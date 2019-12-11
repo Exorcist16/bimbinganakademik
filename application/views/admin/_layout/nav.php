@@ -76,7 +76,7 @@
         </li>
         <li class="<?= ($modul == 'daftarDosen' ? 'active' : '') ?>">
           <a href="<?= base_url() ?>kps/daftarDosen">
-            <i class="fa fa-tripadvisor"></i> <span>Daftar Dosen</span>
+            <i class="fa fa-user"></i> <span>Daftar Dosen</span>
             <span class="pull-right-container">
               <!-- <small class="label pull-right bg-green">new</small> -->
             </span>

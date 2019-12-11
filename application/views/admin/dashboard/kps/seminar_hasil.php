@@ -17,13 +17,16 @@
               <!-- <br> -->
               <h3 class="box-title">Daftar Judul Seminar</h3>
               <div class="box-tools pull-right">
+                <a class="btn btn-sm btn-social btn-google" data-toggle="modal" data-target="#modal-default1">
+                  <i class="fa fa-plus-square"></i> Jadwal Seminar
+                </a>&nbsp;
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">Jenjang Strata
                     <span class="fa fa-caret-down"></span></button>
                   <ul class="dropdown-menu">
                     <li><a href="#">Jenjang S1</a></li>
                     <li><a href="#">Jenjang S2</a></li>
-                    <li><a href="#">Jenjang S2</a></li>
+                    <li><a href="#">Jenjang S3</a></li>
                   </ul>
                 </div>
               </div>
@@ -34,9 +37,6 @@
             <div class="row">
               <div class="col-md-6">
                 <!-- Date and time range -->
-                <a class="btn btn-sm btn-social btn-google" data-toggle="modal" data-target="#modal-default1">
-                  <i class="fa fa-plus-square"></i> Jadwal Seminar
-                </a>
               </div>
             </div>
             <br>
@@ -180,41 +180,88 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Tambah Jadwal Ujian</h4>
                 </div>
-                <div class="modal-body">
-                  <div class="row">
-                    <form role="form">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Nim Mahasiswa:</label>
-                          <select class="form-control select2" style="width: 100%;">
-                            <option selected="selected">D42114516</option>
-                            <option>D42114516</option>
-                            <option>D42114516</option>
-                            <option>D42114516</option>
-                            <option>D42114516</option>
-                            <option>D42114516</option>
-                            <option>D42114516</option>
-                          </select>
-                        </div>
-                        <div class="form-group">
-                          <label>Tgl Ujian:</label>
-
-                          <div class="input-group date">
-                            <div class="input-group-addon">
-                              <i class="fa fa-calendar"></i>
-                            </div>
-                            <input type="text" class="form-control pull-right" id="datepicker">
-                          </div>
-                          <!-- /.input group -->
-                        </div>
+                <form role="form">
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label>NIM</label>
+                      <select class="form-control select2" name="ujian_hasil_nim" id="ujian_hasil_nim" style="width: 100%;" required>
+                        <option selected value="" disabled>NIM</option>
+                        <option>D42114516</option>
+                        <option>D42114516</option>
+                        <option>D42114516</option>
+                        <option>D42114516</option>
+                        <option>D42114516</option>
+                        <option>D42114516</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Nama Mahasiswa</label>
+                      <input type="text" class="form-control" name="ujian_hasil_nama" id="ujian_hasil_nama" placeholder="Nama Mahasiswa"  required>
+                    </div>
+                    <div class="form-group">
+                      <label>Pembimbing I</label>
+                      <input type="text" class="form-control" name="ujian_hasil_pembimbing1" id="ujian_hasil_pembimbing1" placeholder="Pembimbing I"  required>
+                      <div class="checkbox">
+                       <label><input name="ujian_hasil_notif_pembimbing1" id="ujian_hasil_notif_pembimbing1" type="checkbox" checked>Kirimkan Notifikasi</label>
                       </div>
-                    </form>
+                    </div>
+                    <div class="form-group">
+                      <label>Pembimbing II</label>
+                      <input type="text" class="form-control" name="ujian_hasil_pembimbing2" id="ujian_hasil_pembimbing2" placeholder="Pembimbing II"  required>
+                      <div class="checkbox">
+                       <label><input name="ujian_hasil_notif_pembimbing2" id="ujian_hasil_notif_pembimbing2" type="checkbox" checked>Kirimkan Notifikasi</label>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Penguji I</label>
+                      <input type="text" class="form-control" name="ujian_hasil_penguji1" id="ujian_hasil_penguji1" placeholder="Penguji I"  required>
+                      <div class="checkbox">
+                       <label><input name="ujian_hasil_notif_penguji1" id="ujian_hasil_notif_penguji1" type="checkbox" checked>Kirimkan Notifikasi</label>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Penguji II</label>
+                      <input type="text" class="form-control" name="ujian_hasil_penguji2" id="ujian_hasil_penguji2" placeholder="Penguji II"  required>
+                      <div class="checkbox">
+                       <label><input name="ujian_hasil_notif_penguji2" id="ujian_hasil_notif_penguji2" type="checkbox" checked>Kirimkan Notifikasi</label>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Penguji III</label>
+                      <input type="text" class="form-control" name="ujian_hasil_penguji3" id="ujian_hasil_penguji3" placeholder="Penguji III" >
+                      <div class="checkbox">
+                       <label><input name="ujian_hasil_notif_penguji3" id="ujian_hasil_notif_penguji3" type="checkbox" checked>Kirimkan Notifikasi</label>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Tanggal Ujian</label>
+                      <div class="input-group date">
+                        <div class="input-group-addon">
+                          <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right" name="ujian_hasil_tanggal" id="datepicker" placeholder="Tanggal Ujian">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Waktu Ujian</label>
+                      <select class="form-control select2" name="ujian_hasil_waktu" id="ujian_hasil_waktu" style="width: 100%;" required>
+                        <option selected value="" disabled>Waktu Ujian</option>
+                        <option value="09.00 - 10.30 WITA">09.00 - 10.30 WITA</option>
+                        <option value="09.00 - 10.30 WITA">10.30 - 12.00 WITA</option>
+                        <option value="09.00 - 10.30 WITA">13.00 - 14.30 WITA</option>
+                        <option value="09.00 - 10.30 WITA">14.30 - 16.00 WITA</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Tempat Ujian</label>
+                      <input type="text" class="form-control" name="ujian_hasil_tempat" id="ujian_hasil_tempat" placeholder="Tempat Ujian"  required>
+                    </div>
                   </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                  <button type="button" class="btn btn-primary">Tambahkan</button>
-                </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Tambahkan</button>
+                  </div>
+                </form>
               </div>
               <!-- /.modal-content -->
             </div>
