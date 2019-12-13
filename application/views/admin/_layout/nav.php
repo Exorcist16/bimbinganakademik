@@ -165,6 +165,28 @@
           </ul>
         </li>
       </ul>
+
+    <!-- superadmin navigation -->
+    <?php elseif($this->session->userdata('role') == 'superadmin'):?>
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">MAIN NAVIGATION</li>
+        <li class="<?= ($modul == 'dashboard' ? 'active' : '') ?>">
+          <a href="<?= base_url() ?>superadmin/dashboard">
+            <i class="fa fa-circle-o"></i> <span>Dashboard</span>
+            <span class="pull-right-container">
+              <!-- <small class="label pull-right bg-green">new</small> -->
+            </span>
+          </a>
+        </li>
+        <li class="<?= ($modul == 'dashboard' ? 'active' : '') ?>">
+          <a href="<?= base_url() ?>superadmin/dashboard">
+            <i class="fa fa-circle-o"></i> <span>Dashboard</span>
+            <span class="pull-right-container">
+              <!-- <small class="label pull-right bg-green">new</small> -->
+            </span>
+          </a>
+        </li>
+      </ul>
     <?php endif; ?>
   </section>
   <!-- /.sidebar -->

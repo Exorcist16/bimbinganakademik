@@ -31,6 +31,8 @@ class AuthModel extends CI_Model {
                 redirect('mahasiswa');
             }else if ($role=="dosen") {
                 redirect('dosen');
+            }else if ($role=="superadmin") {
+                redirect('superadmin');
             }
             // else if($level == "admin"){
             //     redirect("admin");
