@@ -23,9 +23,25 @@ class Superadmin extends CI_Controller {
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
-	public function manajemenUser(){
+	public function manajemenKps(){
 		$data = array(  'title'             => 'Manajemen User',
-		                'isi'               => 'admin/dashboard/superadmin/manajemen_user',
+		                'isi'               => 'admin/dashboard/superadmin/manajemen_kps',
+		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+		            );
+		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
+	public function masterDataJurusan(){
+		$data = array(  'title'             => 'Manajemen User',
+		                'isi'               => 'admin/dashboard/superadmin/master_data_jurusan',
+		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+		            );
+		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
+	public function masterDataDepartemen(){
+		$data = array(  'title'             => 'Manajemen User',
+		                'isi'               => 'admin/dashboard/superadmin/master_data_departemen',
 		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);

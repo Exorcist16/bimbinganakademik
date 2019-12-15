@@ -68,7 +68,7 @@
                       17/10/2019
                     </td>
                     <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-edit"></i></button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
                       <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
@@ -87,7 +87,7 @@
                       17/10/2019
                     </td>
                     <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-edit"></i></button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
                       <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
@@ -106,7 +106,7 @@
                       17/10/2019
                     </td>
                     <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-edit"></i></button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
                       <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
@@ -125,7 +125,7 @@
                       17/10/2019
                     </td>
                     <td>
-                      <button type="button" class="btn btn-primary"><i class="fa fa-fw  fa-edit"></i></button>
+                      <button type="button" class="btn btn-primary"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
                       <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
@@ -144,7 +144,7 @@
                       17/10/2019
                     </td>
                     <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-edit"></i></button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
                       <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
@@ -163,7 +163,7 @@
                       17/10/2019
                     </td>
                     <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-edit"></i></button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
                       <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
@@ -254,7 +254,13 @@
                     </div>
                     <div class="form-group">
                       <label>Tempat Ujian</label>
-                      <input type="text" class="form-control" name="ujian_hasil_tempat" id="ujian_hasil_tempat" placeholder="Tempat Ujian"  required>
+                      <select class="form-control select2" name="ujian_hasil_tempat" id="ujian_hasil_tempat" style="width: 100%;" required>
+                        <option selected value="" disabled>Tempat Ujian</option>
+                        <option value="Meeting Room Lab. Ubicon">Meeting Room Lab. Ubicon</option>
+                        <option value="Meeting Room Lab. Ubicon">Meeting Room Lab. Ubicon</option>
+                        <option value="Meeting Room Lab. Ubicon">Meeting Room Lab. Ubicon</option>
+                        <option value="Meeting Room Lab. Ubicon">Meeting Room Lab. Ubicon</option>
+                      </select>
                     </div>
                   </div>
                   <div class="modal-footer">

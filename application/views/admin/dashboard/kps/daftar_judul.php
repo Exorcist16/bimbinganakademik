@@ -17,9 +17,9 @@
               <!-- <br> -->
               <h3 class="box-title">Daftar Judul Penelitian</h3>
               <div class="box-tools pull-right">
-                <a class="btn btn-sm btn-social btn-google" data-toggle="modal" data-target="#modal-judul-baru">
+                <button class="btn btn-sm btn-social btn-google" data-toggle="modal" data-target="#modal-judul-baru">
                   <i class="fa fa-plus-square"></i> Judul Baru
-                </a>&nbsp;
+                </button>&nbsp;
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">Jenjang Strata
                     <span class="fa fa-caret-down"></span></button>
@@ -168,10 +168,10 @@
                       <label>NIM</label>
                       <input type="text" class="form-control" name="penelitian_nim" id="penelitian_nim" placeholder="Nim Mahasiswa" required>
                     </div>
-                   <!--  <div class="form-group">
+                    <div class="form-group">
                       <label>Jurusan</label>
                       <select class="form-control select2" name="penelitian_jurusan" id="penelitian_jurusan" style="width: 100%;" required>
-                        <option selected value="" disabled>Departemen</option>
+                        <option selected value="" disabled>Jurusan</option>
                         <option value="Teknik Sipil">Teknik Sipil</option>
                         <option value="Teknik Mesin">Teknik Mesin</option>
                         <option value="Teknik Perkapalan">Teknik Perkapalan</option>
@@ -198,7 +198,7 @@
                         <option value="Teknik Informatika">Teknik Informatika</option>
                         <option value="Teknik Lingkungan">Teknik Lingkungan</option>
                       </select>
-                    </div> -->
+                    </div>
                     <div class="form-group">
                       <label>Judul Penelitian</label>
                       <input type="text" class="form-control" name="penelitian_judul" id="penelitian_judul" placeholder="Judul Penelitian" required>
@@ -299,9 +299,9 @@
                       <input type="text" class="form-control" name="penelitian_nim" id="penelitian_nim" placeholder="Nim Mahasiswa" required>
                     </div>
                     <div class="form-group">
-                      <label>jurusan</label>
+                      <label>Jurusan</label>
                       <select class="form-control select2" name="penelitian_jurusan" id="penelitian_jurusan" style="width: 100%;" required>
-                        <option selected value="" disabled>Departemen</option>
+                        <option selected value="" disabled>Jurusan</option>
                         <option value="Teknik Sipil">Teknik Sipil</option>
                         <option value="Teknik Mesin">Teknik Mesin</option>
                         <option value="Teknik Perkapalan">Teknik Perkapalan</option>
@@ -401,7 +401,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Tambahkan</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                   </div>
                 </form>
               </div>

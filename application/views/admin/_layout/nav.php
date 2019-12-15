@@ -54,16 +54,16 @@
             </span>
           </a>
         </li>
-        <li class="treeview <?= ($modul == 'persetujuanJadwalHasil' || $modul == 'persetujuanJadwalTutup' || $modul == 'komunikasiJadwalHasil' || $modul == 'komunikasiJadwalTutup' ? 'active' : '') ?>">
+        <li class="treeview <?= ($modul == 'persetujuanJadwalHasil' || $modul == 'persetujuanJadwalTutup' ? 'active' : '') ?>">
           <a href="#">
-            <i class="fa fa-comments"></i> <span>Persetujuan</span>
+            <i class="fa fa-check-square-o"></i> <span>Konfirmasi</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="<?= ($modul == 'persetujuanJadwalHasil' || $modul == 'komunikasiJadwalHasil' ? 'active' : '') ?>"><a href="<?= base_url() ?>kps/persetujuanJadwalHasil"><i class="fa fa-circle-o"></i>Seminar Hasil</a></li>
-            <li class="<?= ($modul == 'persetujuanJadwalTutup' || $modul == 'komunikasiJadwalTutup' ? 'active' : '') ?>"><a href="<?= base_url() ?>kps/persetujuanJadwalTutup"><i class="fa fa-circle-o"></i>Ujian Skripsi</a></li>
+            <li class="<?= ($modul == 'persetujuanJadwalHasil' ? 'active' : '') ?>"><a href="<?= base_url() ?>kps/persetujuanJadwalHasil"><i class="fa fa-circle-o"></i>Seminar Hasil</a></li>
+            <li class="<?= ($modul == 'persetujuanJadwalTutup' ? 'active' : '') ?>"><a href="<?= base_url() ?>kps/persetujuanJadwalTutup"><i class="fa fa-circle-o"></i>Ujian Skripsi</a></li>
           </ul>
         </li>
         <li class="<?= ($modul == 'daftarMahasiswa' ? 'active' : '') ?>">
@@ -81,6 +81,18 @@
               <!-- <small class="label pull-right bg-green">new</small> -->
             </span>
           </a>
+        </li>
+        <li class="treeview <?= ($modul == 'masterDataWaktu' || $modul == 'masterDataTempat' ? 'active' : '') ?>">
+          <a href="#">
+            <i class="fa fa-archive"></i> <span>Master Data</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?= ($modul == 'masterDataWaktu' ? 'active' : '') ?>"><a href="<?= base_url() ?>kps/masterDataWaktu"><i class="fa fa-circle-o"></i>Waktu Ujian</a></li>
+            <li class="<?= ($modul == 'masterDataTempat' ? 'active' : '') ?>"><a href="<?= base_url() ?>kps/masterDataTempat"><i class="fa fa-circle-o"></i>Tempat Ujian</a></li>
+          </ul>
         </li>
       </ul>
     <!-- end of kps navigation -->
@@ -172,19 +184,34 @@
         <li class="header">MAIN NAVIGATION</li>
         <li class="<?= ($modul == 'dashboard' ? 'active' : '') ?>">
           <a href="<?= base_url() ?>superadmin/dashboard">
-            <i class="fa fa-circle-o"></i> <span>Dashboard</span>
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
               <!-- <small class="label pull-right bg-green">new</small> -->
             </span>
           </a>
         </li>
-        <li class="<?= ($modul == 'dashboard' ? 'active' : '') ?>">
-          <a href="<?= base_url() ?>superadmin/dashboard">
-            <i class="fa fa-circle-o"></i> <span>Dashboard</span>
+        <li class="treeview <?= ($modul == 'masterDataDepartemen' || $modul == 'masterDataJurusan' ? 'active' : '') ?>">
+          <a href="#">
+            <i class="fa fa-archive"></i> <span>Master Data</span>
             <span class="pull-right-container">
-              <!-- <small class="label pull-right bg-green">new</small> -->
+              <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
+          <ul class="treeview-menu">
+            <li class="<?= ($modul == 'masterDataJurusan' ? 'active' : '') ?>"><a href="<?= base_url() ?>superadmin/masterDataJurusan"><i class="fa fa-circle-o"></i>Jurusan</a></li>
+            <li class="<?= ($modul == 'masterDataDepartemen' ? 'active' : '') ?>"><a href="<?= base_url() ?>superadmin/masterDataDepartemen"><i class="fa fa-circle-o"></i>Departemen</a></li>
+          </ul>
+        </li>
+        <li class="treeview <?= ($modul == 'manajemenKps' ? 'active' : '') ?>">
+          <a href="#">
+            <i class="fa fa-users"></i> <span>Manajemen User</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?= ($modul == 'manajemenKps' ? 'active' : '') ?>"><a href="<?= base_url() ?>superadmin/manajemenKps"><i class="fa fa-circle-o"></i>KPS</a></li>
+          </ul>
         </li>
       </ul>
     <?php endif; ?>
