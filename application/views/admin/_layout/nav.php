@@ -10,7 +10,7 @@
       </div>
       <div class="pull-left info">
         <p>Abdillah Satari</p>
-        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        <i>D42114000</i>
       </div>
     </div>
     <!-- search form -->
@@ -96,6 +96,14 @@
             </span>
           </a>
         </li>
+        <li class="<?= ($modul == 'tambahAktivitas' ? 'active' : '') ?>">
+          <a href="<?= base_url() ?>mahasiswa/tambahAktivitas">
+            <i class="fa fa-circle-o"></i> <span>Bimbingan</span>
+            <span class="pull-right-container">
+              <!-- <small class="label pull-right bg-green">new</small> -->
+            </span>
+          </a>
+        </li>
         <li class="<?= ($modul == 'kartuKontrol' ? 'active' : '') ?>">
           <a href="<?= base_url() ?>mahasiswa/kartuKontrol">
             <i class="fa fa-file-text"></i> <span>Kartu Kontrol</span>
@@ -104,65 +112,64 @@
             </span>
           </a>
         </li>
-        <li class="treeview <?= ($modul == 'komunikasiPembimbing1' || $modul == 'komunikasiPembimbing2' ? 'active' : '') ?>">
-          <a href="#">
-            <i class="fa fa-comments"></i> <span>Komunikasi</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="<?= ($modul == 'komunikasiPembimbing1' ? 'active' : '') ?>">
-              <a href="<?= base_url() ?>mahasiswa/komunikasiPembimbing1"><i class="fa fa-commenting-o"></i>
-              Pembimbing 1
-              <span class="pull-right-container">
-                <span class="label label-success pull-right">2</span>
-              </span>
-              </a>
-            </li>
-            <li class="<?= ($modul == 'komunikasiPembimbing2' ? 'active' : '') ?>">
-              <a href="<?= base_url() ?>mahasiswa/komunikasiPembimbing2"><i class="fa fa-commenting-o"></i>
-              Pembimbing 2
-              <span class="pull-right-container">
-                <span class="label label-success pull-right">2</span>
-              </span>
-              </a>
-            </li>
-          </ul>
-        </li>
       </ul>
     <!-- end of mahasiswa navigation -->
     <!-- dosen navigation -->
     <?php elseif($this->session->userdata('role') == 'dosen'):?>
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="<?= ($modul == 'pembimbing' ? 'active' : '') ?>">
-          <a href="<?= base_url() ?>dosen/pembimbing">
-            <i class="fa fa-circle-o"></i> <span>Pembimbing</span>
+        <li class="<?= ($modul == 'dashboard' ? 'active' : '') ?>">
+          <a href="<?= base_url() ?>dosen/dashboard">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
               <!-- <small class="label pull-right bg-green">new</small> -->
             </span>
           </a>
         </li>
-        <li class="<?= ($modul == 'penguji' ? 'active' : '') ?>">
-          <a href="<?= base_url() ?>dosen/penguji">
-            <i class="fa fa-circle-o"></i> <span>Penguji</span>
-            <span class="pull-right-container">
-              <!-- <small class="label pull-right bg-green">new</small> -->
-            </span>
-          </a>
-        </li>
-        <li class="treeview <?= ($modul == 'penugasanIn' || $modul == 'penugasanOut' ? 'active' : '') ?>">
+        <li class="treeview <?= ($modul == 'pembimbingIn' || $modul == 'pembimbingOut' ? 'active' : '') ?>">
           <a href="#">
-            <i class="fa fa-comments"></i> <span>Penugasan</span>
+            <i class="fa fa-users"></i> <span>Pembimbing</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?= ($modul == 'pembimbingIn' ? 'active' : '') ?>"><a href="<?= base_url() ?>dosen/pembimbingIn"><i class="fa fa-circle-o"></i>Aktif</a></li>
+            <li class="<?= ($modul == 'pembimbingOut' ? 'active' : '') ?>"><a href="<?= base_url() ?>dosen/pembimbingOut"><i class="fa fa-circle-o"></i>Selesai</a></li>
+          </ul>
+        </li>
+        <li class="treeview <?= ($modul == 'pengujiIn' || $modul == 'pengujiOut' ? 'active' : '') ?>">
+          <a href="#">
+            <i class="fa fa-users"></i> <span>Penguji</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?= ($modul == 'pengujiIn' ? 'active' : '') ?>"><a href="<?= base_url() ?>dosen/pengujiIn"><i class="fa fa-circle-o"></i>Aktif</a></li>
+            <li class="<?= ($modul == 'pengujiOut' ? 'active' : '') ?>"><a href="<?= base_url() ?>dosen/pengujiOut"><i class="fa fa-circle-o"></i>Selesai</a></li>
+          </ul>
+        </li>
+        <li class="treeview <?= ($modul == 'penugasanIn' || $modul == 'penugasanConf' || $modul == 'penugasanOut' ? 'active' : '') ?>">
+          <a href="#">
+            <i class="fa fa-tasks"></i> <span>Penugasan</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
             <li class="<?= ($modul == 'penugasanIn' ? 'active' : '') ?>"><a href="<?= base_url() ?>dosen/penugasanIn"><i class="fa fa-circle-o"></i>Upcoming</a></li>
+            <li class="<?= ($modul == 'penugasanConf' ? 'active' : '') ?>"><a href="<?= base_url() ?>dosen/penugasanConf"><i class="fa fa-circle-o"></i>Confirmed</a></li>
             <li class="<?= ($modul == 'penugasanOut' ? 'active' : '') ?>"><a href="<?= base_url() ?>dosen/penugasanOut"><i class="fa fa-circle-o"></i>Done</a></li>
           </ul>
+        </li>
+        <li class="<?= ($modul == 'bimbinganMasuk' ? 'active' : '') ?>">
+          <a href="<?= base_url() ?>dosen/bimbinganMasuk">
+            <i class="fa fa-comments-o"></i> <span>Bimbingan</span>
+            <span class="pull-right-container">
+              <!-- <small class="label pull-right bg-green">new</small> -->
+            </span>
+          </a>
         </li>
       </ul>
     <?php endif; ?>

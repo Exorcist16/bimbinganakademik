@@ -12,7 +12,7 @@
           <div class="box-header with-border">
             <div>
               <!-- <br> -->
-              <h3 class="box-title">Mahasiswa Bimbingan</h3>
+              <h3 class="box-title">Jadwal Masuk</h3>
               <div class="box-tools pull-right">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">Jenjang Strata
@@ -26,114 +26,65 @@
               </div>
             </div>
           </div>
+
           <!-- /.box-header -->
           <div class="box-body">
-            
             <div class="box box-success">
+              <!-- /.box-header -->
               <div class="box-body">
-                <div class="products-list product-list-in-box">
-                  <a href="javascript:void(0)" class="product-title">
-                    Abdillah Satari Rahim
-                    <button type="button" class="btn btn-success pull-right">
-                      <i class="fa fa-fw fa-commenting-o"></i>
-                      <small class="label pull-right">3</small>
-                    </button> 
-                    <button type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#modal-default">
-                      <i class="fa fa-fw fa-edit"></i>
-                      <small class="label pull-right fa fa-check"></small>
-                    </button> 
-                  </a>
-                  <span class="product-description">
-                    D42114516
-                  </span>
-                </div>              
+                <div class="media-scroll">
+                  <table id="example2" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Nama</th>
+                        <th>Tanggal</th>
+                        <th>Waktu</th>
+                        <th>Detail</th>
+                        <th class="text-center" style="width: 140px">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <b>
+                            A. Muh. Fauzy
+                          </b>
+                          <br>
+                          <span style="color: grey">
+                            D42114516
+                          </span>
+                        </td>
+                        <td>
+                          11-12-2019
+                        </td>
+                        <td>
+                          10:00
+                        </td>
+                        <td>
+                          <a href="javascript:void(0)" class="product-title">
+                            <button type="button" class="btn btn-warning text-center" data-toggle="modal" data-target="#modal-default">
+                              <i class="fa fa-fw fa-edit"></i>
+                            </button> 
+                          </a> 
+                        </td>
+                        <td>
+                          <a href="javascript:void(0)" class="product-title">
+                            <button type="button" class="btn btn-danger pull-right">
+                              Reject
+                            </button> 
+                            <button type="button" class="btn btn-success pull-right">
+                              Accept
+                            </button>
+                          </a> 
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
-            
-            <div class="box box-success">
-              <div class="box-body">
-                <div class="products-list product-list-in-box">
-                  <a href="javascript:void(0)" class="product-title">
-                    Abdillah Satari Rahim
-                    <button type="button" class="btn btn-success pull-right">
-                      <i class="fa fa-fw fa-commenting-o"></i>
-                      <small class="label pull-right">3</small>
-                    </button> 
-                    <button type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#modal-default">
-                      <i class="fa fa-fw fa-edit"></i>
-                      <small class="label pull-right fa fa-check"></small>
-                    </button> 
-                  <span class="product-description">
-                    D42114516
-                  </span>
-                </div>              
-              </div>
-            </div>
-
-            <div class="box box-success">
-              <div class="box-body">
-                <div class="products-list product-list-in-box">
-                  <a href="javascript:void(0)" class="product-title">
-                    Zulfadli A.S
-                    <button type="button" class="btn btn-success pull-right">
-                      <i class="fa fa-fw fa-commenting-o"></i>
-                      <small class="label pull-right">3</small>
-                    </button> 
-                    <button type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#modal-default">
-                      <i class="fa fa-fw fa-edit"></i>
-                      <small class="label pull-right fa fa-check"></small>
-                    </button> 
-                  </a>
-                  <span class="product-description">
-                    D42114516
-                  </span>
-                </div>              
-              </div>
-            </div>
-
-            <div class="box box-success">
-              <div class="box-body">
-                <div class="products-list product-list-in-box">
-                  <a href="javascript:void(0)" class="product-title">
-                    Hermawan Safrin
-                    <button type="button" class="btn btn-success pull-right">
-                      <i class="fa fa-fw fa-commenting-o"></i>
-                      <small class="label pull-right">3</small>
-                    </button> 
-                    <button type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#modal-default">
-                      <i class="fa fa-fw fa-edit"></i>
-                      <small class="label pull-right fa fa-check"></small>
-                    </button> 
-                  </a>
-                  <span class="product-description">
-                    D42114516
-                  </span>
-                </div>              
-              </div>
-            </div>
-
-            <div class="box box-success">
-              <div class="box-body">
-                <div class="products-list product-list-in-box">
-                  <a href="javascript:void(0)" class="product-title">
-                    A. Muh. Fauzy
-                    <button type="button" class="btn btn-success pull-right">
-                      <i class="fa fa-fw fa-commenting-o"></i>
-                      <small class="label pull-right">3</small>
-                    </button> 
-                    <button type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#modal-default">
-                      <i class="fa fa-fw fa-edit"></i>
-                      <small class="label pull-right fa fa-check"></small>
-                    </button> 
-                  </a>
-                  <span class="product-description">
-                    D42114516
-                  </span>
-                </div>              
-              </div>
-            </div>
-
           </div>
+
           <!-- /.box-body -->
           <div class="modal fade" id="modal-default">
             <div class="modal-dialog">

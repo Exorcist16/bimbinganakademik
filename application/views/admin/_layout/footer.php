@@ -48,6 +48,9 @@
 		<!-- iCheck 1.0.1 -->
 		<script src="<?=base_url('assets/')?>/plugins/iCheck/icheck.min.js"></script>
 
+		<!-- Toastr -->
+		<script src="toastr.js"></script>
+
 		<script>
 		  $(function () {
 		    $('#example1').DataTable()

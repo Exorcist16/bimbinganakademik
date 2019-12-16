@@ -31,20 +31,20 @@ class Mahasiswa extends CI_Controller {
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
-	public function komunikasiPembimbing1(){
+	public function tambahAktivitas(){
 		$data = array(  'title'             => 'Mahasiswa Dashboard',
-		                'isi'               => 'admin/dashboard/mahasiswa/komunikasi_pembimbing',
+		                'isi'               => 'admin/dashboard/mahasiswa/tambah_aktivitas',
 		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
-	public function komunikasiPembimbing2(){
+	public function bimbingan(){
 		$data = array(  'title'             => 'Mahasiswa Dashboard',
-		                'isi'               => 'admin/dashboard/mahasiswa/komunikasi_pembimbing',
+		                'isi'               => 'admin/dashboard/mahasiswa/bimbingan',
 		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
-	
+
 }

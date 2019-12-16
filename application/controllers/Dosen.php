@@ -12,20 +12,44 @@ class Dosen extends CI_Controller {
 	}
 
 	public function index() {
-		redirect(base_url('dosen/pembimbing'));
+		redirect(base_url('dosen/dashboard'));
 	}
 
-	public function pembimbing(){
+	public function dashboard() {
+		$data = array(	'title'				=> 'Mahasiswa Dashboard',
+						'isi'				=> 'admin/dashboard/dosen/dosen_dashboard',
+						// 'dataScript'		=> 'admin/dataScript/beranda-script'
+					);
+		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
+	public function pembimbingIn(){
 		$data = array(  'title'             => 'Mahasiswa Dashboard',
-		                'isi'               => 'admin/dashboard/dosen/dosen_pembimbing',
+		                'isi'               => 'admin/dashboard/dosen/dosen_pembimbing_in',
 		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
-	public function penguji(){
+	public function pembimbingOut(){
 		$data = array(  'title'             => 'Mahasiswa Dashboard',
-		                'isi'               => 'admin/dashboard/dosen/dosen_penguji',
+		                'isi'               => 'admin/dashboard/dosen/dosen_pembimbing_out',
+		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+		            );
+		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
+	public function pengujiIn(){
+		$data = array(  'title'             => 'Mahasiswa Dashboard',
+		                'isi'               => 'admin/dashboard/dosen/dosen_penguji_in',
+		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+		            );
+		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
+	public function pengujiOut(){
+		$data = array(  'title'             => 'Mahasiswa Dashboard',
+		                'isi'               => 'admin/dashboard/dosen/dosen_penguji_out',
 		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
@@ -39,9 +63,33 @@ class Dosen extends CI_Controller {
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
+	public function PenugasanConf(){
+		$data = array(  'title'             => 'Mahasiswa Dashboard',
+		                'isi'               => 'admin/dashboard/dosen/penugasan_conf',
+		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+		            );
+		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
 	public function penugasanOut(){
 		$data = array(  'title'             => 'Mahasiswa Dashboard',
 		                'isi'               => 'admin/dashboard/dosen/penugasan_out',
+		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+		            );
+		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
+	public function bimbinganMasuk(){
+		$data = array(  'title'             => 'Mahasiswa Dashboard',
+		                'isi'               => 'admin/dashboard/dosen/bimbingan_masuk',
+		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+		            );
+		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
+	public function bimbingan(){
+		$data = array(  'title'             => 'Mahasiswa Dashboard',
+		                'isi'               => 'admin/dashboard/dosen/bimbingan',
 		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
