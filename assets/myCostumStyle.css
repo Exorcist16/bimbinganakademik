@@ -6,10 +6,10 @@
 }
 
 /*dataTables show & search customize*/
-@media screen and (max-width: 767px){}
+/*@media screen and (max-width: 767px){}
 div.dataTables_wrapper div.dataTables_length, div.dataTables_wrapper div.dataTables_filter, div.dataTables_wrapper div.dataTables_info, div.dataTables_wrapper div.dataTables_paginate {
      text-align: left !important; 
-}
+}*/
 
 /*datatables show customize*/
 div.dataTables_wrapper div.dataTables_length select {

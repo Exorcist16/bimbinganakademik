@@ -41,7 +41,7 @@ class Kps extends CI_Controller {
 
 	public function persetujuanJadwalHasil(){
 		$data = array(  'title'             => 'KPS Dashboard',
-		                'isi'               => 'admin/dashboard/kps/persetujuan_jadwal',
+		                'isi'               => 'admin/dashboard/kps/persetujuan_jadwal_hasil',
 		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
@@ -49,28 +49,28 @@ class Kps extends CI_Controller {
 
 	public function persetujuanJadwalTutup(){
 		$data = array(  'title'             => 'KPS Dashboard',
-		                'isi'               => 'admin/dashboard/kps/persetujuan_jadwal',
+		                'isi'               => 'admin/dashboard/kps/persetujuan_jadwal_tutup',
 		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
-	public function komunikasiJadwalHasil(){
-		$data = array(  'title'             => 'KPS Dashboard',
-		                'isi'               => 'admin/dashboard/kps/komunikasi_jadwal_hasil',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
-		            );
-		$this->load->view('admin/_layout/wrapper', $data);
-	}
+	// public function komunikasiJadwalHasil(){
+	// 	$data = array(  'title'             => 'KPS Dashboard',
+	// 	                'isi'               => 'admin/dashboard/kps/komunikasi_jadwal_hasil',
+	// 	            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+	// 	            );
+	// 	$this->load->view('admin/_layout/wrapper', $data);
+	// }
 
 
-	public function komunikasiJadwalTutup(){
-		$data = array(  'title'             => 'KPS Dashboard',
-		                'isi'               => 'admin/dashboard/kps/komunikasi_jadwal_tutup',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
-		            );
-		$this->load->view('admin/_layout/wrapper', $data);
-	}
+	// public function komunikasiJadwalTutup(){
+	// 	$data = array(  'title'             => 'KPS Dashboard',
+	// 	                'isi'               => 'admin/dashboard/kps/komunikasi_jadwal_tutup',
+	// 	            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+	// 	            );
+	// 	$this->load->view('admin/_layout/wrapper', $data);
+	// }
 
 	public function daftarMahasiswa(){
 		$data = array(  'title'             => 'KPS Dashboard',
@@ -83,6 +83,22 @@ class Kps extends CI_Controller {
 	public function daftarDosen(){
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/daftar_dosen',
+		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+		            );
+		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
+	public function masterDataWaktu(){
+		$data = array(  'title'             => 'KPS Dashboard',
+		                'isi'               => 'admin/dashboard/kps/master_data_waktu',
+		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+		            );
+		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
+	public function masterDataTempat(){
+		$data = array(  'title'             => 'KPS Dashboard',
+		                'isi'               => 'admin/dashboard/kps/master_data_tempat',
 		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
