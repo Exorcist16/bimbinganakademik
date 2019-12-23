@@ -52,76 +52,24 @@
                 </tr>
               </thead>
               <tbody>
+                <?php foreach ($mahasiswadata as $mahasiswa) { ?> <!--22-12-2019 -->
                 <tr>
-                  <td>Abdllah Satari Rahim</td>
-                  <td>D42114516</td>
-                  <td>S1</td>
-                  <td>2014</td>
+                  <td><?= $mahasiswa->nama; ?></td>
+                  <td><?= $mahasiswa->nim; ?></td>
+                  <td><?= $mahasiswa->strata; ?></td>
+                  <td><?= $mahasiswa->angkatan; ?></td>
                   <td>md5 Encrypted Password</td>
                   <td>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-mahasiswa-edit"><i class="fa fa-fw  fa-edit"></i></button>
                     <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
                   </td>
                 </tr>
-                <tr>
-                  <td>Abdllah Satari Rahim</td>
-                  <td>D42114516</td>
-                  <td>S1</td>
-                  <td>2014</td>
-                  <td>md5 Encrypted Password</td>
-                  <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-mahasiswa-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Abdllah Satari Rahim</td>
-                  <td>D42114516</td>
-                  <td>S1</td>
-                  <td>2015</td>
-                  <td>md5 Encrypted Password</td>
-                  <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-mahasiswa-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Abdllah Satari Rahim</td>
-                  <td>D42114516</td>
-                  <td>S1</td>
-                  <td>2015</td>
-                  <td>md5 Encrypted Password</td>
-                  <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-mahasiswa-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Abdllah Satari Rahim</td>
-                  <td>D42114516</td>
-                  <td>S1</td>
-                  <td>2013</td>
-                  <td>md5 Encrypted Password</td>
-                  <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-mahasiswa-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Abdllah Satari Rahim</td>
-                  <td>D42114516</td>
-                  <td>S1</td>
-                  <td>2015</td>
-                  <td>md5 Encrypted Password</td>
-                  <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-mahasiswa-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                  </td>
-                </tr>
+                <?php } ?>
               </tbody>
             </table>
           </div>
           <!-- /.box-body -->
+
           <div class="modal fade" id="modal-mahasiswa-tambah">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -130,7 +78,7 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Tambah Mahasiswa</h4>
                 </div>
-                <form role="form">
+                <form role="form" action="<?php echo base_url().'kps/tambah_mahasiswa';?>" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>Nama Mahasiswa</label>
@@ -143,20 +91,18 @@
                     <div class="form-group">
                       <label>Departemen</label>
                       <select class="form-control select2" name="mahasiswa_departemen" id="mahasiswa_departemen" style="width: 100%;" required>
-                        <option selected value="" disabled>Departemen</option>
-                        <option value="Teknik Sipil">Teknik Sipil</option>
-                        <option value="Teknik Mesin">Teknik Mesin</option>
-                        <option value="Teknik Perkapalan">Teknik Perkapalan</option>
-                        <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="Teknik Arsitektur">Teknik Arsitektur</option>
-                        <option value="Teknik Geologi">Teknik Geologi</option>
-                        <option value="Teknik Industri">Teknik Industri</option>
-                        <option value="Teknik Kelautan">Teknik Kelautan</option>
-                        <option value="Teknik Perkapalan">Teknik Sistem Perkapalan</option>
-                        <option value="Teknik Perencanaan Wilayah Kota">Teknik Perencanaan Wilayah Kota</option>
-                        <option value="Teknik Pertambangan">Teknik Pertambangan</option>
-                        <option value="Teknik Informatika">Teknik Informatika</option>
-                        <option value="Teknik Lingkungan">Teknik Lingkungan</option>
+                        <?php foreach ($departemendata as $departemen) { ?>    <!-- 22-12-2019 -->
+                        <option value="<?=$departemen->departemen;?>"><?=$departemen->departemen;?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                    <div class="form_group">
+                      <label>Strata</label>
+                      <select class="form-control select2" name="mahasiswa_strata" id="mahasiswa_strata" style="width: 100%;" required>
+                        <option selected value="" disabled>--Strata--</option>
+                        <option value="S1">Strata 1</option>
+                        <option value="S2">Strata 2</option>
+                        <option value="S3">Strata 3</option>
                       </select>
                     </div>
                     <div class="form-group">

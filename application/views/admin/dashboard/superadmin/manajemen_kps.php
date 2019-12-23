@@ -38,116 +38,18 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php foreach ($tampilkps as $datakps) { ?>
                   <tr>
-                    <td>Teknik Elektro</td>
-                    <td>Teknik Informatika</td>
-                    <td>kpsinfor</td>
+                    <td><?=$datakps->jurusan;?></td>
+                    <td><?=$datakps->departemen;?></td>
+                    <td><?=$datakps->username;?></td>
                     <td>md5 Encrypted Password</td>
                     <td>
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-user-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
+                      <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#modal-kps-hapus"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>Teknik Informatika</td>
-                    <td>kpsinfor</td>
-                    <td>md5 Encrypted Password</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-user-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>Teknik Informatika</td>
-                    <td>kpsinfor</td>
-                    <td>md5 Encrypted Password</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-user-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>Teknik Informatika</td>
-                    <td>kpsinfor</td>
-                    <td>md5 Encrypted Password</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-user-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>Teknik Informatika</td>
-                    <td>kpsinfor</td>
-                    <td>md5 Encrypted Password</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-user-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>Teknik Informatika</td>
-                    <td>kpsinfor</td>
-                    <td>md5 Encrypted Password</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-user-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>Teknik Informatika</td>
-                    <td>kpsinfor</td>
-                    <td>md5 Encrypted Password</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-user-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>Teknik Informatika</td>
-                    <td>kpsinfor</td>
-                    <td>md5 Encrypted Password</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-user-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>Teknik Informatika</td>
-                    <td>kpsinfor</td>
-                    <td>md5 Encrypted Password</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-user-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>Teknik Informatika</td>
-                    <td>kpsinfor</td>
-                    <td>md5 Encrypted Password</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-user-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>Teknik Informatika</td>
-                    <td>kpsinfor</td>
-                    <td>md5 Encrypted Password</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-user-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </div>
@@ -159,40 +61,50 @@
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title">Tambah Judul Penelitian</h4>
+                  <h4 class="modal-title">Tambah KPS</h4>
                 </div>
-                <form role="form">
+                <form role="form" action="<?php echo base_url().'superadmin/tambah_kps';?>" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>Jurusan</label>
-                      <select class="form-control select2" name="user_jurusan" id="user_jurusan" style="width: 100%;" required>
-                        <option selected value="" disabled>Jurusan</option>
-                        <option value="Teknik Sipil">Teknik Sipil</option>
-                        <option value="Teknik Mesin">Teknik Mesin</option>
-                        <option value="Teknik Perkapalan">Teknik Perkapalan</option>
-                        <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="Teknik Arsitektur">Teknik Arsitektur</option>
-                        <option value="Teknik Geologi">Teknik Geologi</option>
+                      <select class="form-control select2" name="jurusan" id="jurusan" style="width: 100%;" required>
+                        <option selected value="" disabled>-Pilih Jurusan-</option>
+                        <?php foreach ($data->result() as $row) : ?>
+                        <option value="<?=$row->id_jurusan?>"><?=$row->jurusan;?></option>
+                      <?php endforeach ?>
                       </select>
                     </div>
                     <div class="form-group">
                       <label>Departemen</label>
-                      <select class="form-control select2" name="user_departemen" id="user_departemen" style="width: 100%;" required>
-                        <option selected value="" disabled>Departemen</option>
-                        <option value="Teknik Sipil">Teknik Sipil</option>
-                        <option value="Teknik Mesin">Teknik Mesin</option>
-                        <option value="Teknik Perkapalan">Teknik Perkapalan</option>
-                        <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="Teknik Arsitektur">Teknik Arsitektur</option>
-                        <option value="Teknik Geologi">Teknik Geologi</option>
-                        <option value="Teknik Industri">Teknik Industri</option>
-                        <option value="Teknik Kelautan">Teknik Kelautan</option>
-                        <option value="Teknik Perkapalan">Teknik Sistem Perkapalan</option>
-                        <option value="Teknik Perencanaan Wilayah Kota">Teknik Perencanaan Wilayah Kota</option>
-                        <option value="Teknik Pertambangan">Teknik Pertambangan</option>
-                        <option value="Teknik Informatika">Teknik Informatika</option>
-                        <option value="Teknik Lingkungan">Teknik Lingkungan</option>
+                      <select class="form-control select2" name="departemen" id="departemen" style="width: 100%;" required>
+                        <option selected value="" disabled>-Pilih Departemen-</option>
                       </select>
+
+                      <!--Script untuk chained dropdown 21-12-2019 -->
+                      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                      <script>
+                        $(document).ready(function(){
+                          $('#jurusan').change(function() {
+                            var id = $(this).val();
+                            $.ajax({
+                              url: "<?=base_url();?>/Superadmin/get_departemen",
+                              method: "POST",
+                              dataType: "JSON",
+                              data: {
+                                id: id
+                              },
+                              success: function(array) {
+                                var html = '';
+                                for (let index = 0; index < array.length; index++){
+                                  html += "<option>" + array[index].departemen + "</option>"
+                                }
+                                $('#departemen').html(html);
+                              }
+                            })
+                          })
+                        })
+                      </script>
+
                     </div>
                     <div class="form-group">
                       <label>Username</label>
@@ -275,6 +187,22 @@
             <!-- /.modal-dialog -->
           </div>
           <!-- /.modal -->
+
+          <div class="modal modal-danger fade" id="modal-kps-hapus">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4>Anda ingin menghapus user KPS <?=$datakps->username;?></h4>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak, Kembali</button>
+                <button type="button" class="btn btn-outline">Ya, Hapus</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
         </div>
         <!-- /.box -->
       </div>

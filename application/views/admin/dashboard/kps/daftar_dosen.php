@@ -45,65 +45,24 @@
                 <tr>
                   <th>Nama</th>
                   <th>Nip</th>
-                  <th>Password</th>
+                  <th>Departemen</th>
+                  <!--<th>Password</th>-->
                   <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
+                <?php foreach ($dosendata as $dosendata) { ?> <!--22-12-2019 -->
                 <tr>
-                  <td>Abdllah Satari Rahim</td>
-                  <td>D42114516</td>
-                  <td>md5 Encrypted Password</td>
+                  <td><?=$dosendata->nama_dosen; ?></td>
+                  <td><?=$dosendata->nip; ?></td>
+                  <td><?=$dosendata->departemen_dosen; ?></td>
+                  <!--<td>md5 Encrypted Password</td>-->
                   <td>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-dosen-edit"><i class="fa fa-fw  fa-edit"></i></button>
                     <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
                   </td>
                 </tr>
-                <tr>
-                  <td>Abdllah Satari Rahim</td>
-                  <td>D42114516</td>
-                  <td>md5 Encrypted Password</td>
-                  <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-dosen-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Abdllah Satari Rahim</td>
-                  <td>D42114516</td>
-                  <td>md5 Encrypted Password</td>
-                  <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-dosen-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Abdllah Satari Rahim</td>
-                  <td>D42114516</td>
-                  <td>md5 Encrypted Password</td>
-                  <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-dosen-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Abdllah Satari Rahim</td>
-                  <td>D42114516</td>
-                  <td>md5 Encrypted Password</td>
-                  <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-dosen-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Abdllah Satari Rahim</td>
-                  <td>D42114516</td>
-                  <td>md5 Encrypted Password</td>
-                  <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-dosen-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                  </td>
-                </tr>
+                <?php } ?>
               </tbody>
             </table>
           </div>
@@ -116,7 +75,7 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Tambah Dosen</h4>
                 </div>
-                <form role="form">
+                <form role="form" action="<?php echo base_url().'kps/tambah_dosen';?>" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>Nama Dosen</label>
@@ -124,25 +83,14 @@
                     </div>
                     <div class="form-group">
                       <label>NIP</label>
-                      <input type="text" class="form-control" name="dosen_nim" id="dosen_nim" placeholder="NIP"  required>
+                      <input type="text" class="form-control" name="dosen_nip" id="dosen_nip" placeholder="NIP"  required>
                     </div>
                     <div class="form-group">
                       <label>Departemen</label>
                       <select class="form-control select2" name="dosen_departemen" id="dosen_departemen" style="width: 100%;" required>
-                        <option selected value="" disabled>Departemen</option>
-                        <option value="Teknik Sipil">Teknik Sipil</option>
-                        <option value="Teknik Mesin">Teknik Mesin</option>
-                        <option value="Teknik Perkapalan">Teknik Perkapalan</option>
-                        <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="Teknik Arsitektur">Teknik Arsitektur</option>
-                        <option value="Teknik Geologi">Teknik Geologi</option>
-                        <option value="Teknik Industri">Teknik Industri</option>
-                        <option value="Teknik Kelautan">Teknik Kelautan</option>
-                        <option value="Teknik Perkapalan">Teknik Sistem Perkapalan</option>
-                        <option value="Teknik Perencanaan Wilayah Kota">Teknik Perencanaan Wilayah Kota</option>
-                        <option value="Teknik Pertambangan">Teknik Pertambangan</option>
-                        <option value="Teknik Informatika">Teknik Informatika</option>
-                        <option value="Teknik Lingkungan">Teknik Lingkungan</option>
+                        <?php foreach ($departemensession as $departemen) { ?>    <!-- 22-12-2019 -->
+                        <option value="<?=$departemen->departemen;?>"><?=$departemen->departemen;?></option>
+                        <?php } ?>
                       </select>
                     </div>
                     <div class="form-group">

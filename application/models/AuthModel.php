@@ -11,13 +11,13 @@ class AuthModel extends CI_Model {
         if($query->num_rows()>0){
             foreach ($query->result() as $x){
                 $sess = array(
-                    "nama_user" => $x->nama_lengkap_user,
-                    "no_telp" => $x->no_tlp_user,
-                    "id_user" => $x->id_user,
-                    "username" => $x->username,
-                    "alamat" => $x->alamat_user,
-                    "role" => $x->role,
-                    "status" => "login",
+                    "nama_user"   => $x->nama_lengkap_user,
+                    "id_user"     => $x->id_user,
+                    "username"    => $x->username,
+                    "role"        => $x->role,
+                    "departemen"  => $x->departemen,
+                    "jurusan"     => $x->jurusan,
+                    "status"      => "login",
                 );
                 $role = $x->role;
 

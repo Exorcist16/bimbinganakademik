@@ -27,7 +27,7 @@
           <div class="box-body">
             <br>
             <div class="media-scroll">
-              <table id="example1" class="table table-bordered table-striped">
+              <table id="example2" class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th>Nama Jurusan</th>
@@ -35,87 +35,20 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php foreach ($jurusan as $jurusan) {?>
                   <tr>
-                    <td>Teknik Elektro</td>
+                    <td><?=$jurusan->jurusan;?></td>
                     <td>
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-jurusan-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-jurusan-hapus"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-jurusan-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-jurusan-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-jurusan-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-jurusan-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-jurusan-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-jurusan-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-jurusan-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-jurusan-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-jurusan-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-jurusan-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </div>
           </div>
+
           <!-- /.box-body -->
           <div class="modal fade" id="modal-jurusan-tambah">
             <div class="modal-dialog">
@@ -125,7 +58,7 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Tambah Jurusan</h4>
                 </div>
-                <form role="form">
+                <form role="form" action="<?php echo base_url().'superadmin/tambah_jurusan';?>" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>Nama Jurusan</label>
@@ -169,6 +102,25 @@
             <!-- /.modal-dialog -->
           </div>
           <!-- /.modal -->
+
+          <div class="modal modal-danger fade" id="modal-jurusan-hapus">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4>Anda akan menghapus jurusan ?</h4>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak, Kembali</button>
+                <button type="button" class="btn btn-outline">Ya, Hapus</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
         </div>
         <!-- /.box -->
       </div>

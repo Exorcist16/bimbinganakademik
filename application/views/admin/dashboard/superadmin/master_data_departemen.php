@@ -36,98 +36,21 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php foreach ($hasil as $data) { ?>
                   <tr>
-                    <td>Teknik Informatika</td>
-                    <td>Teknik Elektro</td>
+                    <td><?=$data->departemen;?></td>
+                    <td><?=$data->jurusan;?></td>
                     <td>
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-departemen-edit"><i class="fa fa-fw  fa-edit"></i></button>
                       <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
-                  <tr>
-                    <td>Teknik Informatika</td>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-departemen-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Informatika</td>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-departemen-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Informatika</td>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-departemen-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Informatika</td>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-departemen-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Informatika</td>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-departemen-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Informatika</td>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-departemen-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Informatika</td>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-departemen-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Informatika</td>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-departemen-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Informatika</td>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-departemen-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Teknik Informatika</td>
-                    <td>Teknik Elektro</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-departemen-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </div>
           </div>
+
           <!-- /.box-body -->
           <div class="modal fade" id="modal-departemen-tambah">
             <div class="modal-dialog">
@@ -137,7 +60,7 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Tambah Departemen</h4>
                 </div>
-                <form role="form">
+                <form role="form" action="<?php echo base_url().'superadmin/tambah_departemen';?>" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>Nama Departemen</label>
@@ -147,12 +70,9 @@
                       <label>Jurusan</label>
                       <select class="form-control select2" name="departemen_jurusan" id="departemen_jurusan" style="width: 100%;" required>
                         <option selected value="" disabled>Jurusan</option>
-                        <option value="Teknik Sipil">Teknik Sipil</option>
-                        <option value="Teknik Mesin">Teknik Mesin</option>
-                        <option value="Teknik Perkapalan">Teknik Perkapalan</option>
-                        <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="Teknik Arsitektur">Teknik Arsitektur</option>
-                        <option value="Teknik Geologi">Teknik Geologi</option>
+                        <?php foreach ($jurusan as $jurusan) { ?>
+                        <option value="<?=$jurusan->id_jurusan;?>"><?=$jurusan->jurusan;?></option>
+                        <?php } ?>
                       </select>
                     </div>
                   </div>
