@@ -169,4 +169,16 @@ class Kps extends CI_Controller {
 		redirect('kps/masterDataWaktu');
 	}
 
+	public function tambah_tempat(){
+		$sessiondepartemen = $this->session->userdata('departemen');
+
+		$data = array(
+			'tempat_ujian_nama'				=> $this->input->post('tempat'),
+			'tempat_ujian_departemen'	=> $sessiondepartemen
+		);
+
+		$this->crud->i('tempat_ujian', $data);
+		redirect('kps/masterDataTempat');
+	}
+
 }

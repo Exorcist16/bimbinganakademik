@@ -57,7 +57,7 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Tambah Tempat Ujian</h4>
                 </div>
-                <form role="form">
+                <form role="form" action="<?php echo base_url().'kps/tambah_tempat';?>" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>Tempat Ujian</label>
