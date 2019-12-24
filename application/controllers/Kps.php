@@ -99,9 +99,12 @@ class Kps extends CI_Controller {
 	}
 
 	public function masterDataTempat(){
+		$sessiondepartemen = $this->session->userdata('departemen');
+		$datatempatmaster = $this->crud->gw('tempat_ujian', array('tempat_ujian_departemen' => $sessiondepartemen));
+
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/master_data_tempat',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+										'datatempatmaster'	=> $datatempatmaster
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
@@ -109,7 +112,7 @@ class Kps extends CI_Controller {
 	//22-12-2019
 	public function tambah_dosen(){
 		$sessionjurusan = $this->session->userdata('jurusan');
-		
+
 		$datadosen = array(
 			'nip'								=> $this->input->post('dosen_nip'),
 			'nama_dosen'				=> $this->input->post('dosen_nama'),
