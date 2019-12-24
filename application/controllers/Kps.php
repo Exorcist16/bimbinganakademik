@@ -58,11 +58,11 @@ class Kps extends CI_Controller {
 	}
 
 	public function daftarMahasiswa(){
-		$sessiond = $this->session->userdata('departemen');
-		$mahasiswadata = $this->crud->gw('mahasiswa', array('departemen' => $sessiond));
+		$sessiondepartemen = $this->session->userdata('departemen');
+		$sessionusername = $this->session->userdata('username');
 
-		$sessionu = $this->session->userdata('username');
-		$departemendata = $this->crud->gw('kps', array('username' => $sessionu));
+		$mahasiswadata = $this->crud->gw('mahasiswa', array('departemen' => $sessiondepartemen));
+		$departemendata = $this->crud->gw('kps', array('username' => $sessionusername));
 
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/daftar_mahasiswa',
@@ -73,11 +73,11 @@ class Kps extends CI_Controller {
 	}
 
 	public function daftarDosen(){
-		$session = $this->session->userdata('username'); //22-12-2019
-		$sessionj = $this->session->userdata('jurusan');
+		$sessionusername = $this->session->userdata('username');
+		$sessionjurusan = $this->session->userdata('jurusan');
 
-		$departemensession = $this->crud->gw('kps', array('username' => $session));
-		$dosendata = $this->crud->gw('dosen', array('jurusan_dosen' => $sessionj));
+		$departemensession = $this->crud->gw('kps', array('username' => $sessionusername));
+		$dosendata = $this->crud->gw('dosen', array('jurusan_dosen' => $sessionjurusan));
 
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/daftar_dosen',
@@ -88,9 +88,12 @@ class Kps extends CI_Controller {
 	}
 
 	public function masterDataWaktu(){
+		$sessiondepartemen = $this->session->userdata('departemen');
+		$datawaktumaster = $this->crud->gw('waktu_ujian', array('waktu_departemen' => $sessiondepartemen));
+
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/master_data_waktu',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+										'datawaktumaster'		=> $datawaktumaster
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
@@ -105,11 +108,13 @@ class Kps extends CI_Controller {
 
 	//22-12-2019
 	public function tambah_dosen(){
+		$sessionjurusan = $this->session->userdata('jurusan');
+		
 		$datadosen = array(
 			'nip'								=> $this->input->post('dosen_nip'),
 			'nama_dosen'				=> $this->input->post('dosen_nama'),
 			'departemen_dosen'	=> $this->input->post('dosen_departemen'),
-			'jurusan_dosen'			=> $this->session->userdata('jurusan')
+			'jurusan_dosen'			=> $sessionjurusan
 		);
 
 		$datauserdosen = array(
@@ -118,7 +123,7 @@ class Kps extends CI_Controller {
 			'nama_user'					=> $this->input->post('dosen_nama'),
 			'departemen'				=> $this->input->post('dosen_departemen'),
 			'role'							=> 'dosen',
-			'jurusan'						=> $this->session->userdata('jurusan')
+			'jurusan'						=> $sessionjurusan
 		);
 
 		$this->crud->i('dosen', $datadosen);
@@ -146,6 +151,19 @@ class Kps extends CI_Controller {
 		$this->crud->i('mahasiswa', $datamahasiswa);
 		$this->crud->i('user', $datausermahasiswa);
 		redirect('kps/daftarMahasiswa');
+	}
+
+	public function tambah_waktu(){
+		$sessiondepartemen = $this->session->userdata('departemen');
+
+		$data = array(
+			'waktu_mulai'				=> $this->input->post('waktu_mulai'),
+			'waktu_selesai'			=> $this->input->post('waktu_selesai'),
+			'waktu_departemen'	=> $sessiondepartemen
+		);
+
+		$this->crud->i('waktu_ujian', $data);
+		redirect('kps/masterDataWaktu');
 	}
 
 }

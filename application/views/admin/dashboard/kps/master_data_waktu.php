@@ -36,38 +36,16 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php foreach ($datawaktumaster as $datawaktumaster) { ?>
                   <tr>
-                    <td>09.00 WITA</td>
-                    <td>10.30 WITA</td>
+                    <td><?= $datawaktumaster->waktu_mulai; ?> WITA</td>
+                    <td><?= $datawaktumaster->waktu_selesai; ?> WITA</td>
                     <td>
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-waktu-edit"><i class="fa fa-fw  fa-edit"></i></button>
                       <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
-                  <tr>
-                    <td>09.00 WITA</td>
-                    <td>10.30 WITA</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-waktu-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>09.00 WITA</td>
-                    <td>10.30 WITA</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-waktu-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>09.00 WITA</td>
-                    <td>10.30 WITA</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-waktu-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </div>
@@ -81,7 +59,7 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Tambah Waktu Ujian</h4>
                 </div>
-                <form role="form">
+                <form role="form" action="<?php echo base_url().'kps/tambah_waktu';?>" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>Waktu Mulai</label>
