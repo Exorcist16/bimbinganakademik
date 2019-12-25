@@ -13,6 +13,7 @@
 
 		<!-- jQuery 3 -->
 		<script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+		
 		<!-- Bootstrap 3.3.7 -->
 		<script src="<?=base_url('assets/')?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<!-- Select2 -->
@@ -31,7 +32,7 @@
 		<!-- date-range-picker -->
 		<script src="<?=base_url('assets/')?>bower_components/moment/min/moment.min.js"></script>
 		<script src="<?=base_url('assets/')?>bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-		
+
 		<!-- bootstrap datepicker -->
 		<script src="<?=base_url('assets/')?>bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 		<!-- bootstrap color picker -->
@@ -47,9 +48,6 @@
 
 		<!-- iCheck 1.0.1 -->
 		<script src="<?=base_url('assets/')?>/plugins/iCheck/icheck.min.js"></script>
-
-		<!-- Toastr -->
-		<script src="toastr.js"></script>
 
 		<script>
 		  $(function () {
@@ -75,10 +73,10 @@
 
 		    //Date range picker
 		    $('#reservation').daterangepicker()
-		    
+
 		    //Date range picker with time picker
 		    $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' }})
-		    
+
 		    //Date range as a button
 		    $('#daterange-btn').daterangepicker(
 		      {

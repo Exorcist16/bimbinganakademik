@@ -11,6 +11,8 @@ class Kps extends CI_Controller {
 	    }
 			$this->load->model('crud');	//22-12-2019
 			$this->load->library('session');
+
+			$this->load->model('Kps_model');
 	}
 
 	public function index() {
@@ -18,11 +20,35 @@ class Kps extends CI_Controller {
 	}
 
 	public function daftarJudul(){
+		$sessiondepartemen = $this->session->userdata('departemen');
+		$datapembimbing = $this->crud->gw('dosen', array('departemen_dosen' => $sessiondepartemen));
+
+		$sessionjurusan = $this->session->userdata('jurusan');
+		$datapenguji = $this->crud->gw('dosen', array('jurusan_dosen' => $sessionjurusan));
+
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/daftar_judul',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+										'pembimbing'				=> $datapembimbing,
+										'penguji'						=> $datapenguji,
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
+	public function tambah_judul(){
+		$sessiondepartemen = $this->session->userdata('departemen');
+
+		$data = array(
+			'nim'					=> $this->input->post('penelitian_nim'),
+			'judul'				=> $this->input->post('penelitian_judul'),
+			'pembimbing1'	=> $this->input->post('penelitian_pembimbing1'),
+			'pembimbing2'	=> $this->input->post('penelitian_pembimbing2'),
+			'penguji1'		=> $this->input->post('penelitian_penguji1'),
+			'penguji2'		=> $this->input->post('penelitian_penguji2'),
+			'judul_departemen'	=> $sessiondepartemen
+		);
+
+		$this->crud->i('judul', $data);
+		redirect('kps/daftarJudul');
 	}
 
 	public function seminarHasil(){
