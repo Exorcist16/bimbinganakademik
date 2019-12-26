@@ -62,6 +62,7 @@
             </div>
           </div>
           <!-- /.box-body -->
+
           <div class="modal fade" id="modal-judul-baru">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -80,10 +81,27 @@
                       <label>Nama Mahasiswa</label>
                       <input type="text" class="form-control" name="penelitian_nama" id="penelitian_nama" placeholder="Nama Mahasiswa" readonly>
                     </div>
-                    <div class="form-group">
-                      <label>Departemen</label>
-                      <input type="text" class="form-control" name="penelitian_departemen" id="penelitian_departemen" placeholder="Departemen" readonly>
-                    </div>
+
+                    <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+                    <script type="text/javascript">
+                      $(document).ready(function(){
+                        $("#penelitian_nim").change(function(){
+                          var nim = $(this).val();
+                          $.ajax({
+                            url: "<?=base_url();?>/Kps/get_nama",
+                            method: "POST",
+                            dataType: "JSON",
+                            data: {
+                              nim: nim
+                            },
+                            success: function(data) {
+                              document.getElementById("penelitian_nama").value = data[0].nama;
+                            }
+                          })
+                        });
+                      });
+                    </script>
+
                     <div class="form-group">
                       <label>Judul Penelitian</label>
                       <input type="text" class="form-control" name="penelitian_judul" id="penelitian_judul" placeholder="Judul Penelitian" required>

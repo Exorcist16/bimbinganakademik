@@ -37,6 +37,12 @@ class Kps extends CI_Controller {
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
+	public function get_nama(){
+		$nim = $this->input->post('nim');
+		$data = $this->Kps_model->get_nama($nim);
+		echo json_encode($data);
+	}
+
 	public function tambah_judul(){
 		$sessiondepartemen = $this->session->userdata('departemen');
 
