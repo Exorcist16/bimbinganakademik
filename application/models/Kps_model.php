@@ -9,4 +9,9 @@ class Kps_model extends CI_Model{
     $this->db->limit(10);
     return $this->db->get('mahasiswa')->result();
   }
+
+  function tampil_data($sessiondepartemen){
+    return $this->db->query("SELECT * FROM mahasiswa INNER JOIN judul ON mahasiswa.nim=judul.nim WHERE mahasiswa.departemen = '$sessiondepartemen'")->result();
+  }
+
 }

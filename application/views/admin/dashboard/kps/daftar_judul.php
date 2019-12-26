@@ -46,105 +46,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>Judul Penelitian Mahasiswa1</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-judul-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>Judul Penelitian Mahasiswa</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-judul-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>Judul Penelitian Mahasiswa</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-judul-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>Judul Penelitian Mahasiswa</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-judul-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>Judul Penelitian Mahasiswa</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-judul-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>Judul Penelitian Mahasiswa</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-judul-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>Judul Penelitian Mahasiswa</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-judul-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>Judul Penelitian Mahasiswa</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-judul-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>Judul Penelitian Mahasiswa</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-judul-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>Judul Penelitian Mahasiswa</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-judul-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>Judul Penelitian Mahasiswa</td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-judul-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
+                  <?php foreach ($datatampil as $datatampil) { ?>
+                    <tr>
+                      <td><?=$datatampil->nim; ?></td>
+                      <td><?=$datatampil->nama; ?></td>
+                      <td><?=$datatampil->judul; ?></td>
+                      <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-judul-edit"><i class="fa fa-fw  fa-edit"></i></button>
+                        <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
+                      </td>
+                    </tr>
+                    <?php } ?>
                 </tbody>
               </table>
             </div>

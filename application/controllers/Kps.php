@@ -23,6 +23,8 @@ class Kps extends CI_Controller {
 		$sessiondepartemen = $this->session->userdata('departemen');
 		$datapembimbing = $this->crud->gw('dosen', array('departemen_dosen' => $sessiondepartemen));
 
+		$datatampil = $this->Kps_model->tampil_data($sessiondepartemen);
+
 		$sessionjurusan = $this->session->userdata('jurusan');
 		$datapenguji = $this->crud->gw('dosen', array('jurusan_dosen' => $sessionjurusan));
 
@@ -30,6 +32,7 @@ class Kps extends CI_Controller {
 		                'isi'               => 'admin/dashboard/kps/daftar_judul',
 										'pembimbing'				=> $datapembimbing,
 										'penguji'						=> $datapenguji,
+										'datatampil'				=> $datatampil
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
