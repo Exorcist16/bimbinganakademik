@@ -61,11 +61,36 @@ class Kps extends CI_Controller {
 	}
 
 	public function seminarHasil(){
+		$sessiondepartemen = $this->session->userdata('departemen');
+		$datatampilseminar = $this->Kps_model->tampil_data_seminar_hasil($sessiondepartemen);
+
+		$datawaktuhasil = $this->crud->gw('waktu_ujian', array('waktu_departemen' => $sessiondepartemen));
+		$datatempathasil = $this->crud->gw('tempat_ujian', array('tempat_ujian_departemen' => $sessiondepartemen));
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/seminar_hasil',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+										'datatampilseminar'=> $datatampilseminar,
+										'datawaktuhasil'		=> $datawaktuhasil,
+										'datatempathasil'		=> $datatempathasil
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
+	}
+	public function tambah_seminar_hasil(){
+		$nim = $this->input->post('ujian_hasil_nim');
+
+		$data = array(
+			'seminar_nim'			=> $nim,
+			'seminar_tanggal'	=> $this->input->post('ujian_hasil_tanggal'),
+			'seminar_waktu'		=> $this->input->post('ujian_hasil_waktu'),
+			'seminar_tempat'	=> $this->input->post('ujian_hasil_tempat')
+		);
+
+		$datastatusujian = array(
+			'judul'		=> '1'
+		);
+
+		$this->crud->i('seminar', $data);
+		$this->crud->u('mahasiswa', $datastatusujian, array('nim' => $nim));
+		redirect('kps/seminarHasil');
 	}
 
 	public function ujianSkripsi(){
