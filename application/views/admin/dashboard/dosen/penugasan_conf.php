@@ -28,7 +28,7 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            
+
             <div class="box box-success">
               <div class="box-body">
                 <!-- /.box-header -->
@@ -44,30 +44,23 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>
-                            <b>
-                              A. Muh. Fauzy
-                            </b>
-                            <br>
-                            <span style="color: grey">
-                              D42114516
-                            </span>
-                          </td>
-                          <td>
-                            11-12-2019
-                          </td>
-                          <td>
-                            10:00
-                          </td>
-                          <td>
-                            <a href="javascript:void(0)" class="product-title">
-                              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
-                                <i class="fa fa-fw fa-check-square-o"></i>
-                              </button> 
-                            </a> 
-                          </td>
-                        </tr>
+                        <<?php foreach ($dataconfirmed as $dataconfirmed): ?>
+                          <tr>
+                            <td><b><?= $dataconfirmed->nama;?></b>
+                              <br>
+                              <span style="color: grey"><?= $dataconfirmed->nim;?></span>
+                            </td>
+                            <td><?= $dataconfirmed->seminar_tanggal;?></td>
+                            <td><?= $dataconfirmed->waktu_mulai;?> - <?= $dataconfirmed->waktu_selesai;?> WITA</td>
+                            <td>
+                              <a href="javascript:void(0)" class="product-title">
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
+                                  <i class="fa fa-fw fa-check-square-o"></i>
+                                </button>
+                              </a>
+                            </td>
+                          </tr>
+                        <?php endforeach; ?>
                       </tbody>
                     </table>
                   </div>
@@ -76,7 +69,7 @@
             </div>
           </div>
 
-          
+
           <div class="modal fade" id="modal-default">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -86,7 +79,7 @@
                   <h4 class="modal-title">Detail Seminar Hasil</h4>
                 </div>
                 <div class="modal-body">
-                  
+
                   <!-- Profile Image -->
                   <div class="box box-success">
                     <div class="box-body box-profile">
@@ -95,7 +88,7 @@
                       <h3 class="profile-username text-center">Abdillah Satari Rahim</h3>
 
                       <p class="text-muted text-center">D42114516</p>
-                     
+
                       <!-- <ul class="list-group list-group-bordered">
                           <li class="list-group-item">
                             <span class="col-md-6">

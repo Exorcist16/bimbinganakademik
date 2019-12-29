@@ -11,7 +11,7 @@ class AuthModel extends CI_Model {
         if($query->num_rows()>0){
             foreach ($query->result() as $x){
                 $sess = array(
-                    "nama_user"   => $x->nama_lengkap_user,
+                    "nama_user"   => $x->nama_user,
                     "id_user"     => $x->id_user,
                     "username"    => $x->username,
                     "role"        => $x->role,

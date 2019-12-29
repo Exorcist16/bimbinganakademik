@@ -44,40 +44,33 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <?php foreach ($dataupcoming as $u) { ?>
                       <tr>
-                        <td>
-                          <b>
-                            A. Muh. Fauzy
-                          </b>
+                        <td><b><?=$u->nama;?></b>
                           <br>
-                          <span style="color: grey">
-                            D42114516
-                          </span>
+                          <span style="color: grey"><?=$u->nim;?></span>
                         </td>
-                        <td>
-                          11-12-2019
-                        </td>
-                        <td>
-                          10:00
-                        </td>
+                        <td><?=$u->seminar_tanggal;?></td>
+                        <td><?=$u->waktu_mulai;?>-<?=$u->waktu_selesai;?></td>
                         <td>
                           <a href="javascript:void(0)" class="product-title">
                             <button type="button" class="btn btn-warning text-center" data-toggle="modal" data-target="#modal-default">
                               <i class="fa fa-fw fa-edit"></i>
-                            </button> 
-                          </a> 
+                            </button>
+                          </a>
                         </td>
                         <td>
                           <a href="javascript:void(0)" class="product-title">
                             <button type="button" class="btn btn-danger pull-right">
                               Reject
-                            </button> 
+                            </button>
                             <button type="button" class="btn btn-success pull-right">
                               Accept
                             </button>
-                          </a> 
+                          </a>
                         </td>
                       </tr>
+                      <?php } ?>
                     </tbody>
                   </table>
                 </div>

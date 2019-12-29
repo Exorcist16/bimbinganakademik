@@ -9,6 +9,9 @@ class Dosen extends CI_Controller {
 	    if($this->session->userdata('status') != "login"){
 	        redirect('auth');
 	    }
+			$this->load->model('crud');
+			$this->load->library('session');
+			$this->load->model('Dosen_model');
 	}
 
 	public function index() {
@@ -56,17 +59,23 @@ class Dosen extends CI_Controller {
 	}
 
 	public function PenugasanIn(){
+		$sessionnama = $this->session->userdata('nama_user');
+		$dataupcoming = $this->Dosen_model->upcoming($sessionnama);
+
 		$data = array(  'title'             => 'Mahasiswa Dashboard',
 		                'isi'               => 'admin/dashboard/dosen/penugasan_in',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+										'dataupcoming'			=> $dataupcoming
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
 	public function PenugasanConf(){
+		$sessionnama = $this->session->userdata('nama_user');
+		$dataconfirmed = $this->Dosen_model->confirmed($sessionnama);
+
 		$data = array(  'title'             => 'Mahasiswa Dashboard',
 		                'isi'               => 'admin/dashboard/dosen/penugasan_conf',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+										'dataconfirmed'			=> $dataconfirmed
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
@@ -94,5 +103,5 @@ class Dosen extends CI_Controller {
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
-	
+
 }

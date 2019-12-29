@@ -81,7 +81,8 @@ class Kps extends CI_Controller {
 			'seminar_nim'			=> $nim,
 			'seminar_tanggal'	=> $this->input->post('ujian_hasil_tanggal'),
 			'seminar_waktu'		=> $this->input->post('ujian_hasil_waktu'),
-			'seminar_tempat'	=> $this->input->post('ujian_hasil_tempat')
+			'seminar_tempat'	=> $this->input->post('ujian_hasil_tempat'),
+			'seminar_jenis'		=> 'seminar hasil'
 		);
 
 		$datastatusujian = array(
