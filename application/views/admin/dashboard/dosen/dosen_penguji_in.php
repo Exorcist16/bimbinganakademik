@@ -44,11 +44,9 @@
                           <span style="color: grey"><?=$pengujiaktif->nim;?></span>
                         </td>
                         <td>
-                          <a href="javascript:void(0)" class="product-title">
-                            <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-default">
+                          <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-default" data-id="<?=$pengujiaktif->nim;?>">
                             Detail
                           </button>
-                          </a>
                         </td>
                       </tr>
                       <?php } ?>
@@ -76,23 +74,22 @@
                         <div class="box-body box-profile">
                           <img class="profile-user-img img-responsive img-circle" src="<?=base_url('assets/')?>dist/img/user4-128x128.jpg" alt="User profile picture">
 
-                          <h3 class="profile-username text-center">Abdillah Satari Rahim</h3>
+                          <h3 class="profile-username text-center" name="penguji_nama" id="penguji_nama"></h3>
 
-                          <p class="text-muted text-center">D42114516</p>
+                          <p class="text-muted text-center" name="penguji_nim" id="penguji_nim"></p>
 
                           <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
-                              <b>Departemen Teknik Informatika</b>
+                              <b name="penguji_departemen" id="penguji_departemen"></b>
                             </li>
                             <li class="list-group-item">
-                              <b>Strata 1</b>
+                              <b name="penguji_strata" id="penguji_strata"></b>
                             </li>
                             <li class="list-group-item">
-                              <b>2014</b>
+                              <b name="penguji_angkatan" id="penguji_angkatan"></b>
                             </li>
                           </ul>
 
-                          <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
                         </div>
                         <!-- /.box-body -->
                       </div>
@@ -107,17 +104,15 @@
                         <div class="box-body">
                           <strong><i class="fa fa-book margin-r-5"></i>Judul Penelitian</strong>
 
-                          <p class="text-muted">
-                            Implementasi Teknologi Progressive Web Application Menggunakan Framework Angular Pada Sistem Monitoring Energi Listrik
-                          </p>
+                          <p class="text-muted" name="penguji_judul" id="penguji_judul"></p>
 
                           <hr>
 
                           <strong><i class="fa fa-group margin-r-5"></i>Pembimbing</strong>
 
                           <p class="text-muted">
-                          Dr. Amil Ahmad Ilham, S.T., M.IT. <br>
-                          Dr. Eng. Zulkifli Tahir, S.T., M.Sc.
+                          <p name="penguji_pembimbing2" id="penguji_pembimbing1"></p> <br>
+                          <p name="penguji_pembimbing2" id="penguji_pembimbing2"></p>
                           </p>
 
                           <hr>
@@ -125,13 +120,14 @@
                           <strong><i class="fa fa-group margin-r-5"></i>Penguji</strong>
 
                           <p class="text-muted">
-                          Prof. Dr. Ir. Andani, S.T., M.T.<br>
-                          Adnan, S.T., M.T., Ph.D<br>
-                          Dr. Wardi, S.T., M.Eng.
+                          <p name="penguji_penguji1" id="penguji_penguji1"></p><br>
+                          <p name="penguji_penguji2" id="penguji_penguji2">
                           </p>
 
                           <!-- <hr> -->
                         </div>
+                        <!-- /.box-body -->
+                      </div>
                         <!-- /.box-body -->
                       </div>
                       <!-- /.box -->
@@ -146,6 +142,34 @@
             </div>
             <!-- /.modal-dialog -->
           </div>
+
+          <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+          <script type="text/javascript">
+            $(document).on("click", "button", function(){
+              var nim = $(this).data('id');
+              $.ajax({
+                url: "<?=base_url();?>/Dosen/get_data",
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                  nim: nim
+                },
+                success: function(data){
+                  document.getElementById("penguji_nama").innerText = data[0].nama;
+                  document.getElementById("penguji_nim").innerText = data[0].nim;
+                  document.getElementById("penguji_departemen").innerText = 'Departemen ' + data[0].departemen;
+                  document.getElementById("penguji_strata").innerText = data[0].strata;
+                  document.getElementById("penguji_angkatan").innerText = data[0].angkatan;
+                  document.getElementById("penguji_judul").innerText = data[0].judul;
+                  document.getElementById("penguji_pembimbing1").innerText = data[0].pembimbing1;
+                  document.getElementById("penguji_pembimbing2").innerText = data[0].pembimbing2;
+                  document.getElementById("penguji_penguji1").innerText = data[0].penguji1;
+                  document.getElementById("penguji_penguji2").innerText = data[0].penguji2;
+                }
+              })
+            })
+          </script>
+
         </div>
         <!-- /.box -->
       </div>

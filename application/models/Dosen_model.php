@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dosen_model extends CI_Model{
 
+  public function get_data($nim){
+    return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul ON mahasiswa.nim=judul.nim
+    WHERE judul.nim='$nim'")->result();
+  }
+
   function bimbinganaktif($sessionnama){
     $data = $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul ON mahasiswa.nim=judul.nim")->result();
     foreach ($data as $data) {

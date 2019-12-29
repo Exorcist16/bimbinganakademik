@@ -42,11 +42,9 @@
                           <span style="color: grey"><?=$bimbinganalumni->nim;?></span>
                         </td>
                         <td>
-                          <a href="javascript:void(0)" class="product-title">
-                            <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-default">
+                          <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-default" data-id="<?=$bimbinganalumni->nim;?>">
                             Detail
                           </button>
-                          </a>
                         </td>
                       </tr>
                       <?php } ?>
@@ -76,23 +74,22 @@
                         <div class="box-body box-profile">
                           <img class="profile-user-img img-responsive img-circle" src="<?=base_url('assets/')?>dist/img/user4-128x128.jpg" alt="User profile picture">
 
-                          <h3 class="profile-username text-center">Abdillah Satari Rahim</h3>
+                          <h3 class="profile-username text-center" name="bimbinga_nama" id="bimbinga_nama"></h3>
 
-                          <p class="text-muted text-center">D42114516</p>
+                          <p class="text-muted text-center" name="bimbinga_nim" id="bimbinga_nim"></p>
 
                           <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
-                              <b>Departemen Teknik Informatika</b>
+                              <b name="bimbinga_departemen" id="bimbinga_departemen"></b>
                             </li>
                             <li class="list-group-item">
-                              <b>Strata 1</b>
+                              <b name="bimbinga_strata" id="bimbinga_strata"></b>
                             </li>
                             <li class="list-group-item">
-                              <b>2014</b>
+                              <b name="bimbinga_angkatan" id="bimbinga_angkatan"></b>
                             </li>
                           </ul>
 
-                          <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
                         </div>
                         <!-- /.box-body -->
                       </div>
@@ -107,17 +104,15 @@
                         <div class="box-body">
                           <strong><i class="fa fa-book margin-r-5"></i>Judul Penelitian</strong>
 
-                          <p class="text-muted">
-                            Implementasi Teknologi Progressive Web Application Menggunakan Framework Angular Pada Sistem Monitoring Energi Listrik
-                          </p>
+                          <p class="text-muted" name="bimbinga_judul" id="bimbinga_judul"></p>
 
                           <hr>
 
                           <strong><i class="fa fa-group margin-r-5"></i>Pembimbing</strong>
 
                           <p class="text-muted">
-                          Dr. Amil Ahmad Ilham, S.T., M.IT. <br>
-                          Dr. Eng. Zulkifli Tahir, S.T., M.Sc.
+                          <p name="bimbinga_pembimbing2" id="bimbinga_pembimbing1"></p> <br>
+                          <p name="bimbinga_pembimbing2" id="bimbinga_pembimbing2"></p>
                           </p>
 
                           <hr>
@@ -125,9 +120,8 @@
                           <strong><i class="fa fa-group margin-r-5"></i>Penguji</strong>
 
                           <p class="text-muted">
-                          Prof. Dr. Ir. Andani, S.T., M.T.<br>
-                          Adnan, S.T., M.T., Ph.D<br>
-                          Dr. Wardi, S.T., M.Eng.
+                          <p name="bimbinga_penguji1" id="bimbinga_penguji1"></p><br>
+                          <p name="bimbinga_penguji2" id="bimbinga_penguji2">
                           </p>
 
                           <!-- <hr> -->
@@ -146,6 +140,34 @@
             </div>
             <!-- /.modal-dialog -->
           </div>
+
+          <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+          <script type="text/javascript">
+            $(document).on("click", "button", function(){
+              var nim = $(this).data('id');
+              $.ajax({
+                url: "<?=base_url();?>/Dosen/get_data",
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                  nim: nim
+                },
+                success: function(data){
+                  document.getElementById("bimbinga_nama").innerText = data[0].nama;
+                  document.getElementById("bimbinga_nim").innerText = data[0].nim;
+                  document.getElementById("bimbinga_departemen").innerText = 'Departemen ' + data[0].departemen;
+                  document.getElementById("bimbinga_strata").innerText = data[0].strata;
+                  document.getElementById("bimbinga_angkatan").innerText = data[0].angkatan;
+                  document.getElementById("bimbinga_judul").innerText = data[0].judul;
+                  document.getElementById("bimbinga_pembimbing1").innerText = data[0].pembimbing1;
+                  document.getElementById("bimbinga_pembimbing2").innerText = data[0].pembimbing2;
+                  document.getElementById("bimbinga_penguji1").innerText = data[0].penguji1;
+                  document.getElementById("bimbinga_penguji2").innerText = data[0].penguji2;
+                }
+              })
+            })
+          </script>
+
         </div>
         <!-- /.box -->
       </div>

@@ -116,4 +116,10 @@ class Dosen extends CI_Controller {
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
+	public function get_data(){
+		$nim = $this->input->post('nim');
+		$data = $this->Dosen_model->get_data($nim);
+		echo json_encode($data);
+	}
+
 }
