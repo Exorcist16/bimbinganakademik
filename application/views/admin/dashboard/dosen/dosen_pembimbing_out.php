@@ -35,24 +35,21 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <?php foreach ($bimbinganalumni as $bimbinganalumni) { ?>
                       <tr>
-                        <td>
-                          <b>
-                            A. Muh. Fauzy
-                          </b>
+                        <td><b><?=$bimbinganalumni->nama;?></b>
                           <br>
-                          <span style="color: grey">
-                            D42114516
-                          </span>
+                          <span style="color: grey"><?=$bimbinganalumni->nim;?></span>
                         </td>
                         <td>
                           <a href="javascript:void(0)" class="product-title">
                             <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-default">
                             Detail
-                          </button> 
-                          </a> 
+                          </button>
+                          </a>
                         </td>
                       </tr>
+                      <?php } ?>
                     </tbody>
                   </table>
                 </div>

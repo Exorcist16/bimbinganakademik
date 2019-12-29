@@ -2,6 +2,71 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dosen_model extends CI_Model{
+
+  function bimbinganaktif($sessionnama){
+    $data = $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul ON mahasiswa.nim=judul.nim")->result();
+    foreach ($data as $data) {
+      $pembimbing1 = $data->pembimbing1;
+      $pembimbing2 = $data->pembimbing2;
+      $penguji1 = $data->penguji1;
+      $penguji2 = $data->penguji2;
+
+      if ($pembimbing1==$sessionnama){
+        return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
+          ON mahasiswa.nim=judul.nim WHERE judul.pembimbing1='$sessionnama'
+          AND mahasiswa.alumni='0'")->result();
+      } elseif ($pembimbing2==$sessionnama) {
+        return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
+          ON mahasiswa.nim=judul.nim WHERE judul.pembimbing2='$sessionnama'
+          AND mahasiswa.alumni='0'")->result();
+      } elseif ($penguji1==$sessionnama) {
+        return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
+          ON mahasiswa.nim=judul.nim WHERE judul.penguji1='$sessionnama'
+          AND mahasiswa.alumni='0'")->result();
+      } elseif ($penguji2==$sessionnama) {
+        return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
+          ON mahasiswa.nim=judul.nim WHERE judul.penguji2='$sessionnama'
+          AND mahasiswa.alumni='0'")->result();
+      } else {
+        return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
+          ON mahasiswa.nim=judul.nim WHERE judul.penguji2='$sessionnama'
+          AND mahasiswa.alumni='0'")->result();
+      }
+    }
+  }
+
+  function bimbinganalumni($sessionnama){
+    $data = $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul ON mahasiswa.nim=judul.nim")->result();
+    foreach ($data as $data) {
+      $pembimbing1 = $data->pembimbing1;
+      $pembimbing2 = $data->pembimbing2;
+      $penguji1 = $data->penguji1;
+      $penguji2 = $data->penguji2;
+
+      if ($pembimbing1==$sessionnama){
+        return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
+          ON mahasiswa.nim=judul.nim WHERE judul.pembimbing1='$sessionnama'
+          AND mahasiswa.alumni='1'")->result();
+      } elseif ($pembimbing2==$sessionnama) {
+        return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
+          ON mahasiswa.nim=judul.nim WHERE judul.pembimbing2='$sessionnama'
+          AND mahasiswa.alumni='1'")->result();
+      } elseif ($penguji1==$sessionnama) {
+        return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
+          ON mahasiswa.nim=judul.nim WHERE judul.penguji1='$sessionnama'
+          AND mahasiswa.alumni='1'")->result();
+      } elseif ($penguji2==$sessionnama) {
+        return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
+          ON mahasiswa.nim=judul.nim WHERE judul.penguji2='$sessionnama'
+          AND mahasiswa.alumni='1'")->result();
+      } else {
+        return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
+          ON mahasiswa.nim=judul.nim WHERE judul.penguji2='$sessionnama'
+          AND mahasiswa.alumni='1'")->result();
+      }
+    }
+  }
+
   function upcoming($sessionnama){
 
       $data = $this->db->query("SELECT * FROM judul LEFT JOIN seminar ON judul.nim=seminar.seminar_nim")->result();
