@@ -90,4 +90,44 @@ class Dosen_model extends CI_Model{
       }
     }
   }
+
+  function done($sessionnama){
+    $data = $this->db->query("SELECT * FROM judul LEFT JOIN seminar ON judul.nim=seminar.seminar_nim")->result();
+    foreach ($data as $data) {
+      $pembimbing1 = $data->pembimbing1;
+      $pembimbing2 = $data->pembimbing2;
+      $penguji1 = $data->penguji1;
+      $penguji2 = $data->penguji2;
+      $seminar_done = $data->seminar_done;
+
+      if ($pembimbing1==$sessionnama AND $seminar_done==1){
+        return  $this->db->query("SELECT * FROM ((mahasiswa LEFT JOIN judul ON mahasiswa.nim = judul.nim)
+         LEFT JOIN seminar on mahasiswa.nim=seminar.seminar_nim)
+          LEFT JOIN waktu_ujian on seminar.seminar_waktu=waktu_ujian.waktu_ujian_id
+          WHERE judul.pembimbing1='$sessionnama' AND seminar.seminar_done='1'")->result();
+      } elseif ($pembimbing2==$sessionnama AND $seminar_done==1) {
+        return  $this->db->query("SELECT * FROM ((mahasiswa LEFT JOIN judul ON mahasiswa.nim = judul.nim)
+         LEFT JOIN seminar on mahasiswa.nim=seminar.seminar_nim)
+          LEFT JOIN waktu_ujian on seminar.seminar_waktu=waktu_ujian.waktu_ujian_id
+          WHERE judul.pembimbing2='$sessionnama' AND seminar.seminar_done='1'")->result();
+      } elseif ($penguji1==$sessionnama AND $seminar_done==1) {
+        return  $this->db->query("SELECT * FROM ((mahasiswa LEFT JOIN judul ON mahasiswa.nim = judul.nim)
+         LEFT JOIN seminar on mahasiswa.nim=seminar.seminar_nim)
+          LEFT JOIN waktu_ujian on seminar.seminar_waktu=waktu_ujian.waktu_ujian_id
+          WHERE judul.penguji1='$sessionnama' AND seminar.seminar_done='1'")->result();
+      } elseif ($penguji2==$sessionnama AND $seminar_done==1) {
+        return  $this->db->query("SELECT * FROM ((mahasiswa LEFT JOIN judul ON mahasiswa.nim = judul.nim)
+        LEFT JOIN seminar on mahasiswa.nim=seminar.seminar_nim)
+         LEFT JOIN waktu_ujian on seminar.seminar_waktu=waktu_ujian.waktu_ujian_id
+         WHERE judul.penguji2='$sessionnama' AND seminar.seminar_done='1'")->result();
+      } else {
+        return $this->db->query("SELECT * FROM ((mahasiswa LEFT JOIN judul ON mahasiswa.nim = judul.nim)
+         LEFT JOIN seminar on mahasiswa.nim=seminar.seminar_nim)
+          LEFT JOIN waktu_ujian on seminar.seminar_waktu=waktu_ujian.waktu_ujian_id
+          WHERE (seminar.seminar_done='1')
+          AND (judul.pembimbing1='$sessionnama' OR judul.pembimbing2='$sessionnama'
+          OR judul.penguji1='$sessionnama' OR judul.penguji2='$sessionnama')")->result();
+      }
+    }
+  }
 }

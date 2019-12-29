@@ -43,26 +43,17 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <?php foreach ($datadone as $datadone) { ?>
                         <tr>
-                          <td>
-                            <b>
-                              A. Muh. Fauzy
-                            </b>
+                          <td><b><?=$datadone->nama;?></b>
                             <br>
-                            <span style="color: grey">
-                              D42114516
-                            </span>
+                            <span style="color: grey"><?=$datadone->nim;?></span>
                           </td>
-                          <td>
-                            11-12-2019
-                          </td>
-                          <td>
-                            10:00
-                          </td>
-                          <td>
-                            Seminar Hasil
-                          </td>
+                          <td><?=$datadone->seminar_tanggal;?></td>
+                          <td><?=$datadone->waktu_mulai;?> - <?=$datadone->waktu_selesai;?></td>
+                          <td><?=$datadone->seminar_jenis;?></td>
                         </tr>
+                        <?php } ?>
                       </tbody>
                     </table>
                   </div>

@@ -80,10 +80,14 @@ class Dosen extends CI_Controller {
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
+
 	public function penugasanOut(){
+		$sessionnama = $this->session->userdata('nama_user');
+		$datadone = $this->Dosen_model->done($sessionnama);
+
 		$data = array(  'title'             => 'Mahasiswa Dashboard',
 		                'isi'               => 'admin/dashboard/dosen/penugasan_out',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+										'datadone'					=> $datadone
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
