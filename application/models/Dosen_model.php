@@ -19,17 +19,9 @@ class Dosen_model extends CI_Model{
         return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
           ON mahasiswa.nim=judul.nim WHERE judul.pembimbing2='$sessionnama'
           AND mahasiswa.alumni='0'")->result();
-      } elseif ($penguji1==$sessionnama) {
-        return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
-          ON mahasiswa.nim=judul.nim WHERE judul.penguji1='$sessionnama'
-          AND mahasiswa.alumni='0'")->result();
-      } elseif ($penguji2==$sessionnama) {
-        return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
-          ON mahasiswa.nim=judul.nim WHERE judul.penguji2='$sessionnama'
-          AND mahasiswa.alumni='0'")->result();
       } else {
         return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
-          ON mahasiswa.nim=judul.nim WHERE judul.penguji2='$sessionnama'
+          ON mahasiswa.nim=judul.nim WHERE judul.pembimbing2='$sessionnama'
           AND mahasiswa.alumni='0'")->result();
       }
     }
@@ -40,8 +32,6 @@ class Dosen_model extends CI_Model{
     foreach ($data as $data) {
       $pembimbing1 = $data->pembimbing1;
       $pembimbing2 = $data->pembimbing2;
-      $penguji1 = $data->penguji1;
-      $penguji2 = $data->penguji2;
 
       if ($pembimbing1==$sessionnama){
         return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
@@ -51,17 +41,9 @@ class Dosen_model extends CI_Model{
         return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
           ON mahasiswa.nim=judul.nim WHERE judul.pembimbing2='$sessionnama'
           AND mahasiswa.alumni='1'")->result();
-      } elseif ($penguji1==$sessionnama) {
-        return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
-          ON mahasiswa.nim=judul.nim WHERE judul.penguji1='$sessionnama'
-          AND mahasiswa.alumni='1'")->result();
-      } elseif ($penguji2==$sessionnama) {
-        return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
-          ON mahasiswa.nim=judul.nim WHERE judul.penguji2='$sessionnama'
-          AND mahasiswa.alumni='1'")->result();
       } else {
         return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
-          ON mahasiswa.nim=judul.nim WHERE judul.penguji2='$sessionnama'
+          ON mahasiswa.nim=judul.nim WHERE judul.pembimbing2='$sessionnama'
           AND mahasiswa.alumni='1'")->result();
       }
     }
