@@ -47,17 +47,21 @@ class Dosen extends CI_Controller {
 	}
 
 	public function pengujiIn(){
+		$sessionnama = $this->session->userdata('nama_user');
+		$pengujiaktif = $this->Dosen_model->pengujiaktif($sessionnama);
 		$data = array(  'title'             => 'Mahasiswa Dashboard',
 		                'isi'               => 'admin/dashboard/dosen/dosen_penguji_in',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+										'pengujiaktif'			=> $pengujiaktif
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
 	public function pengujiOut(){
+		$sessionnama = $this->session->userdata('nama_user');
+		$pengujialumni = $this->Dosen_model->pengujialumni($sessionnama);
 		$data = array(  'title'             => 'Mahasiswa Dashboard',
 		                'isi'               => 'admin/dashboard/dosen/dosen_penguji_out',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+										'pengujialumni'			=> $pengujialumni
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
