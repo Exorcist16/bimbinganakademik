@@ -44,7 +44,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <<?php foreach ($dataconfirmed as $dataconfirmed): ?>
+                        <?php foreach ($dataconfirmed as $dataconfirmed): ?>
                           <tr>
                             <td><b><?= $dataconfirmed->nama;?></b>
                               <br>

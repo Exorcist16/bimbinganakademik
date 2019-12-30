@@ -176,13 +176,10 @@ class Dosen_model extends CI_Model{
          LEFT JOIN waktu_ujian on seminar.seminar_waktu=waktu_ujian.waktu_ujian_id
          WHERE judul.penguji2='$sessionnama' AND seminar.penguji2_status='1'")->result();
       } else {
-        return $this->db->query("SELECT * FROM ((mahasiswa LEFT JOIN judul ON mahasiswa.nim = judul.nim)
-         LEFT JOIN seminar on mahasiswa.nim=seminar.seminar_nim)
-          LEFT JOIN waktu_ujian on seminar.seminar_waktu=waktu_ujian.waktu_ujian_id
-          WHERE (seminar.pembimbing1_status='0' AND seminar.pembimbing2_status='0'
-          AND seminar.penguji1_status='0' AND seminar.penguji2_status='0')
-          AND (judul.pembimbing1='$sessionnama' OR judul.pembimbing2='$sessionnama'
-          OR judul.penguji1='$sessionnama' OR judul.penguji2='$sessionnama')")->result();
+        return  $this->db->query("SELECT * FROM ((mahasiswa LEFT JOIN judul ON mahasiswa.nim = judul.nim)
+        LEFT JOIN seminar on mahasiswa.nim=seminar.seminar_nim)
+         LEFT JOIN waktu_ujian on seminar.seminar_waktu=waktu_ujian.waktu_ujian_id
+         WHERE judul.penguji2='$sessionnama' AND seminar.penguji2_status='1'")->result();
       }
     }
   }

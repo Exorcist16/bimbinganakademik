@@ -64,7 +64,7 @@
                             <button type="button" class="btn btn-danger pull-right">
                               Reject
                             </button>
-                            <button type="button" class="btn btn-success pull-right">
+                            <button type="button" id="terima" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-terima" data-nim="<?=$u->nim;?>">
                               Accept
                             </button>
                           </a>
@@ -166,6 +166,44 @@
             </div>
             <!-- /.modal-dialog -->
           </div>
+
+          <div class="modal modal-success fade" id="modal-terima">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 id="ket_terima">Anda ingin menerima permintaan seminar?</h4>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak, Kembali</button>
+                <a href="#" id="btn-terima">
+                  <button type="button" class="btn btn-outline">Ya, Terima</button>
+                </a>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+
+          <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+          <script type="text/javascript">
+            $(document).on("click", "#terima", function(){
+              var nim = $(this).attr('data-nim')
+              $.ajax({
+                url: "<?=base_url();?>/Dosen/get_data",
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                  nim: nim
+                },
+                success: function(data){
+                  document.getElementById("ket_terima").innerText = 'Anda ingin menerima permintaan Seminar oleh mahasiswa atas nama '+data[0].nama;
+                  document.getElementById("btn-terima").href='<?=base_url();?>/Dosen/terima_seminar/'+data[0].nim;
+                }
+              })
+            })
+          </script>
+
         </div>
         <!-- /.box -->
       </div>
