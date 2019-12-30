@@ -60,10 +60,12 @@
                           </a>
                         </td>
                         <td>
-                          <a href="javascript:void(0)" class="product-title">
-                            <button type="button" class="btn btn-danger pull-right">
+                          <a href="#" class="product-title">
+                            <button type="button" id="tolak" class="btn btn-danger pull-right" data-toggle="modal" data-target="#modal-tolak" data-nima="<?=$u->nim;?>">
                               Reject
                             </button>
+                          </a>
+                          <a href="#" class="product-title">
                             <button type="button" id="terima" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-terima" data-nim="<?=$u->nim;?>">
                               Accept
                             </button>
@@ -165,21 +167,41 @@
           </div>
 
           <div class="modal modal-success fade" id="modal-terima">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 id="ket_terima">Anda ingin menerima permintaan seminar?</h4>
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                  <h4 id="ket_terima">Anda ingin menerima permintaan seminar?</h4>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak, Kembali</button>
+                  <a href="#" id="btn-terima">
+                    <button type="button" class="btn btn-outline">Ya, Terima</button>
+                  </a>
+                </div>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak, Kembali</button>
-                <a href="#" id="btn-terima">
-                  <button type="button" class="btn btn-outline">Ya, Terima</button>
-                </a>
-              </div>
+              <!-- /.modal-content -->
             </div>
-            <!-- /.modal-content -->
+          </div>
+
+          <div class="modal modal-danger fade" id="modal-tolak">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                  <h4 id="ket_tolak"></h4>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak, Kembali</button>
+                  <a href="#" id="btn-tolak">
+                    <button type="button" class="btn btn-outline">Ya, Tolak</button>
+                  </a>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
           </div>
 
           <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
@@ -196,6 +218,25 @@
                 success: function(data){
                   document.getElementById("ket_terima").innerText = 'Anda ingin menerima permintaan Seminar oleh mahasiswa atas nama '+data[0].nama;
                   document.getElementById("btn-terima").href='<?=base_url();?>/Dosen/terima_seminar/'+data[0].nim;
+                }
+              })
+            })
+          </script>
+
+          <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+          <script type="text/javascript">
+            $(document).on("click", "#tolak", function(){
+              var nim = $(this).attr('data-nima')
+              $.ajax({
+                url: "<?=base_url();?>/Dosen/get_data",
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                  nim: nim
+                },
+                success: function(data){
+                  document.getElementById("ket_tolak").innerText = 'Anda ingin menolak permintaan Seminar oleh mahasiswa atas nama '+data[0].nama;
+                  document.getElementById("btn-tolak").href='<?=base_url();?>/Dosen/tolak_seminar/'+data[0].nim;
                 }
               })
             })

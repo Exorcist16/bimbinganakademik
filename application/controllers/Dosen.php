@@ -157,4 +157,39 @@ class Dosen extends CI_Controller {
 		redirect('dosen/PenugasanConf');
 	}
 
+	public function tolak_seminar(){
+		$nim = $this->uri->segment(3);
+		$sessionnama = $this->session->userdata('nama_user');
+		$datadata = $this->crud->gw('judul', array('nim' => $nim));
+		foreach ($datadata as $datadata) {
+			$pembimbing1 = $datadata->pembimbing1;
+      $pembimbing2 = $datadata->pembimbing2;
+      $penguji1 = $datadata->penguji1;
+      $penguji2 = $datadata->penguji2;
+
+			if ($pembimbing1==$sessionnama) {
+				$data = array(
+					'pembimbing1_status' => '2'
+				);
+				$this->crud->u('seminar', $data, array('seminar_nim' => $nim));
+			} elseif ($pembimbing2==$sessionnama) {
+				$data = array(
+					'pembimbing2_status' => '2'
+				);
+				$this->crud->u('seminar', $data, array('seminar_nim' => $nim));
+			} elseif ($penguji1 == $sessionnama) {
+				$data = array(
+					'penguji1_status' => '2'
+				);
+				$this->crud->u('seminar', $data, array('seminar_nim' => $nim));
+			} elseif ($penguji2 == $sessionnama) {
+				$data = array(
+					'penguji2_status' => '2'
+				);
+				$this->crud->u('seminar', $data, array('seminar_nim' => $nim));
+			}
+		}
+		redirect('dosen/PenugasanIn');
+	}
+
 }
