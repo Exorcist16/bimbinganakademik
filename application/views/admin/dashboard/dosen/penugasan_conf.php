@@ -54,7 +54,7 @@
                             <td><?= $dataconfirmed->waktu_mulai;?> - <?= $dataconfirmed->waktu_selesai;?> WITA</td>
                             <td>
                               <a href="javascript:void(0)" class="product-title">
-                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
+                                <button type="button" id="conf_detail" class="btn btn-success" data-toggle="modal" data-target="#modal-default" data-id="<?=$dataconfirmed->nim;?>">
                                   <i class="fa fa-fw fa-check-square-o"></i>
                                 </button>
                               </a>
@@ -85,59 +85,42 @@
                     <div class="box-body box-profile">
                       <img class="profile-user-img img-responsive img-circle" src="<?=base_url('assets/')?>dist/img/avatar5.png" alt="User profile picture">
 
-                      <h3 class="profile-username text-center">Abdillah Satari Rahim</h3>
+                      <h3 class="profile-username text-center" id="conf_nama"></h3>
 
-                      <p class="text-muted text-center">D42114516</p>
-
-                      <!-- <ul class="list-group list-group-bordered">
-                          <li class="list-group-item">
-                            <span class="col-md-6">
-                              <b>Departemen Teknik Informatika</b>
-                            </span>
-                            <span class="col-md-6">
-                                <b> Dosen Pembimbing 1
-                                <span class="pull-right-container">
-                                  <small class="label pull-right bg-green">Confirmed</small>
-                                </span>
-                              </b>
-                            </span>
-                          </li>
-                      </ul> -->
+                      <p class="text-muted text-center" id="conf_nim"></p>
 
                       <div class="box">
                         <div class="box-body">
                           <div class="col-md-6">
-                            <p >Departemen Teknik Informatika</p>
-                            <p >S1</p>
-                            <p >Implementasi Progressive Web App (PWA) Menggunakan Framework Angular Dalam Membangun Sistem Monitoring Energy Listrik</p>
-                            <p>17/10/2019</p>
+                            <p id="conf_departemen"></p>
+                            <p id="conf_strata"></p>
+                            <p id="conf_judul"></p>
+                            <p id="conf_tanggal"></p>
                           </div>
                           <div class="col-md-6">
                             <p> Dosen Pembimbing 1
                               <span class="pull-right-container">
-                                <small class="label pull-right bg-green">Confirmed</small>
+                                <small id="conf_status_pembimbing1" class="label pull-right bg-yellow">Status</small>
                               </span>
                             </p>
                             <p> Dosen Pembimbing 2
                               <span class="pull-right-container">
-                                <small class="label pull-right bg-green">Confirmed</small>
+                                <small id="conf_status_pembimbing2" class="label pull-right bg-yellow">Status</small>
                               </span>
                             </p>
                             <p> Dosen Penguji 1
                               <span class="pull-right-container">
-                                <small class="label pull-right bg-yellow">Waiting</small>
+                                <small id="conf_status_penguji1" class="label pull-right bg-yellow">Status</small>
                               </span>
                             </p>
                             <p> Dosen Penguji 2
                               <span class="pull-right-container">
-                                <small class="label pull-right bg-red">Rejected</small>
+                                <small id="conf_status_penguji2" class="label pull-right bg-yellow">Status</small>
                               </span>
                             </p>
                           </div>
                         </div>
                       </div>
-
-                      <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
                     </div>
                     <!-- /.box-body -->
                   </div>
@@ -145,7 +128,6 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                  <!-- <button type="button" class="btn btn-primary">Tambahkan</button> -->
                 </div>
               </div>
               <!-- /.modal-content -->
@@ -153,6 +135,85 @@
             <!-- /.modal-dialog -->
           </div>
           <!-- /.modal -->
+
+          <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+          <script type="text/javascript">
+            $(document).on("click", "#conf_detail", function(){
+              var nim = $(this).attr('data-id')
+              $.ajax({
+                url: "<?=base_url();?>/Dosen/get_data",
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                  nim: nim
+                },
+                success: function(data){
+                  document.getElementById("conf_nama").innerText = data[0].nama;
+                  document.getElementById("conf_nim").innerText = data[0].nim;
+                  document.getElementById("conf_departemen").innerText = 'Departemen ' + data[0].departemen;
+                  document.getElementById("conf_strata").innerText = data[0].strata;
+                  document.getElementById("conf_judul").innerText = data[0].judul;
+                  document.getElementById("conf_tanggal").innerText = data[0].seminar_tanggal;
+                  if (data[0].pembimbing1_status == 0) {
+                    document.getElementById("conf_status_pembimbing1").className = "label pull-right bg-yellow";
+                    document.getElementById("conf_status_pembimbing1").innerText = "Menunggu";
+                  } else if (data[0].pembimbing1_status == 1) {
+                    document.getElementById("conf_status_pembimbing1").className = "label pull-right bg-green";
+                    document.getElementById("conf_status_pembimbing1").innerText = "Diterima";
+                  } else if (data[0].pembimbing1_status == 2) {
+                    document.getElementById("conf_status_pembimbing1").className = "label pull-right bg-red";
+                    document.getElementById("conf_status_pembimbing1").innerText = "Ditolak";
+                  } else {
+                    document.getElementById("conf_status_pembimbing1").className = "label pull-right bg-yellow";
+                    document.getElementById("conf_status_pembimbing1").innerText = "Menunggu";
+                  }
+
+                  if (data[0].pembimbing2_status == 0) {
+                    document.getElementById("conf_status_pembimbing2").className = "label pull-right bg-yellow";
+                    document.getElementById("conf_status_pembimbing2").innerText = "Menunggu";
+                  } else if (data[0].pembimbing2_status == 1) {
+                    document.getElementById("conf_status_pembimbing2").className = "label pull-right bg-green";
+                    document.getElementById("conf_status_pembimbing2").innerText = "Diterima";
+                  } else if (data[0].pembimbing2_status == 2) {
+                    document.getElementById("conf_status_pembimbing2").className = "label pull-right bg-red";
+                    document.getElementById("conf_status_pembimbing2").innerText = "Ditolak";
+                  } else {
+                    document.getElementById("conf_status_pembimbing2").className = "label pull-right bg-yellow";
+                    document.getElementById("conf_status_pembimbing2").innerText = "Menunggu";
+                  }
+
+                  if (data[0].penguji1_status == 0) {
+                    document.getElementById("conf_status_penguji1").className = "label pull-right bg-yellow";
+                    document.getElementById("conf_status_penguji1").innerText = "Menunggu";
+                  } else if (data[0].pembimbing1_status == 1) {
+                    document.getElementById("conf_status_penguji1").className = "label pull-right bg-green";
+                    document.getElementById("conf_status_penguji1").innerText = "Diterima";
+                  } else if (data[0].penguji1_status == 2) {
+                    document.getElementById("conf_status_penguji1").className = "label pull-right bg-red";
+                    document.getElementById("conf_status_penguji1").innerText = "Ditolak";
+                  } else {
+                    document.getElementById("conf_status_penguji1").className = "label pull-right bg-yellow";
+                    document.getElementById("conf_status_penguji1").innerText = "Menunggu";
+                  }
+
+                  if (data[0].penguji2_status == 0) {
+                    document.getElementById("conf_status_penguji2").className = "label pull-right bg-yellow";
+                    document.getElementById("conf_status_penguji2").innerText = "Menunggu";
+                  } else if (data[0].pembimbing2_status == 1) {
+                    document.getElementById("conf_status_penguji2").className = "label pull-right bg-green";
+                    document.getElementById("conf_status_penguji2").innerText = "Diterima";
+                  } else if (data[0].penguji2_status == 2) {
+                    document.getElementById("conf_status_penguji2").className = "label pull-right bg-red";
+                    document.getElementById("conf_status_penguji2").innerText = "Ditolak";
+                  } else {
+                    document.getElementById("conf_status_penguji2").className = "label pull-right bg-yellow";
+                    document.getElementById("conf_status_penguji2").innerText = "Menunggu";
+                  }
+                }
+              })
+            })
+          </script>
+
         </div>
         <!-- /.box -->
       </div>

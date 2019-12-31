@@ -4,7 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Dosen_model extends CI_Model{
 
   public function get_data($nim){
-    return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul ON mahasiswa.nim=judul.nim
+    return $this->db->query("SELECT * FROM (mahasiswa LEFT JOIN judul ON mahasiswa.nim=judul.nim)
+    LEFT JOIN seminar ON mahasiswa.nim=seminar.seminar_nim
     WHERE judul.nim='$nim'")->result();
   }
 
