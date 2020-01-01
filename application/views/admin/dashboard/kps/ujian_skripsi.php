@@ -5,7 +5,7 @@
       }
       td{
           text-align: center;
-      } 
+      }
   </style>
   <!-- Main content -->
   <section class="content">
@@ -47,16 +47,17 @@
                     <th>Nim</th>
                     <th>Nama</th>
                     <th>Judul Penelitian</th>
-                    <td>Dosen Menyetujui</td>
-                    <td>Tgl Ujian</td>
+                    <th>Dosen Menyetujui</th>
+                    <th>Tgl Ujian</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
+                  <?php foreach ($datatampiltutup as $datatampiltutup) { ?>
                   <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>Judul Penelitian Mahasiswa1</td>
+                    <td><?=$datatampiltutup->nim;?></td>
+                    <td><?=$datatampiltutup->nama;?></td>
+                    <td><?=$datatampiltutup->judul;?></td>
                     <td>
                       <div class="progress">
                         <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%; color: black;">2/5
@@ -64,109 +65,13 @@
                         </div>
                       </div>
                     </td>
-                    <td>
-                      17/10/2019
-                    </td>
+                    <td><?=$datatampiltutup->seminar_tanggal;?></td>
                     <td>
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
                       <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>Judul Penelitian Mahasiswa</td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%; color: black;">2/5
-                          <span class="sr-only"></span>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      17/10/2019
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>Judul Penelitian Mahasiswa</td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%; color: black;">2/5
-                          <span class="sr-only"></span>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      17/10/2019
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>Judul Penelitian Mahasiswa</td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%; color: black;">2/5
-                          <span class="sr-only"></span>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      17/10/2019
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-primary"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>Judul Penelitian Mahasiswa</td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%; color: black;">2/5
-                          <span class="sr-only"></span>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      17/10/2019
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>Judul Penelitian Mahasiswa</td>
-                    <td>
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%; color: black;">2/5
-                          <span class="sr-only"></span>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      17/10/2019
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </div>
@@ -282,7 +187,7 @@
                   <h4 class="modal-title">Detail Seminar Hasil</h4>
                 </div>
                 <div class="modal-body">
-                  
+
                   <!-- Profile Image -->
                   <div class="box box-success">
                     <div class="box-body box-profile">
@@ -291,7 +196,7 @@
                       <h3 class="profile-username text-center">Abdillah Satari Rahim</h3>
 
                       <p class="text-muted text-center">D42114516</p>
-                     
+
                       <!-- <ul class="list-group list-group-bordered">
                           <li class="list-group-item">
                             <span class="col-md-6">

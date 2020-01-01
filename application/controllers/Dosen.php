@@ -20,8 +20,8 @@ class Dosen extends CI_Controller {
 
 	public function dashboard() {
 		$data = array(	'title'				=> 'Mahasiswa Dashboard',
-						'isi'				=> 'admin/dashboard/dosen/dosen_dashboard',
-						// 'dataScript'		=> 'admin/dataScript/beranda-script'
+										'isi'				=> 'admin/dashboard/dosen/dosen_dashboard',
+
 					);
 		$this->load->view('admin/_layout/wrapper', $data);
 	}

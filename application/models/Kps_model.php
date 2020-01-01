@@ -20,4 +20,8 @@ class Kps_model extends CI_Model{
     return $this->db->query("SELECT * FROM (mahasiswa LEFT JOIN judul ON mahasiswa.nim = judul.nim) LEFT JOIN seminar on mahasiswa.nim=seminar.seminar_nim WHERE mahasiswa.departemen = '$sessiondepartemen' AND mahasiswa.judul = '1'")->result();
   }
 
+  function tampil_data_seminar_tutup($sessiondepartemen){
+    return $this->db->query("SELECT * FROM (mahasiswa LEFT JOIN judul ON mahasiswa.nim = judul.nim) LEFT JOIN seminar on mahasiswa.nim=seminar.seminar_nim WHERE mahasiswa.departemen = '$sessiondepartemen' AND mahasiswa.hasil = '1'")->result();
+  }
+
 }

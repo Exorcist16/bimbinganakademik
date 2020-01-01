@@ -47,8 +47,8 @@
                     <th>Nim</th>
                     <th>Nama</th>
                     <th>Judul Penelitian</th>
-                    <td>Dosen Menyetujui</td>
-                    <td>Tgl Ujian</td>
+                    <th>Dosen Menyetujui</th>
+                    <th>Tgl Ujian</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
