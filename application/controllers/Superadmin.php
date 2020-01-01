@@ -91,6 +91,12 @@ class Superadmin extends CI_Controller {
 		redirect('superadmin/masterDataJurusan');
 	}
 
+	public function hapus_jurusan(){
+		$id = $this->uri->segment(3);
+		$this->crud->d('jurusan', array('id_jurusan' => $id));
+		redirect('superadmin/masterDataJurusan');
+	}
+
 	public function data_jurusan(){
 		$id = $this->input->post('id');
 		$data = $this->crud->gw('jurusan', array('id_jurusan' => $id));

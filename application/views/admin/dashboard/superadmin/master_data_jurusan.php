@@ -40,7 +40,7 @@
                     <td><?=$jurusan->jurusan;?></td>
                     <td>
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-jurusan-edit" id="edit_jurusan" data-id="<?=$jurusan->id_jurusan;?>"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-jurusan-hapus"><i class="fa fa-fw fa-remove"></i></button>
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-jurusan-hapus" id="hapus_jurusan" data-id="<?=$jurusan->id_jurusan;?>"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
                   <?php } ?>
@@ -127,16 +127,35 @@
               <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4>Anda akan menghapus jurusan ?</h4>
+                <h4 id="ket_hapus_jurusan"></h4>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak, Kembali</button>
-                <button type="button" class="btn btn-outline">Ya, Hapus</button>
+                <a href="#" id="button_hapus_jurusan">
+                  <button type="button" class="btn btn-outline">Ya, Hapus</button>
+                </a>
               </div>
             </div>
             <!-- /.modal-content -->
           </div>
           <!-- /.modal-dialog -->
+
+          <script type="text/javascript">
+            $(document).on("click", "#hapus_jurusan", function(){
+              var id = $(this).attr('data-id')
+              $.ajax({
+                url: "<?=base_url();?>/Superadmin/data_jurusan",
+                method: "POST",
+                dataType: "JSON",
+                data: { id: id},
+                success: function(data){
+                  document.getElementById("ket_hapus_jurusan").innerText='Anda akan menghapus data Jurusan '+data[0].jurusan+' ?';
+                  document.getElementById("button_hapus_jurusan").href='<?=base_url();?>/Superadmin/hapus_jurusan/'+data[0].id_jurusan;
+                }
+              })
+            })
+          </script>
+
         </div>
         <!-- /.modal -->
         </div>
