@@ -86,7 +86,7 @@ class Kps extends CI_Controller {
 		);
 
 		$datastatusujian = array(
-			'judul'		=> '1'
+			'request_hasil'		=> '1'
 		);
 
 		$this->crud->i('seminar', $data);
@@ -102,6 +102,23 @@ class Kps extends CI_Controller {
 										'datatampiltutup'	=> $datatampiltutup
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
+	}
+	public function tambah_seminar_tutup(){
+		$nim = $this->input->post('ujian_tutup_nim');
+		$data = array(
+			'seminar_nim'			=> $nim,
+			'seminar_tanggal'	=> $this->input->post('ujian_tutup_tanggal'),
+			'seminar_waktu'		=> $this->input->post('ujian_tutup_waktu'),
+			'seminar_tempat'	=> $this->input->post('ujian_tutup_tempat'),
+			'seminar_jenis'		=> 'seminar tutup'
+		);
+
+		$datastatusujiantutup = array(
+			'request_tutup'	=> '1'
+		);
+		$this->crud->i('seminar', $data);
+		$this->crud->u('mahasiswa', $datastatusujiantutup, array('nim' => $nim));
+		redirect('kps/ujianSkripsi');
 	}
 // ------------------------------------------------------------------------------------------------
 	public function persetujuanJadwalHasil(){

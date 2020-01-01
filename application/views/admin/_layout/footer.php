@@ -48,10 +48,17 @@
 		<!-- iCheck 1.0.1 -->
 		<script src="<?=base_url('assets/')?>/plugins/iCheck/icheck.min.js"></script>
 
+		<!-- <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/rowreorder/1.2.6/js/dataTables.rowReorder.min.js"></script> -->
+		<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
 		<script>
 		  $(function () {
-		    $('#example1').DataTable()
+		    $('#example1').DataTable({
+					'responsive'  : true,
+				})
 		    $('#example2').DataTable({
+					'responsive'  : true,
 		      'paging'      : true,
 		      'lengthChange': false,
 		      'searching'   : false,

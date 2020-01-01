@@ -85,19 +85,11 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Tambah Jadwal Ujian</h4>
                 </div>
-                <form role="form">
+                <form role="form" action="<?php echo base_url().'kps/tambah_seminar_tutup';?>" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>NIM</label>
-                      <select class="form-control select2" name="ujian_tutup_nim" id="ujian_tutup_nim" style="width: 100%;" required>
-                        <option selected value="" disabled>NIM</option>
-                        <option>D42114516</option>
-                        <option>D42114516</option>
-                        <option>D42114516</option>
-                        <option>D42114516</option>
-                        <option>D42114516</option>
-                        <option>D42114516</option>
-                      </select>
+                      <input type="text" class="form-control" name="ujian_tutup_nim" id="ujian_tutup_nim" style="width: 100%;" placeholder="Nim Mahasiswa" required>
                     </div>
                     <div class="form-group">
                       <label>Nama Mahasiswa</label>
@@ -131,13 +123,31 @@
                        <label><input name="ujian_tutup_notif_penguji2" id="ujian_tutup_notif_penguji2" type="checkbox" checked>Kirimkan Notifikasi</label>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label>Penguji III</label>
-                      <input type="text" class="form-control" name="ujian_tutup_penguji3" id="ujian_tutup_penguji3" placeholder="Penguji III" >
-                      <div class="checkbox">
-                       <label><input name="ujian_tutup_notif_penguji3" id="ujian_tutup_notif_penguji3" type="checkbox" checked>Kirimkan Notifikasi</label>
-                      </div>
-                    </div>
+
+                    <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+                    <script type="text/javascript">
+                      $(document).ready(function(){
+                        $("#ujian_tutup_nim").change(function(){
+                          var nim = $(this).val();
+                          $.ajax({
+                            url: "<?=base_url();?>/Kps/get_nama",
+                            method: "POST",
+                            dataType: "JSON",
+                            data: {
+                              nim: nim
+                            },
+                            success: function(data) {
+                              document.getElementById("ujian_tutup_nama").value = data[0].nama;
+                              document.getElementById("ujian_tutup_pembimbing1").value = data[0].pembimbing1;
+                              document.getElementById("ujian_tutup_pembimbing2").value = data[0].pembimbing2;
+                              document.getElementById("ujian_tutup_penguji1").value = data[0].penguji1;
+                              document.getElementById("ujian_tutup_penguji2").value = data[0].penguji2;
+                            }
+                          })
+                        });
+                      });
+                    </script>
+
                     <div class="form-group">
                       <label>Tanggal Ujian</label>
                       <div class="input-group date">
