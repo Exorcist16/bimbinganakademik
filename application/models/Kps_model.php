@@ -31,5 +31,4 @@ class Kps_model extends CI_Model{
       WHERE mahasiswa.departemen = '$sessiondepartemen'
       AND mahasiswa.request_tutup = '1' AND mahasiswa.alumni = '0'")->result();
   }
-
 }

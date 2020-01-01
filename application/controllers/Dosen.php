@@ -18,6 +18,7 @@ class Dosen extends CI_Controller {
 		redirect(base_url('dosen/dashboard'));
 	}
 
+// --------------------------------------------------------------------------------
 	public function dashboard() {
 		$data = array(	'title'				=> 'Mahasiswa Dashboard',
 										'isi'				=> 'admin/dashboard/dosen/dosen_dashboard',
@@ -26,6 +27,7 @@ class Dosen extends CI_Controller {
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
+// --------------------------------------------------------------------------------
 	public function pembimbingIn(){
 		$sessionnama = $this->session->userdata('nama_user');
 		$bimbinganaktif = $this->Dosen_model->bimbinganaktif($sessionnama);
@@ -36,6 +38,7 @@ class Dosen extends CI_Controller {
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
+// --------------------------------------------------------------------------------
 	public function pembimbingOut(){
 		$sessionnama = $this->session->userdata('nama_user');
 		$bimbinganalumni = $this->Dosen_model->bimbinganalumni($sessionnama);
@@ -46,6 +49,7 @@ class Dosen extends CI_Controller {
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
+// --------------------------------------------------------------------------------
 	public function pengujiIn(){
 		$sessionnama = $this->session->userdata('nama_user');
 		$pengujiaktif = $this->Dosen_model->pengujiaktif($sessionnama);
@@ -56,6 +60,7 @@ class Dosen extends CI_Controller {
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
+// --------------------------------------------------------------------------------
 	public function pengujiOut(){
 		$sessionnama = $this->session->userdata('nama_user');
 		$pengujialumni = $this->Dosen_model->pengujialumni($sessionnama);
@@ -66,6 +71,7 @@ class Dosen extends CI_Controller {
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
+// --------------------------------------------------------------------------------
 	public function PenugasanIn(){
 		$sessionnama = $this->session->userdata('nama_user');
 		$dataupcoming = $this->Dosen_model->upcoming($sessionnama);
@@ -77,60 +83,15 @@ class Dosen extends CI_Controller {
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
-	public function PenugasanConf(){
-		$sessionnama = $this->session->userdata('nama_user');
-		$dataconfirmed = $this->Dosen_model->confirmed($sessionnama);
-
-		$data = array(  'title'             => 'Mahasiswa Dashboard',
-		                'isi'               => 'admin/dashboard/dosen/penugasan_conf',
-										'dataconfirmed'			=> $dataconfirmed
-		            );
-		$this->load->view('admin/_layout/wrapper', $data);
-	}
-
-
-	public function penugasanOut(){
-		$sessionnama = $this->session->userdata('nama_user');
-		$datadone = $this->Dosen_model->done($sessionnama);
-
-		$data = array(  'title'             => 'Mahasiswa Dashboard',
-		                'isi'               => 'admin/dashboard/dosen/penugasan_out',
-										'datadone'					=> $datadone
-		            );
-		$this->load->view('admin/_layout/wrapper', $data);
-	}
-
-	public function bimbinganMasuk(){
-		$data = array(  'title'             => 'Mahasiswa Dashboard',
-		                'isi'               => 'admin/dashboard/dosen/bimbingan_masuk',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
-		            );
-		$this->load->view('admin/_layout/wrapper', $data);
-	}
-
-	public function bimbingan(){
-		$data = array(  'title'             => 'Mahasiswa Dashboard',
-		                'isi'               => 'admin/dashboard/dosen/bimbingan',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
-		            );
-		$this->load->view('admin/_layout/wrapper', $data);
-	}
-
-	public function get_data(){
-		$nim = $this->input->post('nim');
-		$data = $this->Dosen_model->get_data($nim);
-		echo json_encode($data);
-	}
-
 	public function terima_seminar(){
 		$nim = $this->uri->segment(3);
 		$sessionnama = $this->session->userdata('nama_user');
 		$datadata = $this->crud->gw('judul', array('nim' => $nim));
 		foreach ($datadata as $datadata) {
 			$pembimbing1 = $datadata->pembimbing1;
-      $pembimbing2 = $datadata->pembimbing2;
-      $penguji1 = $datadata->penguji1;
-      $penguji2 = $datadata->penguji2;
+			$pembimbing2 = $datadata->pembimbing2;
+			$penguji1 = $datadata->penguji1;
+			$penguji2 = $datadata->penguji2;
 
 			if ($pembimbing1==$sessionnama) {
 				$data = array(
@@ -163,9 +124,9 @@ class Dosen extends CI_Controller {
 		$datadata = $this->crud->gw('judul', array('nim' => $nim));
 		foreach ($datadata as $datadata) {
 			$pembimbing1 = $datadata->pembimbing1;
-      $pembimbing2 = $datadata->pembimbing2;
-      $penguji1 = $datadata->penguji1;
-      $penguji2 = $datadata->penguji2;
+			$pembimbing2 = $datadata->pembimbing2;
+			$penguji1 = $datadata->penguji1;
+			$penguji2 = $datadata->penguji2;
 
 			if ($pembimbing1==$sessionnama) {
 				$data = array(
@@ -192,4 +153,52 @@ class Dosen extends CI_Controller {
 		redirect('dosen/PenugasanIn');
 	}
 
+// --------------------------------------------------------------------------------
+	public function PenugasanConf(){
+		$sessionnama = $this->session->userdata('nama_user');
+		$dataconfirmed = $this->Dosen_model->confirmed($sessionnama);
+
+		$data = array(  'title'             => 'Mahasiswa Dashboard',
+		                'isi'               => 'admin/dashboard/dosen/penugasan_conf',
+										'dataconfirmed'			=> $dataconfirmed
+		            );
+		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
+// --------------------------------------------------------------------------------
+	public function penugasanOut(){
+		$sessionnama = $this->session->userdata('nama_user');
+		$datadone = $this->Dosen_model->done($sessionnama);
+
+		$data = array(  'title'             => 'Mahasiswa Dashboard',
+		                'isi'               => 'admin/dashboard/dosen/penugasan_out',
+										'datadone'					=> $datadone
+		            );
+		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
+// --------------------------------------------------------------------------------
+	public function bimbinganMasuk(){
+		$data = array(  'title'             => 'Mahasiswa Dashboard',
+		                'isi'               => 'admin/dashboard/dosen/bimbingan_masuk',
+		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+		            );
+		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
+// --------------------------------------------------------------------------------
+	public function bimbingan(){
+		$data = array(  'title'             => 'Mahasiswa Dashboard',
+		                'isi'               => 'admin/dashboard/dosen/bimbingan',
+		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+		            );
+		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
+// --------------------------------------------------------------------------------
+	public function get_data(){
+		$nim = $this->input->post('nim');
+		$data = $this->Dosen_model->get_data($nim);
+		echo json_encode($data);
+	}
 }

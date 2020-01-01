@@ -39,7 +39,7 @@
                   <tr>
                     <td><?=$jurusan->jurusan;?></td>
                     <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-jurusan-edit"><i class="fa fa-fw  fa-edit"></i></button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-jurusan-edit" id="edit_jurusan" data-id="<?=$jurusan->id_jurusan;?>"><i class="fa fa-fw  fa-edit"></i></button>
                       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-jurusan-hapus"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
@@ -84,7 +84,7 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Edit Jurusan</h4>
                 </div>
-                <form role="form">
+                <form role="form" id="jurusan_simpan_edit" action="#" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>Nama Jurusan</label>
@@ -102,6 +102,24 @@
             <!-- /.modal-dialog -->
           </div>
           <!-- /.modal -->
+
+          <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+          <script type="text/javascript">
+            $(document).on("click", "#edit_jurusan", function(){
+              var id = $(this).attr('data-id')
+              $.ajax({
+                url: "<?=base_url();?>/Superadmin/data_jurusan",
+                method: "POST",
+                dataType: "JSON",
+                data: { id: id},
+                success: function(data){
+                  document.getElementById("jurusan_nama_edit").placeholder=data[0].jurusan;
+                  console.log(data[0].jurusan)
+                  document.getElementById("jurusan_simpan_edit").action='<?=base_url();?>/Superadmin/edit_jurusan/'+data[0].id_jurusan;
+                }
+              })
+            })
+          </script>
 
           <div class="modal modal-danger fade" id="modal-jurusan-hapus">
           <div class="modal-dialog">
