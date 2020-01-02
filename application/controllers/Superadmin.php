@@ -140,6 +140,12 @@ class Superadmin extends CI_Controller {
 		redirect('superadmin/masterDataDepartemen');
 	}
 
+	public function hapus_departemen(){
+		$id = $this->uri->segment(3);
+		$this->crud->d('departemen', array('id_departemen' => $id));
+		redirect('superadmin/masterDataDepartemen');
+	}
+
 	public function data_departemen(){
 		$id = $this->input->post('id');
 		$data = $this->crud->gw('departemen', array('id_departemen' => $id));

@@ -42,7 +42,7 @@
                     <td><?=$data->jurusan;?></td>
                     <td>
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-departemen-edit" id="edit_departemen" data-id="<?=$data->id_departemen;?>"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-departemen-hapus" id="hapus_departemen" data-id="<?=$data->id_departemen;?>"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
                   <?php } ?>
@@ -136,6 +136,41 @@
                 success: function(data){
                   document.getElementById("departemen_nama_edit").value = data[0].departemen;
                   document.getElementById("departemen_simpan_edit").action='<?=base_url();?>/Superadmin/edit_departemen/'+data[0].id_departemen;
+                }
+              })
+            })
+          </script>
+
+          <div class="modal modal-danger fade" id="modal-departemen-hapus">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 id="ket_hapus_departemen"></h4>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak, Kembali</button>
+                <a href="#" id="button_hapus_departemen">
+                  <button type="button" class="btn btn-outline">Ya, Hapus</button>
+                </a>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+
+          <script type="text/javascript">
+            $(document).on("click", "#hapus_departemen", function(){
+              var id = $(this).attr('data-id')
+              $.ajax({
+                url: "<?=base_url();?>/Superadmin/data_departemen",
+                method: "POST",
+                dataType: "JSON",
+                data: { id: id},
+                success: function(data){
+                  document.getElementById("ket_hapus_departemen").innerText='Anda akan menghapus data Departemen '+data[0].departemen+' ?';
+                  document.getElementById("button_hapus_departemen").href='<?=base_url();?>/Superadmin/hapus_departemen/'+data[0].id_departemen;
                 }
               })
             })
