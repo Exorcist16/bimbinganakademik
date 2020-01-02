@@ -41,7 +41,7 @@
                     <td><?=$data->departemen;?></td>
                     <td><?=$data->jurusan;?></td>
                     <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-departemen-edit"><i class="fa fa-fw  fa-edit"></i></button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-departemen-edit" id="edit_departemen" data-id="<?=$data->id_departemen;?>"><i class="fa fa-fw  fa-edit"></i></button>
                       <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
@@ -95,22 +95,20 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Edit Departemen</h4>
                 </div>
-                <form role="form">
+                <form role="form" id="departemen_simpan_edit" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>Nama Departemen</label>
-                      <input type="text" class="form-control" name="departemen_nama_edit" id="departemen_nama_edit" placeholder="Nama Departemen" required>
+                      <input type="text" class="form-control" name="departemen_nama_edit" id="departemen_nama_edit" required>
                     </div>
                     <div class="form-group">
                       <label>Jurusan</label>
                       <select class="form-control select2" name="departemen_jurusan_edit" id="departemen_jurusan_edit" style="width: 100%;" required>
                         <option selected value="" disabled>Jurusan</option>
-                        <option value="Teknik Sipil">Teknik Sipil</option>
-                        <option value="Teknik Mesin">Teknik Mesin</option>
-                        <option value="Teknik Perkapalan">Teknik Perkapalan</option>
-                        <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="Teknik Arsitektur">Teknik Arsitektur</option>
-                        <option value="Teknik Geologi">Teknik Geologi</option>
+                        <?php $je = $this->db->query("SELECT * FROM jurusan")->result();
+                        foreach ($je as $jurusanedit) { ?>
+                        <option value="<?=$jurusanedit->id_jurusan;?>"><?=$jurusanedit->jurusan;?></option>
+                        <?php } ?>
                       </select>
                     </div>
                   </div>
@@ -125,6 +123,24 @@
             <!-- /.modal-dialog -->
           </div>
           <!-- /.modal -->
+
+          <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+          <script type="text/javascript">
+            $(document).on("click", "#edit_departemen", function(){
+              var id = $(this).attr('data-id')
+              $.ajax({
+                url: "<?=base_url();?>/Superadmin/data_departemen",
+                method: "POST",
+                dataType: "JSON",
+                data: { id: id},
+                success: function(data){
+                  document.getElementById("departemen_nama_edit").value = data[0].departemen;
+                  document.getElementById("departemen_simpan_edit").action='<?=base_url();?>/Superadmin/edit_departemen/'+data[0].id_departemen;
+                }
+              })
+            })
+          </script>
+
         </div>
         <!-- /.box -->
       </div>

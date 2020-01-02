@@ -40,6 +40,12 @@ class Superadmin extends CI_Controller {
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
+		public function get_departemen(){
+			$id = $this->input->post('id');
+			$data = $this->Superadmin_model->get_departemen($id);
+			echo json_encode($data);
+		}
+
 	public function tambah_kps(){
 		$datakps = array(
 			'jurusan'			=> $this->input->post('jurusan'),
@@ -73,7 +79,6 @@ class Superadmin extends CI_Controller {
 	}
 
 	public function tambah_jurusan(){
-
 		$data = array(
 			'jurusan' => $this->input->post('jurusan_nama')
 		);
@@ -104,10 +109,11 @@ class Superadmin extends CI_Controller {
 	}
 // --------------------------------------------------------------------------------
 	public function masterDataDepartemen(){
+		$jurusan = $this->crud->ga('jurusan');
 		$departemen = $this->crud->ga('departemen');
 		$data = array(  'title'             => 'Manajemen User',
 		                'isi'               => 'admin/dashboard/superadmin/master_data_departemen',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+			            	'jurusan'						=> $jurusan,
 										'departemen'				=> $departemen,
 										'hasil'							=> $this->Superadmin_model->show_data()
 		            );
@@ -124,9 +130,20 @@ class Superadmin extends CI_Controller {
 		redirect('superadmin/masterDataDepartemen');
 	}
 
-	public function get_departemen(){
+	public function edit_departemen(){
+		$id = $this->uri->segment(3);
+		$data = array(
+			'departemen'						=> $this->input->post('departemen_nama_edit'),
+			'id_jurusan_departemen'	=> $this->input->post('departemen_jurusan_edit')
+		);
+		$this->crud->u('departemen', $data, array('id_departemen' => $id));
+		redirect('superadmin/masterDataDepartemen');
+	}
+
+	public function data_departemen(){
 		$id = $this->input->post('id');
-		$data = $this->Superadmin_model->get_departemen($id);
+		$data = $this->crud->gw('departemen', array('id_departemen' => $id));
 		echo json_encode($data);
 	}
+
 }

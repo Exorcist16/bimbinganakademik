@@ -114,7 +114,6 @@
                 data: { id: id},
                 success: function(data){
                   document.getElementById("jurusan_nama_edit").placeholder=data[0].jurusan;
-                  console.log(data[0].jurusan)
                   document.getElementById("jurusan_simpan_edit").action='<?=base_url();?>/Superadmin/edit_jurusan/'+data[0].id_jurusan;
                 }
               })
