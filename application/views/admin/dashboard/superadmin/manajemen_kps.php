@@ -27,7 +27,7 @@
           <div class="box-body">
             <br>
             <div class="media-scroll">
-              <table id="example2" class="table table-bordered table-striped">
+              <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th>Jurusan</th>
@@ -46,7 +46,7 @@
                     <td>md5 Encrypted Password</td>
                     <td>
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-user-edit" id="manajemen_edit" data-id="<?=$datakps->username;?>"><i class="fa fa-fw  fa-edit"></i></button>
-                      <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#modal-kps-hapus"><i class="fa fa-fw fa-remove"></i></button>
+                      <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#modal-kps-hapus" id="manajemen_hapus" data-id="<?=$datakps->username;?>"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
                   <?php } ?>
@@ -220,15 +220,34 @@
               <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4>Anda ingin menghapus user KPS <?=$datakps->username;?></h4>
+                <h4 id="ket_hapus_kps"></h4>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak, Kembali</button>
-                <button type="button" class="btn btn-outline">Ya, Hapus</button>
+                <a href="#" id="button_hapus_kps">
+                  <button type="button" class="btn btn-outline">Ya, Hapus</button>
+                </a>
               </div>
             </div>
             <!-- /.modal-content -->
           </div>
+
+          <script type="text/javascript">
+            $(document).on("click", "#manajemen_hapus", function(){
+              var id = $(this).attr('data-id')
+              $.ajax({
+                url: "<?=base_url();?>/Superadmin/data_kps",
+                method: "POST",
+                dataType: "JSON",
+                data: { id: id},
+                success: function(data){
+                  document.getElementById("ket_hapus_kps").innerText = 'Anda akan menghapus data user '+data[0].username+'?';
+                  document.getElementById("button_hapus_kps").href = '<?=base_url();?>/Superadmin/hapus_kps/'+data[0].username;
+                }
+              })
+            })
+          </script>
+
         </div>
         <!-- /.box -->
       </div>

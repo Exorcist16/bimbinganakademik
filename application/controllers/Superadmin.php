@@ -91,6 +91,13 @@ class Superadmin extends CI_Controller {
 		redirect('superadmin/manajemenKps');
 	}
 
+	public function hapus_kps(){
+		$id = $this->uri->segment(3);
+		$this->crud->d('kps', array('username' => $id));
+		$this->crud->d('user', array('username' => $id));
+		redirect('superadmin/manajemenKps');
+	}
+
 // --------------------------------------------------------------------------------
 	public function masterDataJurusan(){
 		$jurusan = $this->crud->ga('jurusan');
