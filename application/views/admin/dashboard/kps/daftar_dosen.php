@@ -59,7 +59,7 @@
                   <!--<td>md5 Encrypted Password</td>-->
                   <td>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-dosen-edit" id="dosen_edit" data-id="<?=$dosendata->nip;?>"><i class="fa fa-fw  fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-dosen-hapus" id="dosen_hapus" data-id="<?=$dosendata->nip;?>"><i class="fa fa-fw fa-remove"></i></button>
                   </td>
                 </tr>
                 <?php } ?>
@@ -163,6 +163,42 @@
                   document.getElementById("dosen_nama_edit").value = data[0].nama_dosen;
                   document.getElementById("dosen_nim_edit").value = data[0].nip;
                   document.getElementById("form_edit_dosen").action = '<?=base_url();?>/Kps/edit_dosen/'+data[0].nip;
+                }
+              })
+            })
+          </script>
+
+          <div class="modal modal-danger fade" id="modal-dosen-hapus">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 id="ket_hapus_dosen"></h4>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak, Kembali</button>
+                <a href="#" id="button_hapus_dosen">
+                  <button type="button" class="btn btn-outline">Ya, Hapus</button>
+                </a>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+
+          <script type="text/javascript">
+            $(document).on("click", "#dosen_hapus", function(){
+              var id = $(this).attr('data-id')
+              $.ajax({
+                url: "<?=base_url();?>/Kps/data_dosen",
+                method: "POST",
+                dataType: "JSON",
+                data: { id: id},
+                success: function(data){
+                  console.log(data[0])
+                  document.getElementById("ket_hapus_dosen").innerText='Anda akan menghapus data Dosen '+data[0].nama_dosen+' ?';
+                  document.getElementById("button_hapus_dosen").href='<?=base_url();?>/Kps/hapus_dosen/'+data[0].nip;
                 }
               })
             })

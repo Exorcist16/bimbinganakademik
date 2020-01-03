@@ -231,6 +231,13 @@ class Kps extends CI_Controller {
 		redirect('kps/daftarDosen');
 	}
 
+	public function hapus_dosen(){
+		$id = $this->uri->segment(3);
+		$this->crud->d('dosen', array('nip' => $id));
+		$this->crud->d('user', array('username' => $id));
+		redirect('kps/daftarDosen');
+	}
+
 	public function data_dosen(){
 		$nip = $this->input->post('id');
 		$data = $this->crud->gw('dosen', array('nip' => $nip));
