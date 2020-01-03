@@ -40,11 +40,17 @@ class Superadmin extends CI_Controller {
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
-		public function get_departemen(){
-			$id = $this->input->post('id');
-			$data = $this->Superadmin_model->get_departemen($id);
-			echo json_encode($data);
-		}
+	public function get_departemen(){
+		$id = $this->input->post('id');
+		$data = $this->Superadmin_model->get_departemen($id);
+		echo json_encode($data);
+	}
+
+	public function data_kps(){
+		$id = $this->input->post('id');
+		$data = $this->crud->gw('kps', array('username' => $id));
+		echo json_encode($data);
+	}
 
 	public function tambah_kps(){
 		$datakps = array(
@@ -63,6 +69,25 @@ class Superadmin extends CI_Controller {
 
 		$this->crud->i('kps', $datakps);
 		$this->crud->i('user', $datauser);
+		redirect('superadmin/manajemenKps');
+	}
+
+	public function edit_kps(){
+		$id = $this->uri->segment(3);
+		$data = array(
+			'jurusan'			=> $this->input->post('user_jurusan_edit'),
+			'departemen'	=> $this->input->post('user_departemen_edit'),
+			'username'		=> $this->input->post('user_username_edit')
+		);
+
+		$datau = array(
+			'username'	=> $this->input->post('user_username_edit'),
+			'password'	=> md5($this->input->post('user_password_edit')),
+			'departemen'=> $this->input->post('user_departemen_edit'),
+			'jurusan'		=> $this->input->post('user_jurusan_edit')
+		);
+		$this->crud->u('kps', $data, array('username' => $id));
+		$this->crud->u('user', $datau, array('username' => $id));
 		redirect('superadmin/manajemenKps');
 	}
 

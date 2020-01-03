@@ -27,7 +27,7 @@
           <div class="box-body">
             <br>
             <div class="media-scroll">
-              <table id="example1" class="table table-bordered table-striped">
+              <table id="example2" class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th>Jurusan</th>
@@ -45,7 +45,7 @@
                     <td><?=$datakps->username;?></td>
                     <td>md5 Encrypted Password</td>
                     <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-user-edit"><i class="fa fa-fw  fa-edit"></i></button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-user-edit" id="manajemen_edit" data-id="<?=$datakps->username;?>"><i class="fa fa-fw  fa-edit"></i></button>
                       <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#modal-kps-hapus"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
@@ -134,39 +134,48 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Edit Judul Penelitian</h4>
                 </div>
-                <form role="form">
+                <form role="form" id="form_user_edit" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>Jurusan</label>
                       <select class="form-control select2" name="user_jurusan_edit" id="user_jurusan_edit" style="width: 100%;" required>
                         <option selected value="" disabled>Jurusan</option>
-                        <option value="Teknik Sipil">Teknik Sipil</option>
-                        <option value="Teknik Mesin">Teknik Mesin</option>
-                        <option value="Teknik Perkapalan">Teknik Perkapalan</option>
-                        <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="Teknik Arsitektur">Teknik Arsitektur</option>
-                        <option value="Teknik Geologi">Teknik Geologi</option>
+                        <<?php foreach ($data->result() as $rows) : ?>
+                        <option value="<?=$rows->id_jurusan?>"><?=$rows->jurusan;?></option>
+                        <?php endforeach ?>
                       </select>
                     </div>
                     <div class="form-group">
                       <label>Departemen</label>
                       <select class="form-control select2" name="user_departemen_edit" id="user_departemen_edit" style="width: 100%;" required>
                         <option selected value="" disabled>Departemen</option>
-                        <option value="Teknik Sipil">Teknik Sipil</option>
-                        <option value="Teknik Mesin">Teknik Mesin</option>
-                        <option value="Teknik Perkapalan">Teknik Perkapalan</option>
-                        <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="Teknik Arsitektur">Teknik Arsitektur</option>
-                        <option value="Teknik Geologi">Teknik Geologi</option>
-                        <option value="Teknik Industri">Teknik Industri</option>
-                        <option value="Teknik Kelautan">Teknik Kelautan</option>
-                        <option value="Teknik Perkapalan">Teknik Sistem Perkapalan</option>
-                        <option value="Teknik Perencanaan Wilayah Kota">Teknik Perencanaan Wilayah Kota</option>
-                        <option value="Teknik Pertambangan">Teknik Pertambangan</option>
-                        <option value="Teknik Informatika">Teknik Informatika</option>
-                        <option value="Teknik Lingkungan">Teknik Lingkungan</option>
                       </select>
                     </div>
+
+                    <!--Script untuk chained dropdown 21-12-2019 -->
+                    <script>
+                      $(document).ready(function(){
+                        $('#user_jurusan_edit').change(function() {
+                          var id = $(this).val();
+                          $.ajax({
+                            url: "<?=base_url();?>/Superadmin/get_departemen",
+                            method: "POST",
+                            dataType: "JSON",
+                            data: {
+                              id: id
+                            },
+                            success: function(array) {
+                              var html = '';
+                              for (let index = 0; index < array.length; index++){
+                                html += "<option>" + array[index].departemen + "</option>"
+                              }
+                              $('#user_departemen_edit').html(html);
+                            }
+                          })
+                        })
+                      })
+                    </script>
+
                     <div class="form-group">
                       <label>Username</label>
                       <input type="text" class="form-control" name="user_username_edit" id="user_username_edit" placeholder="Username" required>
@@ -175,6 +184,23 @@
                       <label>Password</label>
                       <input type="password" class="form-control" name="user_password_edit" id="user_password_edit" placeholder="Password" required>
                     </div>
+
+                    <script type="text/javascript">
+                      $(document).on("click", "#manajemen_edit", function(){
+                        var id = $(this).attr('data-id')
+                        $.ajax({
+                          url: "<?=base_url();?>/Superadmin/data_kps",
+                          method: "POST",
+                          dataType: "JSON",
+                          data: { id: id},
+                          success: function(data){
+                            document.getElementById("user_username_edit").value = data[0].username;
+                            document.getElementById("form_user_edit").action = '<?=base_url();?>/Superadmin/edit_kps/'+data[0].username;
+                          }
+                        })
+                      })
+                    </script>
+
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
