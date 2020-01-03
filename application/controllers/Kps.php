@@ -212,6 +212,30 @@ class Kps extends CI_Controller {
 		$this->crud->i('user', $datauserdosen);
 		redirect('kps/daftarDosen');
 	}
+
+	public function edit_dosen(){
+		$id = $this->uri->segment(3);
+		$data = array(
+			'nip'								=> $this->input->post('dosen_nim_edit'),
+			'nama_dosen'				=> $this->input->post('dosen_nama_edit')
+		);
+
+		$datad = array(
+			'username'	=> $this->input->post('dosen_nim_edit'),
+			'password'	=> md5($this->input->post('dosen_password_edit')),
+			'nama_user'	=> $this->input->post('dosen_nama_edit')
+		);
+
+		$this->crud->u('dosen', $data, array('nip' => $id));
+		$this->crud->u('user', $datad, array('username' => $id));
+		redirect('kps/daftarDosen');
+	}
+
+	public function data_dosen(){
+		$nip = $this->input->post('id');
+		$data = $this->crud->gw('dosen', array('nip' => $nip));
+		echo json_encode($data);
+	}
 // ------------------------------------------------------------------------------------------------
 	public function masterDataWaktu(){
 		$sessiondepartemen = $this->session->userdata('departemen');

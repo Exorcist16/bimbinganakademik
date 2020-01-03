@@ -58,7 +58,7 @@
                   <td><?=$dosendata->departemen_dosen; ?></td>
                   <!--<td>md5 Encrypted Password</td>-->
                   <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-dosen-edit"><i class="fa fa-fw  fa-edit"></i></button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-dosen-edit" id="dosen_edit" data-id="<?=$dosendata->nip;?>"><i class="fa fa-fw  fa-edit"></i></button>
                     <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
                   </td>
                 </tr>
@@ -116,7 +116,7 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Edit Dosen</h4>
                 </div>
-                <form role="form">
+                <form role="form" id="form_edit_dosen" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>Nama Dosen</label>
@@ -129,20 +129,9 @@
                     <div class="form-group">
                       <label>Departemen</label>
                       <select class="form-control select2" name="dosen_departemen_edit" id="dosen_departemen_edit" style="width: 100%;" required>
-                        <option selected value="" disabled>Departemen</option>
-                        <option value="Teknik Sipil">Teknik Sipil</option>
-                        <option value="Teknik Mesin">Teknik Mesin</option>
-                        <option value="Teknik Perkapalan">Teknik Perkapalan</option>
-                        <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="Teknik Arsitektur">Teknik Arsitektur</option>
-                        <option value="Teknik Geologi">Teknik Geologi</option>
-                        <option value="Teknik Industri">Teknik Industri</option>
-                        <option value="Teknik Kelautan">Teknik Kelautan</option>
-                        <option value="Teknik Perkapalan">Teknik Sistem Perkapalan</option>
-                        <option value="Teknik Perencanaan Wilayah Kota">Teknik Perencanaan Wilayah Kota</option>
-                        <option value="Teknik Pertambangan">Teknik Pertambangan</option>
-                        <option value="Teknik Informatika">Teknik Informatika</option>
-                        <option value="Teknik Lingkungan">Teknik Lingkungan</option>
+                        <?php foreach ($departemensession as $departemen) { ?>
+                        <option value="<?=$departemen->departemen;?>"><?=$departemen->departemen;?></option>
+                        <?php } ?>
                       </select>
                     </div>
                     <div class="form-group">
@@ -160,6 +149,24 @@
             </div>
             <!-- /.modal-dialog -->
           </div>
+
+          <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+          <script type="text/javascript">
+            $(document).on("click", "#dosen_edit", function(){
+              var id = $(this).attr('data-id')
+              $.ajax({
+                url: "<?=base_url();?>/Kps/data_dosen",
+                method: "POST",
+                dataType: "JSON",
+                data: { id: id},
+                success: function(data){
+                  document.getElementById("dosen_nama_edit").value = data[0].nama_dosen;
+                  document.getElementById("dosen_nim_edit").value = data[0].nip;
+                  document.getElementById("form_edit_dosen").action = '<?=base_url();?>/Kps/edit_dosen/'+data[0].nip;
+                }
+              })
+            })
+          </script>
 
         </div>
         <!-- /.box -->
