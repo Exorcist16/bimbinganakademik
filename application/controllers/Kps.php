@@ -333,6 +333,12 @@ class Kps extends CI_Controller {
 		redirect('kps/masterDataWaktu');
 	}
 
+	public function hapus_waktu(){
+		$id = $this->uri->segment(3);
+		$this->crud->d('waktu_ujian', array('waktu_ujian_id' => $id));
+		redirect('kps/masterDataWaktu');
+	}
+
 	public function data_waktu(){
 		$id = $this->input->post('id');
 		$data = $this->crud->gw('waktu_ujian', array('waktu_ujian_id' => $id));
