@@ -59,6 +59,21 @@ class Kps extends CI_Controller {
 		$this->crud->i('judul', $data);
 		redirect('kps/daftarJudul');
 	}
+
+	public function edit_judul(){
+		$id = $this->uri->segment(3);
+
+		$data = array(
+			'judul'				=> $this->input->post('penelitian_judul_edit'),
+			'pembimbing1'	=> $this->input->post('penelitian_pembimbing1_edit'),
+			'pembimbing2'	=> $this->input->post('penelitian_pembimbing2_edit'),
+			'penguji1'		=> $this->input->post('penelitian_penguji1_edit'),
+			'penguji2'		=> $this->input->post('penelitian_penguji2_edit')
+		);
+
+		$this->crud->u('judul', $data, array('nim' => $id));
+		redirect('kps/daftarJudul');
+	}
 // ------------------------------------------------------------------------------------------------
 	public function seminarHasil(){
 		$sessiondepartemen = $this->session->userdata('departemen');

@@ -52,7 +52,7 @@
                       <td><?=$datatampil->nama; ?></td>
                       <td><?=$datatampil->judul; ?></td>
                       <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-judul-edit"><i class="fa fa-fw  fa-edit"></i></button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-judul-edit" id="judul_edit" data-id="<?=$datatampil->nim; ?>"><i class="fa fa-fw  fa-edit"></i></button>
                         <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
                       </td>
                     </tr>
@@ -166,115 +166,59 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Edit Judul Penelitian</h4>
                 </div>
-                <form role="form">
+                <form role="form" id="penelitian_form_edit" method="post">
                   <div class="modal-body">
                     <div class="form-group">
-                      <label>Nama Mahasiswa</label>
-                      <input type="text" class="form-control" name="penelitian_nama" id="penelitian_nama" placeholder="Nama Mahasiswa" required>
-                    </div>
-                    <div class="form-group">
                       <label>Nim</label>
-                      <input type="text" class="form-control" name="penelitian_nim" id="penelitian_nim" placeholder="Nim Mahasiswa" required>
+                      <input type="text" class="form-control" name="penelitian_nim_edit" id="penelitian_nim_edit" placeholder="Nim Mahasiswa" readonly>
                     </div>
                     <div class="form-group">
-                      <label>Jurusan</label>
-                      <select class="form-control select2" name="penelitian_jurusan" id="penelitian_jurusan" style="width: 100%;" required>
-                        <option selected value="" disabled>Jurusan</option>
-                        <option value="Teknik Sipil">Teknik Sipil</option>
-                        <option value="Teknik Mesin">Teknik Mesin</option>
-                        <option value="Teknik Perkapalan">Teknik Perkapalan</option>
-                        <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="Teknik Arsitektur">Teknik Arsitektur</option>
-                        <option value="Teknik Geologi">Teknik Geologi</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label>Departemen</label>
-                      <select class="form-control select2" name="penelitian_departemen" id="penelitian_departemen" style="width: 100%;" required>
-                        <option selected value="" disabled>Departemen</option>
-                        <option value="Teknik Sipil">Teknik Sipil</option>
-                        <option value="Teknik Mesin">Teknik Mesin</option>
-                        <option value="Teknik Perkapalan">Teknik Perkapalan</option>
-                        <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="Teknik Arsitektur">Teknik Arsitektur</option>
-                        <option value="Teknik Geologi">Teknik Geologi</option>
-                        <option value="Teknik Industri">Teknik Industri</option>
-                        <option value="Teknik Kelautan">Teknik Kelautan</option>
-                        <option value="Teknik Perkapalan">Teknik Sistem Perkapalan</option>
-                        <option value="Teknik Perencanaan Wilayah Kota">Teknik Perencanaan Wilayah Kota</option>
-                        <option value="Teknik Pertambangan">Teknik Pertambangan</option>
-                        <option value="Teknik Informatika">Teknik Informatika</option>
-                        <option value="Teknik Lingkungan">Teknik Lingkungan</option>
-                      </select>
+                      <label>Nama Mahasiswa</label>
+                      <input type="text" class="form-control" name="penelitian_nama_edit" id="penelitian_nama_edit" placeholder="Nama Mahasiswa" readonly>
                     </div>
                     <div class="form-group">
                       <label>Judul Penelitian</label>
-                      <input type="text" class="form-control" name="penelitian_judul" id="penelitian_judul" placeholder="Judul Penelitian" required>
+                      <input type="text" class="form-control" name="penelitian_judul_edit" id="penelitian_judul_edit" placeholder="Judul Penelitian" required>
                     </div>
                     <div class="form-group">
                       <label>Pembimbing I</label>
-                      <select class="form-control select2" name="penelitian_pembibimbing1" id="penelitian_pembimbing1" style="width: 100%;" required>
-                        <option selected value="" disabled>Pembimbing I</option>
-                        <option>Dosen 1</option>
-                        <option>Dosen 2</option>
-                        <option>Dosen 3</option>
-                        <option>Dosen 4</option>
-                        <option>Dosen 5</option>
-                        <option>Dosen 6</option>
+                      <select class="form-control select2" name="penelitian_pembimbing1_edit" id="penelitian_pembimbing1_edit" style="width: 100%;" required>
+                        <option selected id="pembimbing1_edit" style="background-color: #80808050;"></option>
+                        <?php foreach ($pembimbing as $pembimbing1) { ?>
+                        <option><?=$pembimbing1->nama_dosen; ?></option>
+                        <?php } ?>
                       </select>
                       <h6 class="help-block text-red">Mahasiswa bimbingan saat ini : <span name="penelitian_total_bimbingan1">20</span></h6>
                     </div>
                     <div class="form-group">
                       <label>Pembimbing II</label>
-                      <select class="form-control select2" name="penelitian_pembibimbing2" id="penelitian_pembimbing2" style="width: 100%;" required>
-                        <option selected value="" disabled>Pembimbing II</option>
-                        <option>Dosen 1</option>
-                        <option>Dosen 2</option>
-                        <option>Dosen 3</option>
-                        <option>Dosen 4</option>
-                        <option>Dosen 5</option>
-                        <option>Dosen 6</option>
+                      <select class="form-control select2" name="penelitian_pembimbing2_edit" id="penelitian_pembimbing2_edit" style="width: 100%;" required>
+                        <option selected id="pembimbing2_edit" style="background-color: #80808050;"></option>
+                        <?php foreach ($pembimbing as $pembimbing2) { ?>
+                        <option><?=$pembimbing2->nama_dosen; ?></option>
+                        <?php } ?>
                       </select>
                       <h6 class="help-block text-red">Mahasiswa bimbingan saat ini : <span name="penelitian_total_bimbingan2">20</span></h6>
                     </div>
                     <div class="form-group">
                       <label>Penguji I</label>
-                      <select class="form-control select2" name="penelitian_penguji1" id="penelitian_penguji1" style="width: 100%;" required>
-                        <option selected value="" disabled>Penguji I</option>
-                        <option>Dosen 1</option>
-                        <option>Dosen 2</option>
-                        <option>Dosen 3</option>
-                        <option>Dosen 4</option>
-                        <option>Dosen 5</option>
-                        <option>Dosen 6</option>
+                      <select class="form-control select2" name="penelitian_penguji1_edit" id="penelitian_penguji1_edit" style="width: 100%;" required>
+                        <option selected id="penguji1_edit" style="background-color: #80808050;"></option>
+                        <?php foreach ($penguji as $penguji1) { ?>
+                        <option><?=$penguji1->nama_dosen; ?></option>
+                        <?php } ?>
                       </select>
                       <h6 class="help-block text-red">Mahasiswa diuji saat ini : <span name="penelitian_total_uji1">20</span></h6>
                     </div>
                     <div class="form-group">
                       <label>Penguji II</label>
-                      <select class="form-control select2" name="penelitian_penguji2" id="penelitian_penguji2" style="width: 100%;" required>
-                        <option selected value="" disabled>Penguji II</option>
-                        <option>Dosen 1</option>
-                        <option>Dosen 2</option>
-                        <option>Dosen 3</option>
-                        <option>Dosen 4</option>
-                        <option>Dosen 5</option>
-                        <option>Dosen 6</option>
+                      <select class="form-control select2" name="penelitian_penguji2_edit" id="penelitian_penguji2_edit" style="width: 100%;" required>
+                        <option selected id="penguji2_edit" style="background-color: #80808050;">Penguji II</option>
+                        <?php foreach ($penguji as $penguji1) { ?>
+                        <option><?=$penguji1->nama_dosen; ?></option>
+                        <?php } ?>
                       </select>
                       <h6 class="help-block text-red">Mahasiswa diuji saat ini : <span name="penelitian_total_uji2">20</span></h6>
-                    </div>
-                    <div class="form-group">
-                      <label>Penguji III</label>
-                      <select class="form-control select2" name="penelitian_penguji3" id="penelitian_penguji3" style="width: 100%;" required>
-                        <option selected value="" disabled>Penguji III</option>
-                        <option>Dosen 1</option>
-                        <option>Dosen 2</option>
-                        <option>Dosen 3</option>
-                        <option>Dosen 4</option>
-                        <option>Dosen 5</option>
-                        <option>Dosen 6</option>
-                      </select>
-                      <h6 class="help-block text-red">Mahasiswa diuji saat ini : <span name="penelitian_total_uji3">20</span></h6>
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -287,6 +231,30 @@
             </div>
             <!-- /.modal-dialog -->
           </div>
+
+          <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+          <script type="text/javascript">
+            $(document).on("click", "#judul_edit", function(){
+              var nim = $(this).attr('data-id')
+              $.ajax({
+                url: "<?=base_url();?>/Kps/get_nama",
+                method: "POST",
+                dataType: "JSON",
+                data: { nim: nim},
+                success: function(data){
+                  document.getElementById("penelitian_nim_edit").value = data[0].nim;
+                  document.getElementById("penelitian_nama_edit").value = data[0].nama;
+                  document.getElementById("penelitian_judul_edit").value = data[0].judul;
+                  document.getElementById("pembimbing1_edit").innerText = data[0].pembimbing1;
+                  document.getElementById("pembimbing2_edit").innerText = data[0].pembimbing2;
+                  document.getElementById("penguji1_edit").innerText = data[0].penguji1;
+                  document.getElementById("penguji2_edit").innerText = data[0].penguji2;
+                  document.getElementById("penelitian_form_edit").action = '<?=base_url();?>/Kps/edit_judul/'+data[0].nim;
+                }
+              })
+            })
+          </script>
+
           <!-- /.modal -->
         </div>
         <!-- /.box -->
