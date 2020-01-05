@@ -367,4 +367,20 @@ class Kps extends CI_Controller {
 		$this->crud->i('tempat_ujian', $data);
 		redirect('kps/masterDataTempat');
 	}
+
+	public function edit_tempat(){
+		$id = $this->uri->segment(3);
+		$data = array(
+			'tempat_ujian_nama'		=> $this->input->post('tempat_nama_edit')
+		);
+
+		$this->crud->u('tempat_ujian', $data, array('tempat_ujian_id' => $id));
+		redirect('kps/masterDataTempat');
+	}
+
+	public function data_tempat(){
+		$id = $this->input->post('id');
+		$data = $this->crud->gw('tempat_ujian', array('tempat_ujian_id' => $id));
+		echo json_encode($data);
+	}
 }

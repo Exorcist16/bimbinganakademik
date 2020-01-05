@@ -39,7 +39,7 @@
                   <tr>
                     <td><?=$datatempatmaster->tempat_ujian_nama;?></td>
                     <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-tempat-edit"><i class="fa fa-fw  fa-edit"></i></button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-tempat-edit" id="tempat_edit" data-id="<?=$datatempatmaster->tempat_ujian_id;?>"><i class="fa fa-fw  fa-edit"></i></button>
                       <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
@@ -83,11 +83,11 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Edit Tempat Ujian</h4>
                 </div>
-                <form role="form">
+                <form role="form" id="tempat_form_edit" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>Tempat Ujian</label>
-                      <input type="text" class="form-control" name="tempat" id="tempat" placeholder="Tempat Ujian" required>
+                      <input type="text" class="form-control" name="tempat_nama_edit" id="tempat_nama_edit" placeholder="Tempat Ujian" required>
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -98,6 +98,24 @@
               </div>
               <!-- /.modal-content -->
             </div>
+
+            <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+            <script type="text/javascript">
+              $(document).on("click", "#tempat_edit", function(){
+                var id = $(this).attr('data-id')
+                $.ajax({
+                  url: "<?=base_url();?>/Kps/data_tempat",
+                  method: "POST",
+                  dataType: "JSON",
+                  data: { id: id},
+                  success: function(data){
+                    document.getElementById("tempat_nama_edit").value = data[0].tempat_ujian_nama;
+                    document.getElementById("tempat_form_edit").action = '<?=base_url();?>/Kps/edit_tempat/'+data[0].tempat_ujian_id;
+                  }
+                })
+              })
+            </script>
+
             <!-- /.modal-dialog -->
           </div>
           <!-- /.modal -->
