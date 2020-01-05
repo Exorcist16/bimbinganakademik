@@ -378,6 +378,12 @@ class Kps extends CI_Controller {
 		redirect('kps/masterDataTempat');
 	}
 
+	public function hapus_tempat(){
+		$id = $this->uri->segment(3);
+		$this->crud->d('tempat_ujian', array('tempat_ujian_id' => $id));
+		redirect('kps/masterDataTempat');
+	}
+
 	public function data_tempat(){
 		$id = $this->input->post('id');
 		$data = $this->crud->gw('tempat_ujian', array('tempat_ujian_id' => $id));
