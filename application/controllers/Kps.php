@@ -173,6 +173,39 @@ class Kps extends CI_Controller {
 		$this->crud->i('user', $datausermahasiswa);
 		redirect('kps/daftarMahasiswa');
 	}
+
+	public function edit_mahasiswa(){
+		$id = $this->uri->segment(3);
+		$data = array(
+			'nim'								=> $this->input->post('mahasiswa_nim_edit'),
+			'nama'							=> $this->input->post('mahasiswa_nama_edit'),
+			'angkatan'					=> $this->input->post('mahasiswa_angkatan_edit'),
+			'strata'						=> $this->input->post('mahasiswa_strata_edit')
+		);
+
+		$datam = array(
+			'username'	=> $this->input->post('mahasiswa_nim_edit'),
+			'password'	=> md5($this->input->post('mahasiswa_password_edit')),
+			'nama_user'	=> $this->input->post('mahasiswa_nama_edit')
+		);
+
+		$this->crud->u('mahasiswa', $data, array('nim' => $id));
+		$this->crud->u('user', $datam, array('username' => $id));
+		redirect('kps/daftarMahasiswa');
+	}
+
+	public function hapus_mahasiswa(){
+		$id = $this->uri->segment(3);
+		$this->crud->d('mahasiswa', array('nim' => $id));
+		$this->crud->d('user', array('username' => $id));
+		redirect('kps/daftarMahasiswa');
+	}
+
+	public function data_mahasiswa(){
+		$nim = $this->input->post('id');
+		$data = $this->crud->gw('mahasiswa', array('nim' => $nim));
+		echo json_encode($data);
+	}
 // ------------------------------------------------------------------------------------------------
 	public function daftarDosen(){
 		$sessionusername = $this->session->userdata('username');

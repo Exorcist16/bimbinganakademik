@@ -60,8 +60,8 @@
                   <td><?= $mahasiswa->angkatan; ?></td>
                   <td>md5 Encrypted Password</td>
                   <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-mahasiswa-edit"><i class="fa fa-fw  fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-mahasiswa-edit" id="mahasiswa_edit" data-id="<?=$mahasiswa->nim;?>"><i class="fa fa-fw  fa-edit"></i></button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-mahasiswa-hapus" id="mahasiswa_hapus" data-id="<?=$mahasiswa->nim;?>"><i class="fa fa-fw fa-remove"></i></button>
                   </td>
                 </tr>
                 <?php } ?>
@@ -132,7 +132,7 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Edit Mahasiswa</h4>
                 </div>
-                <form role="form">
+                <form role="form" id="mahasiswa_form_edit" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>Nama Mahasiswa</label>
@@ -145,20 +145,18 @@
                     <div class="form-group">
                       <label>Departemen</label>
                       <select class="form-control select2" name="mahasiswa_departemen_edit" id="mahasiswa_departemen_edit" style="width: 100%;" required>
-                        <option selected value="" disabled>Departemen</option>
-                        <option value="Teknik Sipil">Teknik Sipil</option>
-                        <option value="Teknik Mesin">Teknik Mesin</option>
-                        <option value="Teknik Perkapalan">Teknik Perkapalan</option>
-                        <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="Teknik Arsitektur">Teknik Arsitektur</option>
-                        <option value="Teknik Geologi">Teknik Geologi</option>
-                        <option value="Teknik Industri">Teknik Industri</option>
-                        <option value="Teknik Kelautan">Teknik Kelautan</option>
-                        <option value="Teknik Perkapalan">Teknik Sistem Perkapalan</option>
-                        <option value="Teknik Perencanaan Wilayah Kota">Teknik Perencanaan Wilayah Kota</option>
-                        <option value="Teknik Pertambangan">Teknik Pertambangan</option>
-                        <option value="Teknik Informatika">Teknik Informatika</option>
-                        <option value="Teknik Lingkungan">Teknik Lingkungan</option>
+                        <?php foreach ($departemendata as $departemen) { ?>
+                          <option value="<?$departemen->departemen;?>"><?=$departemen->departemen;?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                    <div class="form_group">
+                      <label>Strata</label>
+                      <select class="form-control select2" name="mahasiswa_strata_edit" id="mahasiswa_strata_edit" style="width: 100%;" required>
+                        <option selected value="" disabled>--Strata--</option>
+                        <option value="S1">Strata 1</option>
+                        <option value="S2">Strata 2</option>
+                        <option value="S3">Strata 3</option>
                       </select>
                     </div>
                     <div class="form-group">
@@ -172,7 +170,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Tambahkan</button>
+                    <button type="submit" class="btn btn-primary">Edit Data</button>
                   </div>
                 </form>
               </div>
@@ -180,6 +178,61 @@
             </div>
             <!-- /.modal-dialog -->
           </div>
+
+          <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+          <script type="text/javascript">
+            $(document).on("click", "#mahasiswa_edit", function(){
+              var id = $(this).attr('data-id')
+              $.ajax({
+                url: "<?=base_url();?>/Kps/data_mahasiswa",
+                method: "POST",
+                dataType: "JSON",
+                data: { id: id},
+                success: function(data){
+                  document.getElementById("mahasiswa_nama_edit").value = data[0].nama;
+                  document.getElementById("mahasiswa_nim_edit").value = data[0].nim;
+                  document.getElementById("mahasiswa_angkatan_edit").value = data[0].angkatan;
+                  document.getElementById("mahasiswa_form_edit").action = '<?=base_url();?>/Kps/edit_mahasiswa/'+data[0].nim;
+                }
+              })
+            })
+          </script>
+
+          <div class="modal modal-danger fade" id="modal-mahasiswa-hapus">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 id="ket_hapus_mahasiswa"></h4>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak, Kembali</button>
+                <a href="#" id="button_hapus_mahasiswa">
+                  <button type="button" class="btn btn-outline">Ya, Hapus</button>
+                </a>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+
+          <script type="text/javascript">
+            $(document).on("click", "#mahasiswa_hapus", function(){
+              var id = $(this).attr('data-id')
+              $.ajax({
+                url: "<?=base_url();?>/Kps/data_mahasiswa",
+                method: "POST",
+                dataType: "JSON",
+                data: { id: id},
+                success: function(data){
+                  console.log(data[0])
+                  document.getElementById("ket_hapus_mahasiswa").innerText='Anda akan menghapus data Mahasiswa atas nama: '+data[0].nama+' ?';
+                  document.getElementById("button_hapus_mahasiswa").href='<?=base_url();?>/Kps/hapus_mahasiswa/'+data[0].nim;
+                }
+              })
+            })
+          </script>
 
         </div>
         <!-- /.box -->
