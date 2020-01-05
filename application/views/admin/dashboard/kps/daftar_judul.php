@@ -53,7 +53,7 @@
                       <td><?=$datatampil->judul; ?></td>
                       <td>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-judul-edit" id="judul_edit" data-id="<?=$datatampil->nim; ?>"><i class="fa fa-fw  fa-edit"></i></button>
-                        <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-judul-hapus" id="judul_hapus" data-id="<?=$datatampil->nim; ?>"><i class="fa fa-fw fa-remove"></i></button>
                       </td>
                     </tr>
                     <?php } ?>
@@ -254,9 +254,53 @@
               })
             })
           </script>
-
           <!-- /.modal -->
         </div>
+
+        <div class="modal modal-danger fade" id="modal-judul-hapus">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Hapus Judul</h4>
+              </div>
+              <div class="modal-body">
+                <p id="ket_hapus_judul"></p>
+                <p id="ket_hapus_judul_nama"></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Kembali</button>
+                <a href="#" id="button_hapus_judul">
+                  <button type="button" class="btn btn-outline">Ya, Hapus</button>
+                </a>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+
+          <script type="text/javascript">
+            $(document).on("click", "#judul_hapus", function(){
+              var nim = $(this).attr('data-id')
+              $.ajax({
+                url: "<?=base_url();?>/Kps/get_nama",
+                method: "POST",
+                dataType: "JSON",
+                data: { nim: nim},
+                success: function(data){
+                  console.log(data[0])
+                  document.getElementById("ket_hapus_judul").innerText='Anda akan menghapus data berjudul "'+data[0].judul+'"';
+                  document.getElementById("ket_hapus_judul_nama").innerText='dari Mahasiswa atas nama: '+data[0].nama;
+                  document.getElementById("button_hapus_judul").href='<?=base_url();?>/Kps/hapus_judul/'+data[0].nim;
+                }
+              })
+            })
+          </script>
+
+        </div>
+        <!-- /.modal -->
+
         <!-- /.box -->
       </div>
       <!-- /.col -->

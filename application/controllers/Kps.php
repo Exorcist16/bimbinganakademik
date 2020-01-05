@@ -74,6 +74,12 @@ class Kps extends CI_Controller {
 		$this->crud->u('judul', $data, array('nim' => $id));
 		redirect('kps/daftarJudul');
 	}
+
+	public function hapus_judul(){
+		$id = $this->uri->segment(3);
+		$this->crud->d('judul', array('nim' => $id));
+		redirect('kps/daftarJudul');
+	}
 // ------------------------------------------------------------------------------------------------
 	public function seminarHasil(){
 		$sessiondepartemen = $this->session->userdata('departemen');
