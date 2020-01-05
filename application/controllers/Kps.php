@@ -321,6 +321,23 @@ class Kps extends CI_Controller {
 		$this->crud->i('waktu_ujian', $data);
 		redirect('kps/masterDataWaktu');
 	}
+
+	public function edit_waktu(){
+		$id = $this->uri->segment(3);
+		$data = array(
+			'waktu_mulai'		=> $this->input->post('waktu_mulai_edit'),
+			'waktu_selesai'	=> $this->input->post('waktu_selesai_edit')
+		);
+
+		$this->crud->u('waktu_ujian', $data, array('waktu_ujian_id' => $id));
+		redirect('kps/masterDataWaktu');
+	}
+
+	public function data_waktu(){
+		$id = $this->input->post('id');
+		$data = $this->crud->gw('waktu_ujian', array('waktu_ujian_id' => $id));
+		echo json_encode($data);
+	}
 // ------------------------------------------------------------------------------------------------
 	public function masterDataTempat(){
 		$sessiondepartemen = $this->session->userdata('departemen');

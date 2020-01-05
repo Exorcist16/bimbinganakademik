@@ -41,7 +41,7 @@
                     <td><?= $datawaktumaster->waktu_mulai; ?> WITA</td>
                     <td><?= $datawaktumaster->waktu_selesai; ?> WITA</td>
                     <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-waktu-edit"><i class="fa fa-fw  fa-edit"></i></button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-waktu-edit" id="waktu_edit" data-id="<?= $datawaktumaster->waktu_ujian_id; ?>"><i class="fa fa-fw  fa-edit"></i></button>
                       <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
@@ -91,16 +91,16 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Edit Waktu Ujian</h4>
                 </div>
-                <form role="form">
+                <form role="form" id="waktu_form_edit" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>Waktu Mulai</label>
-                      <input type="text" class="form-control" name="waktu_mulai" id="waktu_mulai" placeholder="Waktu Mulai" required>
+                      <input type="text" class="form-control" name="waktu_mulai_edit" id="waktu_mulai_edit" placeholder="Waktu Mulai" required>
                       <h6 class="help-block text-red">Format memakai tanda titik, contoh : 09.00</h6>
                     </div>
                     <div class="form-group">
                       <label>Waktu Selesai</label>
-                      <input type="text" class="form-control" name="waktu_selesai" id="waktu_selesai" placeholder="Waktu Selesai" required>
+                      <input type="text" class="form-control" name="waktu_selesai_edit" id="waktu_selesai_edit" placeholder="Waktu Selesai" required>
                       <h6 class="help-block text-red">Format memakai tanda titik, contoh : 10.30</h6>
                     </div>
                   </div>
@@ -112,6 +112,25 @@
               </div>
               <!-- /.modal-content -->
             </div>
+
+            <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+            <script type="text/javascript">
+              $(document).on("click", "#waktu_edit", function(){
+                var id = $(this).attr('data-id')
+                $.ajax({
+                  url: "<?=base_url();?>/Kps/data_waktu",
+                  method: "POST",
+                  dataType: "JSON",
+                  data: { id: id},
+                  success: function(data){
+                    document.getElementById("waktu_mulai_edit").value = data[0].waktu_mulai;
+                    document.getElementById("waktu_selesai_edit").value = data[0].waktu_selesai;
+                    document.getElementById("waktu_form_edit").action = '<?=base_url();?>/Kps/edit_waktu/'+data[0].waktu_ujian_id;
+                  }
+                })
+              })
+            </script>
+
             <!-- /.modal-dialog -->
           </div>
           <!-- /.modal -->
