@@ -89,7 +89,7 @@ class Kps extends CI_Controller {
 		$datatempathasil = $this->crud->gw('tempat_ujian', array('tempat_ujian_departemen' => $sessiondepartemen));
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/seminar_hasil',
-										'datatampilseminar'=> $datatampilseminar,
+										'datatampilseminar' => $datatampilseminar,
 										'datawaktuhasil'		=> $datawaktuhasil,
 										'datatempathasil'		=> $datatempathasil
 		            );
@@ -113,6 +113,30 @@ class Kps extends CI_Controller {
 		$this->crud->i('seminar', $data);
 		$this->crud->u('mahasiswa', $datastatusujian, array('nim' => $nim));
 		redirect('kps/seminarHasil');
+	}
+
+	public function hapus_seminar(){
+		$id = $this->uri->segment(3);
+
+		$nim = $this->db->query("SELECT seminar_nim FROM seminar WHERE seminar_id = '$id'")->result();
+		foreach ($nim as $nim) {
+			$nima = $nim->seminar_nim;
+		}
+
+		$data = array(
+			'request_hasil' => '0'
+		);
+
+		$this->crud->u('mahasiswa', $data, array('nim' => $nima));
+		$this->crud->d('seminar', array('seminar_id' => $id));
+		redirect('kps/seminarHasil');
+	}
+
+	public function data_seminar(){
+		$id = $this->input->post('id');
+		$data = $this->db->query("SELECT * FROM seminar LEFT JOIN mahasiswa ON seminar.seminar_nim=mahasiswa.nim
+		WHERE seminar.seminar_id = '$id'")->result();
+		echo json_encode($data);
 	}
 // ------------------------------------------------------------------------------------------------
 	public function ujianSkripsi(){

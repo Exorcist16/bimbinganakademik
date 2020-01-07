@@ -70,7 +70,7 @@
                     </td>
                     <td>
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-seminar-hapus" id="seminar_hapus" data-id="<?=$datatampilseminar->seminar_id;?>"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
                   <?php } ?>
@@ -125,32 +125,6 @@
                        <label><input name="ujian_hasil_notif_penguji2" id="ujian_hasil_notif_penguji2" type="checkbox" checked>Kirimkan Notifikasi</label>
                       </div>
                     </div>
-
-                    <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
-                    <script type="text/javascript">
-                      $(document).ready(function(){
-                        $("#ujian_hasil_nim").change(function(){
-                          var nim = $(this).val();
-                          $.ajax({
-                            url: "<?=base_url();?>/Kps/get_nama",
-                            method: "POST",
-                            dataType: "JSON",
-                            data: {
-                              nim: nim
-                            },
-                            success: function(data) {
-                              document.getElementById("ujian_hasil_nama").value = data[0].nama;
-                              document.getElementById("ujian_hasil_pembimbing1").value = data[0].pembimbing1;
-                              document.getElementById("ujian_hasil_pembimbing2").value = data[0].pembimbing2;
-                              document.getElementById("ujian_hasil_penguji1").value = data[0].penguji1;
-                              document.getElementById("ujian_hasil_penguji2").value = data[0].penguji2;
-
-                            }
-                          })
-                        });
-                      });
-                    </script>
-
                     <div class="form-group">
                       <label>Tanggal Ujian</label>
                       <div class="input-group date">
@@ -187,6 +161,32 @@
               </div>
               <!-- /.modal-content -->
             </div>
+
+            <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+            <script type="text/javascript">
+              $(document).ready(function(){
+                $("#ujian_hasil_nim").change(function(){
+                  var nim = $(this).val();
+                  $.ajax({
+                    url: "<?=base_url();?>/Kps/get_nama",
+                    method: "POST",
+                    dataType: "JSON",
+                    data: {
+                      nim: nim
+                    },
+                    success: function(data) {
+                      document.getElementById("ujian_hasil_nama").value = data[0].nama;
+                      document.getElementById("ujian_hasil_pembimbing1").value = data[0].pembimbing1;
+                      document.getElementById("ujian_hasil_pembimbing2").value = data[0].pembimbing2;
+                      document.getElementById("ujian_hasil_penguji1").value = data[0].penguji1;
+                      document.getElementById("ujian_hasil_penguji2").value = data[0].penguji2;
+
+                    }
+                  })
+                });
+              });
+            </script>
+
             <!-- /.modal-dialog -->
           </div>
           <div class="modal fade" id="modal-default">
@@ -271,6 +271,45 @@
             </div>
             <!-- /.modal-dialog -->
           </div>
+
+          <div class="modal modal-danger fade" id="modal-seminar-hapus">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 id="ket_hapus_seminar"></h4>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak, Kembali</button>
+                <a href="#" id="button_hapus_seminar">
+                  <button type="button" class="btn btn-outline">Ya, Hapus</button>
+                </a>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+
+          <script type="text/javascript">
+            $(document).on("click", "#seminar_hapus", function(){
+              var id = $(this).attr('data-id')
+              $.ajax({
+                url: "<?=base_url();?>/Kps/data_seminar",
+                method: "POST",
+                dataType: "JSON",
+                data: { id: id},
+                success: function(data){
+                  console.log(data[0])
+                  document.getElementById("ket_hapus_seminar").innerText='Anda akan menghapus data seminar yang diajukan oleh mahasiswa '+data[0].nama+' ?';
+                  document.getElementById("button_hapus_seminar").href='<?=base_url();?>/Kps/hapus_seminar/'+data[0].seminar_id;
+                }
+              })
+            })
+          </script>
+
+        </div>
+
           <!-- /.modal -->
         </div>
         <!-- /.box -->
