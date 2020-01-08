@@ -148,8 +148,10 @@ class Kps extends CI_Controller {
 
 	public function data_seminar(){
 		$id = $this->input->post('id');
-		$data = $this->db->query("SELECT * FROM seminar LEFT JOIN mahasiswa ON seminar.seminar_nim=mahasiswa.nim
-		WHERE seminar.seminar_id = '$id'")->result();
+		$data = $this->db->query("SELECT * FROM (seminar LEFT JOIN mahasiswa
+			ON seminar.seminar_nim=mahasiswa.nim)
+			LEFT JOIN judul ON mahasiswa.nim=judul.nim
+			WHERE seminar.seminar_id = '$id'")->result();
 		echo json_encode($data);
 	}
 // ------------------------------------------------------------------------------------------------
