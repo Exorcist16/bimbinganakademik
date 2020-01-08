@@ -21,7 +21,8 @@ class Kps_model extends CI_Model{
       ON mahasiswa.nim = judul.nim) LEFT JOIN seminar
       on mahasiswa.nim=seminar.seminar_nim
       WHERE mahasiswa.departemen = '$sessiondepartemen'
-      AND mahasiswa.request_hasil = '1' AND mahasiswa.hasil = '0'")->result();
+      AND mahasiswa.request_hasil = '1' AND mahasiswa.hasil = '0'
+      ORDER BY seminar.seminar_id DESC")->result();
   }
 
   function tampil_data_seminar_tutup($sessiondepartemen){

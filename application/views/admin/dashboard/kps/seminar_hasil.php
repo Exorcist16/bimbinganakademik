@@ -41,7 +41,7 @@
             </div>
             <br>
             <div class="media-scroll">
-              <table id="example2" class="table table-bordered table-striped" style="width:100%;">
+              <table id="example1" class="table table-bordered table-striped" style="width:100%;">
                 <thead>
                   <tr>
                     <th>Nim</th>
@@ -49,6 +49,7 @@
                     <th>Judul Penelitian</th>
                     <th>Dosen Menyetujui</th>
                     <th>Tgl Ujian</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -65,9 +66,8 @@
                         </div>
                       </div>
                     </td>
-                    <td>
-                      <?=$datatampilseminar->seminar_tanggal;?>
-                    </td>
+                    <td><?=$datatampilseminar->seminar_tanggal;?></td>
+                    <td><?=$datatampilseminar->seminar_status;?></td>
                     <td>
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
                       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-seminar-hapus" id="seminar_hapus" data-id="<?=$datatampilseminar->seminar_id;?>"><i class="fa fa-fw fa-remove"></i></button>

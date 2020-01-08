@@ -71,6 +71,11 @@ class Kps extends CI_Controller {
 			'penguji2'		=> $this->input->post('penelitian_penguji2_edit')
 		);
 
+		$datajudul = array(
+			'seminar_status'	=> 'rejected'
+		);
+
+		$this->crud->u('seminar', $datajudul, array('seminar_nim' => $id));
 		$this->crud->u('judul', $data, array('nim' => $id));
 		redirect('kps/daftarJudul');
 	}
@@ -99,11 +104,20 @@ class Kps extends CI_Controller {
 		$nim = $this->input->post('ujian_hasil_nim');
 
 		$data = array(
-			'seminar_nim'			=> $nim,
-			'seminar_tanggal'	=> $this->input->post('ujian_hasil_tanggal'),
-			'seminar_waktu'		=> $this->input->post('ujian_hasil_waktu'),
-			'seminar_tempat'	=> $this->input->post('ujian_hasil_tempat'),
-			'seminar_jenis'		=> 'seminar hasil'
+			'seminar_nim'								=> $nim,
+			'seminar_tanggal'						=> $this->input->post('ujian_hasil_tanggal'),
+			'seminar_waktu'							=> $this->input->post('ujian_hasil_waktu'),
+			'seminar_tempat'						=> $this->input->post('ujian_hasil_tempat'),
+			'seminar_pembimbing1_nama'	=> $this->input->post('ujian_hasil_pembimbing1'),
+			'seminar_pembimbing1_status'=> 'menunggu',
+			'seminar_pembimbing2_nama'	=> $this->input->post('ujian_hasil_pembimbing2'),
+			'seminar_pembimbing2_status'=> 'menunggu',
+			'seminar_penguji1_nama'			=> $this->input->post('ujian_hasil_penguji1'),
+			'seminar_penguji1_status'		=> 'menunggu',
+			'seminar_penguji2_nama'			=> $this->input->post('ujian_hasil_penguji2'),
+			'seminar_penguji2_status'		=> 'menunggu',
+			'seminar_jenis'							=> 'seminar hasil',
+			'seminar_status'						=> 'aktif'
 		);
 
 		$datastatusujian = array(
