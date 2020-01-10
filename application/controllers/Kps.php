@@ -207,6 +207,21 @@ class Kps extends CI_Controller {
 		redirect('kps/persetujuanJadwalHasil');
 	}
 
+	public function hasil_batal(){
+		$id = $this->uri->segment(3);
+		$nim = $this->uri->segment(4);
+		$datamahasiswa = array(
+			'request_hasil'		=> '0'
+		);
+		$dataseminar = array(
+			'seminar_status'	=> 'rejected'
+		);
+
+		$this->crud->u('mahasiswa', $datamahasiswa, array('nim' => $nim));
+		$this->crud->u('seminar', $dataseminar, array('seminar_id' => $id));
+		redirect('kps/persetujuanJadwalHasil');
+	}
+
 	public function data_hasil(){
 		$id = $this->input->post('id');
 		$data = $this->db->query("SELECT * FROM mahasiswa JOIN seminar
