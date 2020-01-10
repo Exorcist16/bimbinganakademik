@@ -277,13 +277,13 @@
                     document.getElementById("seminar_detail_judul").innerText = data[0].judul;
                     document.getElementById("seminar_detail_tanggal").innerText = data[0].seminar_tanggal;
                     document.getElementById("seminar_detail_status").innerText = data[0].seminar_status;
-                    if (data[0].pembimbing1_status == 'menunggu') {
+                    if (data[0].seminar_pembimbing1_status == 'menunggu') {
                       document.getElementById("seminar_detail_pembimbing1_status").className = "label pull-right bg-yellow";
                       document.getElementById("seminar_detail_pembimbing1_status").innerText = "Menunggu";
-                    } else if (data[0].pembimbing1_status == 'diterima') {
+                    } else if (data[0].seminar_pembimbing1_status == 'diterima') {
                       document.getElementById("seminar_detail_pembimbing1_status").className = "label pull-right bg-green";
                       document.getElementById("seminar_detail_pembimbing1_status").innerText = "Diterima";
-                    } else if (data[0].pembimbing1_status == 'ditolak') {
+                    } else if (data[0].seminar_pembimbing1_status == 'ditolak') {
                       document.getElementById("seminar_detail_pembimbing1_status").className = "label pull-right bg-red";
                       document.getElementById("seminar_detail_pembimbing1_status").innerText = "Ditolak";
                     } else {
@@ -291,13 +291,13 @@
                       document.getElementById("seminar_detail_pembimbing1_status").innerText = "Menunggu";
                     }
 
-                    if (data[0].pembimbing2_status == 'menunggu') {
+                    if (data[0].seminar_pembimbing2_status == 'menunggu') {
                       document.getElementById("seminar_detail_pembimbing2_status").className = "label pull-right bg-yellow";
                       document.getElementById("seminar_detail_pembimbing2_status").innerText = "Menunggu";
-                    } else if (data[0].pembimbing2_status == 'diterima') {
+                    } else if (data[0].seminar_pembimbing2_status == 'diterima') {
                       document.getElementById("seminar_detail_pembimbing2_status").className = "label pull-right bg-green";
                       document.getElementById("seminar_detail_pembimbing2_status").innerText = "Diterima";
-                    } else if (data[0].pembimbing2_status == 'ditolak') {
+                    } else if (data[0].seminar_pembimbing2_status == 'ditolak') {
                       document.getElementById("seminar_detail_pembimbing2_status").className = "label pull-right bg-red";
                       document.getElementById("seminar_detail_pembimbing2_status").innerText = "Ditolak";
                     } else {
@@ -305,13 +305,13 @@
                       document.getElementById("seminar_detail_pembimbing2_status").innerText = "Menunggu";
                     }
 
-                    if (data[0].penguji1_status == 'menunggu') {
+                    if (data[0].seminar_penguji1_status == 'menunggu') {
                       document.getElementById("seminar_detail_penguji1_status").className = "label pull-right bg-yellow";
                       document.getElementById("seminar_detail_penguji1_status").innerText = "Menunggu";
-                    } else if (data[0].pembimbing1_status == 'diterima') {
+                    } else if (data[0].seminar_pembimbing1_status == 'diterima') {
                       document.getElementById("seminar_detail_penguji1_status").className = "label pull-right bg-green";
                       document.getElementById("seminar_detail_penguji1_status").innerText = "Diterima";
-                    } else if (data[0].penguji1_status == 'ditolak') {
+                    } else if (data[0].seminar_penguji1_status == 'ditolak') {
                       document.getElementById("seminar_detail_penguji1_status").className = "label pull-right bg-red";
                       document.getElementById("seminar_detail_penguji1_status").innerText = "Ditolak";
                     } else {
@@ -319,13 +319,13 @@
                       document.getElementById("seminar_detail_penguji1_status").innerText = "Menunggu";
                     }
 
-                    if (data[0].penguji2_status == 'menunggu') {
+                    if (data[0].seminar_penguji2_status == 'menunggu') {
                       document.getElementById("seminar_detail_penguji2_status").className = "label pull-right bg-yellow";
                       document.getElementById("seminar_detail_penguji2_status").innerText = "Menunggu";
-                    } else if (data[0].pembimbing2_status == 'diterima') {
+                    } else if (data[0].seminar_pembimbing2_status == 'diterima') {
                       document.getElementById("seminar_detail_penguji2_status").className = "label pull-right bg-green";
                       document.getElementById("seminar_detail_penguji2_status").innerText = "Diterima";
-                    } else if (data[0].penguji2_status == 'ditolak') {
+                    } else if (data[0].seminar_penguji2_status == 'ditolak') {
                       document.getElementById("seminar_detail_penguji2_status").className = "label pull-right bg-red";
                       document.getElementById("seminar_detail_penguji2_status").innerText = "Ditolak";
                     } else {

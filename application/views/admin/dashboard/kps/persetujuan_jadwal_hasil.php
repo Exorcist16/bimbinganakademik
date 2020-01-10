@@ -45,127 +45,19 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>20 Desember 2019</td>
-                    <td>09.00 - 10.30 WITA</td>
-                    <td>Meeting Room Lab. Ubicon</td>
-                    <td>
-                      <button type="button" class="btn btn-success"><i class="fa fa-fw  fa-check-square-o"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>20 Desember 2019</td>
-                    <td>09.00 - 10.30 WITA</td>
-                    <td>Meeting Room Lab. Ubicon</td>
-                    <td>
-                      <button type="button" class="btn btn-success"><i class="fa fa-fw  fa-check-square-o"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>20 Desember 2019</td>
-                    <td>09.00 - 10.30 WITA</td>
-                    <td>Meeting Room Lab. Ubicon</td>
-                    <td>
-                      <button type="button" class="btn btn-success"><i class="fa fa-fw  fa-check-square-o"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>20 Desember 2019</td>
-                    <td>09.00 - 10.30 WITA</td>
-                    <td>Meeting Room Lab. Ubicon</td>
-                    <td>
-                      <button type="button" class="btn btn-success"><i class="fa fa-fw  fa-check-square-o"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>20 Desember 2019</td>
-                    <td>09.00 - 10.30 WITA</td>
-                    <td>Meeting Room Lab. Ubicon</td>
-                    <td>
-                      <button type="button" class="btn btn-success"><i class="fa fa-fw  fa-check-square-o"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>20 Desember 2019</td>
-                    <td>09.00 - 10.30 WITA</td>
-                    <td>Meeting Room Lab. Ubicon</td>
-                    <td>
-                      <button type="button" class="btn btn-success"><i class="fa fa-fw  fa-check-square-o"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>20 Desember 2019</td>
-                    <td>09.00 - 10.30 WITA</td>
-                    <td>Meeting Room Lab. Ubicon</td>
-                    <td>
-                      <button type="button" class="btn btn-success"><i class="fa fa-fw  fa-check-square-o"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>20 Desember 2019</td>
-                    <td>09.00 - 10.30 WITA</td>
-                    <td>Meeting Room Lab. Ubicon</td>
-                    <td>
-                      <button type="button" class="btn btn-success"><i class="fa fa-fw  fa-check-square-o"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>20 Desember 2019</td>
-                    <td>09.00 - 10.30 WITA</td>
-                    <td>Meeting Room Lab. Ubicon</td>
-                    <td>
-                      <button type="button" class="btn btn-success"><i class="fa fa-fw  fa-check-square-o"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>20 Desember 2019</td>
-                    <td>09.00 - 10.30 WITA</td>
-                    <td>Meeting Room Lab. Ubicon</td>
-                    <td>
-                      <button type="button" class="btn btn-success"><i class="fa fa-fw  fa-check-square-o"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>D42114516</td>
-                    <td>Abdllah Satari Rahim</td>
-                    <td>20 Desember 2019</td>
-                    <td>09.00 - 10.30 WITA</td>
-                    <td>Meeting Room Lab. Ubicon</td>
-                    <td>
-                      <button type="button" class="btn btn-success"><i class="fa fa-fw  fa-check-square-o"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
-                    </td>
-                  </tr>
+                  <<?php foreach ($konfirmasihasil as $konfirmasihasil): ?>
+                    <tr>
+                      <td><?=$konfirmasihasil->nim;?></td>
+                      <td><?=$konfirmasihasil->nama;?></td>
+                      <td><?=$konfirmasihasil->seminar_tanggal;?></td>
+                      <td><?=$konfirmasihasil->waktu_mulai;?> - <?=$konfirmasihasil->waktu_selesai;?> WITA</td>
+                      <td><?=$konfirmasihasil->seminar_tempat;?></td>
+                      <td>
+                        <button type="button" class="btn btn-success"><i class="fa fa-fw  fa-check-square-o"></i></button>
+                        <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
+                      </td>
+                    </tr>
+                  <?php endforeach; ?>
                 </tbody>
               </table>
             </div>

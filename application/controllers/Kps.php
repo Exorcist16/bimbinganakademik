@@ -183,9 +183,11 @@ class Kps extends CI_Controller {
 	}
 // ------------------------------------------------------------------------------------------------
 	public function persetujuanJadwalHasil(){
+		$sessiondepartemen = $this->session->userdata('departemen');
+		$datakonfirmasihasil = $this->Kps_model->tampil_data_konfirmasi_hasil($sessiondepartemen);
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/persetujuan_jadwal_hasil',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+										'konfirmasihasil'		=> $datakonfirmasihasil
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
