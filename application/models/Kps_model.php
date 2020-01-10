@@ -42,6 +42,7 @@ class Kps_model extends CI_Model{
       AND seminar.seminar_pembimbing1_status='diterima'
       AND seminar.seminar_pembimbing2_status='diterima'
       AND seminar.seminar_penguji1_status='diterima'
-      AND seminar.seminar_penguji2_status='diterima'")->result();
+      AND seminar.seminar_penguji2_status='diterima'
+      AND seminar.seminar_status='aktif'")->result();
   }
 }

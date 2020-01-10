@@ -191,6 +191,28 @@ class Kps extends CI_Controller {
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
+
+	public function hasil_selesai(){
+		$id = $this->uri->segment(3);
+		$nim = $this->uri->segment(4);
+		$datamahasiswa = array(
+			'hasil'		=> '1'
+		);
+		$dataseminar = array(
+			'seminar_status'	=> 'selesai'
+		);
+
+		$this->crud->u('mahasiswa', $datamahasiswa, array('nim' => $nim));
+		$this->crud->u('seminar', $dataseminar, array('seminar_id' => $id));
+		redirect('kps/persetujuanJadwalHasil');
+	}
+
+	public function data_hasil(){
+		$id = $this->input->post('id');
+		$data = $this->db->query("SELECT * FROM mahasiswa JOIN seminar
+		ON mahasiswa.nim=seminar.seminar_nim WHERE seminar.seminar_id = '$id'")->result();
+		echo json_encode($data);
+	}
 // ------------------------------------------------------------------------------------------------
 	public function persetujuanJadwalTutup(){
 		$data = array(  'title'             => 'KPS Dashboard',
