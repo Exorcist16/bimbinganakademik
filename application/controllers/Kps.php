@@ -158,20 +158,35 @@ class Kps extends CI_Controller {
 	public function ujianSkripsi(){
 		$sessiondepartemen = $this->session->userdata('departemen');
 		$datatampiltutup = $this->Kps_model->tampil_data_seminar_tutup($sessiondepartemen);
+
+		$datawaktututup = $this->crud->gw('waktu_ujian', array('waktu_departemen' => $sessiondepartemen));
+		$datatempattutup = $this->crud->gw('tempat_ujian', array('tempat_ujian_departemen' => $sessiondepartemen));
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/ujian_skripsi',
-										'datatampiltutup'	=> $datatampiltutup
+										'datatampiltutup'		=> $datatampiltutup,
+										'datawaktututup'		=> $datawaktututup,
+										'datatempattutup'		=> $datatempattutup
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
+
 	public function tambah_seminar_tutup(){
 		$nim = $this->input->post('ujian_tutup_nim');
 		$data = array(
-			'seminar_nim'			=> $nim,
-			'seminar_tanggal'	=> $this->input->post('ujian_tutup_tanggal'),
-			'seminar_waktu'		=> $this->input->post('ujian_tutup_waktu'),
-			'seminar_tempat'	=> $this->input->post('ujian_tutup_tempat'),
-			'seminar_jenis'		=> 'seminar tutup'
+			'seminar_nim'								=> $nim,
+			'seminar_tanggal'						=> $this->input->post('ujian_tutup_tanggal'),
+			'seminar_waktu'							=> $this->input->post('ujian_tutup_waktu'),
+			'seminar_tempat'						=> $this->input->post('ujian_tutup_tempat'),
+			'seminar_pembimbing1_nama'	=> $this->input->post('ujian_tutup_pembimbing1'),
+			'seminar_pembimbing1_status'=> 'menunggu',
+			'seminar_pembimbing2_nama'	=> $this->input->post('ujian_tutup_pembimbing2'),
+			'seminar_pembimbing2_status'=> 'menunggu',
+			'seminar_penguji1_nama'			=> $this->input->post('ujian_tutup_penguji1'),
+			'seminar_penguji1_status'		=> 'menunggu',
+			'seminar_penguji2_nama'			=> $this->input->post('ujian_tutup_penguji2'),
+			'seminar_penguji2_status'		=> 'menunggu',
+			'seminar_jenis'							=> 'seminar tutup',
+			'seminar_status'						=> 'aktif'
 		);
 
 		$datastatusujiantutup = array(

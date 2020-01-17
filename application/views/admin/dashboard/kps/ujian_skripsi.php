@@ -90,6 +90,7 @@
                     <div class="form-group">
                       <label>NIM</label>
                       <input type="text" class="form-control" name="ujian_tutup_nim" id="ujian_tutup_nim" style="width: 100%;" placeholder="Nim Mahasiswa" required>
+                      <h6 id="ujian_tutup_nim_tidak_ada" class="help-block text-red"></h6>
                     </div>
                     <div class="form-group">
                       <label>Nama Mahasiswa</label>
@@ -137,11 +138,16 @@
                               nim: nim
                             },
                             success: function(data) {
-                              document.getElementById("ujian_tutup_nama").value = data[0].nama;
-                              document.getElementById("ujian_tutup_pembimbing1").value = data[0].pembimbing1;
-                              document.getElementById("ujian_tutup_pembimbing2").value = data[0].pembimbing2;
-                              document.getElementById("ujian_tutup_penguji1").value = data[0].penguji1;
-                              document.getElementById("ujian_tutup_penguji2").value = data[0].penguji2;
+                              if (data[0].hasil == 1) {
+                                document.getElementById("ujian_tutup_nim_tidak_ada").innerText = "";
+                                document.getElementById("ujian_tutup_nama").value = data[0].nama;
+                                document.getElementById("ujian_tutup_pembimbing1").value = data[0].pembimbing1;
+                                document.getElementById("ujian_tutup_pembimbing2").value = data[0].pembimbing2;
+                                document.getElementById("ujian_tutup_penguji1").value = data[0].penguji1;
+                                document.getElementById("ujian_tutup_penguji2").value = data[0].penguji2;
+                              } else {
+                                document.getElementById("ujian_tutup_nim_tidak_ada").innerText = "Mahasiswa dengan NIM " + data[0].nim + " belum melaksanakan Seminar Hasil";
+                              }
                             }
                           })
                         });
@@ -161,20 +167,18 @@
                       <label>Waktu Ujian</label>
                       <select class="form-control select2" name="ujian_tutup_waktu" id="ujian_tutup_waktu" style="width: 100%;" required>
                         <option selected value="" disabled>Waktu Ujian</option>
-                        <option value="09.00 - 10.30 WITA">09.00 - 10.30 WITA</option>
-                        <option value="09.00 - 10.30 WITA">10.30 - 12.00 WITA</option>
-                        <option value="09.00 - 10.30 WITA">13.00 - 14.30 WITA</option>
-                        <option value="09.00 - 10.30 WITA">14.30 - 16.00 WITA</option>
+                        <?php foreach ($datawaktututup as $datawaktu) { ?>
+                          <option value="<?=$datawaktu->waktu_ujian_id;?>"><?=$datawaktu->waktu_mulai;?> - <?=$datawaktu->waktu_selesai;?> WITA</option>
+                        <?php } ?>
                       </select>
                     </div>
                     <div class="form-group">
                       <label>Tempat Ujian</label>
                       <select class="form-control select2" name="ujian_tutup_tempat" id="ujian_tutup_tempat" style="width: 100%;" required>
                         <option selected value="" disabled>Tempat Ujian</option>
-                        <option value="Meeting Room Lab. Ubicon">Meeting Room Lab. Ubicon</option>
-                        <option value="Meeting Room Lab. Ubicon">Meeting Room Lab. Ubicon</option>
-                        <option value="Meeting Room Lab. Ubicon">Meeting Room Lab. Ubicon</option>
-                        <option value="Meeting Room Lab. Ubicon">Meeting Room Lab. Ubicon</option>
+                        <?php foreach ($datatempattutup as $datatempat) { ?>
+                          <option value="<?=$datatempat->tempat_ujian_nama;?>"><?=$datatempat->tempat_ujian_nama;?></option>
+                        <?php } ?>
                       </select>
                     </div>
                   </div>
