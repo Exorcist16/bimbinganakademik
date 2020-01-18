@@ -3,10 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Kps_model extends CI_Model{
 
-  public function get_nama($nim){
+  public function get_nama($nim, $sessiondepartemen){
     return $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
      ON judul.nim=mahasiswa.nim
-     WHERE mahasiswa.nim = '$nim'")->result();
+     WHERE mahasiswa.nim = '$nim'
+     AND mahasiswa.departemen = '$sessiondepartemen'")->result();
   }
 
   function tampil_data($sessiondepartemen){

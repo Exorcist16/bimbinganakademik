@@ -96,10 +96,15 @@
                               nim: nim
                             },
                             success: function(data) {
-                              console.log(data[0]);
                               if (data[0] != undefined) {
-                                document.getElementById("penelitian_nama").value = data[0].nama;
-                                document.getElementById("status_nama").innerText = "";
+                                if (data[0].nim != null) {
+                                  document.getElementById("penelitian_nim").value = "";
+                                  document.getElementById("penelitian_nama").value = "";
+                                  document.getElementById("status_nama").innerText = "Mahasiswa sudah memiliki judul. Edit untuk mengubah judul.";
+                                } else {
+                                  document.getElementById("penelitian_nama").value = data[0].nama;
+                                  document.getElementById("status_nama").innerText = "";
+                                }
                               } else {
                                 document.getElementById("penelitian_nama").value = "";
                                 document.getElementById("status_nama").innerText = "Data Mahasiswa tidak ditemukan!!!";

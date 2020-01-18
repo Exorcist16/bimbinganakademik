@@ -38,8 +38,9 @@ class Kps extends CI_Controller {
 	}
 
 	public function get_nama(){
+		$sessiondepartemen = $this->session->userdata('departemen');
 		$nim = $this->input->post('nim');
-		$data = $this->Kps_model->get_nama($nim);
+		$data = $this->Kps_model->get_nama($nim, $sessiondepartemen);
 		echo json_encode($data);
 	}
 
@@ -147,6 +148,7 @@ class Kps extends CI_Controller {
 	}
 
 	public function data_seminar(){
+		$sessiondepartemen = $this->session->userdata('departemen');
 		$id = $this->input->post('id');
 		$data = $this->db->query("SELECT * FROM (seminar LEFT JOIN mahasiswa
 			ON seminar.seminar_nim=mahasiswa.nim)
