@@ -68,7 +68,7 @@
                     <td><?=$datatampiltutup->seminar_tanggal;?></td>
                     <td>
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default" id="tutup_detail" data-id="<?=$datatampiltutup->seminar_id;?>"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-tutup-hapus" id="tutup_hapus" data-id="<?=$datatampiltutup->seminar_id;?>"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
                   <?php } ?>
@@ -345,6 +345,43 @@
 
             <!-- /.modal-dialog -->
           </div>
+
+          <div class="modal modal-danger fade" id="modal-tutup-hapus">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 id="ket_hapus_tutup"></h4>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak, Kembali</button>
+                <a href="#" id="button_hapus_tutup">
+                  <button type="button" class="btn btn-outline">Ya, Hapus</button>
+                </a>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+
+          <script type="text/javascript">
+            $(document).on("click", "#tutup_hapus", function(){
+              var id = $(this).attr('data-id')
+              $.ajax({
+                url: "<?=base_url();?>/Kps/data_tutup",
+                method: "POST",
+                dataType: "JSON",
+                data: { id: id},
+                success: function(data){
+                  console.log(data[0])
+                  document.getElementById("ket_hapus_tutup").innerText='Anda akan menghapus data seminar yang diajukan oleh mahasiswa '+data[0].nama+' ?';
+                  document.getElementById("button_hapus_tutup").href='<?=base_url();?>/Kps/hapus_tutup/'+data[0].seminar_id;
+                }
+              })
+            })
+          </script>
+
           <!-- /.modal -->
         </div>
         <!-- /.box -->

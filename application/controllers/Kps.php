@@ -197,6 +197,23 @@ class Kps extends CI_Controller {
 		redirect('kps/ujianSkripsi');
 	}
 
+	public function hapus_tutup(){
+		$id = $this->uri->segment(3);
+
+		$nim = $this->db->query("SELECT seminar_nim FROM seminar WHERE seminar_id = '$id'")->result();
+		foreach ($nim as $nim) {
+			$nima = $nim->seminar_nim;
+		}
+
+		$data = array(
+			'request_tutup' => '0'
+		);
+
+		$this->crud->u('mahasiswa', $data, array('nim' => $nima));
+		$this->crud->d('seminar', array('seminar_id' => $id));
+		redirect('kps/seminarHasil');
+	}
+
 	public function data_tutup(){
 		$id = $this->input->post('id');
 		$data = $this->db->query("SELECT * FROM (seminar LEFT JOIN mahasiswa
