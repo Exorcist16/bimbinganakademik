@@ -271,11 +271,50 @@ class Kps extends CI_Controller {
 	}
 // ------------------------------------------------------------------------------------------------
 	public function persetujuanJadwalTutup(){
+		$sessiondepartemen = $this->session->userdata('departemen');
+		$datakonfirmasitutup = $this->Kps_model->tampil_data_konfirmasi_tutup($sessiondepartemen);
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/persetujuan_jadwal_tutup',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+										'konfirmasitutup'		=> $datakonfirmasitutup
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
+	public function tutup_selesai(){
+		$id = $this->uri->segment(3);
+		$nim = $this->uri->segment(4);
+		$datamahasiswa = array(
+			'alumni'		=> '1'
+		);
+		$dataseminar = array(
+			'seminar_status'	=> 'selesai'
+		);
+
+		$this->crud->u('mahasiswa', $datamahasiswa, array('nim' => $nim));
+		$this->crud->u('seminar', $dataseminar, array('seminar_id' => $id));
+		redirect('kps/persetujuanJadwalTutup');
+	}
+
+	public function tutup_batal(){
+		$id = $this->uri->segment(3);
+		$nim = $this->uri->segment(4);
+		$datamahasiswa = array(
+			'request_tutup'		=> '0'
+		);
+		$dataseminar = array(
+			'seminar_status'	=> 'rejected'
+		);
+
+		$this->crud->u('mahasiswa', $datamahasiswa, array('nim' => $nim));
+		$this->crud->u('seminar', $dataseminar, array('seminar_id' => $id));
+		redirect('kps/persetujuanJadwalTutup');
+	}
+
+	public function data_konfirmasi_tutup(){
+		$id = $this->input->post('id');
+		$data = $this->db->query("SELECT * FROM mahasiswa JOIN seminar
+		ON mahasiswa.nim=seminar.seminar_nim WHERE seminar.seminar_id = '$id'")->result();
+		echo json_encode($data);
 	}
 // ------------------------------------------------------------------------------------------------
 	public function daftarMahasiswa(){
