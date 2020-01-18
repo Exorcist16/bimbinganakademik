@@ -211,7 +211,7 @@ class Kps extends CI_Controller {
 
 		$this->crud->u('mahasiswa', $data, array('nim' => $nima));
 		$this->crud->d('seminar', array('seminar_id' => $id));
-		redirect('kps/seminarHasil');
+		redirect('kps/ujianSkripsi');
 	}
 
 	public function data_tutup(){
