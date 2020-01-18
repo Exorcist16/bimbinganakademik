@@ -67,7 +67,7 @@
                     </td>
                     <td><?=$datatampiltutup->seminar_tanggal;?></td>
                     <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default" id="tutup_detail" data-id="<?=$datatampiltutup->seminar_id;?>"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
                       <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
@@ -207,59 +207,49 @@
                     <div class="box-body box-profile">
                       <img class="profile-user-img img-responsive img-circle" src="<?=base_url('assets/')?>dist/img/avatar5.png" alt="User profile picture">
 
-                      <h3 class="profile-username text-center">Abdillah Satari Rahim</h3>
+                      <h3 class="profile-username text-center" id="tutup_detail_nama"></h3>
 
-                      <p class="text-muted text-center">D42114516</p>
-
-                      <!-- <ul class="list-group list-group-bordered">
-                          <li class="list-group-item">
-                            <span class="col-md-6">
-                              <b>Departemen Teknik Informatika</b>
-                            </span>
-                            <span class="col-md-6">
-                                <b> Dosen Pembimbing 1
-                                <span class="pull-right-container">
-                                  <small class="label pull-right bg-green">Confirmed</small>
-                                </span>
-                              </b>
-                            </span>
-                          </li>
-                      </ul> -->
+                      <p class="text-muted text-center" id="tutup_detail_nim"></p>
 
                       <div class="box">
                         <div class="box-body">
                           <div class="col-md-6">
-                            <p >Departemen Teknik Informatika</p>
-                            <p >S1</p>
-                            <p >Implementasi Progressive Web App (PWA) Menggunakan Framework Angular Dalam Membangun Sistem Monitoring Energy Listrik</p>
-                            <p>17/10/2019</p>
+                            <p id="tutup_detail_departemen"></p>
+                            <p id="tutup_detail_strata"></p>
+                            <p id="tutup_detail_judul"></p>
+                            <p id="tutup_detail_tanggal"></p>
                           </div>
                           <div class="col-md-6">
                             <p> Dosen Pembimbing 1
                               <span class="pull-right-container">
-                                <small class="label pull-right bg-green">Confirmed</small>
+                                <small id="tutup_detail_pembimbing1_status" class="label pull-right bg-green"></small>
                               </span>
                             </p>
                             <p> Dosen Pembimbing 2
                               <span class="pull-right-container">
-                                <small class="label pull-right bg-green">Confirmed</small>
+                                <small id="tutup_detail_pembimbing2_status" class="label pull-right bg-green"></small>
                               </span>
                             </p>
                             <p> Dosen Penguji 1
                               <span class="pull-right-container">
-                                <small class="label pull-right bg-yellow">Confirmed</small>
+                                <small id="tutup_detail_penguji1_status" class="label pull-right bg-yellow"></small>
                               </span>
                             </p>
                             <p> Dosen Penguji 2
                               <span class="pull-right-container">
-                                <small class="label pull-right bg-red">Confirmed</small>
+                                <small id="tutup_detail_penguji2_status" class="label pull-right bg-red"></small>
                               </span>
                             </p>
                           </div>
                         </div>
                       </div>
 
-                      <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
+                      <p> Status Ujian Tutup
+                        <span class="pull-right-container">
+                          <small id="tutup_detail_status" class="label bg-blue"></small>
+                        </span>
+                      </p>
+
                     </div>
                     <!-- /.box-body -->
                   </div>
@@ -267,11 +257,88 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                  <!-- <button type="button" class="btn btn-primary">Tambahkan</button> -->
                 </div>
               </div>
               <!-- /.modal-content -->
             </div>
+
+            <script type="text/javascript">
+              $(document).on("click", "#tutup_detail", function(){
+                var id = $(this).attr('data-id')
+                $.ajax({
+                  url     : "<?=base_url();?>/Kps/data_tutup",
+                  method  : "POST",
+                  dataType: "JSON",
+                  data    : { id: id },
+                  success : function(data){
+                    document.getElementById("tutup_detail_nama").innerText = data[0].nama;
+                    document.getElementById("tutup_detail_nim").innerText = data[0].nim;
+                    document.getElementById("tutup_detail_departemen").innerText = 'Departemen ' + data[0].departemen;
+                    document.getElementById("tutup_detail_strata").innerText = data[0].strata;
+                    document.getElementById("tutup_detail_judul").innerText = data[0].judul;
+                    document.getElementById("tutup_detail_tanggal").innerText = data[0].seminar_tanggal;
+                    document.getElementById("tutup_detail_status").innerText = data[0].seminar_status;
+                    console.log(data[0].seminar_pembimbing1_status);
+                    if (data[0].seminar_pembimbing1_status == 'menunggu') {
+                      document.getElementById("tutup_detail_pembimbing1_status").className = "label pull-right bg-yellow";
+                      document.getElementById("tutup_detail_pembimbing1_status").innerText = "Menunggu";
+                    } else if (data[0].seminar_pembimbing1_status == 'diterima') {
+                      document.getElementById("tutup_detail_pembimbing1_status").className = "label pull-right bg-green";
+                      document.getElementById("tutup_detail_pembimbing1_status").innerText = "Diterima";
+                    } else if (data[0].seminar_pembimbing1_status == 'ditolak') {
+                      document.getElementById("tutup_detail_pembimbing1_status").className = "label pull-right bg-red";
+                      document.getElementById("tutup_detail_pembimbing1_status").innerText = "Ditolak";
+                    } else {
+                      document.getElementById("tutup_detail_pembimbing1_status").className = "label pull-right bg-yellow";
+                      document.getElementById("tutup_detail_pembimbing1_status").innerText = "Menunggu";
+                    }
+
+                    if (data[0].seminar_pembimbing2_status == 'menunggu') {
+                      document.getElementById("tutup_detail_pembimbing2_status").className = "label pull-right bg-yellow";
+                      document.getElementById("tutup_detail_pembimbing2_status").innerText = "Menunggu";
+                    } else if (data[0].seminar_pembimbing2_status == 'diterima') {
+                      document.getElementById("tutup_detail_pembimbing2_status").className = "label pull-right bg-green";
+                      document.getElementById("tutup_detail_pembimbing2_status").innerText = "Diterima";
+                    } else if (data[0].seminar_pembimbing2_status == 'ditolak') {
+                      document.getElementById("tutup_detail_pembimbing2_status").className = "label pull-right bg-red";
+                      document.getElementById("tutup_detail_pembimbing2_status").innerText = "Ditolak";
+                    } else {
+                      document.getElementById("tutup_detail_pembimbing2_status").className = "label pull-right bg-yellow";
+                      document.getElementById("tutup_detail_pembimbing2_status").innerText = "Menunggu";
+                    }
+
+                    if (data[0].seminar_penguji1_status == 'menunggu') {
+                      document.getElementById("tutup_detail_penguji1_status").className = "label pull-right bg-yellow";
+                      document.getElementById("tutup_detail_penguji1_status").innerText = "Menunggu";
+                    } else if (data[0].seminar_pembimbing1_status == 'diterima') {
+                      document.getElementById("tutup_detail_penguji1_status").className = "label pull-right bg-green";
+                      document.getElementById("tutup_detail_penguji1_status").innerText = "Diterima";
+                    } else if (data[0].seminar_penguji1_status == 'ditolak') {
+                      document.getElementById("tutup_detail_penguji1_status").className = "label pull-right bg-red";
+                      document.getElementById("tutup_detail_penguji1_status").innerText = "Ditolak";
+                    } else {
+                      document.getElementById("tutup_detail_penguji1_status").className = "label pull-right bg-yellow";
+                      document.getElementById("tutup_detail_penguji1_status").innerText = "Menunggu";
+                    }
+
+                    if (data[0].seminar_penguji2_status == 'menunggu') {
+                      document.getElementById("tutup_detail_penguji2_status").className = "label pull-right bg-yellow";
+                      document.getElementById("tutup_detail_penguji2_status").innerText = "Menunggu";
+                    } else if (data[0].seminar_pembimbing2_status == 'diterima') {
+                      document.getElementById("tutup_detail_penguji2_status").className = "label pull-right bg-green";
+                      document.getElementById("tutup_detail_penguji2_status").innerText = "Diterima";
+                    } else if (data[0].seminar_penguji2_status == 'ditolak') {
+                      document.getElementById("tutup_detail_penguji2_status").className = "label pull-right bg-red";
+                      document.getElementById("tutup_detail_penguji2_status").innerText = "Ditolak";
+                    } else {
+                      document.getElementById("tutup_detail_penguji2_status").className = "label pull-right bg-yellow";
+                      document.getElementById("tutup_detail_penguji2_status").innerText = "Menunggu";
+                    }
+                  }
+                })
+              })
+            </script>
+
             <!-- /.modal-dialog -->
           </div>
           <!-- /.modal -->

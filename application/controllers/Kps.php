@@ -196,6 +196,15 @@ class Kps extends CI_Controller {
 		$this->crud->u('mahasiswa', $datastatusujiantutup, array('nim' => $nim));
 		redirect('kps/ujianSkripsi');
 	}
+
+	public function data_tutup(){
+		$id = $this->input->post('id');
+		$data = $this->db->query("SELECT * FROM (seminar LEFT JOIN mahasiswa
+			ON seminar.seminar_nim=mahasiswa.nim)
+			LEFT JOIN judul ON mahasiswa.nim=judul.nim
+			WHERE seminar.seminar_id = '$id'")->result();
+		echo json_encode($data);
+	}
 // ------------------------------------------------------------------------------------------------
 	public function persetujuanJadwalHasil(){
 		$sessiondepartemen = $this->session->userdata('departemen');
