@@ -45,7 +45,8 @@ class Kps_model extends CI_Model{
       AND seminar.seminar_penguji1_status='diterima'
       AND seminar.seminar_penguji2_status='diterima'
       AND seminar.seminar_jenis='seminar hasil'
-      AND seminar.seminar_status='aktif'")->result();
+      AND seminar.seminar_status='aktif'
+      ORDER BY seminar.seminar_id DESC")->result();
   }
 
   function tampil_data_konfirmasi_tutup($sessiondepartemen){
@@ -59,6 +60,7 @@ class Kps_model extends CI_Model{
       AND seminar.seminar_penguji1_status='diterima'
       AND seminar.seminar_penguji2_status='diterima'
       AND seminar.seminar_jenis='seminar tutup'
-      AND seminar.seminar_status='aktif'")->result();
+      AND seminar.seminar_status='aktif'
+      ORDER BY seminar.seminar_id DESC")->result();
   }
 }
