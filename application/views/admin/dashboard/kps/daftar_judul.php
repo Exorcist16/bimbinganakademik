@@ -76,6 +76,7 @@
                     <div class="form-group">
                       <label>NIM</label>
                       <input type="text" class="form-control" name="penelitian_nim" id="penelitian_nim" placeholder="Nim Mahasiswa" required>
+                      <h6 class="help-block text-red" id="status_nama"></h6>
                     </div>
                     <div class="form-group">
                       <label>Nama Mahasiswa</label>
@@ -95,7 +96,14 @@
                               nim: nim
                             },
                             success: function(data) {
-                              document.getElementById("penelitian_nama").value = data[0].nama;
+                              console.log(data[0]);
+                              if (data[0] != undefined) {
+                                document.getElementById("penelitian_nama").value = data[0].nama;
+                                document.getElementById("status_nama").innerText = "";
+                              } else {
+                                document.getElementById("penelitian_nama").value = "";
+                                document.getElementById("status_nama").innerText = "Data Mahasiswa tidak ditemukan!!!";
+                              }
                             }
                           })
                         });
