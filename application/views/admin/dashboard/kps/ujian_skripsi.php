@@ -138,15 +138,19 @@
                               nim: nim
                             },
                             success: function(data) {
-                              if (data[0].hasil == 1) {
-                                document.getElementById("ujian_tutup_nim_tidak_ada").innerText = "";
-                                document.getElementById("ujian_tutup_nama").value = data[0].nama;
-                                document.getElementById("ujian_tutup_pembimbing1").value = data[0].pembimbing1;
-                                document.getElementById("ujian_tutup_pembimbing2").value = data[0].pembimbing2;
-                                document.getElementById("ujian_tutup_penguji1").value = data[0].penguji1;
-                                document.getElementById("ujian_tutup_penguji2").value = data[0].penguji2;
+                              if (data[0].nim != null) {
+                                if (data[0].hasil == 1) {
+                                  document.getElementById("ujian_tutup_nim_tidak_ada").innerText = "";
+                                  document.getElementById("ujian_tutup_nama").value = data[0].nama;
+                                  document.getElementById("ujian_tutup_pembimbing1").value = data[0].pembimbing1;
+                                  document.getElementById("ujian_tutup_pembimbing2").value = data[0].pembimbing2;
+                                  document.getElementById("ujian_tutup_penguji1").value = data[0].penguji1;
+                                  document.getElementById("ujian_tutup_penguji2").value = data[0].penguji2;
+                                } else {
+                                  document.getElementById("ujian_tutup_nim_tidak_ada").innerText = "Mahasiswa dengan NIM " + data[0].nim + " belum melaksanakan Seminar Hasil";
+                                }
                               } else {
-                                document.getElementById("ujian_tutup_nim_tidak_ada").innerText = "Mahasiswa dengan NIM " + data[0].nim + " belum melaksanakan Seminar Hasil";
+                                document.getElementById("ujian_tutup_nim_tidak_ada").innerText = "NIM belum terdaftar dalam ujian proposal";
                               }
                             }
                           })
