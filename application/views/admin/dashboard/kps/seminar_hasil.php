@@ -92,6 +92,7 @@
                     <div class="form-group">
                       <label>NIM</label>
                       <input type="text" class="form-control" name="ujian_hasil_nim" id="ujian_hasil_nim" style="width: 100%;" placeholder="Nim Mahasiswa" required>
+                      <h6 id="ujian_hasil_nim_tidak_ada" class="help-block text-red"></h6>
                     </div>
                     <div class="form-group">
                       <label>Nama Mahasiswa</label>
@@ -175,11 +176,31 @@
                       nim: nim
                     },
                     success: function(data) {
-                      document.getElementById("ujian_hasil_nama").value = data[0].nama;
-                      document.getElementById("ujian_hasil_pembimbing1").value = data[0].pembimbing1;
-                      document.getElementById("ujian_hasil_pembimbing2").value = data[0].pembimbing2;
-                      document.getElementById("ujian_hasil_penguji1").value = data[0].penguji1;
-                      document.getElementById("ujian_hasil_penguji2").value = data[0].penguji2;
+                      if (data[0] != undefined) {
+                        if (data[0].nim != null) {
+                          document.getElementById("ujian_hasil_nim_tidak_ada").innerText = "";
+                          document.getElementById("ujian_hasil_nama").value = data[0].nama;
+                          document.getElementById("ujian_hasil_pembimbing1").value = data[0].pembimbing1;
+                          document.getElementById("ujian_hasil_pembimbing2").value = data[0].pembimbing2;
+                          document.getElementById("ujian_hasil_penguji1").value = data[0].penguji1;
+                          document.getElementById("ujian_hasil_penguji2").value = data[0].penguji2;
+                        } else {
+                          document.getElementById("ujian_hasil_nim_tidak_ada").innerText = "Mahasiswa tersebut belum melaksanakan seminar proposal";
+                          document.getElementById("ujian_hasil_nama").value = "";
+                          document.getElementById("ujian_hasil_pembimbing1").value = "";
+                          document.getElementById("ujian_hasil_pembimbing2").value = "";
+                          document.getElementById("ujian_hasil_penguji1").value = "";
+                          document.getElementById("ujian_hasil_penguji2").value = "";
+                        }
+                      } else {
+                        document.getElementById("ujian_hasil_nim_tidak_ada").innerText = "Data mahasiswa tidak ditemukan!!!";
+                        document.getElementById("ujian_hasil_nama").value = "";
+                        document.getElementById("ujian_hasil_pembimbing1").value = "";
+                        document.getElementById("ujian_hasil_pembimbing2").value = "";
+                        document.getElementById("ujian_hasil_penguji1").value = "";
+                        document.getElementById("ujian_hasil_penguji2").value = "";
+                      }
+
 
                     }
                   })
