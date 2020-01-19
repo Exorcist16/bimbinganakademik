@@ -86,6 +86,22 @@ class Kps extends CI_Controller {
 		$this->crud->d('judul', array('nim' => $id));
 		redirect('kps/daftarJudul');
 	}
+
+	public function get_jumlah_bimbing(){
+		$nama = $this->input->post('nama');
+		$data = $this->db->query("SELECT COUNT(*)
+						AS pembimbing FROM `judul` WHERE pembimbing1 = '$nama'
+						OR pembimbing2 = '$nama'")->result();
+		echo json_encode($data);
+	}
+
+	public function get_jumlah_uji(){
+		$nama = $this->input->post('nama');
+		$data = $this->db->query("SELECT COUNT(*)
+						AS penguji FROM `judul` WHERE penguji1 = '$nama'
+						OR penguji2 = '$nama'")->result();
+		echo json_encode($data);
+	}
 // ------------------------------------------------------------------------------------------------
 	public function seminarHasil(){
 		$sessiondepartemen = $this->session->userdata('departemen');
