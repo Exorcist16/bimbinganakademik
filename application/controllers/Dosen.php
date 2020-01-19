@@ -20,9 +20,16 @@ class Dosen extends CI_Controller {
 
 // --------------------------------------------------------------------------------
 	public function dashboard() {
+		$sessionnama = $this->session->userdata('nama_user');
+		$jmlbimbing = $this->db->query("SELECT COUNT(*) AS bimbingan FROM `judul`
+									WHERE pembimbing1='$sessionnama' OR pembimbing2='$sessionnama'
+									")->result();
+		$jmluji = $this->db->query("SELECT COUNT(*) AS uji FROM `judul`
+							WHERE penguji1='$sessionnama' OR penguji2='$sessionnama'")->result();
 		$data = array(	'title'				=> 'Mahasiswa Dashboard',
-										'isi'				=> 'admin/dashboard/dosen/dosen_dashboard',
-
+										'isi'					=> 'admin/dashboard/dosen/dosen_dashboard',
+										'bimbingan'		=> $jmlbimbing,
+										'uji'					=> $jmluji
 					);
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
