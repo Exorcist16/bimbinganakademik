@@ -1,0 +1,17 @@
+{
+  "name": "FT-UH Scheduler",
+  "short_name": "FT-UH Scheduler",
+  "description": "Penjadwalan seminar tugas akhir untuk Fakultas Teknik Universitas Hasanuddin",
+  "start_url": "/ft-uh-scheduler/Auth",
+  "display": "standalone",
+  "background_color": "#fff",
+  "theme_color": "#fff",
+  "gcm_sender_id": "229549979081",
+  "icons": [
+    {
+      "src": "./app-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
