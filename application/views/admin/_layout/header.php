@@ -5,7 +5,7 @@
     }
   </style>
   <!-- Logo -->
-  <a href="index2.html" class="logo">
+  <a href="index2.html" class="logo normal-logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <!-- <span class="logo-mini"><b>A</b>LT</span> -->
     <span class="logo-mini"><img src="<?=base_url('assets/')?>dist/img/unhas.webp"></span>
@@ -18,6 +18,9 @@
     <!-- Sidebar toggle button-->
     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
       <span class="sr-only">Toggle navigation</span>
+    </a>
+    <a href="#" class="mobile-logo">
+      <img style="width: auto; height: 40px;" src="<?=base_url('assets/')?>dist/img/unhas-cover.png">
     </a>
     <!-- Navbar Right Menu -->
     <div class="navbar-custom-menu">
