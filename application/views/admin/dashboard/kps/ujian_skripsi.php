@@ -67,8 +67,8 @@
                     </td>
                     <td><?=$datatampiltutup->seminar_tanggal;?></td>
                     <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
-                      <button type="button" class="btn btn-danger"><i class="fa fa-fw fa-remove"></i></button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default" id="tutup_detail" data-id="<?=$datatampiltutup->seminar_id;?>"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-tutup-hapus" id="tutup_hapus" data-id="<?=$datatampiltutup->seminar_id;?>"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
                   <?php } ?>
@@ -90,6 +90,7 @@
                     <div class="form-group">
                       <label>NIM</label>
                       <input type="text" class="form-control" name="ujian_tutup_nim" id="ujian_tutup_nim" style="width: 100%;" placeholder="Nim Mahasiswa" required>
+                      <h6 id="ujian_tutup_nim_tidak_ada" class="help-block text-red"></h6>
                     </div>
                     <div class="form-group">
                       <label>Nama Mahasiswa</label>
@@ -137,11 +138,39 @@
                               nim: nim
                             },
                             success: function(data) {
-                              document.getElementById("ujian_tutup_nama").value = data[0].nama;
-                              document.getElementById("ujian_tutup_pembimbing1").value = data[0].pembimbing1;
-                              document.getElementById("ujian_tutup_pembimbing2").value = data[0].pembimbing2;
-                              document.getElementById("ujian_tutup_penguji1").value = data[0].penguji1;
-                              document.getElementById("ujian_tutup_penguji2").value = data[0].penguji2;
+                              if (data[0] != undefined) {
+                                if (data[0].nim != null) {
+                                  if (data[0].hasil == 1) {
+                                    document.getElementById("ujian_tutup_nim_tidak_ada").innerText = "";
+                                    document.getElementById("ujian_tutup_nama").value = data[0].nama;
+                                    document.getElementById("ujian_tutup_pembimbing1").value = data[0].pembimbing1;
+                                    document.getElementById("ujian_tutup_pembimbing2").value = data[0].pembimbing2;
+                                    document.getElementById("ujian_tutup_penguji1").value = data[0].penguji1;
+                                    document.getElementById("ujian_tutup_penguji2").value = data[0].penguji2;
+                                  } else {
+                                    document.getElementById("ujian_tutup_nim_tidak_ada").innerText = "Mahasiswa dengan NIM " + data[0].nim + " belum melaksanakan Seminar Hasil";
+                                    document.getElementById("ujian_tutup_nama").value = "";
+                                    document.getElementById("ujian_tutup_pembimbing1").value = "";
+                                    document.getElementById("ujian_tutup_pembimbing2").value = "";
+                                    document.getElementById("ujian_tutup_penguji1").value = "";
+                                    document.getElementById("ujian_tutup_penguji2").value = "";
+                                  }
+                                } else {
+                                  document.getElementById("ujian_tutup_nim_tidak_ada").innerText = "Mahasiswa belum melaksanakan seminar proposal";
+                                  document.getElementById("ujian_tutup_nama").value = "";
+                                  document.getElementById("ujian_tutup_pembimbing1").value = "";
+                                  document.getElementById("ujian_tutup_pembimbing2").value = "";
+                                  document.getElementById("ujian_tutup_penguji1").value = "";
+                                  document.getElementById("ujian_tutup_penguji2").value = "";
+                                }
+                              } else {
+                                document.getElementById("ujian_tutup_nim_tidak_ada").innerText = "Data Mahasiswa tidak ditemukan!!!";
+                                document.getElementById("ujian_tutup_nama").value = "";
+                                document.getElementById("ujian_tutup_pembimbing1").value = "";
+                                document.getElementById("ujian_tutup_pembimbing2").value = "";
+                                document.getElementById("ujian_tutup_penguji1").value = "";
+                                document.getElementById("ujian_tutup_penguji2").value = "";
+                              }
                             }
                           })
                         });
@@ -161,20 +190,18 @@
                       <label>Waktu Ujian</label>
                       <select class="form-control select2" name="ujian_tutup_waktu" id="ujian_tutup_waktu" style="width: 100%;" required>
                         <option selected value="" disabled>Waktu Ujian</option>
-                        <option value="09.00 - 10.30 WITA">09.00 - 10.30 WITA</option>
-                        <option value="09.00 - 10.30 WITA">10.30 - 12.00 WITA</option>
-                        <option value="09.00 - 10.30 WITA">13.00 - 14.30 WITA</option>
-                        <option value="09.00 - 10.30 WITA">14.30 - 16.00 WITA</option>
+                        <?php foreach ($datawaktututup as $datawaktu) { ?>
+                          <option value="<?=$datawaktu->waktu_ujian_id;?>"><?=$datawaktu->waktu_mulai;?> - <?=$datawaktu->waktu_selesai;?> WITA</option>
+                        <?php } ?>
                       </select>
                     </div>
                     <div class="form-group">
                       <label>Tempat Ujian</label>
                       <select class="form-control select2" name="ujian_tutup_tempat" id="ujian_tutup_tempat" style="width: 100%;" required>
                         <option selected value="" disabled>Tempat Ujian</option>
-                        <option value="Meeting Room Lab. Ubicon">Meeting Room Lab. Ubicon</option>
-                        <option value="Meeting Room Lab. Ubicon">Meeting Room Lab. Ubicon</option>
-                        <option value="Meeting Room Lab. Ubicon">Meeting Room Lab. Ubicon</option>
-                        <option value="Meeting Room Lab. Ubicon">Meeting Room Lab. Ubicon</option>
+                        <?php foreach ($datatempattutup as $datatempat) { ?>
+                          <option value="<?=$datatempat->tempat_ujian_nama;?>"><?=$datatempat->tempat_ujian_nama;?></option>
+                        <?php } ?>
                       </select>
                     </div>
                   </div>
@@ -203,59 +230,49 @@
                     <div class="box-body box-profile">
                       <img class="profile-user-img img-responsive img-circle" src="<?=base_url('assets/')?>dist/img/avatar5.png" alt="User profile picture">
 
-                      <h3 class="profile-username text-center">Abdillah Satari Rahim</h3>
+                      <h3 class="profile-username text-center" id="tutup_detail_nama"></h3>
 
-                      <p class="text-muted text-center">D42114516</p>
-
-                      <!-- <ul class="list-group list-group-bordered">
-                          <li class="list-group-item">
-                            <span class="col-md-6">
-                              <b>Departemen Teknik Informatika</b>
-                            </span>
-                            <span class="col-md-6">
-                                <b> Dosen Pembimbing 1
-                                <span class="pull-right-container">
-                                  <small class="label pull-right bg-green">Confirmed</small>
-                                </span>
-                              </b>
-                            </span>
-                          </li>
-                      </ul> -->
+                      <p class="text-muted text-center" id="tutup_detail_nim"></p>
 
                       <div class="box">
                         <div class="box-body">
                           <div class="col-md-6">
-                            <p >Departemen Teknik Informatika</p>
-                            <p >S1</p>
-                            <p >Implementasi Progressive Web App (PWA) Menggunakan Framework Angular Dalam Membangun Sistem Monitoring Energy Listrik</p>
-                            <p>17/10/2019</p>
+                            <p id="tutup_detail_departemen"></p>
+                            <p id="tutup_detail_strata"></p>
+                            <p id="tutup_detail_judul"></p>
+                            <p id="tutup_detail_tanggal"></p>
                           </div>
                           <div class="col-md-6">
                             <p> Dosen Pembimbing 1
                               <span class="pull-right-container">
-                                <small class="label pull-right bg-green">Confirmed</small>
+                                <small id="tutup_detail_pembimbing1_status" class="label pull-right bg-green"></small>
                               </span>
                             </p>
                             <p> Dosen Pembimbing 2
                               <span class="pull-right-container">
-                                <small class="label pull-right bg-green">Confirmed</small>
+                                <small id="tutup_detail_pembimbing2_status" class="label pull-right bg-green"></small>
                               </span>
                             </p>
                             <p> Dosen Penguji 1
                               <span class="pull-right-container">
-                                <small class="label pull-right bg-yellow">Confirmed</small>
+                                <small id="tutup_detail_penguji1_status" class="label pull-right bg-yellow"></small>
                               </span>
                             </p>
                             <p> Dosen Penguji 2
                               <span class="pull-right-container">
-                                <small class="label pull-right bg-red">Confirmed</small>
+                                <small id="tutup_detail_penguji2_status" class="label pull-right bg-red"></small>
                               </span>
                             </p>
                           </div>
                         </div>
                       </div>
 
-                      <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
+                      <p> Status Ujian Tutup
+                        <span class="pull-right-container">
+                          <small id="tutup_detail_status" class="label bg-blue"></small>
+                        </span>
+                      </p>
+
                     </div>
                     <!-- /.box-body -->
                   </div>
@@ -263,13 +280,127 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                  <!-- <button type="button" class="btn btn-primary">Tambahkan</button> -->
                 </div>
               </div>
               <!-- /.modal-content -->
             </div>
+
+            <script type="text/javascript">
+              $(document).on("click", "#tutup_detail", function(){
+                var id = $(this).attr('data-id')
+                $.ajax({
+                  url     : "<?=base_url();?>/Kps/data_tutup",
+                  method  : "POST",
+                  dataType: "JSON",
+                  data    : { id: id },
+                  success : function(data){
+                    document.getElementById("tutup_detail_nama").innerText = data[0].nama;
+                    document.getElementById("tutup_detail_nim").innerText = data[0].nim;
+                    document.getElementById("tutup_detail_departemen").innerText = 'Departemen ' + data[0].departemen;
+                    document.getElementById("tutup_detail_strata").innerText = data[0].strata;
+                    document.getElementById("tutup_detail_judul").innerText = data[0].judul;
+                    document.getElementById("tutup_detail_tanggal").innerText = data[0].seminar_tanggal;
+                    document.getElementById("tutup_detail_status").innerText = data[0].seminar_status;
+                    console.log(data[0].seminar_pembimbing1_status);
+                    if (data[0].seminar_pembimbing1_status == 'menunggu') {
+                      document.getElementById("tutup_detail_pembimbing1_status").className = "label pull-right bg-yellow";
+                      document.getElementById("tutup_detail_pembimbing1_status").innerText = "Menunggu";
+                    } else if (data[0].seminar_pembimbing1_status == 'diterima') {
+                      document.getElementById("tutup_detail_pembimbing1_status").className = "label pull-right bg-green";
+                      document.getElementById("tutup_detail_pembimbing1_status").innerText = "Diterima";
+                    } else if (data[0].seminar_pembimbing1_status == 'ditolak') {
+                      document.getElementById("tutup_detail_pembimbing1_status").className = "label pull-right bg-red";
+                      document.getElementById("tutup_detail_pembimbing1_status").innerText = "Ditolak";
+                    } else {
+                      document.getElementById("tutup_detail_pembimbing1_status").className = "label pull-right bg-yellow";
+                      document.getElementById("tutup_detail_pembimbing1_status").innerText = "Menunggu";
+                    }
+
+                    if (data[0].seminar_pembimbing2_status == 'menunggu') {
+                      document.getElementById("tutup_detail_pembimbing2_status").className = "label pull-right bg-yellow";
+                      document.getElementById("tutup_detail_pembimbing2_status").innerText = "Menunggu";
+                    } else if (data[0].seminar_pembimbing2_status == 'diterima') {
+                      document.getElementById("tutup_detail_pembimbing2_status").className = "label pull-right bg-green";
+                      document.getElementById("tutup_detail_pembimbing2_status").innerText = "Diterima";
+                    } else if (data[0].seminar_pembimbing2_status == 'ditolak') {
+                      document.getElementById("tutup_detail_pembimbing2_status").className = "label pull-right bg-red";
+                      document.getElementById("tutup_detail_pembimbing2_status").innerText = "Ditolak";
+                    } else {
+                      document.getElementById("tutup_detail_pembimbing2_status").className = "label pull-right bg-yellow";
+                      document.getElementById("tutup_detail_pembimbing2_status").innerText = "Menunggu";
+                    }
+
+                    if (data[0].seminar_penguji1_status == 'menunggu') {
+                      document.getElementById("tutup_detail_penguji1_status").className = "label pull-right bg-yellow";
+                      document.getElementById("tutup_detail_penguji1_status").innerText = "Menunggu";
+                    } else if (data[0].seminar_pembimbing1_status == 'diterima') {
+                      document.getElementById("tutup_detail_penguji1_status").className = "label pull-right bg-green";
+                      document.getElementById("tutup_detail_penguji1_status").innerText = "Diterima";
+                    } else if (data[0].seminar_penguji1_status == 'ditolak') {
+                      document.getElementById("tutup_detail_penguji1_status").className = "label pull-right bg-red";
+                      document.getElementById("tutup_detail_penguji1_status").innerText = "Ditolak";
+                    } else {
+                      document.getElementById("tutup_detail_penguji1_status").className = "label pull-right bg-yellow";
+                      document.getElementById("tutup_detail_penguji1_status").innerText = "Menunggu";
+                    }
+
+                    if (data[0].seminar_penguji2_status == 'menunggu') {
+                      document.getElementById("tutup_detail_penguji2_status").className = "label pull-right bg-yellow";
+                      document.getElementById("tutup_detail_penguji2_status").innerText = "Menunggu";
+                    } else if (data[0].seminar_pembimbing2_status == 'diterima') {
+                      document.getElementById("tutup_detail_penguji2_status").className = "label pull-right bg-green";
+                      document.getElementById("tutup_detail_penguji2_status").innerText = "Diterima";
+                    } else if (data[0].seminar_penguji2_status == 'ditolak') {
+                      document.getElementById("tutup_detail_penguji2_status").className = "label pull-right bg-red";
+                      document.getElementById("tutup_detail_penguji2_status").innerText = "Ditolak";
+                    } else {
+                      document.getElementById("tutup_detail_penguji2_status").className = "label pull-right bg-yellow";
+                      document.getElementById("tutup_detail_penguji2_status").innerText = "Menunggu";
+                    }
+                  }
+                })
+              })
+            </script>
+
             <!-- /.modal-dialog -->
           </div>
+
+          <div class="modal modal-danger fade" id="modal-tutup-hapus">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 id="ket_hapus_tutup"></h4>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak, Kembali</button>
+                <a href="#" id="button_hapus_tutup">
+                  <button type="button" class="btn btn-outline">Ya, Hapus</button>
+                </a>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+
+          <script type="text/javascript">
+            $(document).on("click", "#tutup_hapus", function(){
+              var id = $(this).attr('data-id')
+              $.ajax({
+                url: "<?=base_url();?>/Kps/data_tutup",
+                method: "POST",
+                dataType: "JSON",
+                data: { id: id},
+                success: function(data){
+                  console.log(data[0])
+                  document.getElementById("ket_hapus_tutup").innerText='Anda akan menghapus data seminar yang diajukan oleh mahasiswa '+data[0].nama+' ?';
+                  document.getElementById("button_hapus_tutup").href='<?=base_url();?>/Kps/hapus_tutup/'+data[0].seminar_id;
+                }
+              })
+            })
+          </script>
+
           <!-- /.modal -->
         </div>
         <!-- /.box -->

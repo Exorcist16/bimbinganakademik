@@ -38,8 +38,9 @@ class Kps extends CI_Controller {
 	}
 
 	public function get_nama(){
+		$sessiondepartemen = $this->session->userdata('departemen');
 		$nim = $this->input->post('nim');
-		$data = $this->Kps_model->get_nama($nim);
+		$data = $this->Kps_model->get_nama($nim, $sessiondepartemen);
 		echo json_encode($data);
 	}
 
@@ -71,6 +72,11 @@ class Kps extends CI_Controller {
 			'penguji2'		=> $this->input->post('penelitian_penguji2_edit')
 		);
 
+		$datajudul = array(
+			'seminar_status'	=> 'rejected'
+		);
+
+		$this->crud->u('seminar', $datajudul, array('seminar_nim' => $id));
 		$this->crud->u('judul', $data, array('nim' => $id));
 		redirect('kps/daftarJudul');
 	}
@@ -79,6 +85,22 @@ class Kps extends CI_Controller {
 		$id = $this->uri->segment(3);
 		$this->crud->d('judul', array('nim' => $id));
 		redirect('kps/daftarJudul');
+	}
+
+	public function get_jumlah_bimbing(){
+		$nama = $this->input->post('nama');
+		$data = $this->db->query("SELECT COUNT(*)
+						AS pembimbing FROM `judul` WHERE pembimbing1 = '$nama'
+						OR pembimbing2 = '$nama'")->result();
+		echo json_encode($data);
+	}
+
+	public function get_jumlah_uji(){
+		$nama = $this->input->post('nama');
+		$data = $this->db->query("SELECT COUNT(*)
+						AS penguji FROM `judul` WHERE penguji1 = '$nama'
+						OR penguji2 = '$nama'")->result();
+		echo json_encode($data);
 	}
 // ------------------------------------------------------------------------------------------------
 	public function seminarHasil(){
@@ -99,11 +121,20 @@ class Kps extends CI_Controller {
 		$nim = $this->input->post('ujian_hasil_nim');
 
 		$data = array(
-			'seminar_nim'			=> $nim,
-			'seminar_tanggal'	=> $this->input->post('ujian_hasil_tanggal'),
-			'seminar_waktu'		=> $this->input->post('ujian_hasil_waktu'),
-			'seminar_tempat'	=> $this->input->post('ujian_hasil_tempat'),
-			'seminar_jenis'		=> 'seminar hasil'
+			'seminar_nim'								=> $nim,
+			'seminar_tanggal'						=> $this->input->post('ujian_hasil_tanggal'),
+			'seminar_waktu'							=> $this->input->post('ujian_hasil_waktu'),
+			'seminar_tempat'						=> $this->input->post('ujian_hasil_tempat'),
+			'seminar_pembimbing1_nama'	=> $this->input->post('ujian_hasil_pembimbing1'),
+			'seminar_pembimbing1_status'=> 'menunggu',
+			'seminar_pembimbing2_nama'	=> $this->input->post('ujian_hasil_pembimbing2'),
+			'seminar_pembimbing2_status'=> 'menunggu',
+			'seminar_penguji1_nama'			=> $this->input->post('ujian_hasil_penguji1'),
+			'seminar_penguji1_status'		=> 'menunggu',
+			'seminar_penguji2_nama'			=> $this->input->post('ujian_hasil_penguji2'),
+			'seminar_penguji2_status'		=> 'menunggu',
+			'seminar_jenis'							=> 'seminar hasil',
+			'seminar_status'						=> 'aktif'
 		);
 
 		$datastatusujian = array(
@@ -133,29 +164,47 @@ class Kps extends CI_Controller {
 	}
 
 	public function data_seminar(){
+		$sessiondepartemen = $this->session->userdata('departemen');
 		$id = $this->input->post('id');
-		$data = $this->db->query("SELECT * FROM seminar LEFT JOIN mahasiswa ON seminar.seminar_nim=mahasiswa.nim
-		WHERE seminar.seminar_id = '$id'")->result();
+		$data = $this->db->query("SELECT * FROM (seminar LEFT JOIN mahasiswa
+			ON seminar.seminar_nim=mahasiswa.nim)
+			LEFT JOIN judul ON mahasiswa.nim=judul.nim
+			WHERE seminar.seminar_id = '$id'")->result();
 		echo json_encode($data);
 	}
 // ------------------------------------------------------------------------------------------------
 	public function ujianSkripsi(){
 		$sessiondepartemen = $this->session->userdata('departemen');
 		$datatampiltutup = $this->Kps_model->tampil_data_seminar_tutup($sessiondepartemen);
+
+		$datawaktututup = $this->crud->gw('waktu_ujian', array('waktu_departemen' => $sessiondepartemen));
+		$datatempattutup = $this->crud->gw('tempat_ujian', array('tempat_ujian_departemen' => $sessiondepartemen));
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/ujian_skripsi',
-										'datatampiltutup'	=> $datatampiltutup
+										'datatampiltutup'		=> $datatampiltutup,
+										'datawaktututup'		=> $datawaktututup,
+										'datatempattutup'		=> $datatempattutup
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
+
 	public function tambah_seminar_tutup(){
 		$nim = $this->input->post('ujian_tutup_nim');
 		$data = array(
-			'seminar_nim'			=> $nim,
-			'seminar_tanggal'	=> $this->input->post('ujian_tutup_tanggal'),
-			'seminar_waktu'		=> $this->input->post('ujian_tutup_waktu'),
-			'seminar_tempat'	=> $this->input->post('ujian_tutup_tempat'),
-			'seminar_jenis'		=> 'seminar tutup'
+			'seminar_nim'								=> $nim,
+			'seminar_tanggal'						=> $this->input->post('ujian_tutup_tanggal'),
+			'seminar_waktu'							=> $this->input->post('ujian_tutup_waktu'),
+			'seminar_tempat'						=> $this->input->post('ujian_tutup_tempat'),
+			'seminar_pembimbing1_nama'	=> $this->input->post('ujian_tutup_pembimbing1'),
+			'seminar_pembimbing1_status'=> 'menunggu',
+			'seminar_pembimbing2_nama'	=> $this->input->post('ujian_tutup_pembimbing2'),
+			'seminar_pembimbing2_status'=> 'menunggu',
+			'seminar_penguji1_nama'			=> $this->input->post('ujian_tutup_penguji1'),
+			'seminar_penguji1_status'		=> 'menunggu',
+			'seminar_penguji2_nama'			=> $this->input->post('ujian_tutup_penguji2'),
+			'seminar_penguji2_status'		=> 'menunggu',
+			'seminar_jenis'							=> 'seminar tutup',
+			'seminar_status'						=> 'aktif'
 		);
 
 		$datastatusujiantutup = array(
@@ -165,21 +214,125 @@ class Kps extends CI_Controller {
 		$this->crud->u('mahasiswa', $datastatusujiantutup, array('nim' => $nim));
 		redirect('kps/ujianSkripsi');
 	}
+
+	public function hapus_tutup(){
+		$id = $this->uri->segment(3);
+
+		$nim = $this->db->query("SELECT seminar_nim FROM seminar WHERE seminar_id = '$id'")->result();
+		foreach ($nim as $nim) {
+			$nima = $nim->seminar_nim;
+		}
+
+		$data = array(
+			'request_tutup' => '0'
+		);
+
+		$this->crud->u('mahasiswa', $data, array('nim' => $nima));
+		$this->crud->d('seminar', array('seminar_id' => $id));
+		redirect('kps/ujianSkripsi');
+	}
+
+	public function data_tutup(){
+		$id = $this->input->post('id');
+		$data = $this->db->query("SELECT * FROM (seminar LEFT JOIN mahasiswa
+			ON seminar.seminar_nim=mahasiswa.nim)
+			LEFT JOIN judul ON mahasiswa.nim=judul.nim
+			WHERE seminar.seminar_id = '$id'")->result();
+		echo json_encode($data);
+	}
 // ------------------------------------------------------------------------------------------------
 	public function persetujuanJadwalHasil(){
+		$sessiondepartemen = $this->session->userdata('departemen');
+		$datakonfirmasihasil = $this->Kps_model->tampil_data_konfirmasi_hasil($sessiondepartemen);
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/persetujuan_jadwal_hasil',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+										'konfirmasihasil'		=> $datakonfirmasihasil
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
+
+	public function hasil_selesai(){
+		$id = $this->uri->segment(3);
+		$nim = $this->uri->segment(4);
+		$datamahasiswa = array(
+			'hasil'		=> '1'
+		);
+		$dataseminar = array(
+			'seminar_status'	=> 'selesai'
+		);
+
+		$this->crud->u('mahasiswa', $datamahasiswa, array('nim' => $nim));
+		$this->crud->u('seminar', $dataseminar, array('seminar_id' => $id));
+		redirect('kps/persetujuanJadwalHasil');
+	}
+
+	public function hasil_batal(){
+		$id = $this->uri->segment(3);
+		$nim = $this->uri->segment(4);
+		$datamahasiswa = array(
+			'request_hasil'		=> '0'
+		);
+		$dataseminar = array(
+			'seminar_status'	=> 'rejected'
+		);
+
+		$this->crud->u('mahasiswa', $datamahasiswa, array('nim' => $nim));
+		$this->crud->u('seminar', $dataseminar, array('seminar_id' => $id));
+		redirect('kps/persetujuanJadwalHasil');
+	}
+
+	public function data_hasil(){
+		$id = $this->input->post('id');
+		$data = $this->db->query("SELECT * FROM mahasiswa JOIN seminar
+		ON mahasiswa.nim=seminar.seminar_nim WHERE seminar.seminar_id = '$id'")->result();
+		echo json_encode($data);
+	}
 // ------------------------------------------------------------------------------------------------
 	public function persetujuanJadwalTutup(){
+		$sessiondepartemen = $this->session->userdata('departemen');
+		$datakonfirmasitutup = $this->Kps_model->tampil_data_konfirmasi_tutup($sessiondepartemen);
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/persetujuan_jadwal_tutup',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+										'konfirmasitutup'		=> $datakonfirmasitutup
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
+	public function tutup_selesai(){
+		$id = $this->uri->segment(3);
+		$nim = $this->uri->segment(4);
+		$datamahasiswa = array(
+			'alumni'		=> '1'
+		);
+		$dataseminar = array(
+			'seminar_status'	=> 'selesai'
+		);
+
+		$this->crud->u('mahasiswa', $datamahasiswa, array('nim' => $nim));
+		$this->crud->u('seminar', $dataseminar, array('seminar_id' => $id));
+		redirect('kps/persetujuanJadwalTutup');
+	}
+
+	public function tutup_batal(){
+		$id = $this->uri->segment(3);
+		$nim = $this->uri->segment(4);
+		$datamahasiswa = array(
+			'request_tutup'		=> '0'
+		);
+		$dataseminar = array(
+			'seminar_status'	=> 'rejected'
+		);
+
+		$this->crud->u('mahasiswa', $datamahasiswa, array('nim' => $nim));
+		$this->crud->u('seminar', $dataseminar, array('seminar_id' => $id));
+		redirect('kps/persetujuanJadwalTutup');
+	}
+
+	public function data_konfirmasi_tutup(){
+		$id = $this->input->post('id');
+		$data = $this->db->query("SELECT * FROM mahasiswa JOIN seminar
+		ON mahasiswa.nim=seminar.seminar_nim WHERE seminar.seminar_id = '$id'")->result();
+		echo json_encode($data);
 	}
 // ------------------------------------------------------------------------------------------------
 	public function daftarMahasiswa(){

@@ -41,7 +41,7 @@
             </div>
             <br>
             <div class="media-scroll">
-              <table id="example2" class="table table-bordered table-striped" style="width:100%;">
+              <table id="example1" class="table table-bordered table-striped" style="width:100%;">
                 <thead>
                   <tr>
                     <th>Nim</th>
@@ -49,6 +49,7 @@
                     <th>Judul Penelitian</th>
                     <th>Dosen Menyetujui</th>
                     <th>Tgl Ujian</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -65,11 +66,10 @@
                         </div>
                       </div>
                     </td>
+                    <td><?=$datatampilseminar->seminar_tanggal;?></td>
+                    <td><?=$datatampilseminar->seminar_status;?></td>
                     <td>
-                      <?=$datatampilseminar->seminar_tanggal;?>
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default" id="seminar_detail" data-id="<?=$datatampilseminar->seminar_id;?>"><i class="fa fa-fw  fa-ellipsis-h"></i></button>
                       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-seminar-hapus" id="seminar_hapus" data-id="<?=$datatampilseminar->seminar_id;?>"><i class="fa fa-fw fa-remove"></i></button>
                     </td>
                   </tr>
@@ -92,6 +92,7 @@
                     <div class="form-group">
                       <label>NIM</label>
                       <input type="text" class="form-control" name="ujian_hasil_nim" id="ujian_hasil_nim" style="width: 100%;" placeholder="Nim Mahasiswa" required>
+                      <h6 id="ujian_hasil_nim_tidak_ada" class="help-block text-red"></h6>
                     </div>
                     <div class="form-group">
                       <label>Nama Mahasiswa</label>
@@ -175,11 +176,31 @@
                       nim: nim
                     },
                     success: function(data) {
-                      document.getElementById("ujian_hasil_nama").value = data[0].nama;
-                      document.getElementById("ujian_hasil_pembimbing1").value = data[0].pembimbing1;
-                      document.getElementById("ujian_hasil_pembimbing2").value = data[0].pembimbing2;
-                      document.getElementById("ujian_hasil_penguji1").value = data[0].penguji1;
-                      document.getElementById("ujian_hasil_penguji2").value = data[0].penguji2;
+                      if (data[0] != undefined) {
+                        if (data[0].nim != null) {
+                          document.getElementById("ujian_hasil_nim_tidak_ada").innerText = "";
+                          document.getElementById("ujian_hasil_nama").value = data[0].nama;
+                          document.getElementById("ujian_hasil_pembimbing1").value = data[0].pembimbing1;
+                          document.getElementById("ujian_hasil_pembimbing2").value = data[0].pembimbing2;
+                          document.getElementById("ujian_hasil_penguji1").value = data[0].penguji1;
+                          document.getElementById("ujian_hasil_penguji2").value = data[0].penguji2;
+                        } else {
+                          document.getElementById("ujian_hasil_nim_tidak_ada").innerText = "Mahasiswa tersebut belum melaksanakan seminar proposal";
+                          document.getElementById("ujian_hasil_nama").value = "";
+                          document.getElementById("ujian_hasil_pembimbing1").value = "";
+                          document.getElementById("ujian_hasil_pembimbing2").value = "";
+                          document.getElementById("ujian_hasil_penguji1").value = "";
+                          document.getElementById("ujian_hasil_penguji2").value = "";
+                        }
+                      } else {
+                        document.getElementById("ujian_hasil_nim_tidak_ada").innerText = "Data mahasiswa tidak ditemukan!!!";
+                        document.getElementById("ujian_hasil_nama").value = "";
+                        document.getElementById("ujian_hasil_pembimbing1").value = "";
+                        document.getElementById("ujian_hasil_pembimbing2").value = "";
+                        document.getElementById("ujian_hasil_penguji1").value = "";
+                        document.getElementById("ujian_hasil_penguji2").value = "";
+                      }
+
 
                     }
                   })
@@ -204,60 +225,49 @@
                     <div class="box-body box-profile">
                       <img class="profile-user-img img-responsive img-circle" src="<?=base_url('assets/')?>dist/img/avatar5.png" alt="User profile picture">
 
-                      <h3 class="profile-username text-center">Abdillah Satari Rahim</h3>
+                      <h3 class="profile-username text-center" id="seminar_detail_nama"></h3>
 
-                      <p class="text-muted text-center">D42114516</p>
-
-                      <!-- <ul class="list-group list-group-bordered">
-                          <li class="list-group-item">
-                            <span class="col-md-6">
-                              <b>Departemen Teknik Informatika</b>
-                            </span>
-                            <span class="col-md-6">
-                                <b> Dosen Pembimbing 1
-                                <span class="pull-right-container">
-                                  <small class="label pull-right bg-green">Confirmed</small>
-                                </span>
-                              </b>
-                            </span>
-                          </li>
-                      </ul> -->
+                      <p class="text-muted text-center" id="seminar_detail_nim"></p>
 
                       <div class="box">
                         <div class="box-body">
                           <div class="col-md-6">
-                            <p >Departemen Teknik Informatika</p>
-                            <p >S1</p>
-                            <p >Implementasi Progressive Web App (PWA) Menggunakan Framework Angular Dalam Membangun Sistem Monitoring Energy Listrik</p>
-                            <p>17/10/2019</p>
+                            <p id="seminar_detail_departemen"></p>
+                            <p id="seminar_detail_strata"></p>
+                            <p id="seminar_detail_judul"></p>
+                            <p id="seminar_detail_tanggal"></p>
                           </div>
                           <div class="col-md-6">
                             <p> Dosen Pembimbing 1
                               <span class="pull-right-container">
-                                <small class="label pull-right bg-green">Confirmed</small>
+                                <small id="seminar_detail_pembimbing1_status" class="label pull-right bg-green">Confirmed</small>
                               </span>
                             </p>
                             <p> Dosen Pembimbing 2
                               <span class="pull-right-container">
-                                <small class="label pull-right bg-green">Confirmed</small>
+                                <small id="seminar_detail_pembimbing2_status" class="label pull-right bg-green">Confirmed</small>
                               </span>
                             </p>
                             <p> Dosen Penguji 1
                               <span class="pull-right-container">
-                                <small class="label pull-right bg-yellow">Waiting</small>
+                                <small id="seminar_detail_penguji1_status" class="label pull-right bg-yellow">Waiting</small>
                               </span>
                             </p>
                             <p> Dosen Penguji 2
                               <span class="pull-right-container">
-                                <small class="label pull-right bg-red">Rejected</small>
+                                <small id="seminar_detail_penguji2_status" class="label pull-right bg-red">Rejected</small>
                               </span>
                             </p>
                           </div>
-                        </div>
-                      </div>
+                        </div></div>
 
-                      <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
-                    </div>
+                        <p> Status
+                          <span class="pull-right-container">
+                            <small id="seminar_detail_status" class="label bg-blue"></small>
+                          </span>
+                        </p>
+
+                      </div>
                     <!-- /.box-body -->
                   </div>
                   <!-- /.box -->
@@ -269,6 +279,85 @@
               </div>
               <!-- /.modal-content -->
             </div>
+
+            <script type="text/javascript">
+              $(document).on("click", "#seminar_detail", function(){
+                var id = $(this).attr('data-id')
+                $.ajax({
+                  url: "<?=base_url();?>/Kps/data_seminar",
+                  method: "POST",
+                  dataType: "JSON",
+                  data: {
+                    id: id
+                  },
+                  success: function(data){
+                    document.getElementById("seminar_detail_nama").innerText = data[0].nama;
+                    document.getElementById("seminar_detail_nim").innerText = data[0].nim;
+                    document.getElementById("seminar_detail_departemen").innerText = 'Departemen ' + data[0].departemen;
+                    document.getElementById("seminar_detail_strata").innerText = data[0].strata;
+                    document.getElementById("seminar_detail_judul").innerText = data[0].judul;
+                    document.getElementById("seminar_detail_tanggal").innerText = data[0].seminar_tanggal;
+                    document.getElementById("seminar_detail_status").innerText = data[0].seminar_status;
+                    if (data[0].seminar_pembimbing1_status == 'menunggu') {
+                      document.getElementById("seminar_detail_pembimbing1_status").className = "label pull-right bg-yellow";
+                      document.getElementById("seminar_detail_pembimbing1_status").innerText = "Menunggu";
+                    } else if (data[0].seminar_pembimbing1_status == 'diterima') {
+                      document.getElementById("seminar_detail_pembimbing1_status").className = "label pull-right bg-green";
+                      document.getElementById("seminar_detail_pembimbing1_status").innerText = "Diterima";
+                    } else if (data[0].seminar_pembimbing1_status == 'ditolak') {
+                      document.getElementById("seminar_detail_pembimbing1_status").className = "label pull-right bg-red";
+                      document.getElementById("seminar_detail_pembimbing1_status").innerText = "Ditolak";
+                    } else {
+                      document.getElementById("seminar_detail_pembimbing1_status").className = "label pull-right bg-yellow";
+                      document.getElementById("seminar_detail_pembimbing1_status").innerText = "Menunggu";
+                    }
+
+                    if (data[0].seminar_pembimbing2_status == 'menunggu') {
+                      document.getElementById("seminar_detail_pembimbing2_status").className = "label pull-right bg-yellow";
+                      document.getElementById("seminar_detail_pembimbing2_status").innerText = "Menunggu";
+                    } else if (data[0].seminar_pembimbing2_status == 'diterima') {
+                      document.getElementById("seminar_detail_pembimbing2_status").className = "label pull-right bg-green";
+                      document.getElementById("seminar_detail_pembimbing2_status").innerText = "Diterima";
+                    } else if (data[0].seminar_pembimbing2_status == 'ditolak') {
+                      document.getElementById("seminar_detail_pembimbing2_status").className = "label pull-right bg-red";
+                      document.getElementById("seminar_detail_pembimbing2_status").innerText = "Ditolak";
+                    } else {
+                      document.getElementById("seminar_detail_pembimbing2_status").className = "label pull-right bg-yellow";
+                      document.getElementById("seminar_detail_pembimbing2_status").innerText = "Menunggu";
+                    }
+
+                    if (data[0].seminar_penguji1_status == 'menunggu') {
+                      document.getElementById("seminar_detail_penguji1_status").className = "label pull-right bg-yellow";
+                      document.getElementById("seminar_detail_penguji1_status").innerText = "Menunggu";
+                    } else if (data[0].seminar_pembimbing1_status == 'diterima') {
+                      document.getElementById("seminar_detail_penguji1_status").className = "label pull-right bg-green";
+                      document.getElementById("seminar_detail_penguji1_status").innerText = "Diterima";
+                    } else if (data[0].seminar_penguji1_status == 'ditolak') {
+                      document.getElementById("seminar_detail_penguji1_status").className = "label pull-right bg-red";
+                      document.getElementById("seminar_detail_penguji1_status").innerText = "Ditolak";
+                    } else {
+                      document.getElementById("seminar_detail_penguji1_status").className = "label pull-right bg-yellow";
+                      document.getElementById("seminar_detail_penguji1_status").innerText = "Menunggu";
+                    }
+
+                    if (data[0].seminar_penguji2_status == 'menunggu') {
+                      document.getElementById("seminar_detail_penguji2_status").className = "label pull-right bg-yellow";
+                      document.getElementById("seminar_detail_penguji2_status").innerText = "Menunggu";
+                    } else if (data[0].seminar_pembimbing2_status == 'diterima') {
+                      document.getElementById("seminar_detail_penguji2_status").className = "label pull-right bg-green";
+                      document.getElementById("seminar_detail_penguji2_status").innerText = "Diterima";
+                    } else if (data[0].seminar_penguji2_status == 'ditolak') {
+                      document.getElementById("seminar_detail_penguji2_status").className = "label pull-right bg-red";
+                      document.getElementById("seminar_detail_penguji2_status").innerText = "Ditolak";
+                    } else {
+                      document.getElementById("seminar_detail_penguji2_status").className = "label pull-right bg-yellow";
+                      document.getElementById("seminar_detail_penguji2_status").innerText = "Menunggu";
+                    }
+                  }
+                })
+              })
+            </script>
+
             <!-- /.modal-dialog -->
           </div>
 

@@ -23,15 +23,17 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            
+
             <div class="row">
-        
+
               <!-- ./col -->
               <div class="col-lg-6 col-xs-6">
                 <!-- small box -->
                 <div class="small-box bg-green">
                   <div class="inner">
-                    <h3>53</h3>
+                    <h3><?php foreach ($bimbingan as $bimbingan) { ?>
+                      <?=$bimbingan->bimbingan;?>
+                    <?php } ?></h3>
 
                     <p>Jumlah Mahasiswa Bimbingan</p>
                   </div>
@@ -42,12 +44,16 @@
                 </div>
               </div>
               <!-- ./col -->
-              
+
               <div class="col-lg-6 col-xs-6">
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                   <div class="inner">
-                    <h3>44</h3>
+                    <h3>
+                      <?php foreach ($uji as $uji) { ?>
+                        <?=$uji->uji;?>
+                      <?php } ?>
+                    </h3>
 
                     <p>Jumlah Mahasiswa Pengujian</p>
                   </div>

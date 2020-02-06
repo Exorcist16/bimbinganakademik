@@ -79,6 +79,7 @@
 		  $(function () {
 		    $('#example1').DataTable({
 					'responsive'  : true,
+					'ordering'    : false,
 				})
 		    $('#example2').DataTable({
 					'responsive'  : true,

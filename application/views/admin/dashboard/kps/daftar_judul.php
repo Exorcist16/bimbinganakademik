@@ -76,6 +76,7 @@
                     <div class="form-group">
                       <label>NIM</label>
                       <input type="text" class="form-control" name="penelitian_nim" id="penelitian_nim" placeholder="Nim Mahasiswa" required>
+                      <h6 class="help-block text-red" id="status_nama"></h6>
                     </div>
                     <div class="form-group">
                       <label>Nama Mahasiswa</label>
@@ -95,7 +96,19 @@
                               nim: nim
                             },
                             success: function(data) {
-                              document.getElementById("penelitian_nama").value = data[0].nama;
+                              if (data[0] != undefined) {
+                                if (data[0].nim != null) {
+                                  document.getElementById("penelitian_nim").value = "";
+                                  document.getElementById("penelitian_nama").value = "";
+                                  document.getElementById("status_nama").innerText = "Mahasiswa sudah memiliki judul. Edit untuk mengubah judul.";
+                                } else {
+                                  document.getElementById("penelitian_nama").value = data[0].nama;
+                                  document.getElementById("status_nama").innerText = "";
+                                }
+                              } else {
+                                document.getElementById("penelitian_nama").value = "";
+                                document.getElementById("status_nama").innerText = "Data Mahasiswa tidak ditemukan!!!";
+                              }
                             }
                           })
                         });
@@ -114,8 +127,27 @@
                         <option><?=$pembimbing1->nama_dosen; ?></option>
                         <?php } ?>
                       </select>
-                      <h6 class="help-block text-red">Mahasiswa bimbingan saat ini : <span name="penelitian_total_bimbingan1">20</span></h6>
+                      <h6 class="help-block text-red">Mahasiswa bimbingan saat ini : <span id="penelitian_total_bimbingan1" name="penelitian_total_bimbingan1">0</span></h6>
                     </div>
+                    <script type="text/javascript">
+                      $(document).ready(function(){
+                        $("#penelitian_pembimbing1").change(function(){
+                          var nama = $(this).val();
+                          $.ajax({
+                            url: "<?=base_url();?>/Kps/get_jumlah_bimbing",
+                            method: "POST",
+                            dataType: "JSON",
+                            data: {
+                              nama: nama
+                            },
+                            success: function(data) {
+                              document.getElementById("penelitian_total_bimbingan1").innerText = data[0].pembimbing;
+                            }
+                          })
+                        });
+                      });
+                    </script>
+
                     <div class="form-group">
                       <label>Pembimbing II</label>
                       <select class="form-control select2" name="penelitian_pembimbing2" id="penelitian_pembimbing2" style="width: 100%;" required>
@@ -124,8 +156,27 @@
                         <option><?=$pembimbing2->nama_dosen; ?></option>
                         <?php } ?>
                       </select>
-                      <h6 class="help-block text-red">Mahasiswa bimbingan saat ini : <span name="penelitian_total_bimbingan2">20</span></h6>
+                      <h6 class="help-block text-red">Mahasiswa bimbingan saat ini : <span id="penelitian_total_bimbingan2" name="penelitian_total_bimbingan2">0</span></h6>
                     </div>
+                    <script type="text/javascript">
+                      $(document).ready(function(){
+                        $("#penelitian_pembimbing2").change(function(){
+                          var nama = $(this).val();
+                          $.ajax({
+                            url: "<?=base_url();?>/Kps/get_jumlah_bimbing",
+                            method: "POST",
+                            dataType: "JSON",
+                            data: {
+                              nama: nama
+                            },
+                            success: function(data) {
+                              document.getElementById("penelitian_total_bimbingan2").innerText = data[0].pembimbing;
+                            }
+                          })
+                        });
+                      });
+                    </script>
+
                     <div class="form-group">
                       <label>Penguji I</label>
                       <select class="form-control select2" name="penelitian_penguji1" id="penelitian_penguji1" style="width: 100%;" required>
@@ -134,8 +185,27 @@
                         <option><?=$penguji1->nama_dosen; ?></option>
                         <?php } ?>
                       </select>
-                      <h6 class="help-block text-red">Mahasiswa diuji saat ini : <span name="penelitian_total_uji1">20</span></h6>
+                      <h6 class="help-block text-red">Mahasiswa diuji saat ini : <span id="penelitian_total_uji1" name="penelitian_total_uji1">0</span></h6>
                     </div>
+                    <script type="text/javascript">
+                      $(document).ready(function(){
+                        $("#penelitian_penguji1").change(function(){
+                          var nama = $(this).val();
+                          $.ajax({
+                            url: "<?=base_url();?>/Kps/get_jumlah_uji",
+                            method: "POST",
+                            dataType: "JSON",
+                            data: {
+                              nama: nama
+                            },
+                            success: function(data) {
+                              document.getElementById("penelitian_total_uji1").innerText = data[0].penguji;
+                            }
+                          })
+                        });
+                      });
+                    </script>
+
                     <div class="form-group">
                       <label>Penguji II</label>
                       <select class="form-control select2" name="penelitian_penguji2" id="penelitian_penguji2" style="width: 100%;" required>
@@ -144,8 +214,27 @@
                         <option><?=$penguji2->nama_dosen; ?></option>
                         <?php } ?>
                       </select>
-                      <h6 class="help-block text-red">Mahasiswa diuji saat ini : <span name="penelitian_total_uji2">20</span></h6>
+                      <h6 class="help-block text-red">Mahasiswa diuji saat ini : <span id="penelitian_total_uji2" name="penelitian_total_uji2">0</span></h6>
                     </div>
+                    <script type="text/javascript">
+                      $(document).ready(function(){
+                        $("#penelitian_penguji2").change(function(){
+                          var nama = $(this).val();
+                          $.ajax({
+                            url: "<?=base_url();?>/Kps/get_jumlah_uji",
+                            method: "POST",
+                            dataType: "JSON",
+                            data: {
+                              nama: nama
+                            },
+                            success: function(data) {
+                              document.getElementById("penelitian_total_uji2").innerText = data[0].penguji;
+                            }
+                          })
+                        });
+                      });
+                    </script>
+
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
@@ -188,7 +277,25 @@
                         <option><?=$pembimbing1->nama_dosen; ?></option>
                         <?php } ?>
                       </select>
-                      <h6 class="help-block text-red">Mahasiswa bimbingan saat ini : <span name="penelitian_total_bimbingan1">20</span></h6>
+                      <h6 class="help-block text-red">Mahasiswa bimbingan saat ini : <span id="penelitian_total_bimbingan1_edit" name="penelitian_total_bimbingan1_edit">0</span></h6>
+                      <script type="text/javascript">
+                        $(document).ready(function(){
+                          $("#penelitian_pembimbing1_edit").change(function(){
+                            var nama = $(this).val();
+                            $.ajax({
+                              url: "<?=base_url();?>/Kps/get_jumlah_bimbing",
+                              method: "POST",
+                              dataType: "JSON",
+                              data: {
+                                nama: nama
+                              },
+                              success: function(data) {
+                                document.getElementById("penelitian_total_bimbingan1_edit").innerText = data[0].pembimbing;
+                              }
+                            })
+                          });
+                        });
+                      </script>
                     </div>
                     <div class="form-group">
                       <label>Pembimbing II</label>
@@ -198,7 +305,25 @@
                         <option><?=$pembimbing2->nama_dosen; ?></option>
                         <?php } ?>
                       </select>
-                      <h6 class="help-block text-red">Mahasiswa bimbingan saat ini : <span name="penelitian_total_bimbingan2">20</span></h6>
+                      <h6 class="help-block text-red">Mahasiswa bimbingan saat ini : <span id="penelitian_total_bimbingan2_edit" name="penelitian_total_bimbingan2">0</span></h6>
+                      <script type="text/javascript">
+                        $(document).ready(function(){
+                          $("#penelitian_pembimbing2_edit").change(function(){
+                            var nama = $(this).val();
+                            $.ajax({
+                              url: "<?=base_url();?>/Kps/get_jumlah_bimbing",
+                              method: "POST",
+                              dataType: "JSON",
+                              data: {
+                                nama: nama
+                              },
+                              success: function(data) {
+                                document.getElementById("penelitian_total_bimbingan2_edit").innerText = data[0].pembimbing;
+                              }
+                            })
+                          });
+                        });
+                      </script>
                     </div>
                     <div class="form-group">
                       <label>Penguji I</label>
@@ -208,7 +333,25 @@
                         <option><?=$penguji1->nama_dosen; ?></option>
                         <?php } ?>
                       </select>
-                      <h6 class="help-block text-red">Mahasiswa diuji saat ini : <span name="penelitian_total_uji1">20</span></h6>
+                      <h6 class="help-block text-red">Mahasiswa diuji saat ini : <span id="penelitian_total_uji1_edit" name="penelitian_total_uji1">0</span></h6>
+                      <script type="text/javascript">
+                        $(document).ready(function(){
+                          $("#penelitian_penguji1_edit").change(function(){
+                            var nama = $(this).val();
+                            $.ajax({
+                              url: "<?=base_url();?>/Kps/get_jumlah_uji",
+                              method: "POST",
+                              dataType: "JSON",
+                              data: {
+                                nama: nama
+                              },
+                              success: function(data) {
+                                document.getElementById("penelitian_total_uji1_edit").innerText = data[0].penguji;
+                              }
+                            })
+                          });
+                        });
+                      </script>
                     </div>
                     <div class="form-group">
                       <label>Penguji II</label>
@@ -218,7 +361,25 @@
                         <option><?=$penguji1->nama_dosen; ?></option>
                         <?php } ?>
                       </select>
-                      <h6 class="help-block text-red">Mahasiswa diuji saat ini : <span name="penelitian_total_uji2">20</span></h6>
+                      <h6 class="help-block text-red">Mahasiswa diuji saat ini : <span id="penelitian_total_uji2_edit" name="penelitian_total_uji2">0</span></h6>
+                      <script type="text/javascript">
+                        $(document).ready(function(){
+                          $("#penelitian_penguji2_edit").change(function(){
+                            var nama = $(this).val();
+                            $.ajax({
+                              url: "<?=base_url();?>/Kps/get_jumlah_uji",
+                              method: "POST",
+                              dataType: "JSON",
+                              data: {
+                                nama: nama
+                              },
+                              success: function(data) {
+                                document.getElementById("penelitian_total_uji2_edit").innerText = data[0].penguji;
+                              }
+                            })
+                          });
+                        });
+                      </script>
                     </div>
                   </div>
                   <div class="modal-footer">
