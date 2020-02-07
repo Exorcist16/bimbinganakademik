@@ -224,7 +224,6 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="<?= ($modul == 'masterDataJurusan' ? 'active' : '') ?>"><a href="<?= base_url() ?>superadmin/masterDataJurusan"><i class="fa fa-circle-o"></i>Jurusan</a></li>
             <li class="<?= ($modul == 'masterDataDepartemen' ? 'active' : '') ?>"><a href="<?= base_url() ?>superadmin/masterDataDepartemen"><i class="fa fa-circle-o"></i>Departemen</a></li>
           </ul>
         </li>

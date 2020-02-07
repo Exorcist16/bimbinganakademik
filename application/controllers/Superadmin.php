@@ -99,47 +99,6 @@ class Superadmin extends CI_Controller {
 	}
 
 // --------------------------------------------------------------------------------
-	// public function masterDataJurusan(){
-	// 	$jurusan = $this->crud->ga('jurusan');
-	// 	$data = array(  'title'             => 'Manajemen User',
-	// 	                'isi'               => 'admin/dashboard/superadmin/master_data_jurusan',
-	// 	            	// 'dataScript'        => 'admin/dataScript/beranda-script'
-	// 									'jurusan'						=> $jurusan
-	// 	            );
-	//
-	// 	$this->load->view('admin/_layout/wrapper', $data);
-	// }
-	//
-	// public function tambah_jurusan(){
-	// 	$data = array(
-	// 		'jurusan' => $this->input->post('jurusan_nama')
-	// 	);
-	//
-	// 	$this->crud->i('jurusan', $data);
-	// 	redirect('superadmin/masterDataJurusan');
-	// }
-	//
-	// public function edit_jurusan(){
-	// 	$id = $this->uri->segment(3);
-	// 	$data = array(
-	// 		'jurusan'		=> $this->input->post('jurusan_nama_edit')
-	// 	);
-	// 	$this->crud->u('jurusan', $data, array('id_jurusan' => $id));
-	// 	redirect('superadmin/masterDataJurusan');
-	// }
-	//
-	// public function hapus_jurusan(){
-	// 	$id = $this->uri->segment(3);
-	// 	$this->crud->d('jurusan', array('id_jurusan' => $id));
-	// 	redirect('superadmin/masterDataJurusan');
-	// }
-	//
-	// public function data_jurusan(){
-	// 	$id = $this->input->post('id');
-	// 	$data = $this->crud->gw('jurusan', array('id_jurusan' => $id));
-	// 	echo json_encode($data);
-	// }
-// --------------------------------------------------------------------------------
 	public function masterDataDepartemen(){
 		$departemen = $this->crud->ga('departemen');
 		$data = array(  'title'             => 'Manajemen User',
