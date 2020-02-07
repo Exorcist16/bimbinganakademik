@@ -7,14 +7,12 @@
 
     public function show_data(){
       $this->db->order_by('id_departemen', 'ASC');
-      return $this->db->from('departemen')->join('jurusan', 'jurusan.id_jurusan=departemen.id_jurusan_departemen')
-      ->get()->result();
+      return $this->db->from('departemen')->get()->result();
     }
 
     public function show_data_kps(){
       $this->db->order_by('username', 'ASC');
-      return $this->db->from('kps')->join('jurusan', 'jurusan.id_jurusan=kps.jurusan')
-      ->get()->result();
+      return $this->db->from('kps')->get()->result();
     }
 
   }
