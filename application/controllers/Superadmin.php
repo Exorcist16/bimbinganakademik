@@ -99,63 +99,59 @@ class Superadmin extends CI_Controller {
 	}
 
 // --------------------------------------------------------------------------------
-	public function masterDataJurusan(){
-		$jurusan = $this->crud->ga('jurusan');
-		$data = array(  'title'             => 'Manajemen User',
-		                'isi'               => 'admin/dashboard/superadmin/master_data_jurusan',
-		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
-										'jurusan'						=> $jurusan
-		            );
-
-		$this->load->view('admin/_layout/wrapper', $data);
-	}
-
-	public function tambah_jurusan(){
-		$data = array(
-			'jurusan' => $this->input->post('jurusan_nama')
-		);
-
-		$this->crud->i('jurusan', $data);
-		redirect('superadmin/masterDataJurusan');
-	}
-
-	public function edit_jurusan(){
-		$id = $this->uri->segment(3);
-		$data = array(
-			'jurusan'		=> $this->input->post('jurusan_nama_edit')
-		);
-		$this->crud->u('jurusan', $data, array('id_jurusan' => $id));
-		redirect('superadmin/masterDataJurusan');
-	}
-
-	public function hapus_jurusan(){
-		$id = $this->uri->segment(3);
-		$this->crud->d('jurusan', array('id_jurusan' => $id));
-		redirect('superadmin/masterDataJurusan');
-	}
-
-	public function data_jurusan(){
-		$id = $this->input->post('id');
-		$data = $this->crud->gw('jurusan', array('id_jurusan' => $id));
-		echo json_encode($data);
-	}
+	// public function masterDataJurusan(){
+	// 	$jurusan = $this->crud->ga('jurusan');
+	// 	$data = array(  'title'             => 'Manajemen User',
+	// 	                'isi'               => 'admin/dashboard/superadmin/master_data_jurusan',
+	// 	            	// 'dataScript'        => 'admin/dataScript/beranda-script'
+	// 									'jurusan'						=> $jurusan
+	// 	            );
+	//
+	// 	$this->load->view('admin/_layout/wrapper', $data);
+	// }
+	//
+	// public function tambah_jurusan(){
+	// 	$data = array(
+	// 		'jurusan' => $this->input->post('jurusan_nama')
+	// 	);
+	//
+	// 	$this->crud->i('jurusan', $data);
+	// 	redirect('superadmin/masterDataJurusan');
+	// }
+	//
+	// public function edit_jurusan(){
+	// 	$id = $this->uri->segment(3);
+	// 	$data = array(
+	// 		'jurusan'		=> $this->input->post('jurusan_nama_edit')
+	// 	);
+	// 	$this->crud->u('jurusan', $data, array('id_jurusan' => $id));
+	// 	redirect('superadmin/masterDataJurusan');
+	// }
+	//
+	// public function hapus_jurusan(){
+	// 	$id = $this->uri->segment(3);
+	// 	$this->crud->d('jurusan', array('id_jurusan' => $id));
+	// 	redirect('superadmin/masterDataJurusan');
+	// }
+	//
+	// public function data_jurusan(){
+	// 	$id = $this->input->post('id');
+	// 	$data = $this->crud->gw('jurusan', array('id_jurusan' => $id));
+	// 	echo json_encode($data);
+	// }
 // --------------------------------------------------------------------------------
 	public function masterDataDepartemen(){
-		$jurusan = $this->crud->ga('jurusan');
 		$departemen = $this->crud->ga('departemen');
 		$data = array(  'title'             => 'Manajemen User',
 		                'isi'               => 'admin/dashboard/superadmin/master_data_departemen',
-			            	'jurusan'						=> $jurusan,
-										'departemen'				=> $departemen,
-										'hasil'							=> $this->Superadmin_model->show_data()
+										'departemen'				=> $departemen
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
 	public function tambah_departemen(){
 		$data = array(
-			'departemen'						=> $this->input->post('departemen_nama'),
-			'id_jurusan_departemen'	=> $this->input->post('departemen_jurusan')
+			'departemen'						=> $this->input->post('departemen_nama')
 		);
 
 		$this->crud->i('departemen', $data);
@@ -165,8 +161,7 @@ class Superadmin extends CI_Controller {
 	public function edit_departemen(){
 		$id = $this->uri->segment(3);
 		$data = array(
-			'departemen'						=> $this->input->post('departemen_nama_edit'),
-			'id_jurusan_departemen'	=> $this->input->post('departemen_jurusan_edit')
+			'departemen'						=> $this->input->post('departemen_nama_edit')
 		);
 		$this->crud->u('departemen', $data, array('id_departemen' => $id));
 		redirect('superadmin/masterDataDepartemen');

@@ -31,15 +31,13 @@
                 <thead>
                   <tr>
                     <th>Nama Departemen</th>
-                    <th>Jurusan</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($hasil as $data) { ?>
+                  <?php foreach ($departemen as $data) { ?>
                   <tr>
                     <td><?=$data->departemen;?></td>
-                    <td><?=$data->jurusan;?></td>
                     <td>
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-departemen-edit" id="edit_departemen" data-id="<?=$data->id_departemen;?>"><i class="fa fa-fw  fa-edit"></i></button>
                       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-departemen-hapus" id="hapus_departemen" data-id="<?=$data->id_departemen;?>"><i class="fa fa-fw fa-remove"></i></button>
@@ -66,15 +64,6 @@
                       <label>Nama Departemen</label>
                       <input type="text" class="form-control" name="departemen_nama" id="departemen_nama" placeholder="Nama Departemen" required>
                     </div>
-                    <div class="form-group">
-                      <label>Jurusan</label>
-                      <select class="form-control select2" name="departemen_jurusan" id="departemen_jurusan" style="width: 100%;" required>
-                        <option selected value="" disabled>Jurusan</option>
-                        <?php foreach ($jurusan as $jurusan) { ?>
-                        <option value="<?=$jurusan->id_jurusan;?>"><?=$jurusan->jurusan;?></option>
-                        <?php } ?>
-                      </select>
-                    </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
@@ -100,16 +89,6 @@
                     <div class="form-group">
                       <label>Nama Departemen</label>
                       <input type="text" class="form-control" name="departemen_nama_edit" id="departemen_nama_edit" required>
-                    </div>
-                    <div class="form-group">
-                      <label>Jurusan</label>
-                      <select class="form-control select2" name="departemen_jurusan_edit" id="departemen_jurusan_edit" style="width: 100%;" required>
-                        <option selected value="" disabled>Jurusan</option>
-                        <?php $je = $this->db->query("SELECT * FROM jurusan")->result();
-                        foreach ($je as $jurusanedit) { ?>
-                        <option value="<?=$jurusanedit->id_jurusan;?>"><?=$jurusanedit->jurusan;?></option>
-                        <?php } ?>
-                      </select>
                     </div>
                   </div>
                   <div class="modal-footer">
