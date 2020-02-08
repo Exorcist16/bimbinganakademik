@@ -228,7 +228,7 @@
             <li class="<?= ($modul == 'masterDataTempatSeminar' ? 'active' : '') ?>"><a href="<?= base_url() ?>superadmin/masterDataTempatSeminar"><i class="fa fa-circle-o"></i>Tempat Seminar</a></li>
           </ul>
         </li>
-        <li class="treeview <?= ($modul == 'manajemenKps' ? 'active' : '') ?>">
+        <li class="treeview <?= ($modul == 'manajemenKps' || $modul == 'manajemenDosen' ? 'active' : '') ?>">
           <a href="#">
             <i class="fa fa-users"></i> <span>Manajemen User</span>
             <span class="pull-right-container">
@@ -237,6 +237,7 @@
           </a>
           <ul class="treeview-menu">
             <li class="<?= ($modul == 'manajemenKps' ? 'active' : '') ?>"><a href="<?= base_url() ?>superadmin/manajemenKps"><i class="fa fa-circle-o"></i>KPS</a></li>
+            <li class="<?= ($modul == 'manajemenDosen' ? 'active' : '') ?>"><a href="<?= base_url() ?>superadmin/manajemenDosen"><i class="fa fa-circle-o"></i>Dosen</a></li>
           </ul>
         </li>
       </ul>

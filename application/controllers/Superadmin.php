@@ -165,4 +165,64 @@ class Superadmin extends CI_Controller {
 		$data = $this->crud->gw('tempat_ujian', array('tempat_ujian_id' => $id));
 		echo json_encode($data);
 	}
+
+	// --------------------------------------------------------------------------------
+	public function manajemenDosen(){
+		$dosendata = $this->db->query('SELECT * FROM dosen ORDER BY nama_dosen ASC')->result();
+
+		$data = array(	'title'			=> 'Manajemen Dosen',
+										'isi'				=> 'admin/dashboard/superadmin/manajemen_dosen',
+										'dosendata'	=> $dosendata
+									);
+		$this->load->view('admin/_layout/wrapper', $data);
+	}
+
+	public function tambah_dosen(){
+		$datadosen = array(
+			'nip'					=> $this->input->post('dosen_nip'),
+			'nama_dosen'	=> $this->input->post('dosen_nama')
+		);
+
+		$datauser = array(
+			'username'		=> $this->input->post('dosen_nip'),
+			'password'		=> md5($this->input->post('dosen_nip')),
+			'nama_user'		=> $this->input->post('dosen_nama'),
+			'role'				=> 'dosen'
+		);
+
+		$this->crud->i('dosen', $datadosen);
+		$this->crud->i('user', $datauser);
+		redirect('superadmin/manajemenDosen');
+	}
+
+	public function edit_dosen(){
+		$id = $this->uri->segment(3);
+		$datadosen = array(
+			'nip'				=> $this->input->post('dosen_nip_edit'),
+			'nama_dosen'=> $this->input->post('dosen_nama_edit')
+		);
+
+		$datauser = array(
+			'username'	=> $this->input->post('dosen_nip_edit'),
+			'password'	=> md5($this->input->post('dosen_nip_edit')),
+			'nama_user'	=> $this->input->post('dosen_nama_edit')
+		);
+
+		$this->crud->u('dosen', $datadosen, array('nip' => $id));
+		$this->crud->u('user', $datauser, array('username' => $id));
+		redirect('superadmin/manajemenDosen');
+	}
+
+	public function hapus_dosen(){
+		$id = $this->uri->segment(3);
+		$this->crud->d('dosen', array('nip' => $id));
+		$this->crud->d('user', array('username' => $id));
+		redirect('superadmin/manajemenDosen');
+	}
+
+	public function data_dosen(){
+		$nip = $this->input->post('id');
+		$data = $this->crud->gw('dosen', array('nip' => $nip));
+		echo json_encode($data);
+	}
 }
