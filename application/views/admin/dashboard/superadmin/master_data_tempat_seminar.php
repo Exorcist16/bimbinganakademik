@@ -57,7 +57,7 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Tambah Tempat Ujian</h4>
                 </div>
-                <form role="form" action="<?php echo base_url().'kps/tambah_tempat';?>" method="post">
+                <form role="form" action="<?php echo base_url().'superadmin/tambah_tempat';?>" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>Tempat Ujian</label>
@@ -104,13 +104,13 @@
               $(document).on("click", "#tempat_edit", function(){
                 var id = $(this).attr('data-id')
                 $.ajax({
-                  url: "<?=base_url();?>/Kps/data_tempat",
+                  url: "<?=base_url();?>/Superadmin/data_tempat",
                   method: "POST",
                   dataType: "JSON",
                   data: { id: id},
                   success: function(data){
                     document.getElementById("tempat_nama_edit").value = data[0].tempat_ujian_nama;
-                    document.getElementById("tempat_form_edit").action = '<?=base_url();?>/Kps/edit_tempat/'+data[0].tempat_ujian_id;
+                    document.getElementById("tempat_form_edit").action = '<?=base_url();?>/Superadmin/edit_tempat/'+data[0].tempat_ujian_id;
                   }
                 })
               })
@@ -142,14 +142,14 @@
             $(document).on("click", "#tempat_hapus", function(){
               var id = $(this).attr('data-id')
               $.ajax({
-                url: "<?=base_url();?>/Kps/data_tempat",
+                url: "<?=base_url();?>/Superadmin/data_tempat",
                 method: "POST",
                 dataType: "JSON",
                 data: { id: id},
                 success: function(data){
                   console.log(data[0])
                   document.getElementById("ket_hapus_tempat").innerText='Anda akan menghapus data tempat: '+data[0].tempat_ujian_nama+' ?';
-                  document.getElementById("button_hapus_tempat").href='<?=base_url();?>/Kps/hapus_tempat/'+data[0].tempat_ujian_id;
+                  document.getElementById("button_hapus_tempat").href='<?=base_url();?>/Superadmin/hapus_tempat/'+data[0].tempat_ujian_id;
                 }
               })
             })
