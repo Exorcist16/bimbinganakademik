@@ -31,6 +31,7 @@
                 <thead>
                   <tr>
                     <th>Tempat Ujian</th>
+                    <th>Lokasi</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -38,6 +39,7 @@
                   <?php foreach ($datatempatmaster as $datatempatmaster) { ?>
                   <tr>
                     <td><?=$datatempatmaster->tempat_ujian_nama;?></td>
+                    <td><?=$datatempatmaster->tempat_ujian_departemen;?></td>
                     <td>
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-tempat-edit" id="tempat_edit" data-id="<?=$datatempatmaster->tempat_ujian_id;?>"><i class="fa fa-fw  fa-edit"></i></button>
                       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-tempat-hapus" id="tempat_hapus" data-id="<?=$datatempatmaster->tempat_ujian_id;?>"><i class="fa fa-fw fa-remove"></i></button>
@@ -62,6 +64,15 @@
                     <div class="form-group">
                       <label>Tempat Ujian</label>
                       <input type="text" class="form-control" name="tempat" id="tempat" placeholder="Tempat Ujian" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Departemen</label>
+                      <select class="form-control select2" name="departemen" id="departemen" style="width: 100%;" required>
+                        <option selected value="Fakultas teknik">Fakultas Teknik</option>
+                        <?php foreach ($departemen as $departemen) { ?>
+                          <option value="<?= $departemen->departemen;?>"><?= $departemen->departemen;?></option>
+                        <?php } ?>
+                      </select>
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -89,6 +100,16 @@
                       <label>Tempat Ujian</label>
                       <input type="text" class="form-control" name="tempat_nama_edit" id="tempat_nama_edit" placeholder="Tempat Ujian" required>
                     </div>
+                    <div class="form-group">
+                      <label>Departemen</label>
+                      <select class="form-control select2" name="departemen_edit" id="departemen_edit" style="width: 100%;" required>
+                        <option id="selected" value="" readonly ></option>
+                        <option value="Fakultas teknik">Fakultas Teknik</option>
+                        <?php foreach ($dep as $dep) { ?>
+                          <option value="<?= $dep->departemen;?>"><?= $dep->departemen;?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
@@ -109,6 +130,8 @@
                   dataType: "JSON",
                   data: { id: id},
                   success: function(data){
+                    document.getElementById("selected").value = data[0].tempat_ujian_departemen;
+                    document.getElementById("selected").innerText = data[0].tempat_ujian_departemen;
                     document.getElementById("tempat_nama_edit").value = data[0].tempat_ujian_nama;
                     document.getElementById("tempat_form_edit").action = '<?=base_url();?>/Superadmin/edit_tempat/'+data[0].tempat_ujian_id;
                   }

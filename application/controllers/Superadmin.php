@@ -131,16 +131,22 @@ class Superadmin extends CI_Controller {
 
 	public function masterDataTempatSeminar(){
 		$datatempatmaster = $this->crud->ga('tempat_ujian');
+		$departemen = $this->crud->ga('departemen');
 
 		$data = array(	'title'							=> 'Master Data Tempat Seminar',
 										'isi'								=> 'admin/dashboard/superadmin/master_data_tempat_seminar',
-										'datatempatmaster'	=> $datatempatmaster
+										'datatempatmaster'	=> $datatempatmaster,
+										'departemen'				=> $departemen,
+										'dep'								=> $departemen
 									);
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
 
 	public function tambah_tempat(){
-		$data = array(	'tempat_ujian_nama'	=> $this->input->post('tempat'));
+		$data = array(
+			'tempat_ujian_nama'				=> $this->input->post('tempat'),
+			'tempat_ujian_departemen'	=> $this->input->post('departemen')
+		);
 
 		$this->crud->i('tempat_ujian', $data);
 		redirect('superadmin/masterDataTempatSeminar');

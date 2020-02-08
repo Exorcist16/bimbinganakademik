@@ -17,8 +17,12 @@
               <!-- <br> -->
               <h3 class="box-title">List Dosen</h3>
               <div class="box-tools pull-right">
+                <a class="btn btn-sm btn-social btn-google" data-toggle="modal" data-target="#modal-dosen-tambah-file">
+                  <i class="fa fa-plus-square"></i> Tambah dengan File
+                </a>&nbsp;
+              <div class="box-tools pull-right">
                 <a class="btn btn-sm btn-social btn-google" data-toggle="modal" data-target="#modal-dosen-tambah">
-                  <i class="fa fa-plus-square"></i> Tambah Dosen
+                  <i class="fa fa-plus-square"></i> Tambah Manual
                 </a>&nbsp;
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">Jenjang Strata
