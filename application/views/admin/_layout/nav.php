@@ -216,7 +216,7 @@
             </span>
           </a>
         </li>
-        <li class="treeview <?= ($modul == 'masterDataDepartemen' || $modul == 'masterDataJurusan' ? 'active' : '') ?>">
+        <li class="treeview <?= ($modul == 'masterDataDepartemen' || $modul == 'masterDataTempatSeminar' ? 'active' : '') ?>">
           <a href="#">
             <i class="fa fa-archive"></i> <span>Master Data</span>
             <span class="pull-right-container">
@@ -225,6 +225,7 @@
           </a>
           <ul class="treeview-menu">
             <li class="<?= ($modul == 'masterDataDepartemen' ? 'active' : '') ?>"><a href="<?= base_url() ?>superadmin/masterDataDepartemen"><i class="fa fa-circle-o"></i>Departemen</a></li>
+            <li class="<?= ($modul == 'masterDataTempatSeminar' ? 'active' : '') ?>"><a href="<?= base_url() ?>superadmin/masterDataTempatSeminar"><i class="fa fa-circle-o"></i>Tempat Seminar</a></li>
           </ul>
         </li>
         <li class="treeview <?= ($modul == 'manajemenKps' ? 'active' : '') ?>">
