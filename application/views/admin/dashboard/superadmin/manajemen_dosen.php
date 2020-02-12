@@ -15,7 +15,7 @@
           <div class="box-header with-border">
             <div>
               <!-- <br> -->
-              <h3 class="box-title">List Dosen</h3>
+              <h3 class="box-title">Daftar Dosen</h3>
               <div class="box-tools pull-right">
                 <a class="btn btn-sm btn-social btn-google" data-toggle="modal" data-target="#modal-dosen-tambah-file">
                   <i class="fa fa-plus-square"></i> Tambah dengan File
@@ -67,6 +67,35 @@
                 <?php } ?>
               </tbody>
             </table>
+          </div>
+
+          <!-- /.box-body -->
+          <div class="modal fade" id="modal-dosen-tambah-file">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Tambah Dosen dengan File</h4>
+                </div>
+                <?php echo $this->session->flashdata('notif'); ?>
+                <form role="form" action="<?php echo base_url().'superadmin/upload_dosen';?>" method="post" enctype="multipart/form-data">
+                  <div class="modal-body">
+                    <div class="form-grup">
+                      <label>Catatan: </label>
+                      <p>- unduh format file di link berikut: <a href="<?php echo base_url().'superadmin/download_file';?>">Unduh Format</a></p>
+                      <label>Unggah File Excel</label>
+                      <input type="file" name="userfile" class="form-control">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Upload</button>
+                  </div>
+                </form>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
           </div>
 
           <!-- /.box-body -->

@@ -2,7 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Superadmin extends CI_Controller {
-
 	public function __construct() {
 	    parent::__construct();
 	    date_default_timezone_set('Asia/Makassar');
@@ -12,6 +11,7 @@ class Superadmin extends CI_Controller {
 
 			$this->load->model('crud');	//19-12-2019
 			$this->load->model('Superadmin_model');	//21-12-2019
+			$this->load->helper('download');
 	}
 
 	public function index() {
@@ -230,5 +230,60 @@ class Superadmin extends CI_Controller {
 		$nip = $this->input->post('id');
 		$data = $this->crud->gw('dosen', array('nip' => $nip));
 		echo json_encode($data);
+	}
+
+	public function upload_dosen(){
+		//load plugin phpexcel
+		include APPPATH.'third_party/PHPExcel/PHPExcel.php';
+
+		$config['upload_path'] = realpath('assets/excel');
+		$config['allowed_types'] = 'xlsx|xls|csv';
+		$config['max_size'] = '10000';
+		$config['encrypt_name'] = true;
+
+		$this->load->library('upload', $config);
+
+		if (!$this->upload->do_upload()) {
+			//upload gagal
+			$this->session->set_flashdata('notif', '<div class="alert alert-danger"><b>PROSES IMPORT GAGAL!</b> '.$this->upload->display_errors().'</div>');
+			//redirect
+			redirect('superadmin/manajemenDosen');
+		} else {
+			$data_upload = $this->upload->data();
+			$excel_reader = new PHPExcel_Reader_Excel2007();
+			$loadexcel = $excel_reader->load('assets/excel/'.$data_upload['file_name']);
+			$sheet = $loadexcel->getActiveSheet()->toArray(null, true, true, true);
+			$data = array();
+			$datauser = array();
+			$numrow = 1;
+			foreach ($sheet as $row) {
+				if ($numrow > 1) {
+					array_push($data, array(
+						'nip'					=> $row['A'],
+						'nama_dosen'	=> $row['B']
+					));
+					array_push($datauser, array(
+						'username'	=> $row['A'],
+						'password'	=> md5($row['A']),
+						'nama_user'	=> $row['B'],
+						'role'			=> 'dosen'
+					));
+				}
+				$numrow++;
+			}
+
+			$this->db->insert_batch('dosen', $data);
+			$this->db->insert_batch('user', $datauser);
+
+			unlink(realpath('assets/excel/'.$data_upload['file_name']));
+
+			//upload sukses
+			$this->session->set_flashdata('notif', '<div class="alert alert-success"><b>IMPORT BERHASIL!</b></div>');
+			redirect('superadmin/manajemenDosen');
+		}
+	}
+
+	public function download_file(){
+		force_download('assets/excel/format.xlsx', NULL);
 	}
 }
