@@ -236,7 +236,7 @@ class Superadmin extends CI_Controller {
 		//load plugin phpexcel
 		include APPPATH.'third_party/PHPExcel/PHPExcel.php';
 
-		$config['upload_path'] = realpath('assets/excel');
+		$config['upload_path'] = 'assets/excel/';
 		$config['allowed_types'] = 'xlsx|xls|csv';
 		$config['max_size'] = '10000';
 		$config['encrypt_name'] = true;
@@ -275,7 +275,7 @@ class Superadmin extends CI_Controller {
 			$this->db->insert_batch('dosen', $data);
 			$this->db->insert_batch('user', $datauser);
 
-			unlink(realpath('assets/excel/'.$data_upload['file_name']));
+			unlink('assets/excel/'.$data_upload['file_name']);
 
 			//upload sukses
 			$this->session->set_flashdata('notif', '<div class="alert alert-success"><b>IMPORT BERHASIL!</b></div>');

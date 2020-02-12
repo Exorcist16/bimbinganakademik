@@ -39,7 +39,8 @@
           <!-- /.box-header -->
           <div class="box-body">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-12">
+                <?php echo $this->session->flashdata('notif'); ?>
                 <!-- Date and time range -->
               </div>
             </div>
@@ -78,7 +79,6 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Tambah Dosen dengan File</h4>
                 </div>
-                <?php echo $this->session->flashdata('notif'); ?>
                 <form role="form" action="<?php echo base_url().'superadmin/upload_dosen';?>" method="post" enctype="multipart/form-data">
                   <div class="modal-body">
                     <div class="form-grup">
