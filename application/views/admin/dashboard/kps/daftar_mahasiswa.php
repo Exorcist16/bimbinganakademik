@@ -16,26 +16,32 @@
             <div>
               <!-- <br> -->
               <h3 class="box-title">List Mahasiswa</h3>
+              <div class="btn-group pull-right">
+                <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">Jenjang Strata
+                  <span class="fa fa-caret-down"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Jenjang S1</a></li>
+                  <li><a href="#">Jenjang S2</a></li>
+                  <li><a href="#">Jenjang S3</a></li>
+                </ul>&nbsp;
+              </div>
               <div class="box-tools pull-right">
                 <a class="btn btn-sm btn-social btn-google" data-toggle="modal" data-target="#modal-mahasiswa-tambah">
                   <i class="fa fa-plus-square"></i> Tambah Mahasiswa
                 </a>&nbsp;
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">Jenjang Strata
-                    <span class="fa fa-caret-down"></span></button>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Jenjang S1</a></li>
-                    <li><a href="#">Jenjang S2</a></li>
-                    <li><a href="#">Jenjang S3</a></li>
-                  </ul>
-                </div>
+              </div>
+              <div class="box-tools pull-right">
+                <a class="btn btn-sm btn-social btn-google" data-toggle="modal" data-target="#modal-mahasiswa-tambah-file">
+                  <i class="fa fa-plus-square"></i> Tambah dengan File
+                </a>&nbsp;
               </div>
             </div>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-12">
+                <?php echo $this->session->flashdata('notif'); ?>
                 <!-- Date and time range -->
               </div>
             </div>
@@ -68,6 +74,35 @@
               </tbody>
             </table>
           </div>
+
+          <!-- /.box-body -->
+          <div class="modal fade" id="modal-mahasiswa-tambah-file">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Tambah Mahasiswa dengan File</h4>
+                </div>
+                <form role="form" action="<?php echo base_url().'kps/upload_mahasiswa';?>" method="post" enctype="multipart/form-data">
+                  <div class="modal-body">
+                    <div class="form-grup">
+                      <label>Catatan: </label>
+                      <p>- unduh format file di link berikut: <a href="<?php echo base_url().'kps/download_format_mahasiswa';?>">Unduh Format</a></p>
+                      <label>Unggah File Excel</label>
+                      <input type="file" name="userfile" class="form-control">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Upload</button>
+                  </div>
+                </form>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+
           <!-- /.box-body -->
 
           <div class="modal fade" id="modal-mahasiswa-tambah">
@@ -81,12 +116,12 @@
                 <form role="form" action="<?php echo base_url().'kps/tambah_mahasiswa';?>" method="post">
                   <div class="modal-body">
                     <div class="form-group">
-                      <label>Nama Mahasiswa</label>
-                      <input type="text" class="form-control" name="mahasiswa_nama" id="mahasiswa_nama" placeholder="Nama Mahasiswa"  required>
-                    </div>
-                    <div class="form-group">
                       <label>NIM</label>
                       <input type="text" class="form-control" name="mahasiswa_nim" id="mahasiswa_nim" placeholder="NIM"  required>
+                    </div>
+                    <div class="form-group">
+                      <label>Nama Mahasiswa</label>
+                      <input type="text" class="form-control" name="mahasiswa_nama" id="mahasiswa_nama" placeholder="Nama Mahasiswa"  required>
                     </div>
                     <div class="form-group">
                       <label>Departemen</label>
@@ -105,13 +140,10 @@
                         <option value="S3">Strata 3</option>
                       </select>
                     </div>
+                    <br>
                     <div class="form-group">
                       <label>Angkatan</label>
                       <input type="number" class="form-control" name="mahasiswa_angkatan" id="mahasiswa_angkatan" placeholder="Angkatan"  required>
-                    </div>
-                    <div class="form-group">
-                      <label>Password</label>
-                      <input type="password" class="form-control" name="mahasiswa_password" id="mahasiswa_password" placeholder="Password"  required>
                     </div>
                   </div>
                   <div class="modal-footer">

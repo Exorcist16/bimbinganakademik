@@ -13,6 +13,7 @@ class Kps extends CI_Controller {
 			$this->load->library('session');
 
 			$this->load->model('Kps_model');
+			$this->load->helper('download');
 	}
 
 	public function index() {
@@ -347,24 +348,64 @@ class Kps extends CI_Controller {
 
 	public function tambah_mahasiswa(){
 		$datamahasiswa = array(
-			'nama'					=> $this->input->post('mahasiswa_nama'),
 			'nim'						=> $this->input->post('mahasiswa_nim'),
+			'nama'					=> $this->input->post('mahasiswa_nama'),
 			'departemen'		=> $this->input->post('mahasiswa_departemen'),
 			'angkatan'			=> $this->input->post('mahasiswa_angkatan'),
 			'strata'				=> $this->input->post('mahasiswa_strata')
 		);
 
-		$datausermahasiswa = array(
-			'username'					=> $this->input->post('mahasiswa_nim'),
-			'password'					=> md5($this->input->post('mahasiswa_password')),
-			'nama_user'					=> $this->input->post('mahasiswa_nama'),
-			'departemen'				=> $this->input->post('mahasiswa_departemen'),
-			'role'							=> 'mahasiswa'
-		);
-
 		$this->crud->i('mahasiswa', $datamahasiswa);
-		$this->crud->i('user', $datausermahasiswa);
 		redirect('kps/daftarMahasiswa');
+	}
+
+	public function upload_mahasiswa(){
+		$sessiondepartemen = $this->session->userdata('departemen');
+		//load plugin PHPExcel
+		include APPPATH.'third_party/PHPExcel/PHPExcel.php';
+
+		$config['upload_path'] = 'assets/excel/';
+		$config['allowed_types'] = 'xlsx|xls|csv';
+		$config['max_size'] = '10000';
+		$config['encrypt_name'] = true;
+
+		$this->load->library('upload', $config);
+
+		if(!$this->upload->do_upload()){
+			$this->session->set_flashdata('notif', '<div class="alert alert-danger"><b>PROSES IMPORT GAGAL!</b> '.$this->upload->display_errors().'</div>');
+			redirect('kps/daftarMahasiswa');
+		} else {
+			$data_upload = $this->upload->data();
+			$excel_reader = new PHPExcel_Reader_Excel2007();
+			$loadexcel = $excel_reader->load('assets/excel/'.$data_upload['file_name']);
+			$sheet = $loadexcel->getActiveSheet()->toArray(null, true, true, true);
+			$data = array();
+			$numrow = 1;
+
+			foreach ($sheet as $row) {
+				if ($numrow > 1) {
+					array_push($data, array(
+						'nim'					=> $row['A'],
+						'nama'				=> $row['B'],
+						'strata'			=> $row['C'],
+						'angkatan'		=> $row['D'],
+						'departemen'	=> $sessiondepartemen
+					));
+				}
+				$numrow++;
+			}
+
+			$this->db->insert_batch('mahasiswa', $data);
+
+			unlink('assets/excel/'.$data_upload['file_name']);
+
+			$this->session->set_flashdata('notif', '<div class="alert alert-success"><b>IMPORT BERHASIL!</b></div>');
+			redirect('kps/daftarMahasiswa');
+		}
+	}
+
+	public function download_format_mahasiswa(){
+		force_download('assets/excel/format_mahasiswa.xlsx', NULL);
 	}
 
 	public function edit_mahasiswa(){
@@ -399,7 +440,7 @@ class Kps extends CI_Controller {
 		$data = $this->crud->gw('mahasiswa', array('nim' => $nim));
 		echo json_encode($data);
 	}
-	
+
 // ------------------------------------------------------------------------------------------------
 	public function masterDataWaktu(){
 		$sessiondepartemen = $this->session->userdata('departemen');
