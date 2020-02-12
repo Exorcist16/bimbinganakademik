@@ -13,7 +13,7 @@
           <img src="<?=base_url('assets/')?>dist/img/user_profil.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Nama KPS</p>
+          <p><?php echo $this->session->userdata('username'); ?></p>
         </div>
       </div>
       <ul class="sidebar-menu" data-widget="tree">
