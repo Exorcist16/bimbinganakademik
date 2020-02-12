@@ -419,7 +419,7 @@ class Kps extends CI_Controller {
 
 		$datam = array(
 			'username'	=> $this->input->post('mahasiswa_nim_edit'),
-			'password'	=> md5($this->input->post('mahasiswa_password_edit')),
+			'password'	=> md5($this->input->post('mahasiswa_nim_edit')),
 			'nama_user'	=> $this->input->post('mahasiswa_nama_edit')
 		);
 

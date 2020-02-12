@@ -156,6 +156,7 @@
             </div>
             <!-- /.modal-dialog -->
           </div>
+
           <div class="modal fade" id="modal-mahasiswa-edit">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -167,12 +168,12 @@
                 <form role="form" id="mahasiswa_form_edit" method="post">
                   <div class="modal-body">
                     <div class="form-group">
-                      <label>Nama Mahasiswa</label>
-                      <input type="text" class="form-control" name="mahasiswa_nama_edit" id="mahasiswa_nama_edit" placeholder="Nama Mahasiswa"  required>
-                    </div>
-                    <div class="form-group">
                       <label>NIM</label>
                       <input type="text" class="form-control" name="mahasiswa_nim_edit" id="mahasiswa_nim_edit" placeholder="NIM"  required>
+                    </div>
+                    <div class="form-group">
+                      <label>Nama Mahasiswa</label>
+                      <input type="text" class="form-control" name="mahasiswa_nama_edit" id="mahasiswa_nama_edit" placeholder="Nama Mahasiswa"  required>
                     </div>
                     <div class="form-group">
                       <label>Departemen</label>
@@ -191,13 +192,10 @@
                         <option value="S3">Strata 3</option>
                       </select>
                     </div>
+                    <br>
                     <div class="form-group">
                       <label>Angkatan</label>
                       <input type="number" class="form-control" name="mahasiswa_angkatan_edit" id="mahasiswa_angkatan_edit" placeholder="Angkatan"  required>
-                    </div>
-                    <div class="form-group">
-                      <label>Password</label>
-                      <input type="password" class="form-control" name="mahasiswa_password_edit" id="mahasiswa_password_edit" placeholder="Password"  required>
                     </div>
                   </div>
                   <div class="modal-footer">
