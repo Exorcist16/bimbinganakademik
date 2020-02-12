@@ -22,13 +22,14 @@ class Kps extends CI_Controller {
 // ------------------------------------------------------------------------------------------------
 	public function daftarJudul(){
 		$sessiondepartemen = $this->session->userdata('departemen');
-		$datapembimbing = $this->crud->ga('dosen');
+		$datadosen = $this->crud->ga('dosen');
 
 		$datatampil = $this->Kps_model->tampil_data($sessiondepartemen);
 
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/daftar_judul',
-										'datatampil'				=> $datatampil
+										'datatampil'				=> $datatampil,
+										'dosen'							=> $datadosen
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
@@ -43,17 +44,31 @@ class Kps extends CI_Controller {
 	public function tambah_judul(){
 		$sessiondepartemen = $this->session->userdata('departemen');
 
+		$nim = $this->input->post('penelitian_nim');
+		$mahasiswa = $this->crud->gw('mahasiswa', array('nim' => $nim));
+
 		$data = array(
-			'nim'					=> $this->input->post('penelitian_nim'),
-			'judul'				=> $this->input->post('penelitian_judul'),
-			'pembimbing1'	=> $this->input->post('penelitian_pembimbing1'),
-			'pembimbing2'	=> $this->input->post('penelitian_pembimbing2'),
-			'penguji1'		=> $this->input->post('penelitian_penguji1'),
-			'penguji2'		=> $this->input->post('penelitian_penguji2'),
+			'nim'								=> $this->input->post('penelitian_nim'),
+			'judul'							=> $this->input->post('penelitian_judul'),
+			'pembimbing1'				=> $this->input->post('penelitian_pembimbing1'),
+			'pembimbing2'				=> $this->input->post('penelitian_pembimbing2'),
+			'penguji1'					=> $this->input->post('penelitian_penguji1'),
+			'penguji2'					=> $this->input->post('penelitian_penguji2'),
 			'judul_departemen'	=> $sessiondepartemen
 		);
 
+		foreach ($mahasiswa as $key) {
+			$datauser = array(
+				'username'	=> $key->nim,
+				'password'	=> md5($key->nim),
+				'nama_user'	=> $key->nama,
+				'role'			=> 'mahasiswa',
+				'departemen'=> $key->departemen
+			);
+		}
+
 		$this->crud->i('judul', $data);
+		$this->crud->i('user', $datauser);
 		redirect('kps/daftarJudul');
 	}
 

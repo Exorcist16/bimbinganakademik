@@ -123,7 +123,7 @@
                       <label>Pembimbing I</label>
                       <select class="form-control select2" name="penelitian_pembimbing1" id="penelitian_pembimbing1" style="width: 100%;" required>
                         <option selected value="" disabled>Pembimbing I</option>
-                        <?php foreach ($pembimbing as $pembimbing1) { ?>
+                        <?php foreach ($dosen as $pembimbing1) { ?>
                         <option><?=$pembimbing1->nama_dosen; ?></option>
                         <?php } ?>
                       </select>
@@ -152,7 +152,7 @@
                       <label>Pembimbing II</label>
                       <select class="form-control select2" name="penelitian_pembimbing2" id="penelitian_pembimbing2" style="width: 100%;" required>
                         <option selected value="" disabled>Pembimbing II</option>
-                        <?php foreach ($pembimbing as $pembimbing2) { ?>
+                        <?php foreach ($dosen as $pembimbing2) { ?>
                         <option><?=$pembimbing2->nama_dosen; ?></option>
                         <?php } ?>
                       </select>
@@ -181,7 +181,7 @@
                       <label>Penguji I</label>
                       <select class="form-control select2" name="penelitian_penguji1" id="penelitian_penguji1" style="width: 100%;" required>
                         <option selected value="" disabled>Penguji I</option>
-                        <?php foreach ($penguji as $penguji1) { ?>
+                        <?php foreach ($dosen as $penguji1) { ?>
                         <option><?=$penguji1->nama_dosen; ?></option>
                         <?php } ?>
                       </select>
@@ -210,7 +210,7 @@
                       <label>Penguji II</label>
                       <select class="form-control select2" name="penelitian_penguji2" id="penelitian_penguji2" style="width: 100%;" required>
                         <option selected value="" disabled>Penguji II</option>
-                        <?php foreach ($penguji as $penguji2) { ?>
+                        <?php foreach ($dosen as $penguji2) { ?>
                         <option><?=$penguji2->nama_dosen; ?></option>
                         <?php } ?>
                       </select>
@@ -273,7 +273,7 @@
                       <label>Pembimbing I</label>
                       <select class="form-control select2" name="penelitian_pembimbing1_edit" id="penelitian_pembimbing1_edit" style="width: 100%;" required>
                         <option selected id="pembimbing1_edit" style="background-color: #80808050;"></option>
-                        <?php foreach ($pembimbing as $pembimbing1) { ?>
+                        <?php foreach ($dosen as $pembimbing1) { ?>
                         <option><?=$pembimbing1->nama_dosen; ?></option>
                         <?php } ?>
                       </select>
@@ -301,7 +301,7 @@
                       <label>Pembimbing II</label>
                       <select class="form-control select2" name="penelitian_pembimbing2_edit" id="penelitian_pembimbing2_edit" style="width: 100%;" required>
                         <option selected id="pembimbing2_edit" style="background-color: #80808050;"></option>
-                        <?php foreach ($pembimbing as $pembimbing2) { ?>
+                        <?php foreach ($dosen as $pembimbing2) { ?>
                         <option><?=$pembimbing2->nama_dosen; ?></option>
                         <?php } ?>
                       </select>
@@ -329,7 +329,7 @@
                       <label>Penguji I</label>
                       <select class="form-control select2" name="penelitian_penguji1_edit" id="penelitian_penguji1_edit" style="width: 100%;" required>
                         <option selected id="penguji1_edit" style="background-color: #80808050;"></option>
-                        <?php foreach ($penguji as $penguji1) { ?>
+                        <?php foreach ($dosen as $penguji1) { ?>
                         <option><?=$penguji1->nama_dosen; ?></option>
                         <?php } ?>
                       </select>
@@ -357,7 +357,7 @@
                       <label>Penguji II</label>
                       <select class="form-control select2" name="penelitian_penguji2_edit" id="penelitian_penguji2_edit" style="width: 100%;" required>
                         <option selected id="penguji2_edit" style="background-color: #80808050;">Penguji II</option>
-                        <?php foreach ($penguji as $penguji1) { ?>
+                        <?php foreach ($dosen as $penguji1) { ?>
                         <option><?=$penguji1->nama_dosen; ?></option>
                         <?php } ?>
                       </select>
