@@ -21,17 +21,12 @@ class Kps extends CI_Controller {
 // ------------------------------------------------------------------------------------------------
 	public function daftarJudul(){
 		$sessiondepartemen = $this->session->userdata('departemen');
-		$datapembimbing = $this->crud->gw('dosen', array('departemen_dosen' => $sessiondepartemen));
+		$datapembimbing = $this->crud->ga('dosen');
 
 		$datatampil = $this->Kps_model->tampil_data($sessiondepartemen);
 
-		$sessionjurusan = $this->session->userdata('jurusan');
-		$datapenguji = $this->crud->gw('dosen', array('jurusan_dosen' => $sessionjurusan));
-
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/daftar_judul',
-										'pembimbing'				=> $datapembimbing,
-										'penguji'						=> $datapenguji,
 										'datatampil'				=> $datatampil
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
@@ -404,76 +399,7 @@ class Kps extends CI_Controller {
 		$data = $this->crud->gw('mahasiswa', array('nim' => $nim));
 		echo json_encode($data);
 	}
-// ------------------------------------------------------------------------------------------------
-	public function daftarDosen(){
-		$sessionusername = $this->session->userdata('username');
-		$sessionjurusan = $this->session->userdata('jurusan');
-
-		$departemensession = $this->crud->gw('kps', array('username' => $sessionusername));
-		$dosendata = $this->crud->gw('dosen', array('jurusan_dosen' => $sessionjurusan));
-
-		$data = array(  'title'             => 'KPS Dashboard',
-		                'isi'               => 'admin/dashboard/kps/daftar_dosen',
-										'dosendata'					=> $dosendata, //22-12-2019
-										'departemensession'	=> $departemensession
-		            );
-		$this->load->view('admin/_layout/wrapper', $data);
-	}
-
-	public function tambah_dosen(){
-		$sessionjurusan = $this->session->userdata('jurusan');
-
-		$datadosen = array(
-			'nip'								=> $this->input->post('dosen_nip'),
-			'nama_dosen'				=> $this->input->post('dosen_nama'),
-			'departemen_dosen'	=> $this->input->post('dosen_departemen'),
-			'jurusan_dosen'			=> $sessionjurusan
-		);
-
-		$datauserdosen = array(
-			'username'					=> $this->input->post('dosen_nip'),
-			'password'					=> md5($this->input->post('dosen_password')),
-			'nama_user'					=> $this->input->post('dosen_nama'),
-			'departemen'				=> $this->input->post('dosen_departemen'),
-			'role'							=> 'dosen',
-			'jurusan'						=> $sessionjurusan
-		);
-
-		$this->crud->i('dosen', $datadosen);
-		$this->crud->i('user', $datauserdosen);
-		redirect('kps/daftarDosen');
-	}
-
-	public function edit_dosen(){
-		$id = $this->uri->segment(3);
-		$data = array(
-			'nip'								=> $this->input->post('dosen_nim_edit'),
-			'nama_dosen'				=> $this->input->post('dosen_nama_edit')
-		);
-
-		$datad = array(
-			'username'	=> $this->input->post('dosen_nim_edit'),
-			'password'	=> md5($this->input->post('dosen_password_edit')),
-			'nama_user'	=> $this->input->post('dosen_nama_edit')
-		);
-
-		$this->crud->u('dosen', $data, array('nip' => $id));
-		$this->crud->u('user', $datad, array('username' => $id));
-		redirect('kps/daftarDosen');
-	}
-
-	public function hapus_dosen(){
-		$id = $this->uri->segment(3);
-		$this->crud->d('dosen', array('nip' => $id));
-		$this->crud->d('user', array('username' => $id));
-		redirect('kps/daftarDosen');
-	}
-
-	public function data_dosen(){
-		$nip = $this->input->post('id');
-		$data = $this->crud->gw('dosen', array('nip' => $nip));
-		echo json_encode($data);
-	}
+	
 // ------------------------------------------------------------------------------------------------
 	public function masterDataWaktu(){
 		$sessiondepartemen = $this->session->userdata('departemen');

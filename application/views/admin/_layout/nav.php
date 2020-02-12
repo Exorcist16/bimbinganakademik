@@ -62,15 +62,7 @@
             </span>
           </a>
         </li>
-        <li class="<?= ($modul == 'daftarDosen' ? 'active' : '') ?>">
-          <a href="<?= base_url() ?>kps/daftarDosen">
-            <i class="fa fa-user"></i> <span>Daftar Dosen</span>
-            <span class="pull-right-container">
-              <!-- <small class="label pull-right bg-green">new</small> -->
-            </span>
-          </a>
-        </li>
-        <li class="treeview <?= ($modul == 'masterDataWaktu' || $modul == 'masterDataTempat' ? 'active' : '') ?>">
+        <li class="treeview <?= ($modul == 'masterDataWaktu' ? 'active' : '') ?>">
           <a href="#">
             <i class="fa fa-archive"></i> <span>Master Data</span>
             <span class="pull-right-container">
@@ -79,7 +71,6 @@
           </a>
           <ul class="treeview-menu">
             <li class="<?= ($modul == 'masterDataWaktu' ? 'active' : '') ?>"><a href="<?= base_url() ?>kps/masterDataWaktu"><i class="fa fa-circle-o"></i>Waktu Ujian</a></li>
-            <li class="<?= ($modul == 'masterDataTempat' ? 'active' : '') ?>"><a href="<?= base_url() ?>kps/masterDataTempat"><i class="fa fa-circle-o"></i>Tempat Ujian</a></li>
           </ul>
         </li>
       </ul>
