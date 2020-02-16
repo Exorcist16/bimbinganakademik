@@ -149,7 +149,7 @@
                       <select class="form-control select2" name="ujian_hasil_tempat" id="ujian_hasil_tempat" style="width: 100%;" required>
                         <option selected value="" disabled>Tempat Ujian</option>
                         <?php foreach ($datatempathasil as $datatempat) { ?>
-                        <option value="<?=$datatempat->tempat_ujian_nama;?>"><?=$datatempat->tempat_ujian_nama;?></option>
+                        <option value="<?=$datatempat->tempat_ujian_nama;?>"><?=$datatempat->tempat_ujian_nama;?> - <?=$datatempat->tempat_ujian_departemen?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -238,22 +238,22 @@
                             <p id="seminar_detail_tanggal"></p>
                           </div>
                           <div class="col-md-6">
-                            <p> Dosen Pembimbing 1
+                            <p><font id="seminar_detail_pembimbing1_nama"></font>
                               <span class="pull-right-container">
                                 <small id="seminar_detail_pembimbing1_status" class="label pull-right bg-green">Confirmed</small>
                               </span>
                             </p>
-                            <p> Dosen Pembimbing 2
+                            <p><font id="seminar_detail_pembimbing2_nama"></font>
                               <span class="pull-right-container">
                                 <small id="seminar_detail_pembimbing2_status" class="label pull-right bg-green">Confirmed</small>
                               </span>
                             </p>
-                            <p> Dosen Penguji 1
+                            <p><font id="seminar_detail_penguji1_nama"></font>
                               <span class="pull-right-container">
                                 <small id="seminar_detail_penguji1_status" class="label pull-right bg-yellow">Waiting</small>
                               </span>
                             </p>
-                            <p> Dosen Penguji 2
+                            <p><font id="seminar_detail_penguji2_nama"></font>
                               <span class="pull-right-container">
                                 <small id="seminar_detail_penguji2_status" class="label pull-right bg-red">Rejected</small>
                               </span>
@@ -298,6 +298,10 @@
                     document.getElementById("seminar_detail_judul").innerText = data[0].judul;
                     document.getElementById("seminar_detail_tanggal").innerText = data[0].seminar_tanggal;
                     document.getElementById("seminar_detail_status").innerText = data[0].seminar_status;
+                    document.getElementById("seminar_detail_pembimbing1_nama").innerText = data[0].seminar_pembimbing1_nama;
+                    document.getElementById("seminar_detail_pembimbing2_nama").innerText = data[0].seminar_pembimbing2_nama;
+                    document.getElementById("seminar_detail_penguji1_nama").innerText = data[0].seminar_penguji1_nama;
+                    document.getElementById("seminar_detail_penguji2_nama").innerText = data[0].seminar_penguji2_nama;
                     if (data[0].seminar_pembimbing1_status == 'menunggu') {
                       document.getElementById("seminar_detail_pembimbing1_status").className = "label pull-right bg-yellow";
                       document.getElementById("seminar_detail_pembimbing1_status").innerText = "Menunggu";

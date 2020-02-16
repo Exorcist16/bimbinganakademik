@@ -119,7 +119,7 @@ class Kps extends CI_Controller {
 		$datatampilseminar = $this->Kps_model->tampil_data_seminar_hasil($sessiondepartemen);
 
 		$datawaktuhasil = $this->crud->gw('waktu_ujian', array('waktu_departemen' => $sessiondepartemen));
-		$datatempathasil = $this->crud->gw('tempat_ujian', array('tempat_ujian_departemen' => $sessiondepartemen));
+		$datatempathasil = $this->crud->ga('tempat_ujian');
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/seminar_hasil',
 										'datatampilseminar' => $datatampilseminar,
