@@ -125,8 +125,8 @@
           <img src="<?=base_url('assets/')?>dist/img/user_profil.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Nama Dosen</p>
-          <i>Nip Dosen</i>
+          <p><?php echo $this->session->userdata('nama_user');?></p>
+          <i><?php echo $this->session->userdata('username');?></i>
         </div>
       </div>
       <ul class="sidebar-menu" data-widget="tree">
