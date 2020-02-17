@@ -34,11 +34,11 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<?=base_url('assets/')?>dist/css/skins/_all-skins.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="<?=base_url('assets/')?>/myCostumStyle.css">
+    <link rel="stylesheet" href="<?=base_url('assets/')?>myCostumStyle.css">
     <link rel="stylesheet" href="<?=base_url('assets/')?>dist/css/ftuh-custom.css">
 
     <!-- PWA -->
-    <link rel="manifest" href="<?=base_url('assets/')?>/pwa/manifest.json">
+    <link rel="manifest" href="<?=base_url('assets/')?>pwa/manifest.json">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

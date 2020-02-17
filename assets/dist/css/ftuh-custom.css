@@ -9,3 +9,24 @@
 .align-right {
 	text-align: right;
 }
+
+.mobile-logo {
+	padding: 5px 10px;
+	float: left;
+	display: none;
+}
+
+@media screen and (max-width: 767px) {
+	.mobile-logo {
+		display: unset;
+	}
+	.normal-logo {
+		display: none !important;
+	}
+	.fixed .content-wrapper, .fixed .right-side {
+		padding-top: 50px;
+	}
+	.main-sidebar {
+		padding-top: 50px;
+	}
+}

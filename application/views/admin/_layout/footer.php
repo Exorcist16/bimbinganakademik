@@ -52,7 +52,30 @@
 		<script src="https://cdn.datatables.net/rowreorder/1.2.6/js/dataTables.rowReorder.min.js"></script> -->
 		<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
+		<!-- <script src="<?=base_url()?>/upup.min.js"></script>
 		<script>
+			UpUp.start({
+			  'content-url': 'offline.html',
+			  'assets': ['/img/logo.png', '/css/style.css', 'headlines.json']
+			});
+		</script> -->
+
+		<script>
+			if ("serviceWorker" in navigator) {
+				window.addEventListener("load", function() {
+				navigator.serviceWorker
+				.register("<?=base_url('assets/')?>pwa/sw.js")
+				.then(function() {
+					console.log("Pendaftaran Service Worker berhasil");
+				})
+				.catch(function() {
+					console.log("Pendaftaran Service Worker gagal");
+				});
+				});
+			} else {
+				console.log("Service Worker belum didiukung browser ini");
+			}
+
 		  $(function () {
 		    $('#example1').DataTable({
 					'responsive'  : true,
