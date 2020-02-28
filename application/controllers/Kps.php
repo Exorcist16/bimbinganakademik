@@ -130,6 +130,18 @@ class Kps extends CI_Controller {
 	}
 	public function tambah_seminar_hasil(){
 		$nim = $this->input->post('ujian_hasil_nim');
+		// $tanggal = $this->input->post('ujian_hasil_tanggal');
+		// $waktu = $this->input->post('ujian_hasil_waktu');
+		// $tempat = $this->input->post('ujian_hasil_tempat');
+		//
+		// $cek_sedia = $this->db->query("SELECT * FROM seminar WHERE seminar_tanggal = '$tanggal'
+		// 	AND seminar_waktu = '$waktu' AND seminar_tempat = '$tempat'")->result();
+		// $cek_dosen = $this->db->query("SELECT * FROM seminar WHERE seminar_tanggal = '$tanggal'
+		// 	AND seminar_waktu = '$waktu'")->result();
+		//
+		// if ($cek_sedia == NULL) {
+		// 	// code...
+		// }
 
 		$data = array(
 			'seminar_nim'								=> $nim,
@@ -181,6 +193,12 @@ class Kps extends CI_Controller {
 			ON seminar.seminar_nim=mahasiswa.nim)
 			LEFT JOIN judul ON mahasiswa.nim=judul.nim
 			WHERE seminar.seminar_id = '$id'")->result();
+		echo json_encode($data);
+	}
+
+	public function proteksi(){
+		$tanggal = $this->input->post('tanggal');
+		$data = $this->db->query("SELECT * FROM seminar WHERE seminar_tanggal='$tanggal'")->result();
 		echo json_encode($data);
 	}
 // ------------------------------------------------------------------------------------------------
