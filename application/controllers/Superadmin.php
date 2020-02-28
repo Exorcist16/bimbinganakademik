@@ -171,7 +171,10 @@ class Superadmin extends CI_Controller {
 
 	public function edit_tempat(){
 		$id = $this->uri->segment(3);
-		$data = array('tempat_ujian_nama' => $this->input->post('tempat_nama_edit'));
+		$data = array(
+			'tempat_ujian_nama' => $this->input->post('tempat_nama_edit'),
+			'tempat_ujian_departemen'	=> $this->input->post('departemen_edit')
+		);
 
 		$this->crud->u('tempat_ujian', $data, array('tempat_ujian_id' => $id));
 		redirect('superadmin/masterDataTempatSeminar');
