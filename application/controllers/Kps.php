@@ -130,18 +130,6 @@ class Kps extends CI_Controller {
 	}
 	public function tambah_seminar_hasil(){
 		$nim = $this->input->post('ujian_hasil_nim');
-		// $tanggal = $this->input->post('ujian_hasil_tanggal');
-		// $waktu = $this->input->post('ujian_hasil_waktu');
-		// $tempat = $this->input->post('ujian_hasil_tempat');
-		//
-		// $cek_sedia = $this->db->query("SELECT * FROM seminar WHERE seminar_tanggal = '$tanggal'
-		// 	AND seminar_waktu = '$waktu' AND seminar_tempat = '$tempat'")->result();
-		// $cek_dosen = $this->db->query("SELECT * FROM seminar WHERE seminar_tanggal = '$tanggal'
-		// 	AND seminar_waktu = '$waktu'")->result();
-		//
-		// if ($cek_sedia == NULL) {
-		// 	// code...
-		// }
 
 		$data = array(
 			'seminar_nim'								=> $nim,
