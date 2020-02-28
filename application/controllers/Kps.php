@@ -189,6 +189,14 @@ class Kps extends CI_Controller {
 		$data = $this->db->query("SELECT * FROM seminar WHERE seminar_tanggal='$tanggal'")->result();
 		echo json_encode($data);
 	}
+
+	public function get_waktu_hasil(){
+		$id = $this->input->post('id');
+		$data = $this->db->query("SELECT * FROM waktu_ujian LEFT JOIN tempat_ujian
+       ON waktu_ujian.waktu_departemen = tempat_ujian.tempat_ujian_departemen
+       WHERE tempat_ujian.tempat_ujian_nama = '$id'")->result();
+		echo json_encode($data);
+	}
 // ------------------------------------------------------------------------------------------------
 	public function ujianSkripsi(){
 		$sessiondepartemen = $this->session->userdata('departemen');
