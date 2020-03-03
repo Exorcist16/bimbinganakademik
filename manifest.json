@@ -6,10 +6,10 @@
   "display": "standalone",
   "background_color": "#fff",
   "theme_color": "#fff",
-  "gcm_sender_id": "229549979081",
+  "gcm_sender_id": "267660624424",
   "icons": [
     {
-      "src": "./app-logo.png",
+      "src": "./assets/dist/img/app-logo.png",
       "sizes": "512x512",
       "type": "image/png"
     }

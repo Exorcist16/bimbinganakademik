@@ -1,13 +1,13 @@
 		<footer class="main-footer">
-		    <div class="container">
-		      <div class="pull-right hidden-xs">
-		        <b>Version</b> 2.4.13
-		      </div>
-		      <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE</a>.</strong> All rights
-		      reserved.
-		    </div>
-		    <!-- /.container -->
-		  </footer>
+			<div class="container">
+			<div class="pull-right hidden-xs">
+				<b>Version</b> 2.4.13
+			</div>
+			<strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE</a>.</strong> All rights
+			reserved.
+			</div>
+			<!-- /.container -->
+		</footer>
 		</div>
 		<!-- ./wrapper -->
 
@@ -52,111 +52,160 @@
 		<script src="https://cdn.datatables.net/rowreorder/1.2.6/js/dataTables.rowReorder.min.js"></script> -->
 		<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
+		<script src="<?=base_url('assets/')?>dist/js/main.js"></script>
+
 		<!-- <script src="<?=base_url()?>/upup.min.js"></script>
 		<script>
 			UpUp.start({
-			  'content-url': 'offline.html',
-			  'assets': ['/img/logo.png', '/css/style.css', 'headlines.json']
+			'content-url': 'offline.html',
+			'assets': ['/img/logo.png', '/css/style.css', 'headlines.json']
 			});
 		</script> -->
 
 		<script>
-			if ("serviceWorker" in navigator) {
-				window.addEventListener("load", function() {
-				navigator.serviceWorker
-				.register("<?=base_url('assets/')?>pwa/sw.js")
-				.then(function() {
-					console.log("Pendaftaran Service Worker berhasil");
-				})
-				.catch(function() {
-					console.log("Pendaftaran Service Worker gagal");
-				});
-				});
-			} else {
-				console.log("Service Worker belum didiukung browser ini");
+			function urlBase64ToUint8Array(base64String) {
+				const padding = '='.repeat((4 - base64String.length % 4) % 4);
+				const base64 = (base64String + padding)
+					.replace(/-/g, '+')
+					.replace(/_/g, '/');
+				const rawData = window.atob(base64);
+				const outputArray = new Uint8Array(rawData.length);
+				for (let i = 0; i < rawData.length; ++i) {
+					outputArray[i] = rawData.charCodeAt(i);
+				}
+				return outputArray;
 			}
 
-		  $(function () {
-		    $('#example1').DataTable({
+			if (!('serviceWorker' in navigator)) {
+				console.log("Service worker tidak didukung browser ini.");
+			} else {
+				registerServiceWorker();
+				requestPermission();
+			}
+			
+			// Register service worker
+			function registerServiceWorker() {
+				return navigator.serviceWorker.register('<?=base_url()?>sw.js')
+					.then(function (registration) {
+						console.log('Registrasi service worker berhasil.');
+						return registration;
+					})
+					.catch(function (err) {
+						console.error('Registrasi service worker gagal.', err);
+					});
+			}
+
+			function requestPermission() {
+				if ('Notification' in window) {
+					Notification.requestPermission().then(function (result) {
+						if (result === "denied") {
+							console.log("Fitur notifikasi tidak diijinkan.");
+							return;
+						} else if (result === "default") {
+							console.error("Pengguna menutup kotak dialog permintaan ijin.");
+							return;
+						}
+						
+						if (('PushManager' in window)) {
+							navigator.serviceWorker.getRegistration().then(function(registration) {
+								registration.pushManager.subscribe({
+									userVisibleOnly: true,
+									applicationServerKey: urlBase64ToUint8Array("BBM3ZhbZ9j0Og57QieQ0dT6MjU5U4sVZcsc5j4dSWTlC3WvFp3Db1GBvwNcyAFfRn9VpiTuYUgcoFDSJYFYGkvo")
+								}).then(function(subscribe) {
+									console.log('Berhasil melakukan subscribe dengan endpoint: ', subscribe.endpoint);
+									console.log('Berhasil melakukan subscribe dengan p256dh key: ', btoa(String.fromCharCode.apply(
+										null, new Uint8Array(subscribe.getKey('p256dh')))));
+									console.log('Berhasil melakukan subscribe dengan auth key: ', btoa(String.fromCharCode.apply(
+										null, new Uint8Array(subscribe.getKey('auth')))));
+								}).catch(function(e) {
+									console.error('Tidak dapat melakukan subscribe ', e.message);
+								});
+							});
+						}
+					});
+				}
+			}
+
+			$('#example1').DataTable({
 					'responsive'  : true,
 					'ordering'    : false,
 				})
-		    $('#example2').DataTable({
+			$('#example2').DataTable({
 					'responsive'  : true,
-		      'paging'      : true,
-		      'lengthChange': false,
-		      'searching'   : false,
-		      'ordering'    : true,
-		      'info'        : true,
-		      'autoWidth'   : false
-		    })
+			'paging'      : true,
+			'lengthChange': false,
+			'searching'   : false,
+			'ordering'    : true,
+			'info'        : true,
+			'autoWidth'   : false
+			})
 
-		    //Initialize Select2 Elements
-		    // $('.select2').select2()
+			//Initialize Select2 Elements
+			// $('.select2').select2()
 
-		    //Datemask dd/mm/yyyy
-		    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-		    //Datemask2 mm/dd/yyyy
-		    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-		    //Money Euro
-		    $('[data-mask]').inputmask()
+			//Datemask dd/mm/yyyy
+			$('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+			//Datemask2 mm/dd/yyyy
+			$('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+			//Money Euro
+			$('[data-mask]').inputmask()
 
-		    //Date range picker
-		    $('#reservation').daterangepicker()
+			//Date range picker
+			$('#reservation').daterangepicker()
 
-		    //Date range picker with time picker
-		    $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' }})
+			//Date range picker with time picker
+			$('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' }})
 
-		    //Date range as a button
-		    $('#daterange-btn').daterangepicker(
-		      {
-		        ranges   : {
-		          'Today'       : [moment(), moment()],
-		          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-		          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-		          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-		          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-		          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-		        },
-		        startDate: moment().subtract(29, 'days'),
-		        endDate  : moment()
-		      },
-		      function (start, end) {
-		        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-		      }
-		    )
+			//Date range as a button
+			$('#daterange-btn').daterangepicker(
+			{
+				ranges   : {
+				'Today'       : [moment(), moment()],
+				'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+				'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+				'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+				'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+				'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+				},
+				startDate: moment().subtract(29, 'days'),
+				endDate  : moment()
+			},
+			function (start, end) {
+				$('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+			}
+			)
 
-		   //iCheck for checkbox and radio inputs
-		   $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-		     checkboxClass: 'icheckbox_minimal-blue',
-		     radioClass   : 'iradio_minimal-blue'
-		   })
-		   //Red color scheme for iCheck
-		   $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-		     checkboxClass: 'icheckbox_minimal-red',
-		     radioClass   : 'iradio_minimal-red'
-		   })
-		   //Flat red color scheme for iCheck
-		   $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-		     checkboxClass: 'icheckbox_flat-green',
-		     radioClass   : 'iradio_flat-green'
-		   })
+			//iCheck for checkbox and radio inputs
+			$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+				checkboxClass: 'icheckbox_minimal-blue',
+				radioClass   : 'iradio_minimal-blue'
+			})
+			//Red color scheme for iCheck
+			$('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+				checkboxClass: 'icheckbox_minimal-red',
+				radioClass   : 'iradio_minimal-red'
+			})
+			//Flat red color scheme for iCheck
+			$('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+				checkboxClass: 'icheckbox_flat-green',
+				radioClass   : 'iradio_flat-green'
+			})
 
-		    //Date picker
-		    $('#datepicker').datepicker({
-		      autoclose: true
-		    })
+			//Date picker
+			$('#datepicker').datepicker({
+			autoclose: true
+			})
 
-		    //Date picker
-		    $('#datepicker1').datepicker({
-		      autoclose: true
-		    })
+			//Date picker
+			$('#datepicker1').datepicker({
+			autoclose: true
+			})
 
-		    //Timepicker
-		    $('.timepicker').timepicker({
-		      showInputs: false
-		    })
-		  })
+			//Timepicker
+			$('.timepicker').timepicker({
+			showInputs: false
+			})
+		})
 		</script>
 	</body>
 </html>
