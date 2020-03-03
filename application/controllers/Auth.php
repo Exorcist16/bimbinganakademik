@@ -6,6 +6,8 @@ class Auth extends CI_Controller {
     public function __construct() {
         parent::__construct();
         date_default_timezone_set('Asia/Makassar');
+
+        $this->load->model('crud');
     }
 
     public function index() {
@@ -17,6 +19,49 @@ class Auth extends CI_Controller {
         $cek_pass = $this->input->post('password');
         $password = md5($cek_pass);
         $this->AuthModel->login($username, $password);
+    }
+
+    public function profil_mahasiswa(){
+      $data = array(  'title'             => 'Auth',
+                      'isi'               => 'admin/_layout/profil_mahasiswa',
+                    // 'dataScript'        => 'admin/dataScript/beranda-script'
+                  );
+      $this->load->view('admin/_layout/wrapper', $data);
+    }
+
+    public function profil_dosen(){
+      $data = array(  'title'             => 'Auth',
+                      'isi'               => 'admin/_layout/profil_dosen',
+                    // 'dataScript'        => 'admin/dataScript/beranda-script'
+                  );
+      $this->load->view('admin/_layout/wrapper', $data);
+    }
+
+    public function get_pass(){
+      $id = $this->input->post('id');
+      $pass = md5($this->input->post('pass'));
+      $db = $this->db->query("SELECT password FROM user WHERE username = '$id'")->result();
+      foreach ($db as $row) {
+        $data = array(
+          'password'  => $row->password,
+          'passlama'  => $pass
+        );
+      }
+      echo json_encode($data);
+    }
+
+    public function ganti_pass(){
+      $id = $this->session->userdata('username');
+      $data = array(
+        'password' => md5($this->input->post('pass_baru'))
+      );
+      $this->crud->u('user', $data, array('username' => $id));
+
+      if ($this->session->userdata('role') == 'superadmin') {
+        redirect('superadmin/dashboard');
+      } elseif ($this->session->userdata('role') == 'kps') {
+        redirect('kps/daftarJudul');
+      }
     }
 
     public function logout(){

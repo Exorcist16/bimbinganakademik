@@ -256,7 +256,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="<?= base_url() ?>auth/profil_mahasiswa" class="btn btn-default btn-flat">Profil</a>
                 </div>
                 <div class="pull-right">
                   <a href="<?php echo base_url(); ?>auth/logout" class="btn btn-default btn-flat">Sign out</a>
@@ -426,7 +426,7 @@
               </li>
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="<?= base_url() ?>auth/profil_dosen" class="btn btn-default btn-flat">Profil</a>
                 </div>
                 <div class="pull-right">
                   <a href="<?php echo base_url(); ?>auth/logout" class="btn btn-default btn-flat">Sign out</a>
@@ -474,7 +474,7 @@
               </li>
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <button type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#modal-pass-superadmin" id="ganti_pass_superadmin" data-id="superadmin">Ganti Password</a>
                 </div>
                 <div class="pull-right">
                   <a href="<?php echo base_url(); ?>auth/logout" class="btn btn-default btn-flat">Sign out</a>
@@ -482,14 +482,98 @@
               </li>
             </ul>
           </li>
-          <!-- Control Sidebar Toggle Button -->
-          <!-- <li>
-            <a href="<?php echo base_url(); ?>auth/logout" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-            <a href="<?php echo base_url(); ?>auth/logout"><i class="fa fa-gears"></i></a>
-          </li> -->
         </ul>
       </div>
 
     </nav>
     <?php endif; ?>
+
 </header>
+<div class="modal fade" id="modal-pass-superadmin">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Ganti Password Superadmin</h4>
+      </div>
+      <form role="form" action="<?php echo base_url().'auth/ganti_pass';?>" method="post">
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Password Lama</label>
+            <input type="password" class="form-control" name="pass_lama_superadmin" id="pass_lama_superadmin" style="width: 100%;" required>
+            <h6 id="password_lama_superadmin_alert" class="help-block text-red"></h6>
+          </div>
+          <div class="form-group">
+            <label>Password Baru</label>
+            <input type="password" class="form-control" name="pass_baru" id="pass_baru" disabled>
+            <h6 id="password_baru_superadmin_alert" class="help-block text-red"></h6>
+          </div>
+          <div class="form-group">
+            <label>Ulangi Password Baru</label>
+            <input type="password" class="form-control" name="pass_baru_superadmin_ulang" id="pass_baru_superadmin_ulang" disabled>
+            <h6 id="ulang_password_baru_superadmin_alert" class="help-block text-red"></h6>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+          <button id="btn_ganti_pass_superadmin" type="submit" class="btn btn-primary" disabled>Ganti Password</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+
+  <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#pass_lama_superadmin").change(function(){
+        var pass = $(this).val();
+        console.log(pass);
+        var id = "superadmin";
+        $.ajax({
+          url: "<?=base_url();?>/auth/get_pass",
+          method: "POST",
+          dataType: "JSON",
+          data: {
+            id: id,
+            pass: pass
+          },
+          success: function(data){
+            console.log(data.password);
+            console.log(data.passlama);
+            if (data.password != data.passlama) {
+              document.getElementById("password_lama_superadmin_alert").innerText = "password lama salah";
+              document.getElementById("btn_ganti_pass_superadmin").disabled = true;
+              document.getElementById("pass_baru").disabled = true;
+              document.getElementById("pass_baru_superadmin_ulang").disabled = true;
+            } else {
+              document.getElementById("password_lama_superadmin_alert").innerText = "";
+              document.getElementById("btn_ganti_pass_superadmin").disabled = true;
+              document.getElementById("pass_baru").disabled = false;
+              document.getElementById("pass_baru").required = true;
+              document.getElementById("pass_baru_superadmin_ulang").disabled = false;
+              document.getElementById("pass_baru_superadmin_ulang").required = true;
+            }
+          }
+        })
+      })
+    })
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#pass_baru_superadmin_ulang").change(function(){
+        var passbaruulang = $(this).val();
+        var passbaru = $("#pass_baru").val();
+        if (passbaruulang == passbaru) {
+          document.getElementById("ulang_password_baru_superadmin_alert").innerText = "";
+          document.getElementById("btn_ganti_pass_superadmin").disabled = false;
+        } else {
+          document.getElementById("ulang_password_baru_superadmin_alert").innerText = "Password tidak sama";
+          document.getElementById("btn_ganti_pass_superadmin").disabled = true;
+        }
+      })
+    })
+  </script>
+
+</div>
