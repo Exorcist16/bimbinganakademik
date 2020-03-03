@@ -38,7 +38,7 @@ class Auth extends CI_Controller {
     }
 
     public function get_pass(){
-      $id = $this->input->post('id');
+      $id = $this->session->userdata('username');
       $pass = md5($this->input->post('pass'));
       $db = $this->db->query("SELECT password FROM user WHERE username = '$id'")->result();
       foreach ($db as $row) {
@@ -57,11 +57,17 @@ class Auth extends CI_Controller {
       );
       $this->crud->u('user', $data, array('username' => $id));
 
-      if ($this->session->userdata('role') == 'superadmin') {
-        redirect('superadmin/dashboard');
-      } elseif ($this->session->userdata('role') == 'kps') {
-        redirect('kps/daftarJudul');
-      }
+      redirect('superadmin/dashboard');
+    }
+
+    public function ganti_pass_kps(){
+      $id = $this->session->userdata('username');
+      $data = array(
+        'password' => md5($this->input->post('pass_baru_kps'))
+      );
+      $this->crud->u('user', $data, array('username' => $id));
+
+      redirect('kps/daftarJudul');
     }
 
     public function logout(){

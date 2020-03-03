@@ -90,7 +90,7 @@
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                <button type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#modal-pass-kps" id="ganti_pass_kps" data-id="">Ganti Password</button>
               </div>
               <div class="pull-right">
                 <a href="<?php echo base_url(); ?>auth/logout" class="btn btn-default btn-flat">Sign out</a>
@@ -562,6 +562,31 @@
   </script>
   <script type="text/javascript">
     $(document).ready(function(){
+      $("#pass_baru").change(function(){
+        var passbaru = $(this).val();
+        var passbaruulang = $("#pass_baru_superadmin_ulang").val();
+        var passlama = $("#pass_lama_superadmin").val();
+        if (passlama == passbaru) {
+          document.getElementById("password_baru_superadmin_alert").innerText = "Password Baru tidak boleh sama dengan Password Lama";
+          document.getElementById("btn_ganti_pass_superadmin").disabled = true;
+          document.getElementById("pass_baru_superadmin_ulang").value = "";
+          document.getElementById("ulang_password_baru_superadmin_alert").innerText = "";
+        } else if (passbaru == passbaruulang) {
+            document.getElementById("password_baru_superadmin_alert").innerText = "";
+            document.getElementById("btn_ganti_pass_superadmin").disabled = true;
+            document.getElementById("pass_baru_superadmin_ulang").value = "";
+            document.getElementById("ulang_password_baru_superadmin_alert").innerText = "";
+        } else {
+          document.getElementById("password_baru_superadmin_alert").innerText = "";
+          document.getElementById("btn_ganti_pass_superadmin").disabled = false;
+          document.getElementById("pass_baru_superadmin_ulang").value = "";
+          document.getElementById("ulang_password_baru_superadmin_alert").innerText = "";
+        }
+      })
+    })
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
       $("#pass_baru_superadmin_ulang").change(function(){
         var passbaruulang = $(this).val();
         var passbaru = $("#pass_baru").val();
@@ -575,5 +600,112 @@
       })
     })
   </script>
+</div>
 
+<div class="modal fade" id="modal-pass-kps">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Ganti Password KPS <?php echo $this->session->userdata('username');?></h4>
+      </div>
+      <form role="form" action="<?php echo base_url().'auth/ganti_pass_kps';?>" method="post">
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Password Lama</label>
+            <input type="password" class="form-control" name="pass_lama_kps" id="pass_lama_kps" style="width: 100%;" required>
+            <h6 id="password_lama_kps_alert" class="help-block text-red"></h6>
+          </div>
+          <div class="form-group">
+            <label>Password Baru</label>
+            <input type="password" class="form-control" name="pass_baru_kps" id="pass_baru_kps" disabled>
+            <h6 id="password_baru_kps_alert" class="help-block text-red"></h6>
+          </div>
+          <div class="form-group">
+            <label>Ulangi Password Baru</label>
+            <input type="password" class="form-control" name="pass_baru_kps_ulang" id="pass_baru_kps_ulang" disabled>
+            <h6 id="ulang_password_baru_kps_alert" class="help-block text-red"></h6>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+          <button id="btn_ganti_pass_kps" type="submit" class="btn btn-primary" disabled>Ganti Password</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#pass_lama_kps").change(function(){
+        var pass = $(this).val();
+        $.ajax({
+          url: "<?=base_url();?>/auth/get_pass",
+          method: "POST",
+          dataType: "JSON",
+          data: {
+            pass: pass
+          },
+          success: function(data){
+            console.log(data.password);
+            console.log(data.passlama);
+            if (data.password != data.passlama) {
+              document.getElementById("password_lama_kps_alert").innerText = "password lama salah";
+              document.getElementById("btn_ganti_pass_kps").disabled = true;
+              document.getElementById("pass_baru_kps").disabled = true;
+              document.getElementById("pass_baru_kps_ulang").disabled = true;
+            } else {
+              document.getElementById("password_lama_kps_alert").innerText = "";
+              document.getElementById("btn_ganti_pass_kps").disabled = true;
+              document.getElementById("pass_baru_kps").disabled = false;
+              document.getElementById("pass_baru_kps").required = true;
+              document.getElementById("pass_baru_kps_ulang").disabled = false;
+              document.getElementById("pass_baru_kps_ulang").required = true;
+            }
+          }
+        })
+      })
+    })
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#pass_baru_kps").change(function(){
+        var passbaru = $(this).val();
+        var passbaruulang = $("#pass_baru_kps_ulang").val();
+        var passlama = $("#pass_lama_kps").val();
+        if (passlama == passbaru) {
+          document.getElementById("password_baru_kps_alert").innerText = "Password Baru tidak boleh sama dengan Password Lama";
+          document.getElementById("btn_ganti_pass_kps").disabled = true;
+          document.getElementById("pass_baru_kps_ulang").value = "";
+          document.getElementById("ulang_password_baru_kps_alert").innerText = "";
+        } else if (passbaru == passbaruulang) {
+            document.getElementById("password_baru_kps_alert").innerText = "";
+            document.getElementById("btn_ganti_pass_kps").disabled = true;
+            document.getElementById("pass_baru_kps_ulang").value = "";
+            document.getElementById("ulang_password_baru_kps_alert").innerText = "";
+        } else {
+          document.getElementById("password_baru_kps_alert").innerText = "";
+          document.getElementById("btn_ganti_pass_kps").disabled = false;
+          document.getElementById("pass_baru_kps_ulang").value = "";
+          document.getElementById("ulang_password_baru_kps_alert").innerText = "";
+        }
+      })
+    })
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#pass_baru_kps_ulang").change(function(){
+        var passbaruulang = $(this).val();
+        var passbaru = $("#pass_baru_kps").val();
+        if (passbaruulang == passbaru) {
+          document.getElementById("ulang_password_baru_kps_alert").innerText = "";
+          document.getElementById("btn_ganti_pass_kps").disabled = false;
+        } else {
+          document.getElementById("ulang_password_baru_kps_alert").innerText = "Password tidak sama";
+          document.getElementById("btn_ganti_pass_kps").disabled = true;
+        }
+      })
+    })
+  </script>
 </div>
