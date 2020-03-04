@@ -22,9 +22,12 @@ class Auth extends CI_Controller {
     }
 
     public function profil_mahasiswa(){
+      $nim = $this->session->userdata('username');
+      $detail = $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
+         ON mahasiswa.nim = judul.nim WHERE mahasiswa.nim = '$nim'")->result();
       $data = array(  'title'             => 'Auth',
                       'isi'               => 'admin/_layout/profil_mahasiswa',
-                    // 'dataScript'        => 'admin/dataScript/beranda-script'
+                      'detail'            => $detail
                   );
       $this->load->view('admin/_layout/wrapper', $data);
     }
@@ -64,6 +67,16 @@ class Auth extends CI_Controller {
       $id = $this->session->userdata('username');
       $data = array(
         'password' => md5($this->input->post('pass_baru_kps'))
+      );
+      $this->crud->u('user', $data, array('username' => $id));
+
+      redirect('kps/daftarJudul');
+    }
+
+    public function ganti_pass_mahasiswa(){
+      $id = $this->session->userdata('username');
+      $data = array(
+        'password' => md5($this->input->post('pass_baru_mhs'))
       );
       $this->crud->u('user', $data, array('username' => $id));
 

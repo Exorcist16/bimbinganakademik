@@ -474,7 +474,7 @@
               </li>
               <li class="user-footer">
                 <div class="pull-left">
-                  <button type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#modal-pass-superadmin" id="ganti_pass_superadmin" data-id="superadmin">Ganti Password</a>
+                  <button type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#modal-pass-superadmin" id="ganti_pass_superadmin" data-id="superadmin">Ganti Password</button>
                 </div>
                 <div class="pull-right">
                   <a href="<?php echo base_url(); ?>auth/logout" class="btn btn-default btn-flat">Sign out</a>
