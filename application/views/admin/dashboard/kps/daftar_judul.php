@@ -75,7 +75,12 @@
                   <div class="modal-body">
                     <div class="form-group">
                       <label>NIM</label>
-                      <input type="text" class="form-control" name="penelitian_nim" id="penelitian_nim" placeholder="Nim Mahasiswa" required>
+                      <select class="form-control select2" name="penelitian_nim" id="penelitian_nim" style="width: 100%;" required>
+                        <option selected value="" disabled>NIM</option>
+                        <?php foreach ($mahasiswa as $mahasiswa) { ?>
+                        <option><?=$mahasiswa->nim; ?></option>
+                        <?php } ?>
+                      </select>
                       <h6 class="help-block text-red" id="status_nama"></h6>
                     </div>
                     <div class="form-group">
@@ -86,6 +91,21 @@
                     <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
                     <script type="text/javascript">
                       $(document).ready(function(){
+                        $('#penelitian_nim').select2()
+                        $("#penelitian_nim").change(function(){
+                          var nama = $(this).val();
+                          $.ajax({
+                            url: "<?=base_url();?>/Kps/get_jumlah_bimbing",
+                            method: "POST",
+                            dataType: "JSON",
+                            data: {
+                              nama: nama
+                            },
+                            success: function(data) {
+                              document.getElementById("penelitian_total_bimbingan1").innerText = data[0].pembimbing;
+                            }
+                          })
+                        });
                         $("#penelitian_nim").change(function(){
                           var nim = $(this).val();
                           $.ajax({
@@ -117,7 +137,7 @@
 
                     <div class="form-group">
                       <label>Judul Penelitian</label>
-                      <input type="text" class="form-control" name="penelitian_judul" id="penelitian_judul" placeholder="Judul Penelitian" required>
+                      <textarea class="form-control" rows="3" name="penelitian_judul" id="penelitian_judul" placeholder="Judul Penelitian" required></textarea>
                     </div>
                     <div class="form-group">
                       <label>Pembimbing I</label>
@@ -131,6 +151,7 @@
                     </div>
                     <script type="text/javascript">
                       $(document).ready(function(){
+                        $('#penelitian_pembimbing1').select2()
                         $("#penelitian_pembimbing1").change(function(){
                           var nama = $(this).val();
                           $.ajax({
@@ -160,6 +181,7 @@
                     </div>
                     <script type="text/javascript">
                       $(document).ready(function(){
+                        $('#penelitian_pembimbing2').select2()
                         $("#penelitian_pembimbing2").change(function(){
                           var nama = $(this).val();
                           $.ajax({
@@ -189,6 +211,7 @@
                     </div>
                     <script type="text/javascript">
                       $(document).ready(function(){
+                        $('#penelitian_penguji1').select2()
                         $("#penelitian_penguji1").change(function(){
                           var nama = $(this).val();
                           $.ajax({
@@ -218,6 +241,7 @@
                     </div>
                     <script type="text/javascript">
                       $(document).ready(function(){
+                        $('#penelitian_penguji2').select2()
                         $("#penelitian_penguji2").change(function(){
                           var nama = $(this).val();
                           $.ajax({
@@ -267,7 +291,7 @@
                     </div>
                     <div class="form-group">
                       <label>Judul Penelitian</label>
-                      <input type="text" class="form-control" name="penelitian_judul_edit" id="penelitian_judul_edit" placeholder="Judul Penelitian" required>
+                      <textarea class="form-control" rows="3" name="penelitian_judul_edit" id="penelitian_judul_edit" placeholder="Judul Penelitian" required></textarea>
                     </div>
                     <div class="form-group">
                       <label>Pembimbing I</label>

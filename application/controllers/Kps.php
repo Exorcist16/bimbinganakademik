@@ -23,13 +23,15 @@ class Kps extends CI_Controller {
 	public function daftarJudul(){
 		$sessiondepartemen = $this->session->userdata('departemen');
 		$datadosen = $this->crud->ga('dosen');
+		$datamahasiswa = $this->crud->gw('mahasiswa', array('departemen' => $sessiondepartemen));
 
 		$datatampil = $this->Kps_model->tampil_data($sessiondepartemen);
 
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/daftar_judul',
-										'datatampil'				=> $datatampil,
-										'dosen'							=> $datadosen
+						'datatampil'		=> $datatampil,
+						'dosen'				=> $datadosen,
+						'mahasiswa'			=> $datamahasiswa
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
@@ -116,15 +118,17 @@ class Kps extends CI_Controller {
 // ------------------------------------------------------------------------------------------------
 	public function seminarHasil(){
 		$sessiondepartemen = $this->session->userdata('departemen');
+		$datamahasiswa = $this->crud->gw('mahasiswa', array('departemen' => $sessiondepartemen));
 		$datatampilseminar = $this->Kps_model->tampil_data_seminar_hasil($sessiondepartemen);
 
 		$datawaktuhasil = $this->crud->gw('waktu_ujian', array('waktu_departemen' => $sessiondepartemen));
 		$datatempathasil = $this->crud->ga('tempat_ujian');
-		$data = array(  'title'             => 'KPS Dashboard',
-		                'isi'               => 'admin/dashboard/kps/seminar_hasil',
-										'datatampilseminar' => $datatampilseminar,
-										'datawaktuhasil'		=> $datawaktuhasil,
-										'datatempathasil'		=> $datatempathasil
+		$data = array(  'title'						=> 'KPS Dashboard',
+						'isi'						=> 'admin/dashboard/kps/seminar_hasil',
+						'mahasiswa'					=> $datamahasiswa,
+						'datatampilseminar'			=> $datatampilseminar,
+						'datawaktuhasil'			=> $datawaktuhasil,
+						'datatempathasil'			=> $datatempathasil
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}

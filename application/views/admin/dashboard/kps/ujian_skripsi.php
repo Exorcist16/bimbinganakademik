@@ -174,6 +174,8 @@
                             }
                           })
                         });
+                        $('#ujian_tutup_waktu').select2()
+                        $('#ujian_tutup_tempat').select2()
                       });
                     </script>
 
