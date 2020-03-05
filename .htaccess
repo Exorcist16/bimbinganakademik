@@ -3,3 +3,10 @@ RewriteCond $1 !^(index\.php|resources|robots\.txt)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L,QSA] 
+
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    
+    RewriteCond %{HTTPS} off
+    RewriteRule (.*) https://%{SERVER_NAME}/$1 [R,L]
+</IfModule>

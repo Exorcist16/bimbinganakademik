@@ -89,7 +89,13 @@
                   <div class="modal-body">
                     <div class="form-group">
                       <label>NIM</label>
-                      <input type="text" class="form-control" name="ujian_tutup_nim" id="ujian_tutup_nim" style="width: 100%;" placeholder="Nim Mahasiswa" required>
+                      <select class="form-control select2" name="ujian_tutup_nim" id="ujian_tutup_nim" style="width: 100%;" required>
+                        <option selected value="" disabled>NIM</option>
+                        <?php foreach ($mahasiswa as $mahasiswa) { ?>
+                        <option><?=$mahasiswa->nim; ?></option>
+                        <?php } ?>
+                      </select>
+                      <!-- <input type="text" class="form-control" name="ujian_tutup_nim" id="ujian_tutup_nim" style="width: 100%;" placeholder="Nim Mahasiswa" required> -->
                       <h6 id="ujian_tutup_nim_tidak_ada" class="help-block text-red"></h6>
                     </div>
                     <div class="form-group">
@@ -128,6 +134,7 @@
                     <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
                     <script type="text/javascript">
                       $(document).ready(function(){
+                        $('#ujian_tutup_nim').select2();
                         $("#ujian_tutup_nim").change(function(){
                           var nim = $(this).val();
                           $.ajax({
@@ -174,6 +181,8 @@
                             }
                           })
                         });
+                        $('#ujian_tutup_waktu').select2()
+                        $('#ujian_tutup_tempat').select2()
                       });
                     </script>
 

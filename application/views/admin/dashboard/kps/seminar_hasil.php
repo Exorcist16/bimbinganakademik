@@ -91,37 +91,42 @@
                   <div class="modal-body">
                     <div class="form-group">
                       <label>NIM</label>
-                      <input type="text" class="form-control" name="ujian_hasil_nim" id="ujian_hasil_nim" style="width: 100%;" placeholder="Nim Mahasiswa" required>
+                      <select class="form-control select2" name="ujian_hasil_nim" id="ujian_hasil_nim" style="width: 100%;" required>
+                        <option selected value="" disabled>NIM</option>
+                        <?php foreach ($mahasiswa as $mahasiswa) { ?>
+                        <option><?=$mahasiswa->nim; ?></option>
+                        <?php } ?>
+                      </select>
                       <h6 id="ujian_hasil_nim_tidak_ada" class="help-block text-red"></h6>
                     </div>
                     <div class="form-group">
                       <label>Nama Mahasiswa</label>
-                      <input type="text" class="form-control" name="ujian_hasil_nama" id="ujian_hasil_nama" placeholder="Nama Mahasiswa"  required>
+                      <input type="text" class="form-control" name="ujian_hasil_nama" id="ujian_hasil_nama" placeholder="Nama Mahasiswa" readonly required>
                     </div>
                     <div class="form-group">
                       <label>Pembimbing I</label>
-                      <input type="text" class="form-control" name="ujian_hasil_pembimbing1" id="ujian_hasil_pembimbing1" placeholder="Pembimbing I"  required>
+                      <input type="text" class="form-control" name="ujian_hasil_pembimbing1" id="ujian_hasil_pembimbing1" placeholder="Pembimbing I" readonly required>
                       <div class="checkbox">
                        <label><input name="ujian_hasil_notif_pembimbing1" id="ujian_hasil_notif_pembimbing1" type="checkbox" checked>Kirimkan Notifikasi</label>
                       </div>
                     </div>
                     <div class="form-group">
                       <label>Pembimbing II</label>
-                      <input type="text" class="form-control" name="ujian_hasil_pembimbing2" id="ujian_hasil_pembimbing2" placeholder="Pembimbing II"  required>
+                      <input type="text" class="form-control" name="ujian_hasil_pembimbing2" id="ujian_hasil_pembimbing2" placeholder="Pembimbing II" readonly required>
                       <div class="checkbox">
                        <label><input name="ujian_hasil_notif_pembimbing2" id="ujian_hasil_notif_pembimbing2" type="checkbox" checked>Kirimkan Notifikasi</label>
                       </div>
                     </div>
                     <div class="form-group">
                       <label>Penguji I</label>
-                      <input type="text" class="form-control" name="ujian_hasil_penguji1" id="ujian_hasil_penguji1" placeholder="Penguji I"  required>
+                      <input type="text" class="form-control" name="ujian_hasil_penguji1" id="ujian_hasil_penguji1" placeholder="Penguji I" readonly required>
                       <div class="checkbox">
                        <label><input name="ujian_hasil_notif_penguji1" id="ujian_hasil_notif_penguji1" type="checkbox" checked>Kirimkan Notifikasi</label>
                       </div>
                     </div>
                     <div class="form-group">
                       <label>Penguji II</label>
-                      <input type="text" class="form-control" name="ujian_hasil_penguji2" id="ujian_hasil_penguji2" placeholder="Penguji II"  required>
+                      <input type="text" class="form-control" name="ujian_hasil_penguji2" id="ujian_hasil_penguji2" placeholder="Penguji II" readonly required>
                       <div class="checkbox">
                        <label><input name="ujian_hasil_notif_penguji2" id="ujian_hasil_notif_penguji2" type="checkbox" checked>Kirimkan Notifikasi</label>
                       </div>
@@ -164,6 +169,7 @@
             <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
             <script type="text/javascript">
               $(document).ready(function(){
+                $('#ujian_hasil_nim').select2();
                 $("#ujian_hasil_nim").change(function(){
                   var nim = $(this).val();
                   $.ajax({
@@ -184,7 +190,7 @@
                           document.getElementById("ujian_hasil_penguji2").value = data[0].penguji2;
                         } else {
                           document.getElementById("ujian_hasil_nim_tidak_ada").innerText = "Mahasiswa tersebut belum melaksanakan seminar proposal";
-                          document.getElementById("ujian_hasil_nama").value = "";
+                          document.getElementById("ujian_hasil_nama").value = data[0].nama;
                           document.getElementById("ujian_hasil_pembimbing1").value = "";
                           document.getElementById("ujian_hasil_pembimbing2").value = "";
                           document.getElementById("ujian_hasil_penguji1").value = "";
@@ -201,6 +207,8 @@
                     }
                   })
                 });
+                $('#ujian_hasil_waktu').select2();
+                $('#ujian_hasil_tempat').select2();
               });
             </script>
 
