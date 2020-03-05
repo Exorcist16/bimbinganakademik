@@ -95,37 +95,36 @@
                         <option><?=$mahasiswa->nim; ?></option>
                         <?php } ?>
                       </select>
-                      <!-- <input type="text" class="form-control" name="ujian_tutup_nim" id="ujian_tutup_nim" style="width: 100%;" placeholder="Nim Mahasiswa" required> -->
                       <h6 id="ujian_tutup_nim_tidak_ada" class="help-block text-red"></h6>
                     </div>
                     <div class="form-group">
                       <label>Nama Mahasiswa</label>
-                      <input type="text" class="form-control" name="ujian_tutup_nama" id="ujian_tutup_nama" placeholder="Nama Mahasiswa"  required>
+                      <input type="text" class="form-control" name="ujian_tutup_nama" id="ujian_tutup_nama" placeholder="Nama Mahasiswa" readonly required>
                     </div>
                     <div class="form-group">
                       <label>Pembimbing I</label>
-                      <input type="text" class="form-control" name="ujian_tutup_pembimbing1" id="ujian_tutup_pembimbing1" placeholder="Pembimbing I"  required>
+                      <input type="text" class="form-control" name="ujian_tutup_pembimbing1" id="ujian_tutup_pembimbing1" placeholder="Pembimbing I" readonly required>
                       <div class="checkbox">
                        <label><input name="ujian_tutup_notif_pembimbing1" id="ujian_tutup_notif_pembimbing1" type="checkbox" checked>Kirimkan Notifikasi</label>
                       </div>
                     </div>
                     <div class="form-group">
                       <label>Pembimbing II</label>
-                      <input type="text" class="form-control" name="ujian_tutup_pembimbing2" id="ujian_tutup_pembimbing2" placeholder="Pembimbing II"  required>
+                      <input type="text" class="form-control" name="ujian_tutup_pembimbing2" id="ujian_tutup_pembimbing2" placeholder="Pembimbing II" readonly required>
                       <div class="checkbox">
                        <label><input name="ujian_tutup_notif_pembimbing2" id="ujian_tutup_notif_pembimbing2" type="checkbox" checked>Kirimkan Notifikasi</label>
                       </div>
                     </div>
                     <div class="form-group">
                       <label>Penguji I</label>
-                      <input type="text" class="form-control" name="ujian_tutup_penguji1" id="ujian_tutup_penguji1" placeholder="Penguji I"  required>
+                      <input type="text" class="form-control" name="ujian_tutup_penguji1" id="ujian_tutup_penguji1" placeholder="Penguji I" readonly required>
                       <div class="checkbox">
                        <label><input name="ujian_tutup_notif_penguji1" id="ujian_tutup_notif_penguji1" type="checkbox" checked>Kirimkan Notifikasi</label>
                       </div>
                     </div>
                     <div class="form-group">
                       <label>Penguji II</label>
-                      <input type="text" class="form-control" name="ujian_tutup_penguji2" id="ujian_tutup_penguji2" placeholder="Penguji II"  required>
+                      <input type="text" class="form-control" name="ujian_tutup_penguji2" id="ujian_tutup_penguji2" placeholder="Penguji II" readonly required>
                       <div class="checkbox">
                        <label><input name="ujian_tutup_notif_penguji2" id="ujian_tutup_notif_penguji2" type="checkbox" checked>Kirimkan Notifikasi</label>
                       </div>
