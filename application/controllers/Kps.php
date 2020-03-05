@@ -190,15 +190,17 @@ class Kps extends CI_Controller {
 // ------------------------------------------------------------------------------------------------
 	public function ujianSkripsi(){
 		$sessiondepartemen = $this->session->userdata('departemen');
+		$datamahasiswa = $this->crud->gw('mahasiswa', array('departemen' => $sessiondepartemen));
 		$datatampiltutup = $this->Kps_model->tampil_data_seminar_tutup($sessiondepartemen);
 
 		$datawaktututup = $this->crud->gw('waktu_ujian', array('waktu_departemen' => $sessiondepartemen));
 		$datatempattutup = $this->crud->gw('tempat_ujian', array('tempat_ujian_departemen' => $sessiondepartemen));
 		$data = array(  'title'             => 'KPS Dashboard',
 		                'isi'               => 'admin/dashboard/kps/ujian_skripsi',
-										'datatampiltutup'		=> $datatampiltutup,
-										'datawaktututup'		=> $datawaktututup,
-										'datatempattutup'		=> $datatempattutup
+						'mahasiswa'			=> $datamahasiswa,
+						'datatampiltutup'	=> $datatampiltutup,
+						'datawaktututup'	=> $datawaktututup,
+						'datatempattutup'	=> $datatempattutup
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}
