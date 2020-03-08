@@ -19,8 +19,25 @@ class Superadmin extends CI_Controller {
 	}
 // --------------------------------------------------------------------------------
 	public function dashboard(){
+		$jmldepartemen = $this->db->query("SELECT COUNT(*) AS jumlah_departemen FROM
+			departemen")->result();
+		$jmlkps = $this->db->query("SELECT COUNT(*) jumlah_kps FROM kps")->result();
+		$jmlruangan = $this->db->query("SELECT COUNT(*) jumlah_ruangan FROM tempat_ujian")
+			->result();
+		$jmldosen = $this->db->query("SELECT COUNT(*) jumlah_dosen FROM dosen")->result();
+		$jmls1 = $this->db->query("SELECT COUNT(*) jumlah_s1 FROM mahasiswa WHERE
+		 strata = 'S1'")->result();
+		$jmls23 = $this->db->query("SELECT COUNT(*) jumlah_s23 FROM mahasiswa WHERE
+			strata = 'S1' AND strata = 'S3'")->result();
+
 		$data = array(  'title'             => 'Superadmin Dashboard',
 		                'isi'               => 'admin/dashboard/superadmin/dashboard',
+										'jmldepartemen'			=> $jmldepartemen,
+										'jmlkps'						=> $jmlkps,
+										'jmlruangan'				=> $jmlruangan,
+										'jmldosen'					=> $jmldosen,
+										'jmls1'							=> $jmls1,
+										'jmls23'						=> $jmls23
 		            	// 'dataScript'        => 'admin/dataScript/beranda-script'
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
@@ -154,7 +171,10 @@ class Superadmin extends CI_Controller {
 
 	public function edit_tempat(){
 		$id = $this->uri->segment(3);
-		$data = array('tempat_ujian_nama' => $this->input->post('tempat_nama_edit'));
+		$data = array(
+			'tempat_ujian_nama' => $this->input->post('tempat_nama_edit'),
+			'tempat_ujian_departemen'	=> $this->input->post('departemen_edit')
+		);
 
 		$this->crud->u('tempat_ujian', $data, array('tempat_ujian_id' => $id));
 		redirect('superadmin/masterDataTempatSeminar');

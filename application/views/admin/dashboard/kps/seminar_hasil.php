@@ -141,15 +141,6 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label>Waktu Ujian</label>
-                      <select class="form-control select2" name="ujian_hasil_waktu" id="ujian_hasil_waktu" style="width: 100%;" required>
-                        <option selected value="" disabled>Waktu Ujian</option>
-                        <?php foreach ($datawaktuhasil as $datawaktu) { ?>
-                        <option value="<?=$datawaktu->waktu_ujian_id;?>"><?=$datawaktu->waktu_mulai;?> - <?=$datawaktu->waktu_selesai;?> WITA</option>
-                        <?php } ?>
-                      </select>
-                    </div>
-                    <div class="form-group">
                       <label>Tempat Ujian</label>
                       <select class="form-control select2" name="ujian_hasil_tempat" id="ujian_hasil_tempat" style="width: 100%;" required>
                         <option selected value="" disabled>Tempat Ujian</option>
@@ -158,10 +149,17 @@
                         <?php } ?>
                       </select>
                     </div>
+                    <div class="form-group">
+                      <label>Waktu Ujian</label>
+                      <select class="form-control select2" name="ujian_hasil_waktu" id="ujian_hasil_waktu" style="width: 100%;" required>
+                        <option selected value="" disabled>Waktu Ujian</option>
+                      </select>
+                    </div>
+                    <div id="proteksi"><p id="proteksi_info"></p></div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Tambahkan</button>
+                    <button id="proteksi_button" type="submit" class="btn btn-primary">Tambahkan</button>
                   </div>
                 </form>
               </div>
@@ -212,6 +210,183 @@
                 $('#ujian_hasil_waktu').select2();
                 $('#ujian_hasil_tempat').select2();
               });
+            </script>
+
+            <script type="text/javascript">
+              $(document).ready(function(){
+                $("#datepicker").change(function(){
+                  var tanggal = $(this).val();
+                  var tempat = $("#ujian_hasil_tempat").val();
+                  var waktu = $("#ujian_hasil_waktu").val();
+                  var dosen1 = $("#ujian_hasil_pembimbing1").val();
+                  var dosen2 = $("#ujian_hasil_pembimbing2").val();
+                  var dosen3 = $("#ujian_hasil_penguji1").val();
+                  var dosen4 = $("#ujian_hasil_penguji2").val();
+                  // console.log(tanggal);
+                  $.ajax({
+                    url : "<?=base_url();?>/Kps/proteksi",
+                    method: "POST",
+                    dataType: "JSON",
+                    data: {
+                      tanggal: tanggal
+                    },
+                    success: function(data) {
+                      console.log('js tanggal');
+                      for (i=0; i<=data.length; i++){
+                        if (data[i] == null) {
+                          document.getElementById("proteksi").style = "";
+                          document.getElementById("proteksi_info").style = "";
+                          document.getElementById("proteksi_info").innerText = "";
+                          document.getElementById("proteksi_button").disabled = false;
+                        } else {
+                          if (data[i].seminar_tanggal == tanggal) {
+                            if (data[i].seminar_waktu == waktu) {
+                              if (data[i].seminar_pembimbing1_nama == dosen1 || data[i].seminar_pembimbing2_nama == dosen1
+                                || data[i].seminar_penguji1_nama == dosen1 || data[i].seminar_penguji2_nama == dosen1
+                                || data[i].seminar_pembimbing1_nama == dosen2 || data[i].seminar_pembimbing2_nama == dosen2
+                                || data[i].seminar_penguji1_nama == dosen2 || data[i].seminar_penguji2_nama == dosen2
+                                || data[i].seminar_pembimbing1_nama == dosen3 || data[i].seminar_pembimbing2_nama == dosen3
+                                || data[i].seminar_penguji1_nama == dosen3 || data[i].seminar_penguji2_nama == dosen3
+                                || data[i].seminar_pembimbing1_nama == dosen4 || data[i].seminar_pembimbing2_nama == dosen4
+                                || data[i].seminar_penguji1_nama == dosen4 || data[i].seminar_penguji2_nama == dosen4) {
+                                  console.log("dosen dijalankan");
+                                document.getElementById("proteksi").style = "background-color:#dd4b39; width:100%; height: 40px;";
+                                document.getElementById("proteksi_info").style = "color:white;";
+                                document.getElementById("proteksi_info").innerText = "terdapat dosen yang telah memiliki jadwal seminar di waktu yang sama";
+                                document.getElementById("proteksi_button").disabled = true;
+                                break;
+                              } else if (data[i].seminar_tempat == tempat) {
+                                console.log("tempat dijalankan");
+                                document.getElementById("proteksi").style = "background-color:#dd4b39; width:100%; height: 40px;";
+                                document.getElementById("proteksi_info").style = "color:white;";
+                                document.getElementById("proteksi_info").innerText = "Tempat tidak bisa digunakan";
+                                document.getElementById("proteksi_button").disabled = true;
+                                break;
+                              } else {
+                                console.log("tempat else dijalankan");
+                                document.getElementById("proteksi").style = "";
+                                document.getElementById("proteksi_info").style = "";
+                                document.getElementById("proteksi_info").innerText = "";
+                                document.getElementById("proteksi_button").disabled = false;
+                              }
+                            } else {
+                              console.log("else waktu dijalankan");
+                              document.getElementById("proteksi").style = "";
+                              document.getElementById("proteksi_info").style = "";
+                              document.getElementById("proteksi_info").innerText = "";
+                              document.getElementById("proteksi_button").disabled = false;
+                            }
+                          } else {
+                            console.log("else tanggal dijalankan");
+                            document.getElementById("proteksi").style = "";
+                            document.getElementById("proteksi_info").style = "";
+                            document.getElementById("proteksi_info").innerText = "";
+                            document.getElementById("proteksi_button").disabled = false;
+                          }
+                        }
+                      }
+                    }
+                  })
+                })
+              })
+            </script>
+
+            <script type="text/javascript">
+              $(document).ready(function(){
+                $("#ujian_hasil_tempat").change(function(){
+                  var id = $(this).val();
+                  $.ajax({
+                    url : "<?=base_url();?>/Kps/get_waktu_hasil",
+                    method: "POST",
+                    dataType: "JSON",
+                    async: false,
+                    data: {
+                      id: id
+                    },
+                    success: function(data) {
+                      console.log(id);
+                      var html = '';
+                      html += '<option selected value="" disabled>--Pilih Waktu Ujian--</option>';
+                      var i;
+                      for(i=0; i<data.length; i++){
+                        html += '<option value="'+data[i].waktu_ujian_id+'">'+data[i].waktu_mulai+' - '+data[i].waktu_selesai+'</option>';
+                      }
+                      $('#ujian_hasil_waktu').html(html);
+                      document.getElementById("proteksi").style = "";
+                      document.getElementById("proteksi_info").style = "";
+                      document.getElementById("proteksi_info").innerText = "";
+                      document.getElementById("proteksi_button").disabled = false;
+                    }
+                  })
+                })
+              })
+            </script>
+
+            <script type="text/javascript">
+              $(document).ready(function(){
+                $("#ujian_hasil_waktu").change(function(){
+                  var waktu = $(this).val();
+                  var tempat = $("#ujian_hasil_tempat").val();
+                  var tanggal = $("#datepicker").val();
+                  var dosen1 = $("#ujian_hasil_pembimbing1").val();
+                  var dosen2 = $("#ujian_hasil_pembimbing2").val();
+                  var dosen3 = $("#ujian_hasil_penguji1").val();
+                  var dosen4 = $("#ujian_hasil_penguji2").val();
+                  // console.log(tanggal);
+                  $.ajax({
+                    url : "<?=base_url();?>/Kps/proteksi",
+                    method: "POST",
+                    dataType: "JSON",
+                    data: {
+                      tanggal: tanggal
+                    },
+                    success: function(data) {
+                      console.log('js waktu');
+                      for (i=0; i<data.length; i++){
+                        if (data[i].seminar_tanggal == tanggal) {
+                          if (data[i].seminar_waktu == waktu) {
+                            if (data[i].seminar_pembimbing1_nama == dosen1 || data[i].seminar_pembimbing2_nama == dosen1
+                              || data[i].seminar_penguji1_nama == dosen1 || data[i].seminar_penguji2_nama == dosen1
+                              || data[i].seminar_pembimbing1_nama == dosen2 || data[i].seminar_pembimbing2_nama == dosen2
+                              || data[i].seminar_penguji1_nama == dosen2 || data[i].seminar_penguji2_nama == dosen2
+                              || data[i].seminar_pembimbing1_nama == dosen3 || data[i].seminar_pembimbing2_nama == dosen3
+                              || data[i].seminar_penguji1_nama == dosen3 || data[i].seminar_penguji2_nama == dosen3
+                              || data[i].seminar_pembimbing1_nama == dosen4 || data[i].seminar_pembimbing2_nama == dosen4
+                              || data[i].seminar_penguji1_nama == dosen4 || data[i].seminar_penguji2_nama == dosen4) {
+                              document.getElementById("proteksi").style = "background-color:#dd4b39; width:100%; height: 40px;";
+                              document.getElementById("proteksi_info").style = "color:white;";
+                              document.getElementById("proteksi_info").innerText = "terdapat dosen yang telah memiliki jadwal seminar di waktu yang sama";
+                              document.getElementById("proteksi_button").disabled = true;
+                              break;
+                            } else if (data[i].seminar_tempat == tempat) {
+                              document.getElementById("proteksi").style = "background-color:#dd4b39; width:100%; height: 40px;";
+                              document.getElementById("proteksi_info").style = "color:white;";
+                              document.getElementById("proteksi_info").innerText = "Tempat tidak bisa digunakan";
+                              document.getElementById("proteksi_button").disabled = true;
+                              break;
+                            } else {
+                              document.getElementById("proteksi").style = "";
+                              document.getElementById("proteksi_info").style = "";
+                              document.getElementById("proteksi_info").innerText = "";
+                              document.getElementById("proteksi_button").disabled = false;
+                            }
+                          } else {
+                            document.getElementById("proteksi").style = "";
+                            document.getElementById("proteksi_info").style = "";
+                            document.getElementById("proteksi_info").innerText = "";
+                            document.getElementById("proteksi_button").disabled = false;
+                          }
+                        } else {
+                          document.getElementById("proteksi").style = "";
+                          document.getElementById("proteksi_info").style = "";
+                          document.getElementById("proteksi_info").innerText = "";
+                          document.getElementById("proteksi_button").disabled = false;
+                        }
+                      }
+                    }
+                  })
+                })
+              })
             </script>
 
             <!-- /.modal-dialog -->
