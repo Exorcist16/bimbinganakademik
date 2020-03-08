@@ -62,7 +62,7 @@
 			});
 		</script> -->
 
-		<script>
+		<script>			
 			function urlBase64ToUint8Array(base64String) {
 				const padding = '='.repeat((4 - base64String.length % 4) % 4);
 				const base64 = (base64String + padding)
@@ -117,6 +117,7 @@
 										null, new Uint8Array(subscribe.getKey('p256dh')))));
 									console.log('Berhasil melakukan subscribe dengan auth key: ', btoa(String.fromCharCode.apply(
 										null, new Uint8Array(subscribe.getKey('auth')))));
+									return push_sendSubscriptionToServer(subscribe, 'POST');
 								}).catch(function(e) {
 									console.error('Tidak dapat melakukan subscribe ', e.message);
 								});
@@ -125,7 +126,27 @@
 					});
 				}
 			}
+			
+			function push_sendSubscriptionToServer(subscribe, method) {
+				const contentEncoding = (PushManager.supportedContentEncodings || ['aesgcm'])[0];
 
+				return fetch('<?=base_url()?>push_subscription.php', {
+					method,
+					body: JSON.stringify({
+						username : '<?php echo $this->session->userdata('username'); ?>',
+						endpoint: subscribe.endpoint,
+						publicKey: btoa(String.fromCharCode.apply(null, new Uint8Array(subscribe.getKey('p256dh')))),
+						authToken: btoa(String.fromCharCode.apply(null, new Uint8Array(subscribe.getKey('auth')))),
+						contentEncoding,
+					}),
+				}).then(() => subscribe);
+			}
+
+			push_sendSubscriptionToServer();
+			console.log('testa');
+		</script>
+
+		<script>
 			$('#example1').DataTable({
 					'responsive'  : true,
 					'ordering'    : false,
@@ -207,7 +228,7 @@
 			})
 		</script>
 
-		<script>
+		<!-- <script>
 			const sendPushButton = document.querySelector('#send-push-button');
 			if (!sendPushButton) {
 				return;
@@ -230,6 +251,6 @@
 					});
 				})
 			);
-		</script>
+		</script> -->
 	</body>
 </html>
