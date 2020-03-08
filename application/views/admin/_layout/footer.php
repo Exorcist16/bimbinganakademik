@@ -205,7 +205,31 @@
 			$('.timepicker').timepicker({
 			showInputs: false
 			})
-		})
+		</script>
+
+		<script>
+			const sendPushButton = document.querySelector('#send-push-button');
+			if (!sendPushButton) {
+				return;
+			}
+
+			sendPushButton.addEventListener('click', () =>
+				navigator.serviceWorker.ready
+				.then(serviceWorkerRegistration => serviceWorkerRegistration.pushManager.getSubscription())
+				.then(subscription => {
+					if (!subscription) {
+					alert('Please enable push notifications');
+					return;
+					}
+
+					const contentEncoding = (PushManager.supportedContentEncodings || ['aesgcm'])[0];
+					const jsonSubscription = subscription.toJSON();
+					fetch('send_push_notification.php', {
+					method: 'POST',
+					body: JSON.stringify(Object.assign(jsonSubscription, { contentEncoding })),
+					});
+				})
+			);
 		</script>
 	</body>
 </html>
