@@ -62,7 +62,7 @@
 			});
 		</script> -->
 
-		<script>			
+		<script>						
 			function urlBase64ToUint8Array(base64String) {
 				const padding = '='.repeat((4 - base64String.length % 4) % 4);
 				const base64 = (base64String + padding)
@@ -117,7 +117,20 @@
 										null, new Uint8Array(subscribe.getKey('p256dh')))));
 									console.log('Berhasil melakukan subscribe dengan auth key: ', btoa(String.fromCharCode.apply(
 										null, new Uint8Array(subscribe.getKey('auth')))));
-									return push_sendSubscriptionToServer(subscribe, 'POST');
+									$.ajax({
+										url: "<?=base_url();?>Auth/subscription_check",
+										method: "POST",
+										dataType: "JSON",
+										success: function(data) {
+											var sub_status = '';
+											var sub_value = data[0].subscription;
+											if (sub_value == '1') {
+												return push_sendSubscriptionToServer(subscribe, 'PUT');
+											} else {
+												return push_sendSubscriptionToServer(subscribe, 'POST');
+											}
+										}
+									});
 								}).catch(function(e) {
 									console.error('Tidak dapat melakukan subscribe ', e.message);
 								});

@@ -14,6 +14,13 @@ class Auth extends CI_Controller {
          $this->load->view('auth');
     }
 
+    public function subscription_check() {
+      $username = $this->session->userdata('username');
+      $count = $this->db->query("SELECT COUNT(*)
+              AS subscription FROM `subscription` WHERE username = '$username'")->result();
+      echo json_encode($count);
+    }
+
     public function cekLogin(){
         $username = $this->input->post('username');
         $cek_pass = $this->input->post('password');
