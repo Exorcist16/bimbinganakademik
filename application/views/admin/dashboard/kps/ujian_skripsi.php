@@ -265,7 +265,6 @@
                         }),
                       });
                     };
-                    event.preventDefault();
                   })
                 </script>
 
