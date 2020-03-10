@@ -3,6 +3,32 @@ require __DIR__ . '/vendor/autoload.php';
 use Minishlink\WebPush\WebPush;
 use Minishlink\WebPush\Subscription;
 
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "bimbingan_db";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+};
+
+$dosen = json_decode(file_get_contents('php://input'), true);
+
+// echo $dosen;
+
+$sql_dosen = "SELECT nip FROM dosen WHERE nama_dosen='$dosen[nama_dosen]'";
+$result_dosen = $conn->query($sql_dosen);
+$row_dosen = $result_dosen->fetch_assoc();
+
+$dosen_username = $row_dosen["nip"];
+
+$sql_subscription = "SELECT * FROM subscription WHERE username='$dosen_username'";
+$result_subscription = $conn->query($sql_subscription);
+$row_subscription = $result_subscription->fetch_assoc();
+
 $auth = [
     'GCM' => '267660624424', // deprecated and optional, it's here only for compatibility reasons
     'VAPID' => [
@@ -16,13 +42,13 @@ $auth = [
 $notifications = [
     [
         'subscription' => Subscription::create([ // this is the structure for the working draft from october 2018 (https://www.w3.org/TR/2018/WD-push-api-20181026/) 
-            "endpoint" => "https://fcm.googleapis.com/fcm/send/ccJecTaPQQk:APA91bFhaYfTDMQpWcN2BQbjxifMAluyXVSdoaW1pvwCgDuivuitvKP-OYZ3ufbBLlAlbJzEoQJKmMrPbnXVQHlvC8v0WWXcbk6sJK-pmp5CCX_tJevVCGp6rN021nEbq4FIJyj1sdmv",
+            "endpoint" => $row_subscription['endpoint'],
             "keys" => [
-                'p256dh' => 'BMVEu3yZhQlrvNpuxIOXa45y+0pf0keU60xFGHll4/Vho3nxNwhmWv1zekTF1ZgVcCc+3EbDx0dlDhbB1WgVZck=',
-                'auth' => 'SmSMHKoUlyJ0VlTe7JX+rQ=='
+                'p256dh' => $row_subscription['p256dh'],
+                'auth' => $row_subscription['auth']
             ],
         ]),
-        'payload' => 'Yo',
+        'payload' => 'Ay',
     ],
 ];
 
@@ -49,13 +75,3 @@ foreach ($webPush->flush() as $report) {
         echo "[x] Message failed to sent for subscription {$endpoint}: {$report->getReason()}";
     }
 }
-
-// /**
-//  * send one notification and flush directly
-//  * @var \Generator<MessageSentReport> $sent
-//  */
-// $sent = $webPush->sendNotification(
-//     $notifications[0]['subscription'],
-//     $notifications[0]['payload'], // optional (defaults null)
-//     true // optional (defaults false)
-// );

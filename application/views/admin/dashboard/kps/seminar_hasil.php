@@ -87,7 +87,7 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Tambah Jadwal Ujian</h4>
                 </div>
-                <form role="form" action="<?php echo base_url().'kps/tambah_seminar_hasil';?>" method="post">
+                <form id="tambah_seminar_hasil" role="form" action="<?php echo base_url().'kps/tambah_seminar_hasil';?>" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>NIM</label>
@@ -386,6 +386,55 @@
                     }
                   })
                 })
+              })
+            </script>
+
+            <script>
+              $('#tambah_seminar_hasil').submit(function() {
+                var notif_pembimbing1 = document.getElementById("ujian_hasil_notif_pembimbing1").checked;
+                var notif_pembimbing2 = document.getElementById("ujian_hasil_notif_pembimbing2").checked;
+                var notif_penguji1 = document.getElementById("ujian_hasil_notif_penguji1").checked;
+                var notif_penguji2 = document.getElementById("ujian_hasil_notif_penguji2").checked;
+                var pembimbing1 = $("#ujian_hasil_pembimbing1").val();
+                var pembimbing2 = $("#ujian_hasil_pembimbing2").val();
+                var penguji1 = $("#ujian_hasil_penguji1").val();
+                var penguji2 = $("#ujian_hasil_penguji2").val();
+                if (notif_pembimbing1 == true) {
+                  fetch('<?=base_url()?>push_notification.php', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                      nama_dosen : pembimbing1,
+                      jenis : 'konfirmasi_seminar_hasil'
+                    }),
+                  });
+                };
+                if (notif_pembimbing2 == true) {
+                  fetch('<?=base_url()?>push_notification.php', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                      nama_dosen : pembimbing2,
+                      jenis : 'konfirmasi_seminar_hasil'
+                    }),
+                  });
+                };
+                if (notif_penguji1 == true) {
+                  fetch('<?=base_url()?>push_notification.php', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                      nama_dosen : penguji1,
+                      jenis : 'konfirmasi_seminar_hasil'
+                    }),
+                  });
+                };
+                if (notif_penguji2 == true) {
+                  fetch('<?=base_url()?>push_notification.php', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                      nama_dosen : penguji2,
+                      jenis : 'konfirmasi_seminar_hasil'
+                    }),
+                  });
+                };
               })
             </script>
 

@@ -154,9 +154,6 @@
 					}),
 				}).then(() => subscribe);
 			}
-
-			push_sendSubscriptionToServer();
-			console.log('testa');
 		</script>
 
 		<script>
