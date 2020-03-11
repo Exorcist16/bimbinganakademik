@@ -391,6 +391,11 @@
 
             <script>
               $('#tambah_seminar_hasil').submit(function() {
+                var nim_mahasiswa = $('#ujian_hasil_nim :selected').text();
+                var nama_mahasiswa = $("#ujian_hasil_nama").val();
+                var ujian_tanggal = $("[name=ujian_hasil_tanggal]").val();
+                var ujian_waktu = $('#ujian_hasil_waktu :selected').text();
+                var ujian_tempat = $('#ujian_hasil_tempat :selected').text();
                 var notif_pembimbing1 = document.getElementById("ujian_hasil_notif_pembimbing1").checked;
                 var notif_pembimbing2 = document.getElementById("ujian_hasil_notif_pembimbing2").checked;
                 var notif_penguji1 = document.getElementById("ujian_hasil_notif_penguji1").checked;
@@ -403,8 +408,14 @@
                   fetch('<?=base_url()?>push_notification.php', {
                     method: 'POST',
                     body: JSON.stringify({
+                      nim_mahasiswa : nim_mahasiswa,
+                      nama_mahasiswa : nama_mahasiswa,
+                      ujian_tanggal : ujian_tanggal,
+                      ujian_waktu : ujian_waktu,
+                      ujian_tempat : ujian_tempat,
                       nama_dosen : pembimbing1,
-                      jenis : 'konfirmasi_seminar_hasil'
+                      jenis : 'konfirmasi_seminar_hasil',
+                      url : '<?=base_url()?>dosen/penugasanIn'
                     }),
                   });
                 };
@@ -412,8 +423,14 @@
                   fetch('<?=base_url()?>push_notification.php', {
                     method: 'POST',
                     body: JSON.stringify({
+                      nim_mahasiswa : nim_mahasiswa,
+                      nama_mahasiswa : nama_mahasiswa,
+                      ujian_tanggal : ujian_tanggal,
+                      ujian_waktu : ujian_waktu,
+                      ujian_tempat : ujian_tempat,
                       nama_dosen : pembimbing2,
-                      jenis : 'konfirmasi_seminar_hasil'
+                      jenis : 'konfirmasi_seminar_hasil',
+                      url : '<?=base_url()?>dosen/penugasanIn'
                     }),
                   });
                 };
@@ -421,8 +438,14 @@
                   fetch('<?=base_url()?>push_notification.php', {
                     method: 'POST',
                     body: JSON.stringify({
+                      nim_mahasiswa : nim_mahasiswa,
+                      nama_mahasiswa : nama_mahasiswa,
+                      ujian_tanggal : ujian_tanggal,
+                      ujian_waktu : ujian_waktu,
+                      ujian_tempat : ujian_tempat,
                       nama_dosen : penguji1,
-                      jenis : 'konfirmasi_seminar_hasil'
+                      jenis : 'konfirmasi_seminar_hasil',
+                      url : '<?=base_url()?>dosen/penugasanIn'
                     }),
                   });
                 };
@@ -430,11 +453,18 @@
                   fetch('<?=base_url()?>push_notification.php', {
                     method: 'POST',
                     body: JSON.stringify({
+                      nim_mahasiswa : nim_mahasiswa,
+                      nama_mahasiswa : nama_mahasiswa,
+                      ujian_tanggal : ujian_tanggal,
+                      ujian_waktu : ujian_waktu,
+                      ujian_tempat : ujian_tempat,
                       nama_dosen : penguji2,
-                      jenis : 'konfirmasi_seminar_hasil'
+                      jenis : 'konfirmasi_seminar_hasil',
+                      url : '<?=base_url()?>dosen/penugasanIn'
                     }),
                   });
                 };
+                event.preventDefault();
               })
             </script>
 

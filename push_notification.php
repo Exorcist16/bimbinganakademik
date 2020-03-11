@@ -15,11 +15,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 };
 
-$dosen = json_decode(file_get_contents('php://input'), true);
+$input = json_decode(file_get_contents('php://input'), true);
 
-// echo $dosen;
-
-$sql_dosen = "SELECT nip FROM dosen WHERE nama_dosen='$dosen[nama_dosen]'";
+$sql_dosen = "SELECT nip FROM dosen WHERE nama_dosen='$input[nama_dosen]'";
 $result_dosen = $conn->query($sql_dosen);
 $row_dosen = $result_dosen->fetch_assoc();
 
@@ -38,6 +36,25 @@ $auth = [
     ],
 ];
 
+$nim_mahasiswa = $input['nim_mahasiswa'];
+$nama_mahasiswa = $input['nama_mahasiswa'];
+$ujian_tanggal = $input['ujian_tanggal'];
+$ujian_waktu = $input['ujian_waktu'];
+$ujian_tempat = $input['ujian_tempat'];
+
+if ($input['jenis'] == 'konfirmasi_seminar_tutup') {
+    $title = "Konfirmasi Jadwal Ujian Skripsi Baru";
+    $body = "Nama : $nama_mahasiswa ($nim_mahasiswa)\nPada Tanggal $ujian_tanggal di $ujian_tempat.\nWaktu : $ujian_waktu.";
+}
+elseif ($input['jenis'] == 'konfirmasi_seminar_hasil') {
+    $title = "Konfirmasi Jadwal Seminar Hasil Baru";
+    $body = "Nama : $nama_mahasiswa ($nim_mahasiswa)\nPada Tanggal $ujian_tanggal di $ujian_tempat.\nWaktu : $ujian_waktu.";
+} 
+else {
+    $title = "No message";
+    $body = "No message";
+}
+
 // array of notifications
 $notifications = [
     [
@@ -48,7 +65,11 @@ $notifications = [
                 'auth' => $row_subscription['auth']
             ],
         ]),
-        'payload' => 'Ay',
+        'payload' => json_encode([
+            'title' => $title,
+            'body' => $body,
+            'url' => $input['url']
+        ]),
     ],
 ];
 
@@ -58,7 +79,7 @@ $webPush = new WebPush($auth);
 foreach ($notifications as $notification) {
     $webPush->sendNotification(
         $notification['subscription'],
-        $notification['payload'] // optional (defaults null)
+        $notification['payload']
     );
 }
 

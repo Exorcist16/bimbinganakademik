@@ -221,6 +221,11 @@
 
                 <script>
                   $('#tambah_seminar_tutup').submit(function() {
+                    var nim_mahasiswa = $('#ujian_tutup_nim :selected').text();
+                    var nama_mahasiswa = $("#ujian_tutup_nama").val();
+                    var ujian_tanggal = $("[name=ujian_tutup_tanggal]").val();
+                    var ujian_waktu = $('#ujian_tutup_waktu :selected').text();
+                    var ujian_tempat = $('#ujian_tutup_tempat :selected').text();
                     var notif_pembimbing1 = document.getElementById("ujian_tutup_notif_pembimbing1").checked;
                     var notif_pembimbing2 = document.getElementById("ujian_tutup_notif_pembimbing2").checked;
                     var notif_penguji1 = document.getElementById("ujian_tutup_notif_penguji1").checked;
@@ -233,8 +238,14 @@
                       fetch('<?=base_url()?>push_notification.php', {
                         method: 'POST',
                         body: JSON.stringify({
+                          nim_mahasiswa : nim_mahasiswa,
+                          nama_mahasiswa : nama_mahasiswa,
+                          ujian_tanggal : ujian_tanggal,
+                          ujian_waktu : ujian_waktu,
+                          ujian_tempat : ujian_tempat,
                           nama_dosen : pembimbing1,
-                          jenis : 'konfirmasi_seminar_tutup'
+                          jenis : 'konfirmasi_seminar_tutup',
+                          url : '<?=base_url()?>dosen/penugasanIn'
                         }),
                       });
                     };
@@ -242,8 +253,14 @@
                       fetch('<?=base_url()?>push_notification.php', {
                         method: 'POST',
                         body: JSON.stringify({
+                          nim_mahasiswa : nim_mahasiswa,
+                          nama_mahasiswa : nama_mahasiswa,
+                          ujian_tanggal : ujian_tanggal,
+                          ujian_waktu : ujian_waktu,
+                          ujian_tempat : ujian_tempat,
                           nama_dosen : pembimbing2,
-                          jenis : 'konfirmasi_seminar_tutup'
+                          jenis : 'konfirmasi_seminar_tutup',
+                          url : '<?=base_url()?>dosen/penugasanIn'
                         }),
                       });
                     };
@@ -251,8 +268,14 @@
                       fetch('<?=base_url()?>push_notification.php', {
                         method: 'POST',
                         body: JSON.stringify({
+                          nim_mahasiswa : nim_mahasiswa,
+                          nama_mahasiswa : nama_mahasiswa,
+                          ujian_tanggal : ujian_tanggal,
+                          ujian_waktu : ujian_waktu,
+                          ujian_tempat : ujian_tempat,
                           nama_dosen : penguji1,
-                          jenis : 'konfirmasi_seminar_tutup'
+                          jenis : 'konfirmasi_seminar_tutup',
+                          url : '<?=base_url()?>dosen/penugasanIn'
                         }),
                       });
                     };
@@ -260,11 +283,18 @@
                       fetch('<?=base_url()?>push_notification.php', {
                         method: 'POST',
                         body: JSON.stringify({
+                          nim_mahasiswa : nim_mahasiswa,
+                          nama_mahasiswa : nama_mahasiswa,
+                          ujian_tanggal : ujian_tanggal,
+                          ujian_waktu : ujian_waktu,
+                          ujian_tempat : ujian_tempat,
                           nama_dosen : penguji2,
-                          jenis : 'konfirmasi_seminar_tutup'
+                          jenis : 'konfirmasi_seminar_tutup',
+                          url : '<?=base_url()?>dosen/penugasanIn'
                         }),
                       });
                     };
+                    event.preventDefault();
                   })
                 </script>
 

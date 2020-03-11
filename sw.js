@@ -1,5 +1,5 @@
 // Files to cache
-var cacheName = 'ft-uh-scheduler-sw-v1';
+var cacheName = 'ft-uh-scheduler-sw-v2';
 // var appShellFiles = [
 // ];
 // var gamesImages = [];
@@ -36,29 +36,34 @@ var cacheName = 'ft-uh-scheduler-sw-v1';
 // });
 
 self.addEventListener('push', function (event) {
-	var body;
-	if (event.data) {
-		body = event.data.text();
+	var title, body, url;
+	var payload = event.data.json();
+	if (payload) {
+		title = payload.title;
+		body = payload.body;
+		url = payload.url;
 	} else {
+		title = 'Push message no payload';
 		body = 'Push message no payload';
 	}
 	var options = {
 		body: body,
-		icon: 'img/notification.png',
+		icon: 'assets/dist/img/app-logo.png',
 		vibrate: [100, 50, 100],
 		data: {
+			url : url,
 			dateOfArrival: Date.now(),
 			primaryKey: 1
 		}
 	};
 	event.waitUntil(
-		self.registration.showNotification('Push Notification', options)
+		self.registration.showNotification(title, options)
 	);
 });
 
 self.addEventListener('notificationclick', function (event) {
 	if (!event.action) {
 		event.notification.close();
-		clients.openWindow('https://localhost/testing/ft-uh-scheduler/Auth');
+		clients.openWindow(event.notification.data.url);
 	}
 });
