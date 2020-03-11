@@ -32,6 +32,12 @@ class Auth extends CI_Controller {
       $this->load->view('admin/_layout/wrapper', $data);
     }
 
+    // public function tambah_foto_mahasiswa(){
+    //
+    //   $foto = upload_image('foto_mhs', 'edit', 'fotouser', '', $data, TRUE);
+    //
+    // }
+
     public function profil_dosen(){
       $data = array(  'title'             => 'Auth',
                       'isi'               => 'admin/_layout/profil_dosen',
@@ -80,7 +86,7 @@ class Auth extends CI_Controller {
       );
       $this->crud->u('user', $data, array('username' => $id));
 
-      redirect('kps/daftarJudul');
+      redirect('mahasiswa/beranda');
     }
 
     public function logout(){
