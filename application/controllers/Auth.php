@@ -39,9 +39,11 @@ class Auth extends CI_Controller {
     // }
 
     public function profil_dosen(){
+      $nip = $this->session->userdata('username');
+      $detail = $this->db->query("SELECT * FROM dosen WHERE nip = '$nip'")->result();
       $data = array(  'title'             => 'Auth',
                       'isi'               => 'admin/_layout/profil_dosen',
-                    // 'dataScript'        => 'admin/dataScript/beranda-script'
+                      'detail'            => $detail
                   );
       $this->load->view('admin/_layout/wrapper', $data);
     }
@@ -87,6 +89,16 @@ class Auth extends CI_Controller {
       $this->crud->u('user', $data, array('username' => $id));
 
       redirect('mahasiswa/beranda');
+    }
+
+    public function ganti_pass_dosen(){
+      $id = $this->session->userdata('username');
+      $data = array(
+        'password' => md5($this->input->post('pass_baru_dosen'))
+      );
+      $this->crud->u('user', $data, array('username' => $id));
+
+      redirect('dosen/dashboard');
     }
 
     public function logout(){
