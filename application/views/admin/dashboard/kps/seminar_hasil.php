@@ -464,7 +464,6 @@
                     }),
                   });
                 };
-                event.preventDefault();
               })
             </script>
 
