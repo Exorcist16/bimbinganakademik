@@ -256,7 +256,7 @@
               <span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">Ganti Foto</h4>
           </div>
-          <form role="form" action="<?php echo base_url().'auth/ganti_pass_mahasiswa';?>" method="post">
+          <form role="form" action="<?php echo base_url().'auth/tambah_foto_mahasiswa';?>" method="post">
             <div class="modal-body">
               <div class="form-group">
                 <label>Foto Baru</label>
@@ -266,7 +266,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-              <button id="btn_ganti_pass_mhs" type="submit" class="btn btn-primary" disabled>Ganti Password</button>
+              <button id="btn_ganti_pass_mhs" type="submit" class="btn btn-primary">Ganti Foto Profil</button>
             </div>
           </form>
         </div>

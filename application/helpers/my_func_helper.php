@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 if (!function_exists('upload_image')) {
-    function upload_image($files, $method, $folder, $image_name, $error_data, $required = FALSE, $pagepath = 'adminpage/_layout/wrapper') {
+    function upload_image($files, $method, $folder, $image_name, $error_data, $required = FALSE, $pagepath = 'admin/_layout/wrapper') {
         $CI =& get_instance();
 
         $file = is_array($files) ? $files[0] : $files;
@@ -15,6 +15,7 @@ if (!function_exists('upload_image')) {
             $config['max_size']         = '2048'; // KB
             $CI->load->library('upload', $config);
 
+
             if (!$CI->upload->do_upload($file)) {
                 $error_data['error_upload'] = $CI->upload->display_errors('<i style="color: red;">', '</i>');
                 $CI->load->view($pagepath, $error_data);
@@ -23,8 +24,8 @@ if (!function_exists('upload_image')) {
                 if ($method == 'edit') {
                     // Hapus gambar lama
                     if ($image_name != '') {
-                        unlink('./'.upload_path($folder).$image_name);
-                        unlink('./'.upload_path($folder).'thumbs/'.$image_name);
+                        unlink('./assets/dist/img/'.($folder).$image_name);
+                        unlink('./assets/dist/img/'.($folder).'thumbs/'.$image_name);
                     }
                 }
 
@@ -33,7 +34,7 @@ if (!function_exists('upload_image')) {
                 $gambar = $upload['upload_data']['file_name'];
 
                 $config['image_library']    = 'gd2';
-                $config['source_image']     = './'.upload_path($folder).$gambar;
+                $config['source_image']     = './assets/dist/img/'.($folder).$gambar;
                 $config['quality']          = "100%";
 
                 if (is_array($files)) {
@@ -46,7 +47,7 @@ if (!function_exists('upload_image')) {
                     $CI->load->library('image_lib', $config, 'crop');
 
                     if (!$CI->crop->crop()) {
-                        unlink('./'.upload_path($folder).$gambar);
+                        unlink('./assets/dist/img/'.($folder).$gambar);
                         $error_data['error_upload'] = $CI->crop->display_errors('<i style="color: red;">', '</i>');
                         $CI->load->view($pagepath, $error_data);
                         return FALSE;
@@ -59,7 +60,7 @@ if (!function_exists('upload_image')) {
                     $CI->load->library('image_lib', $config, 'cresize');
 
                     if (!$CI->cresize->resize()) {
-                        unlink('./'.upload_path($folder).$image_name);
+                        unlink('./assets/dist/img/'.($folder).$image_name);
                         $error_data['error_upload'] = $CI->cresize->display_errors('<i style="color: red;">', '</i>');
                         $CI->load->view($pagepath, $error_data);
                         return FALSE;
@@ -67,7 +68,7 @@ if (!function_exists('upload_image')) {
                 }
 
                 $config['maintain_ratio']   = TRUE;
-                $config['new_image']        = './'.upload_path($folder).'thumbs/';
+                $config['new_image']        = './assets/dist/img/'.($folder).'thumbs/';
                 $config['create_thumb']     = TRUE;
                 $config['thumb_marker']     = '';
                 $config['width']            = 300;
@@ -76,7 +77,7 @@ if (!function_exists('upload_image')) {
                 $CI->load->library('image_lib', $config, 'resize');
 
                 if (!$CI->resize->resize()) {
-                    unlink('./'.upload_path($folder).$image_name);
+                    unlink('./assets/dist/img/'.($folder).$image_name);
                     $error_data['error_upload'] = $CI->resize->display_errors('<i style="color: red;">', '</i>');
                     $CI->load->view($pagepath, $error_data);
                     return FALSE;

@@ -32,11 +32,18 @@ class Auth extends CI_Controller {
       $this->load->view('admin/_layout/wrapper', $data);
     }
 
-    // public function tambah_foto_mahasiswa(){
-    //
-    //   $foto = upload_image('foto_mhs', 'edit', 'fotouser', '', $data, TRUE);
-    //
-    // }
+    public function tambah_foto_mahasiswa(){
+      $nim = $this->session->userdata('username');
+      $profil = $this->crud->gd('mahasiswa', array('nim' => $nim));
+      $detail = $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
+         ON mahasiswa.nim = judul.nim WHERE mahasiswa.nim = '$nim'")->result();
+      // var_dump($this->input->post('foto_mhs'));
+      // die();
+      $data = array(  'title'             => 'Auth',
+                      'isi'               => 'admin/_layout/profil_mahasiswa',
+                      'detail'            => $detail);
+      $foto = upload_image('foto_mhs', 'tambah', 'fotouser', '', $data);
+    }
 
     public function profil_dosen(){
       $nip = $this->session->userdata('username');

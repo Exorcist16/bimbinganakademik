@@ -182,12 +182,31 @@
                     success: function(data) {
                       if (data[0] != undefined) {
                         if (data[0].nim != null) {
-                          document.getElementById("ujian_hasil_nim_tidak_ada").innerText = "";
-                          document.getElementById("ujian_hasil_nama").value = data[0].nama;
-                          document.getElementById("ujian_hasil_pembimbing1").value = data[0].pembimbing1;
-                          document.getElementById("ujian_hasil_pembimbing2").value = data[0].pembimbing2;
-                          document.getElementById("ujian_hasil_penguji1").value = data[0].penguji1;
-                          document.getElementById("ujian_hasil_penguji2").value = data[0].penguji2;
+                          if (data[0].request_hasil == 1) {
+                            document.getElementById("ujian_hasil_nim_tidak_ada").innerText = "Mahasiswa tersebut telah memiliki jadwal. Hapus jadwal yang ada terlebih dulu untuk membuat jadwal baru.";
+                            document.getElementById("ujian_hasil_nama").value = data[0].nama;
+                            document.getElementById("ujian_hasil_pembimbing1").value = "";
+                            document.getElementById("ujian_hasil_pembimbing2").value = "";
+                            document.getElementById("ujian_hasil_penguji1").value = "";
+                            document.getElementById("ujian_hasil_penguji2").value = "";
+                            document.getElementById("proteksi_button").disabled = true;
+                          } else if ($data[0].hasil == 1) {
+                            document.getElementById("ujian_hasil_nim_tidak_ada").innerText = "Mahasiswa tersebut telah melaksanakan seminar hasil";
+                            document.getElementById("ujian_hasil_nama").value = "";
+                            document.getElementById("ujian_hasil_pembimbing1").value = "";
+                            document.getElementById("ujian_hasil_pembimbing2").value = "";
+                            document.getElementById("ujian_hasil_penguji1").value = "";
+                            document.getElementById("ujian_hasil_penguji2").value = "";
+                            document.getElementById("proteksi_button").disabled = true;
+                          } else {
+                            document.getElementById("ujian_hasil_nim_tidak_ada").innerText = "";
+                            document.getElementById("ujian_hasil_nama").value = data[0].nama;
+                            document.getElementById("ujian_hasil_pembimbing1").value = data[0].pembimbing1;
+                            document.getElementById("ujian_hasil_pembimbing2").value = data[0].pembimbing2;
+                            document.getElementById("ujian_hasil_penguji1").value = data[0].penguji1;
+                            document.getElementById("ujian_hasil_penguji2").value = data[0].penguji2;
+                            document.getElementById("proteksi_button").disabled = false;
+                          }
                         } else {
                           document.getElementById("ujian_hasil_nim_tidak_ada").innerText = "Mahasiswa tersebut belum melaksanakan seminar proposal";
                           document.getElementById("ujian_hasil_nama").value = data[0].nama;
@@ -195,6 +214,7 @@
                           document.getElementById("ujian_hasil_pembimbing2").value = "";
                           document.getElementById("ujian_hasil_penguji1").value = "";
                           document.getElementById("ujian_hasil_penguji2").value = "";
+                          document.getElementById("proteksi_button").disabled = true;
                         }
                       } else {
                         document.getElementById("ujian_hasil_nim_tidak_ada").innerText = "Data mahasiswa tidak ditemukan!!!";
@@ -203,6 +223,7 @@
                         document.getElementById("ujian_hasil_pembimbing2").value = "";
                         document.getElementById("ujian_hasil_penguji1").value = "";
                         document.getElementById("ujian_hasil_penguji2").value = "";
+                        document.getElementById("proteksi_button").disabled = true;
                       }
                     }
                   })
