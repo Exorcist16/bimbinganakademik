@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 20, 2020 at 01:55 PM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.9
+-- Host: localhost
+-- Generation Time: Mar 11, 2020 at 05:48 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -319,6 +319,14 @@ CREATE TABLE `judul` (
   `penguji3` varchar(64) NOT NULL,
   `judul_departemen` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `judul`
+--
+
+INSERT INTO `judul` (`id_judul`, `nim`, `judul`, `pembimbing1`, `pembimbing2`, `penguji1`, `penguji2`, `penguji3`, `judul_departemen`) VALUES
+(1, 'D42115304', 'Testing', 'Dr.Ir. Syamsul Asri, MT', 'Ir. Panguriseng', 'Ir. M. Fathien Azmy, M.Si', 'Ir. Yustinus Upa Sombolayuk, MT', '', 'Teknik Informatika'),
+(2, 'D42115010', 'Testing', 'Dr.Ir. Syamsul Asri, MT', 'Ir. Panguriseng', 'Ir. M. Fathien Azmy, M.Si', 'Ir. Yustinus Upa Sombolayuk, MT', '', 'Teknik Informatika');
 
 -- --------------------------------------------------------
 
@@ -642,7 +650,7 @@ INSERT INTO `mahasiswa` (`nim`, `nama`, `strata`, `angkatan`, `departemen`, `fot
 ('D42115020', 'LAURA NATALIA NAINGGOLAN', 'S1', 2015, 'Teknik Informatika', '', 0, 0, 0, 0),
 ('D42115022', 'JUSMIATI', 'S1', 2015, 'Teknik Informatika', '', 0, 0, 0, 0),
 ('D42115023', 'MARJONO UMAR', 'S1', 2015, 'Teknik Informatika', '', 0, 0, 0, 0),
-('D42115304', 'FIQAR APRIALIM', 'S1', 2015, 'Teknik Informatika', '', 0, 0, 0, 0),
+('D42115304', 'FIQAR APRIALIM', 'S1', 2015, 'Teknik Informatika', '', 1, 1, 0, 0),
 ('D42115305', 'ROSIHAN ARDIANSYAH', 'S1', 2015, 'Teknik Informatika', '', 0, 0, 0, 0),
 ('D42115307', 'DILA AMALIA', 'S1', 2015, 'Teknik Informatika', '', 0, 0, 0, 0),
 ('D42115308', 'KELVIN', 'S1', 2015, 'Teknik Informatika', '', 0, 0, 0, 0),
@@ -748,6 +756,38 @@ CREATE TABLE `seminar` (
   `seminar_status` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `seminar`
+--
+
+INSERT INTO `seminar` (`seminar_id`, `seminar_nim`, `seminar_tanggal`, `seminar_waktu`, `seminar_tempat`, `seminar_pembimbing1_nama`, `seminar_pembimbing1_status`, `seminar_pembimbing2_nama`, `seminar_pembimbing2_status`, `seminar_penguji1_nama`, `seminar_penguji1_status`, `seminar_penguji2_nama`, `seminar_penguji2_status`, `seminar_jenis`, `seminar_status`) VALUES
+(13, 'D42115304', '03/25/2020', 11, 'Lab. Kecerdasan Buatan, Meeting Room', 'Dr.Ir. Syamsul Asri, MT', 'menunggu', 'Ir. Panguriseng', 'menunggu', 'Ir. M. Fathien Azmy, M.Si', 'menunggu', 'Ir. Yustinus Upa Sombolayuk, MT', 'menunggu', 'seminar tutup', 'aktif');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscription`
+--
+
+CREATE TABLE `subscription` (
+  `username` varchar(32) NOT NULL,
+  `endpoint` varchar(200) NOT NULL,
+  `p256dh` varchar(100) NOT NULL,
+  `auth` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `subscription`
+--
+
+INSERT INTO `subscription` (`username`, `endpoint`, `p256dh`, `auth`) VALUES
+('19570323 198601 1 001', 'https://fcm.googleapis.com/fcm/send/ccJecTaPQQk:APA91bFhaYfTDMQpWcN2BQbjxifMAluyXVSdoaW1pvwCgDuivuitvKP-OYZ3ufbBLlAlbJzEoQJKmMrPbnXVQHlvC8v0WWXcbk6sJK-pmp5CCX_tJevVCGp6rN021nEbq4FIJyj1sdmv', 'BMVEu3yZhQlrvNpuxIOXa45y+0pf0keU60xFGHll4/Vho3nxNwhmWv1zekTF1ZgVcCc+3EbDx0dlDhbB1WgVZck=', 'SmSMHKoUlyJ0VlTe7JX+rQ=='),
+('19570405 198802 1 002', 'https://fcm.googleapis.com/fcm/send/ccJecTaPQQk:APA91bFhaYfTDMQpWcN2BQbjxifMAluyXVSdoaW1pvwCgDuivuitvKP-OYZ3ufbBLlAlbJzEoQJKmMrPbnXVQHlvC8v0WWXcbk6sJK-pmp5CCX_tJevVCGp6rN021nEbq4FIJyj1sdmv', 'BMVEu3yZhQlrvNpuxIOXa45y+0pf0keU60xFGHll4/Vho3nxNwhmWv1zekTF1ZgVcCc+3EbDx0dlDhbB1WgVZck=', 'SmSMHKoUlyJ0VlTe7JX+rQ=='),
+('19590708 198802 1 001', 'https://fcm.googleapis.com/fcm/send/ccJecTaPQQk:APA91bFhaYfTDMQpWcN2BQbjxifMAluyXVSdoaW1pvwCgDuivuitvKP-OYZ3ufbBLlAlbJzEoQJKmMrPbnXVQHlvC8v0WWXcbk6sJK-pmp5CCX_tJevVCGp6rN021nEbq4FIJyj1sdmv', 'BMVEu3yZhQlrvNpuxIOXa45y+0pf0keU60xFGHll4/Vho3nxNwhmWv1zekTF1ZgVcCc+3EbDx0dlDhbB1WgVZck=', 'SmSMHKoUlyJ0VlTe7JX+rQ=='),
+('19650318 199103 1 003', 'https://fcm.googleapis.com/fcm/send/fcMrkpUyR7o:APA91bEndJ6cfFaHN_FCP35mx1U9of9Cq2rxkwyWR0QQ1QJUn8t7dG05Vr4qEb6iYpwyuq6ZkM5_IHVNPGqcdCB9sa4NVttEgkkEKzqYzxJx4QouMofLlINFeNCvYxSSEIzPFhrLHOEF', 'BBT3//VM4kulDCXotvR5cnGeijblxz6Lr7ZwSO0lqAodABypOVg35dSGHlfwKaUvQ8/kSSIbQ0oIDrFsGG/FeMk=', '6JhUMYOsmnK4DRhArz4H5g=='),
+('D42115304', 'https://fcm.googleapis.com/fcm/send/ccJecTaPQQk:APA91bFhaYfTDMQpWcN2BQbjxifMAluyXVSdoaW1pvwCgDuivuitvKP-OYZ3ufbBLlAlbJzEoQJKmMrPbnXVQHlvC8v0WWXcbk6sJK-pmp5CCX_tJevVCGp6rN021nEbq4FIJyj1sdmv', 'BMVEu3yZhQlrvNpuxIOXa45y+0pf0keU60xFGHll4/Vho3nxNwhmWv1zekTF1ZgVcCc+3EbDx0dlDhbB1WgVZck=', 'SmSMHKoUlyJ0VlTe7JX+rQ=='),
+('informatika', 'https://fcm.googleapis.com/fcm/send/fcMrkpUyR7o:APA91bEndJ6cfFaHN_FCP35mx1U9of9Cq2rxkwyWR0QQ1QJUn8t7dG05Vr4qEb6iYpwyuq6ZkM5_IHVNPGqcdCB9sa4NVttEgkkEKzqYzxJx4QouMofLlINFeNCvYxSSEIzPFhrLHOEF', 'BBT3//VM4kulDCXotvR5cnGeijblxz6Lr7ZwSO0lqAodABypOVg35dSGHlfwKaUvQ8/kSSIbQ0oIDrFsGG/FeMk=', '6JhUMYOsmnK4DRhArz4H5g==');
+
 -- --------------------------------------------------------
 
 --
@@ -759,6 +799,15 @@ CREATE TABLE `tempat_ujian` (
   `tempat_ujian_nama` varchar(100) NOT NULL,
   `tempat_ujian_departemen` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tempat_ujian`
+--
+
+INSERT INTO `tempat_ujian` (`tempat_ujian_id`, `tempat_ujian_nama`, `tempat_ujian_departemen`) VALUES
+(6, 'Lab. Ubicon, Meeting Room', 'Teknik Informatika'),
+(8, 'Lab. Kecerdasan Buatan, Meeting Room', 'Teknik Informatika'),
+(11, 'Center of Technology, Meeting Room', 'Fakultas teknik');
 
 -- --------------------------------------------------------
 
@@ -1026,7 +1075,10 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `nama_user`, `role`, `sta
 (297, '19870824 201903 2 009', '5ed519b840b4e971f55a1bab4e93c5f0', 'A. Dian Eka Anggriani, S.T.,M.T', 'dosen', '', ''),
 (298, '19891201 201903 2 013', '2c903e388fa5e636971bdf54caedfeaf', 'A. Besse Riyani Indah, ST.,MT ', 'dosen', '', ''),
 (299, '19870719 201903 2 012', 'fcd8edf36ff649e0fdf02ad9d3df8c07', 'Andi Karina Deapati, S.Ars.,MT', 'dosen', '', ''),
-(300, '19930309 201903 1 014', 'b0cfce60e6e6a47e10e728d757ff3693', 'Laode Muh. Asfan Mujahid, ST.,MT', 'dosen', '', '');
+(300, '19930309 201903 1 014', 'b0cfce60e6e6a47e10e728d757ff3693', 'Laode Muh. Asfan Mujahid, ST.,MT', 'dosen', '', ''),
+(301, 'D42115304', '04f993ea42fc0178182cc8305b16fee2', 'FIQAR APRIALIM', 'mahasiswa', '', 'Teknik Informatika'),
+(302, 'D42115304', '04f993ea42fc0178182cc8305b16fee2', 'FIQAR APRIALIM', 'mahasiswa', '', 'Teknik Informatika'),
+(303, 'D42115010', '3d82531840461837f1b90ab03f6d19ff', 'RYAN RAFLI', 'mahasiswa', '', 'Teknik Informatika');
 
 -- --------------------------------------------------------
 
@@ -1092,6 +1144,12 @@ ALTER TABLE `seminar`
   ADD PRIMARY KEY (`seminar_id`);
 
 --
+-- Indexes for table `subscription`
+--
+ALTER TABLE `subscription`
+  ADD PRIMARY KEY (`username`);
+
+--
 -- Indexes for table `tempat_ujian`
 --
 ALTER TABLE `tempat_ujian`
@@ -1123,25 +1181,25 @@ ALTER TABLE `departemen`
 -- AUTO_INCREMENT for table `judul`
 --
 ALTER TABLE `judul`
-  MODIFY `id_judul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_judul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `seminar`
 --
 ALTER TABLE `seminar`
-  MODIFY `seminar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `seminar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tempat_ujian`
 --
 ALTER TABLE `tempat_ujian`
-  MODIFY `tempat_ujian_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `tempat_ujian_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=301;
+  MODIFY `id_user` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=304;
 
 --
 -- AUTO_INCREMENT for table `waktu_ujian`

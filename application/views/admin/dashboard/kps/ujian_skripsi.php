@@ -85,7 +85,7 @@
                     <span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Tambah Jadwal Ujian</h4>
                 </div>
-                <form role="form" action="<?php echo base_url().'kps/tambah_seminar_tutup';?>" method="post">
+                <form id="tambah_seminar_tutup" role="form" action="<?php echo base_url().'kps/tambah_seminar_tutup';?>" method="post">
                   <div class="modal-body">
                     <div class="form-group">
                       <label>NIM</label>
@@ -95,37 +95,36 @@
                         <option><?=$mahasiswa->nim; ?></option>
                         <?php } ?>
                       </select>
-                      <!-- <input type="text" class="form-control" name="ujian_tutup_nim" id="ujian_tutup_nim" style="width: 100%;" placeholder="Nim Mahasiswa" required> -->
                       <h6 id="ujian_tutup_nim_tidak_ada" class="help-block text-red"></h6>
                     </div>
                     <div class="form-group">
                       <label>Nama Mahasiswa</label>
-                      <input type="text" class="form-control" name="ujian_tutup_nama" id="ujian_tutup_nama" placeholder="Nama Mahasiswa"  required>
+                      <input type="text" class="form-control" name="ujian_tutup_nama" id="ujian_tutup_nama" placeholder="Nama Mahasiswa" readonly required>
                     </div>
                     <div class="form-group">
                       <label>Pembimbing I</label>
-                      <input type="text" class="form-control" name="ujian_tutup_pembimbing1" id="ujian_tutup_pembimbing1" placeholder="Pembimbing I"  required>
+                      <input type="text" class="form-control" name="ujian_tutup_pembimbing1" id="ujian_tutup_pembimbing1" placeholder="Pembimbing I" readonly required>
                       <div class="checkbox">
                        <label><input name="ujian_tutup_notif_pembimbing1" id="ujian_tutup_notif_pembimbing1" type="checkbox" checked>Kirimkan Notifikasi</label>
                       </div>
                     </div>
                     <div class="form-group">
                       <label>Pembimbing II</label>
-                      <input type="text" class="form-control" name="ujian_tutup_pembimbing2" id="ujian_tutup_pembimbing2" placeholder="Pembimbing II"  required>
+                      <input type="text" class="form-control" name="ujian_tutup_pembimbing2" id="ujian_tutup_pembimbing2" placeholder="Pembimbing II" readonly required>
                       <div class="checkbox">
                        <label><input name="ujian_tutup_notif_pembimbing2" id="ujian_tutup_notif_pembimbing2" type="checkbox" checked>Kirimkan Notifikasi</label>
                       </div>
                     </div>
                     <div class="form-group">
                       <label>Penguji I</label>
-                      <input type="text" class="form-control" name="ujian_tutup_penguji1" id="ujian_tutup_penguji1" placeholder="Penguji I"  required>
+                      <input type="text" class="form-control" name="ujian_tutup_penguji1" id="ujian_tutup_penguji1" placeholder="Penguji I" readonly required>
                       <div class="checkbox">
                        <label><input name="ujian_tutup_notif_penguji1" id="ujian_tutup_notif_penguji1" type="checkbox" checked>Kirimkan Notifikasi</label>
                       </div>
                     </div>
                     <div class="form-group">
                       <label>Penguji II</label>
-                      <input type="text" class="form-control" name="ujian_tutup_penguji2" id="ujian_tutup_penguji2" placeholder="Penguji II"  required>
+                      <input type="text" class="form-control" name="ujian_tutup_penguji2" id="ujian_tutup_penguji2" placeholder="Penguji II" readonly required>
                       <div class="checkbox">
                        <label><input name="ujian_tutup_notif_penguji2" id="ujian_tutup_notif_penguji2" type="checkbox" checked>Kirimkan Notifikasi</label>
                       </div>
@@ -219,6 +218,85 @@
                     <button type="submit" class="btn btn-primary">Tambahkan</button>
                   </div>
                 </form>
+
+                <script>
+                  $('#tambah_seminar_tutup').submit(function() {
+                    var nim_mahasiswa = $('#ujian_tutup_nim :selected').text();
+                    var nama_mahasiswa = $("#ujian_tutup_nama").val();
+                    var ujian_tanggal = $("[name=ujian_tutup_tanggal]").val();
+                    var ujian_waktu = $('#ujian_tutup_waktu :selected').text();
+                    var ujian_tempat = $('#ujian_tutup_tempat :selected').text();
+                    var notif_pembimbing1 = document.getElementById("ujian_tutup_notif_pembimbing1").checked;
+                    var notif_pembimbing2 = document.getElementById("ujian_tutup_notif_pembimbing2").checked;
+                    var notif_penguji1 = document.getElementById("ujian_tutup_notif_penguji1").checked;
+                    var notif_penguji2 = document.getElementById("ujian_tutup_notif_penguji2").checked;
+                    var pembimbing1 = $("#ujian_tutup_pembimbing1").val();
+                    var pembimbing2 = $("#ujian_tutup_pembimbing2").val();
+                    var penguji1 = $("#ujian_tutup_penguji1").val();
+                    var penguji2 = $("#ujian_tutup_penguji2").val();
+                    if (notif_pembimbing1 == true) {
+                      fetch('<?=base_url()?>push_notification.php', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                          nim_mahasiswa : nim_mahasiswa,
+                          nama_mahasiswa : nama_mahasiswa,
+                          ujian_tanggal : ujian_tanggal,
+                          ujian_waktu : ujian_waktu,
+                          ujian_tempat : ujian_tempat,
+                          nama_dosen : pembimbing1,
+                          jenis : 'konfirmasi_seminar_tutup',
+                          url : '<?=base_url()?>dosen/penugasanIn'
+                        }),
+                      });
+                    };
+                    if (notif_pembimbing2 == true) {
+                      fetch('<?=base_url()?>push_notification.php', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                          nim_mahasiswa : nim_mahasiswa,
+                          nama_mahasiswa : nama_mahasiswa,
+                          ujian_tanggal : ujian_tanggal,
+                          ujian_waktu : ujian_waktu,
+                          ujian_tempat : ujian_tempat,
+                          nama_dosen : pembimbing2,
+                          jenis : 'konfirmasi_seminar_tutup',
+                          url : '<?=base_url()?>dosen/penugasanIn'
+                        }),
+                      });
+                    };
+                    if (notif_penguji1 == true) {
+                      fetch('<?=base_url()?>push_notification.php', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                          nim_mahasiswa : nim_mahasiswa,
+                          nama_mahasiswa : nama_mahasiswa,
+                          ujian_tanggal : ujian_tanggal,
+                          ujian_waktu : ujian_waktu,
+                          ujian_tempat : ujian_tempat,
+                          nama_dosen : penguji1,
+                          jenis : 'konfirmasi_seminar_tutup',
+                          url : '<?=base_url()?>dosen/penugasanIn'
+                        }),
+                      });
+                    };
+                    if (notif_penguji2 == true) {
+                      fetch('<?=base_url()?>push_notification.php', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                          nim_mahasiswa : nim_mahasiswa,
+                          nama_mahasiswa : nama_mahasiswa,
+                          ujian_tanggal : ujian_tanggal,
+                          ujian_waktu : ujian_waktu,
+                          ujian_tempat : ujian_tempat,
+                          nama_dosen : penguji2,
+                          jenis : 'konfirmasi_seminar_tutup',
+                          url : '<?=base_url()?>dosen/penugasanIn'
+                        }),
+                      });
+                    };
+                  })
+                </script>
+
               </div>
               <!-- /.modal-content -->
             </div>
