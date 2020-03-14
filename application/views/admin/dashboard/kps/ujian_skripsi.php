@@ -59,8 +59,44 @@
                     <td><?=$datatampiltutup->nama;?></td>
                     <td><?=$datatampiltutup->judul;?></td>
                     <td>
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%; color: black;">2/5
+                    <?php
+                        $count = 0;
+                        $rejected = false;
+                        $status = array($datatampiltutup->seminar_pembimbing1_status,  $datatampiltutup->seminar_pembimbing2_status,
+                        $datatampiltutup->seminar_penguji1_status, $datatampiltutup->seminar_penguji2_status);
+                        foreach ($status as $value) {
+                          if ($value == 'diterima') {
+                            $count = $count + 1;
+                          } elseif ($value == 'ditolak') {
+                            $count = $count + 1;
+                            $rejected = true;
+                          }
+                        };
+
+                        if ($count == 1) {
+                          $progresswidth = '25%';
+                        } else if ($count == 2) {
+                          $progresswidth = '50%';
+                        } else if ($count == 3) {
+                          $progresswidth = '75%';
+                        } else if ($count >= 4) {
+                          $progresswidth = '100%';
+                        } else {
+                          $progresswidth = '2%';
+                        };
+                        
+                        if ($rejected) {
+                          $progressbar = 'danger';
+                        } else {
+                          if ($count < 4) {
+                            $progressbar = 'warning';
+                          } else {
+                            $progressbar = 'success';
+                          }
+                        }
+                      ?>
+                      <div class="progress" style="border: solid #000 1px;">
+                        <div class="progress-bar progress-bar-<?=$progressbar;?> progress-bar-striped" role="progressbar" aria-valuenow="<?=$count;?>" aria-valuemin="0" aria-valuemax="4" style="width: <?=$progresswidth;?>; color: black;">
                           <span class="sr-only"></span>
                         </div>
                       </div>
