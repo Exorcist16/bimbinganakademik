@@ -22,13 +22,13 @@
               <!-- /.box -->
 
               <div>
-                <img class="profile-user-img img-responsive img-circle" src="<?=base_url('assets/')?>dist/img/<?php if ($detail->foto == null){
+                <img class="profile-user-img img-responsive img-circle" src="<?=base_url('assets/')?>dist/img/fotouser/<?php if ($detail->foto == null){
                   echo "user_profil.png";
                 } else {
                   echo $detail->foto;
                 }?>" style="background:grey" alt="User profile picture">
                 <br>
-                <center><a href="#">Ganti Foto Profil</a></center>
+                <center><a href="" data-toggle="modal" data-target="#modal-foto-mahasiswa" id="ganti_foto_mahasiswa" data-id="<?=$detail->nim;?>">Ganti Foto Profil</a></center>
                 <br>
 
                 <div class="media-scroll">
@@ -44,7 +44,7 @@
                       </tr>
                       <tr>
                         <td>password</td>
-                        <td><b>Password terenkripsi</b><button type="button" class="btn btn-default btn-flat pull-right" data-toggle="modal" data-target="#modal-pass-mahasiswa" id="ganti_pass_mahasiswa" data-id="<?=$detail->nim;?>">Ganti Password</button></td>
+                        <td><b>Password terenkripsi</b><a href="" class="pull-right" data-toggle="modal" data-target="#modal-pass-mahasiswa" id="ganti_pass_mahasiswa" data-id="<?=$detail->nim;?>">Ganti Password</a></td>
                       </tr>
                       <tr>
                         <td>Departemen</td>
@@ -246,6 +246,32 @@
           })
         })
       </script>
+    </div>
+
+    <div class="modal fade" id="modal-foto-mahasiswa">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Ganti Foto</h4>
+          </div>
+          <form role="form" action="<?php echo base_url().'auth/tambah_foto_mahasiswa';?>" method="post">
+            <div class="modal-body">
+              <div class="form-group">
+                <label>Foto Baru</label>
+                <input type="file" class="form-control" name="foto_mhs" id="foto_mhs" accept="image/*" style="width: 100%;" required>
+                <h6 id="password_lama_mhs_alert" class="help-block text-red"></h6>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+              <button id="btn_ganti_pass_mhs" type="submit" class="btn btn-primary">Ganti Foto Profil</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.modal-content -->
+      </div>
     </div>
 
   </div>

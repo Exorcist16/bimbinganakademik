@@ -39,10 +39,25 @@ class Auth extends CI_Controller {
       $this->load->view('admin/_layout/wrapper', $data);
     }
 
+    public function tambah_foto_mahasiswa(){
+      $nim = $this->session->userdata('username');
+      $profil = $this->crud->gd('mahasiswa', array('nim' => $nim));
+      $detail = $this->db->query("SELECT * FROM mahasiswa LEFT JOIN judul
+         ON mahasiswa.nim = judul.nim WHERE mahasiswa.nim = '$nim'")->result();
+      // var_dump($this->input->post('foto_mhs'));
+      // die();
+      $data = array(  'title'             => 'Auth',
+                      'isi'               => 'admin/_layout/profil_mahasiswa',
+                      'detail'            => $detail);
+      $foto = upload_image('foto_mhs', 'tambah', 'fotouser', '', $data);
+    }
+
     public function profil_dosen(){
+      $nip = $this->session->userdata('username');
+      $detail = $this->db->query("SELECT * FROM dosen WHERE nip = '$nip'")->result();
       $data = array(  'title'             => 'Auth',
                       'isi'               => 'admin/_layout/profil_dosen',
-                    // 'dataScript'        => 'admin/dataScript/beranda-script'
+                      'detail'            => $detail
                   );
       $this->load->view('admin/_layout/wrapper', $data);
     }
@@ -87,7 +102,17 @@ class Auth extends CI_Controller {
       );
       $this->crud->u('user', $data, array('username' => $id));
 
-      redirect('kps/daftarJudul');
+      redirect('mahasiswa/beranda');
+    }
+
+    public function ganti_pass_dosen(){
+      $id = $this->session->userdata('username');
+      $data = array(
+        'password' => md5($this->input->post('pass_baru_dosen'))
+      );
+      $this->crud->u('user', $data, array('username' => $id));
+
+      redirect('dosen/dashboard');
     }
 
     public function logout(){

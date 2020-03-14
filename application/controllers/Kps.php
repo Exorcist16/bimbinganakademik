@@ -124,11 +124,11 @@ class Kps extends CI_Controller {
 		$datawaktuhasil = $this->crud->gw('waktu_ujian', array('waktu_departemen' => $sessiondepartemen));
 		$datatempathasil = $this->crud->ga('tempat_ujian');
 		$data = array(  'title'						=> 'KPS Dashboard',
-						'isi'						=> 'admin/dashboard/kps/seminar_hasil',
-						'mahasiswa'					=> $datamahasiswa,
-						'datatampilseminar'			=> $datatampilseminar,
-						'datawaktuhasil'			=> $datawaktuhasil,
-						'datatempathasil'			=> $datatempathasil
+						'isi'											=> 'admin/dashboard/kps/seminar_hasil',
+						'mahasiswa'								=> $datamahasiswa,
+						'datatampilseminar'				=> $datatampilseminar,
+						'datawaktuhasil'					=> $datawaktuhasil,
+						'datatempathasil'					=> $datatempathasil
 		            );
 		$this->load->view('admin/_layout/wrapper', $data);
 	}

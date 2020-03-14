@@ -54,6 +54,4 @@ class AuthModel extends CI_Model {
             redirect('auth');
         }
     }
-
-
 }

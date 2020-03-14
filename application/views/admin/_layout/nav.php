@@ -10,7 +10,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?=base_url('assets/')?>dist/img/user_profil.png" class="img-circle" alt="User Image">
+          <img src="<?=base_url('assets/')?>dist/img/fotouser/user_profil.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('username'); ?></p>
@@ -81,7 +81,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?=base_url('assets/')?>dist/img/user_profil.png" class="img-circle" alt="User Image">
+          <img src="<?=base_url('assets/')?>dist/img/fotouser/user_profil.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('nama_user');?></p>
@@ -122,7 +122,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?=base_url('assets/')?>dist/img/user_profil.png" class="img-circle" alt="User Image">
+          <img src="<?=base_url('assets/')?>dist/img/fotouser/user_profil.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('nama_user');?></p>
@@ -191,7 +191,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?=base_url('assets/')?>dist/img/user_profil.png" class="img-circle" alt="User Image">
+          <img src="<?=base_url('assets/')?>dist/img/fotouser/user_profil.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Superadmin</p>
