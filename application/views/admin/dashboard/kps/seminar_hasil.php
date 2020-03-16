@@ -462,9 +462,11 @@
                 var penguji1 = $("#ujian_hasil_penguji1").val();
                 var penguji2 = $("#ujian_hasil_penguji2").val();
                 if (notif_pembimbing1 == true) {
-                  fetch('<?=base_url()?>push_notification.php', {
+                  $.ajax({
+                    url: "<?=base_url();?>Auth/push_notification_seminar",
                     method: 'POST',
-                    body: JSON.stringify({
+                    dataType: "JSON",
+                    data: JSON.stringify({
                       nim_mahasiswa : nim_mahasiswa,
                       nama_mahasiswa : nama_mahasiswa,
                       ujian_tanggal : ujian_tanggal,
@@ -473,13 +475,15 @@
                       nama_dosen : pembimbing1,
                       jenis : 'konfirmasi_seminar_hasil',
                       url : '<?=base_url()?>dosen/penugasanIn'
-                    }),
-                  });
+                    })
+                  })
                 };
                 if (notif_pembimbing2 == true) {
-                  fetch('<?=base_url()?>push_notification.php', {
+                  $.ajax({
+                    url: "<?=base_url();?>Auth/push_notification_seminar",
                     method: 'POST',
-                    body: JSON.stringify({
+                    dataType: "JSON",
+                    data: JSON.stringify({
                       nim_mahasiswa : nim_mahasiswa,
                       nama_mahasiswa : nama_mahasiswa,
                       ujian_tanggal : ujian_tanggal,
@@ -488,13 +492,15 @@
                       nama_dosen : pembimbing2,
                       jenis : 'konfirmasi_seminar_hasil',
                       url : '<?=base_url()?>dosen/penugasanIn'
-                    }),
-                  });
+                    })
+                  })
                 };
                 if (notif_penguji1 == true) {
-                  fetch('<?=base_url()?>push_notification.php', {
+                  $.ajax({
+                    url: "<?=base_url();?>Auth/push_notification_seminar",
                     method: 'POST',
-                    body: JSON.stringify({
+                    dataType: "JSON",
+                    data: JSON.stringify({
                       nim_mahasiswa : nim_mahasiswa,
                       nama_mahasiswa : nama_mahasiswa,
                       ujian_tanggal : ujian_tanggal,
@@ -503,13 +509,15 @@
                       nama_dosen : penguji1,
                       jenis : 'konfirmasi_seminar_hasil',
                       url : '<?=base_url()?>dosen/penugasanIn'
-                    }),
-                  });
+                    })
+                  })
                 };
                 if (notif_penguji2 == true) {
-                  fetch('<?=base_url()?>push_notification.php', {
+                  $.ajax({
+                    url: "<?=base_url();?>Auth/push_notification_seminar",
                     method: 'POST',
-                    body: JSON.stringify({
+                    dataType: "JSON",
+                    data: JSON.stringify({
                       nim_mahasiswa : nim_mahasiswa,
                       nama_mahasiswa : nama_mahasiswa,
                       ujian_tanggal : ujian_tanggal,
@@ -518,8 +526,8 @@
                       nama_dosen : penguji2,
                       jenis : 'konfirmasi_seminar_hasil',
                       url : '<?=base_url()?>dosen/penugasanIn'
-                    }),
-                  });
+                    })
+                  })
                 };
               })
             </script>
