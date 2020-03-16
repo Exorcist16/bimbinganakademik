@@ -148,7 +148,7 @@
 					method: method,
 					dataType: "JSON",
 					data: JSON.stringify({
-						username : '<?php echo $this->session->userdata('username'); ?>',
+						username : '<?=$this->session->userdata('username'); ?>',
 						endpoint: subscribe.endpoint,
 						publicKey: btoa(String.fromCharCode.apply(null, new Uint8Array(subscribe.getKey('p256dh')))),
 						authToken: btoa(String.fromCharCode.apply(null, new Uint8Array(subscribe.getKey('auth')))),
