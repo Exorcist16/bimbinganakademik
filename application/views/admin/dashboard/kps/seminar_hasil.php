@@ -226,7 +226,7 @@
                             document.getElementById("ujian_hasil_penguji1").value = "";
                             document.getElementById("ujian_hasil_penguji2").value = "";
                             document.getElementById("proteksi_button").disabled = true;
-                          } else if ($data[0].hasil == 1) {
+                          } else if (data[0].hasil == 1) {
                             document.getElementById("ujian_hasil_nim_tidak_ada").innerText = "Mahasiswa tersebut telah melaksanakan seminar hasil";
                             document.getElementById("ujian_hasil_nama").value = "";
                             document.getElementById("ujian_hasil_pembimbing1").value = "";
