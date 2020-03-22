@@ -112,14 +112,9 @@
 									userVisibleOnly: true,
 									applicationServerKey: urlBase64ToUint8Array("BBM3ZhbZ9j0Og57QieQ0dT6MjU5U4sVZcsc5j4dSWTlC3WvFp3Db1GBvwNcyAFfRn9VpiTuYUgcoFDSJYFYGkvo")
 								}).then(function(subscribe) {
-									console.log('Berhasil melakukan subscribe dengan endpoint: ', subscribe.endpoint);
-									console.log('Berhasil melakukan subscribe dengan p256dh key: ', btoa(String.fromCharCode.apply(
-										null, new Uint8Array(subscribe.getKey('p256dh')))));
-									console.log('Berhasil melakukan subscribe dengan auth key: ', btoa(String.fromCharCode.apply(
-										null, new Uint8Array(subscribe.getKey('auth')))));
 									$.ajax({
 										url: "<?=base_url();?>Auth/subscription_check",
-										method: "POST",
+										method: "GET",
 										dataType: "JSON",
 										success: function(data) {
 											var sub_status = '';
