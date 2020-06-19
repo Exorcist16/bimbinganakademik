@@ -1,7 +1,9 @@
-<?php $controller = $this->uri->segment(1); $modul = $this->uri->segment(2); $params = $this->uri->segment(3); ?>
+<?php $controller = $this->uri->segment(1);
+$modul = $this->uri->segment(2);
+$params = $this->uri->segment(3); ?>
 <header class="main-header">
   <style type="text/css">
-    .logo .logo-mini img{
+    .logo .logo-mini img {
       height: 20% !important;
     }
   </style>
@@ -9,109 +11,108 @@
   <a href="index2.html" class="logo normal-logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <!-- <span class="logo-mini"><b>A</b>LT</span> -->
-    <span class="logo-mini"><img src="<?=base_url('assets/')?>dist/img/unhas.webp"></span>
+    <span class="logo-mini"><img src="<?= base_url('assets/') ?>dist/img/unhas.webp"></span>
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><img src="<?=base_url('assets/')?>dist/img/unhas-cover.png"></span>
+    <span class="logo-lg"><img src="<?= base_url('assets/') ?>dist/img/unhas.png"></span>
   </a>
 
   <!-- kps navigation -->
-  <?php if($this->session->userdata('role') == 'kps'):?>
-  <!-- Header Navbar: style can be found in header.less -->
-  <nav class="navbar navbar-static-top">
-    <!-- Sidebar toggle button-->
-    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-      <span class="sr-only">Toggle navigation</span>
-    </a>
-    <a href="#" class="mobile-logo">
-      <img style="width: auto; height: 40px;" src="<?=base_url('assets/')?>dist/img/unhas-cover.png">
-    </a>
-    <!-- Navbar Right Menu -->
-    <div class="navbar-custom-menu">
-      <ul class="nav navbar-nav">
-        <!-- Notifications: style can be found in dropdown.less -->
-        <li class="dropdown notifications-menu">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-bell-o"></i>
-            <span class="label label-warning">10</span>
-          </a>
-          <ul class="dropdown-menu">
-            <li class="header">You have 10 notifications</li>
-            <li>
-              <!-- inner menu: contains the actual data -->
-              <ul class="menu">
-                <li>
-                  <a href="#">
-                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                    page and may cause design problems
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="fa fa-users text-red"></i> 5 new members joined
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="fa fa-user text-red"></i> You changed your username
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="footer"><a href="#">View all</a></li>
-          </ul>
-        </li>
-        <!-- Tasks: style can be found in dropdown.less -->
-
-        <!-- User Account: style can be found in dropdown.less -->
-        <li class="dropdown user user-menu">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="<?=base_url('assets/')?>dist/img/fotouser/user_profil.png" class="user-image" alt="User Image">
-            <span class="hidden-xs"><?php echo $this->session->userdata('username'); ?></span>
-          </a>
-          <ul class="dropdown-menu">
-            <!-- User image -->
-            <li class="user-header">
-              <img src="<?=base_url('assets/')?>dist/img/fotouser/user_profil.png" class="img-circle" alt="User Image">
-
-              <p>
-                <?php echo $this->session->userdata('username'); ?>
-              </p>
-            </li>
-            <!-- Menu Footer-->
-            <li class="user-footer">
-              <div class="pull-left">
-                <button type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#modal-pass-kps" id="ganti_pass_kps" data-id="">Ganti Password</button>
-              </div>
-              <div class="pull-right">
-                <a href="<?php echo base_url(); ?>auth/logout" class="btn btn-default btn-flat">Sign out</a>
-              </div>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-
-  </nav>
-
-  <!-- mahasiswa navigation -->
-  <?php elseif($this->session->userdata('role') == 'mahasiswa'):?>
+  <?php if ($this->session->userdata('role') == 'kps') : ?>
+    <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
       <a href="#" class="mobile-logo">
-        <img style="width: auto; height: 40px;" src="<?=base_url('assets/')?>dist/img/unhas-cover.png">
+        <img style="width: auto; height: 40px;" src="<?= base_url('assets/') ?>dist/img/unhas-cover.png">
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Notifications: style can be found in dropdown.less -->
+          <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-warning">10</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">anda punya 12 pemberitahuan</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-users"></i> 4 Mahasiswa baru bergabung
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-calendar"></i> 2 Jadwal baru diajukan
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-clock-o"></i> 2 Mahasiswa mengganti jadwal
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-file-text"></i> 3 Judul baru ditambahkan
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-user"></i> Anda mengganti username
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="footer"><a href="#">View all</a></li>
+            </ul>
+          </li>
+          <!-- Tasks: style can be found in dropdown.less -->
+
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="<?= base_url('assets/') ?>dist/img/fotouser/user_profil.png" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $this->session->userdata('username'); ?></span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="<?= base_url('assets/') ?>dist/img/fotouser/user_profil.png" class="img-circle" alt="User Image">
+
+                <p>
+                  <?php echo $this->session->userdata('username'); ?>
+                </p>
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <button type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#modal-pass-kps" id="ganti_pass_kps" data-id="">Ganti Password</button>
+                </div>
+                <div class="pull-right">
+                  <a href="<?php echo base_url(); ?>auth/logout" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
+
+    <!-- mahasiswa navigation -->
+  <?php elseif ($this->session->userdata('role') == 'mahasiswa') : ?>
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <a href="#" class="mobile-logo">
+        <img style="width: auto; height: 40px;" src="<?= base_url('assets/') ?>dist/img/unhas-cover.png">
       </a>
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
@@ -123,69 +124,70 @@
               <span class="label label-success">4</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
+              <li class="header">anda punya 4 pesan</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
-                  <li><!-- start message -->
+                  <li>
+                    <!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="<?=base_url('assets/')?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="<?= base_url('assets/') ?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
-                        Support Team
+                        mahasiswa
                         <small><i class="fa fa-clock-o"></i> 5 mins</small>
                       </h4>
-                      <p>Why not buy a new awesome theme?</p>
+                      <p>permisi, saya mengajukan jadwal bimbingan</p>
                     </a>
                   </li>
                   <!-- end message -->
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="<?=base_url('assets/')?>dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="<?= base_url('assets/') ?>dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
-                        AdminLTE Design Team
+                        KPS
                         <small><i class="fa fa-clock-o"></i> 2 hours</small>
                       </h4>
-                      <p>Why not buy a new awesome theme?</p>
+                      <p>saya lupa password, bisa bantu?</p>
                     </a>
                   </li>
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="<?=base_url('assets/')?>dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="<?= base_url('assets/') ?>dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
-                        Developers
+                        Dosen
                         <small><i class="fa fa-clock-o"></i> Today</small>
                       </h4>
-                      <p>Why not buy a new awesome theme?</p>
+                      <p>saya tidak bisa hari itu, tolong hari lain</p>
                     </a>
                   </li>
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="<?=base_url('assets/')?>dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="<?= base_url('assets/') ?>dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
-                        Sales Department
+                        Mahasiswa
                         <small><i class="fa fa-clock-o"></i> Yesterday</small>
                       </h4>
-                      <p>Why not buy a new awesome theme?</p>
+                      <p>saya tidak bisa upload dokumen saya</p>
                     </a>
                   </li>
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="<?=base_url('assets/')?>dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="<?= base_url('assets/') ?>dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
-                        Reviewers
+                        Mahasiswa
                         <small><i class="fa fa-clock-o"></i> 2 days</small>
                       </h4>
-                      <p>Why not buy a new awesome theme?</p>
+                      <p>saya ingin mengatur ulang jadwal, bisa?</p>
                     </a>
                   </li>
                 </ul>
@@ -200,34 +202,33 @@
               <span class="label label-warning">10</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
+              <li class="header">anda punya 12 pemberitahuan</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   <li>
                     <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                      <i class="fa fa-users"></i> 4 Mahasiswa baru bergabung
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                      page and may cause design problems
+                      <i class="fa fa-calendar"></i> 2 Jadwal baru diajukan
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <i class="fa fa-users text-red"></i> 5 new members joined
+                      <i class="fa fa-clock-o"></i> 2 Mahasiswa mengganti jadwal
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                      <i class="fa fa-file-text"></i> 3 Judul baru ditambahkan
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <i class="fa fa-user text-red"></i> You changed your username
+                      <i class="fa fa-user"></i> Anda mengganti username
                     </a>
                   </li>
                 </ul>
@@ -240,17 +241,17 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?=base_url('assets/')?>dist/img/fotouser/user_profil.png" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?php echo $this->session->userdata('nama_user');?></span>
+              <img src="<?= base_url('assets/') ?>dist/img/fotouser/user_profil.png" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $this->session->userdata('nama_user'); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?=base_url('assets/')?>dist/img/fotouser/user_profil.png" class="img-circle" alt="User Image">
+                <img src="<?= base_url('assets/') ?>dist/img/fotouser/user_profil.png" class="img-circle" alt="User Image">
 
                 <p>
-                  <?php echo $this->session->userdata('nama_user');?>
-                  <small><?php echo $this->session->userdata('username');?></small>
+                  <?php echo $this->session->userdata('nama_user'); ?>
+                  <small><?php echo $this->session->userdata('username'); ?></small>
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -274,15 +275,15 @@
 
     </nav>
 
-  <!-- dosen navigation -->
-  <?php elseif($this->session->userdata('role') == 'dosen'):?>
+    <!-- dosen navigation -->
+  <?php elseif ($this->session->userdata('role') == 'dosen') : ?>
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
       <a href="#" class="mobile-logo">
-        <img style="width: auto; height: 40px;" src="<?=base_url('assets/')?>dist/img/unhas-cover.png">
+        <img style="width: auto; height: 40px;" src="<?= base_url('assets/') ?>dist/img/unhas-cover.png">
       </a>
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
@@ -294,69 +295,70 @@
               <span class="label label-success">4</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
+              <li class="header">anda punya 4 pesan</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
-                  <li><!-- start message -->
+                  <li>
+                    <!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="<?=base_url('assets/')?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="<?= base_url('assets/') ?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
-                        Support Team
+                        mahasiswa
                         <small><i class="fa fa-clock-o"></i> 5 mins</small>
                       </h4>
-                      <p>Why not buy a new awesome theme?</p>
+                      <p>permisi, saya mengajukan jadwal bimbingan</p>
                     </a>
                   </li>
                   <!-- end message -->
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="<?=base_url('assets/')?>dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="<?= base_url('assets/') ?>dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
-                        AdminLTE Design Team
+                        KPS
                         <small><i class="fa fa-clock-o"></i> 2 hours</small>
                       </h4>
-                      <p>Why not buy a new awesome theme?</p>
+                      <p>saya lupa password, bisa bantu?</p>
                     </a>
                   </li>
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="<?=base_url('assets/')?>dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="<?= base_url('assets/') ?>dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
-                        Developers
+                        Dosen
                         <small><i class="fa fa-clock-o"></i> Today</small>
                       </h4>
-                      <p>Why not buy a new awesome theme?</p>
+                      <p>saya tidak bisa hari itu, tolong hari lain</p>
                     </a>
                   </li>
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="<?=base_url('assets/')?>dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="<?= base_url('assets/') ?>dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
-                        Sales Department
+                        Mahasiswa
                         <small><i class="fa fa-clock-o"></i> Yesterday</small>
                       </h4>
-                      <p>Why not buy a new awesome theme?</p>
+                      <p>saya tidak bisa upload dokumen saya</p>
                     </a>
                   </li>
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="<?=base_url('assets/')?>dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="<?= base_url('assets/') ?>dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
-                        Reviewers
+                        Mahasiswa
                         <small><i class="fa fa-clock-o"></i> 2 days</small>
                       </h4>
-                      <p>Why not buy a new awesome theme?</p>
+                      <p>saya ingin mengatur ulang jadwal, bisa?</p>
                     </a>
                   </li>
                 </ul>
@@ -371,34 +373,33 @@
               <span class="label label-warning">10</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
+              <li class="header">anda punya 12 pemberitahuan</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   <li>
                     <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                      <i class="fa fa-users"></i> 4 Mahasiswa baru bergabung
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                      page and may cause design problems
+                      <i class="fa fa-calendar"></i> 2 Jadwal baru diajukan
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <i class="fa fa-users text-red"></i> 5 new members joined
+                      <i class="fa fa-clock-o"></i> 2 Mahasiswa mengganti jadwal
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                      <i class="fa fa-file-text"></i> 3 Judul baru ditambahkan
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <i class="fa fa-user text-red"></i> You changed your username
+                      <i class="fa fa-user"></i> Anda mengganti username
                     </a>
                   </li>
                 </ul>
@@ -411,17 +412,17 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?=base_url('assets/')?>dist/img/fotouser/user_profil.png" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?php echo $this->session->userdata('nama_user');?></span>
+              <img src="<?= base_url('assets/') ?>dist/img/fotouser/user_profil.png" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $this->session->userdata('nama_user'); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?=base_url('assets/')?>dist/img/fotouser/user_profil.png" class="img-circle" alt="User Image">
+                <img src="<?= base_url('assets/') ?>dist/img/fotouser/user_profil.png" class="img-circle" alt="User Image">
 
                 <p>
-                  <?php echo $this->session->userdata('nama_user');?>
-                  <small><?php echo $this->session->userdata('username');?></small>
+                  <?php echo $this->session->userdata('nama_user'); ?>
+                  <small><?php echo $this->session->userdata('username'); ?></small>
                 </p>
               </li>
               <li class="user-footer">
@@ -444,15 +445,15 @@
 
     </nav>
 
-  <!-- superadmin navigation -->
-  <?php elseif($this->session->userdata('role') == 'superadmin'):?>
+    <!-- superadmin navigation -->
+  <?php elseif ($this->session->userdata('role') == 'superadmin') : ?>
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
       <a href="#" class="mobile-logo">
-        <img style="width: auto; height: 40px;" src="<?=base_url('assets/')?>dist/img/unhas-cover.png">
+        <img style="width: auto; height: 40px;" src="<?= base_url('assets/') ?>dist/img/unhas-cover.png">
       </a>
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
@@ -460,13 +461,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?=base_url('assets/')?>dist/img/fotouser/user_profil.png" class="user-image" alt="User Image">
+              <img src="<?= base_url('assets/') ?>dist/img/fotouser/user_profil.png" class="user-image" alt="User Image">
               <span class="hidden-xs">Superadmin</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?=base_url('assets/')?>dist/img/fotouser/user_profil.png" class="img-circle" alt="User Image">
+                <img src="<?= base_url('assets/') ?>dist/img/fotouser/user_profil.png" class="img-circle" alt="User Image">
 
                 <p>
                   Superadmin
@@ -486,7 +487,7 @@
       </div>
 
     </nav>
-    <?php endif; ?>
+  <?php endif; ?>
 
 </header>
 <div class="modal fade" id="modal-pass-superadmin">
@@ -497,7 +498,7 @@
           <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Ganti Password Superadmin</h4>
       </div>
-      <form role="form" action="<?php echo base_url().'auth/ganti_pass';?>" method="post">
+      <form role="form" action="<?php echo base_url() . 'auth/ganti_pass'; ?>" method="post">
         <div class="modal-body">
           <div class="form-group">
             <label>Password Lama</label>
@@ -524,22 +525,22 @@
     <!-- /.modal-content -->
   </div>
 
-  <script src="<?=base_url('assets/')?>bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="<?= base_url('assets/') ?>bower_components/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript">
-    $(document).ready(function(){
-      $("#pass_lama_superadmin").change(function(){
+    $(document).ready(function() {
+      $("#pass_lama_superadmin").change(function() {
         var pass = $(this).val();
         console.log(pass);
         var id = "superadmin";
         $.ajax({
-          url: "<?=base_url();?>/auth/get_pass",
+          url: "<?= base_url(); ?>/auth/get_pass",
           method: "POST",
           dataType: "JSON",
           data: {
             id: id,
             pass: pass
           },
-          success: function(data){
+          success: function(data) {
             console.log(data.password);
             console.log(data.passlama);
             if (data.password != data.passlama) {
@@ -561,8 +562,8 @@
     })
   </script>
   <script type="text/javascript">
-    $(document).ready(function(){
-      $("#pass_baru").change(function(){
+    $(document).ready(function() {
+      $("#pass_baru").change(function() {
         var passbaru = $(this).val();
         var passbaruulang = $("#pass_baru_superadmin_ulang").val();
         var passlama = $("#pass_lama_superadmin").val();
@@ -572,10 +573,10 @@
           document.getElementById("pass_baru_superadmin_ulang").value = "";
           document.getElementById("ulang_password_baru_superadmin_alert").innerText = "";
         } else if (passbaru == passbaruulang) {
-            document.getElementById("password_baru_superadmin_alert").innerText = "";
-            document.getElementById("btn_ganti_pass_superadmin").disabled = true;
-            document.getElementById("pass_baru_superadmin_ulang").value = "";
-            document.getElementById("ulang_password_baru_superadmin_alert").innerText = "";
+          document.getElementById("password_baru_superadmin_alert").innerText = "";
+          document.getElementById("btn_ganti_pass_superadmin").disabled = true;
+          document.getElementById("pass_baru_superadmin_ulang").value = "";
+          document.getElementById("ulang_password_baru_superadmin_alert").innerText = "";
         } else {
           document.getElementById("password_baru_superadmin_alert").innerText = "";
           document.getElementById("btn_ganti_pass_superadmin").disabled = false;
@@ -586,8 +587,8 @@
     })
   </script>
   <script type="text/javascript">
-    $(document).ready(function(){
-      $("#pass_baru_superadmin_ulang").change(function(){
+    $(document).ready(function() {
+      $("#pass_baru_superadmin_ulang").change(function() {
         var passbaruulang = $(this).val();
         var passbaru = $("#pass_baru").val();
         if (passbaruulang == passbaru) {
@@ -608,9 +609,9 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Ganti Password KPS <?php echo $this->session->userdata('username');?></h4>
+        <h4 class="modal-title">Ganti Password KPS <?php echo $this->session->userdata('username'); ?></h4>
       </div>
-      <form role="form" action="<?php echo base_url().'auth/ganti_pass_kps';?>" method="post">
+      <form role="form" action="<?php echo base_url() . 'auth/ganti_pass_kps'; ?>" method="post">
         <div class="modal-body">
           <div class="form-group">
             <label>Password Lama</label>
@@ -637,17 +638,17 @@
     <!-- /.modal-content -->
   </div>
   <script type="text/javascript">
-    $(document).ready(function(){
-      $("#pass_lama_kps").change(function(){
+    $(document).ready(function() {
+      $("#pass_lama_kps").change(function() {
         var pass = $(this).val();
         $.ajax({
-          url: "<?=base_url();?>/auth/get_pass",
+          url: "<?= base_url(); ?>/auth/get_pass",
           method: "POST",
           dataType: "JSON",
           data: {
             pass: pass
           },
-          success: function(data){
+          success: function(data) {
             console.log(data.password);
             console.log(data.passlama);
             if (data.password != data.passlama) {
@@ -669,8 +670,8 @@
     })
   </script>
   <script type="text/javascript">
-    $(document).ready(function(){
-      $("#pass_baru_kps").change(function(){
+    $(document).ready(function() {
+      $("#pass_baru_kps").change(function() {
         var passbaru = $(this).val();
         var passbaruulang = $("#pass_baru_kps_ulang").val();
         var passlama = $("#pass_lama_kps").val();
@@ -680,10 +681,10 @@
           document.getElementById("pass_baru_kps_ulang").value = "";
           document.getElementById("ulang_password_baru_kps_alert").innerText = "";
         } else if (passbaru == passbaruulang) {
-            document.getElementById("password_baru_kps_alert").innerText = "";
-            document.getElementById("btn_ganti_pass_kps").disabled = true;
-            document.getElementById("pass_baru_kps_ulang").value = "";
-            document.getElementById("ulang_password_baru_kps_alert").innerText = "";
+          document.getElementById("password_baru_kps_alert").innerText = "";
+          document.getElementById("btn_ganti_pass_kps").disabled = true;
+          document.getElementById("pass_baru_kps_ulang").value = "";
+          document.getElementById("ulang_password_baru_kps_alert").innerText = "";
         } else {
           document.getElementById("password_baru_kps_alert").innerText = "";
           document.getElementById("btn_ganti_pass_kps").disabled = false;
@@ -694,8 +695,8 @@
     })
   </script>
   <script type="text/javascript">
-    $(document).ready(function(){
-      $("#pass_baru_kps_ulang").change(function(){
+    $(document).ready(function() {
+      $("#pass_baru_kps_ulang").change(function() {
         var passbaruulang = $(this).val();
         var passbaru = $("#pass_baru_kps").val();
         if (passbaruulang == passbaru) {
